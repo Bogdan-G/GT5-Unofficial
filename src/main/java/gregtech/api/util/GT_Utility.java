@@ -1066,6 +1066,7 @@ public class GT_Utility {
      */
     public static String parseNumberToString(int aNumber) {
         String tString = E;
+        StringBuilder tStringSB = new StringBuilder(tString);
         boolean temp = true, negative = false;
 
         if (aNumber < 0) {
@@ -1077,10 +1078,11 @@ public class GT_Utility {
             int tDigit = (aNumber / i) % 10;
             if (temp && tDigit != 0) temp = false;
             if (!temp) {
-                tString = new StringBuilder().append(tString).append(tDigit).toString();
-                if (i != 1) for (int j = i; j > 0; j /= 1000) if (j == 1) tString= new StringBuilder().append(tString).append(",").toString();
+                tStringSB.append(tDigit);
+                if (i != 1) for (int j = i; j > 0; j /= 1000) if (j == 1) tStringSB.append(",");
             }
         }
+        tString = String.valueOf(tStringSB);
 
         if (tString.equals(E)) tString = "0";
 
@@ -1653,9 +1655,11 @@ public class GT_Utility {
                                         + "  Air-Quality: " + ((ic2.api.crops.ICropTile) tTileEntity).getAirQuality()
                         );
                         String tString = E;
+                        StringBuilder tStringSB = new StringBuilder(tString);
                         for (String tAttribute : ic2.api.crops.Crops.instance.getCropList()[((ic2.api.crops.ICropTile) tTileEntity).getID()].attributes()) {
-                            tString = new StringBuilder().append(tString).append(", ").append(tAttribute).toString();
+                            tStringSB.append(", ").append(tAttribute);
                         }
+                        tString = String.valueOf(tStringSB);
                         tList.add("Attributes:" + tString.replaceFirst(",", E));
                         tList.add("Discovered by: " + ic2.api.crops.Crops.instance.getCropList()[((ic2.api.crops.ICropTile) tTileEntity).getID()].discoveredBy());
                     }

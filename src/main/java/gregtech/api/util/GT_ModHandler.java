@@ -785,6 +785,7 @@ public class GT_ModHandler {
 
         try {
             String shape = E;
+            StringBuilder shapeSB = new StringBuilder(shape);
             int idx = 0;
             if (aRecipe[idx] instanceof Boolean) {
                 throw new IllegalArgumentException();
@@ -794,8 +795,13 @@ public class GT_ModHandler {
 
             while (aRecipe[idx] instanceof String) {
                 String s = (String) aRecipe[idx++];
-                shape = new StringBuilder().append(shape).append(s).toString();
-                while (s.length() < 3) s = new StringBuilder().append(s).append(" ").toString();
+                StringBuilder sSB = new StringBuilder(s);
+                shapeSB.append(s);
+                while (s.length() < 3) { 
+                    sSB.append(" ");
+                    s = String.valueOf(sSB);
+                }
+                shape = String.valueOf(shapeSB);
                 if (s.length() > 3) throw new IllegalArgumentException();
 
                 for (char c : s.toCharArray()) {
