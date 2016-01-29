@@ -1065,7 +1065,7 @@ public class GT_Utility {
      * Converts a Number to a String
      */
     public static String parseNumberToString(int aNumber) {
-        String tString = E;
+        StringBuilder tString = new StringBuilder(E);
         boolean temp = true, negative = false;
 
         if (aNumber < 0) {
@@ -1077,8 +1077,8 @@ public class GT_Utility {
             int tDigit = (aNumber / i) % 10;
             if (temp && tDigit != 0) temp = false;
             if (!temp) {
-                tString += tDigit;
-                if (i != 1) for (int j = i; j > 0; j /= 1000) if (j == 1) tString += ",";
+                tString.append(tDigit);
+                if (i != 1) for (int j = i; j > 0; j /= 1000) if (j == 1) tString.append(",");
             }
         }
 
@@ -1652,9 +1652,9 @@ public class GT_Utility {
                                         + "  Humidity: " + ((ic2.api.crops.ICropTile) tTileEntity).getHumidity()
                                         + "  Air-Quality: " + ((ic2.api.crops.ICropTile) tTileEntity).getAirQuality()
                         );
-                        String tString = E;
+                        StringBuilder tString = new StringBuilder(E);
                         for (String tAttribute : ic2.api.crops.Crops.instance.getCropList()[((ic2.api.crops.ICropTile) tTileEntity).getID()].attributes()) {
-                            tString += ", " + tAttribute;
+                            tString.append(", ").append(tAttribute);
                         }
                         tList.add("Attributes:" + tString.replaceFirst(",", E));
                         tList.add("Discovered by: " + ic2.api.crops.Crops.instance.getCropList()[((ic2.api.crops.ICropTile) tTileEntity).getID()].discoveredBy());
