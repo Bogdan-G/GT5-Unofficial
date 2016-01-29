@@ -76,7 +76,7 @@ public class GT_LanguageManager {
         if (aKey == null) return E;
         String rTranslation = E;
         for (String tString : aKey.split(aSeperator)) {
-            new StringBuilder().append(rTranslation).append(getTranslation(tString)).toString();
+            rTranslation = new StringBuilder().append(rTranslation).append(getTranslation(tString)).toString();
         }
         return rTranslation;
     }

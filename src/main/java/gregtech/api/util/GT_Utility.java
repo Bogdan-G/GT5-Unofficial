@@ -1077,8 +1077,8 @@ public class GT_Utility {
             int tDigit = (aNumber / i) % 10;
             if (temp && tDigit != 0) temp = false;
             if (!temp) {
-                new StringBuilder().append(tString).append(tDigit).toString();
-                if (i != 1) for (int j = i; j > 0; j /= 1000) if (j == 1) new StringBuilder().append(tString).append(",").toString();
+                tString = new StringBuilder().append(tString).append(tDigit).toString();
+                if (i != 1) for (int j = i; j > 0; j /= 1000) if (j == 1) tString= new StringBuilder().append(tString).append(",").toString();
             }
         }
 
@@ -1654,7 +1654,7 @@ public class GT_Utility {
                         );
                         String tString = E;
                         for (String tAttribute : ic2.api.crops.Crops.instance.getCropList()[((ic2.api.crops.ICropTile) tTileEntity).getID()].attributes()) {
-                            new StringBuilder().append(tString).append(", ").append(tAttribute).toString();
+                            tString = new StringBuilder().append(tString).append(", ").append(tAttribute).toString();
                         }
                         tList.add("Attributes:" + tString.replaceFirst(",", E));
                         tList.add("Discovered by: " + ic2.api.crops.Crops.instance.getCropList()[((ic2.api.crops.ICropTile) tTileEntity).getID()].discoveredBy());

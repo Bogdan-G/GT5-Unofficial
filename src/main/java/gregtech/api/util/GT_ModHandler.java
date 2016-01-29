@@ -794,8 +794,8 @@ public class GT_ModHandler {
 
             while (aRecipe[idx] instanceof String) {
                 String s = (String) aRecipe[idx++];
-                new StringBuilder().append(shape).append(s).toString();
-                while (s.length() < 3) new StringBuilder().append(s).append(" ").toString();
+                shape = new StringBuilder().append(shape).append(s).toString();
+                while (s.length() < 3) s = new StringBuilder().append(s).append(" ").toString();
                 if (s.length() > 3) throw new IllegalArgumentException();
 
                 for (char c : s.toCharArray()) {
