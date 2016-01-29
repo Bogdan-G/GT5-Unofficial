@@ -24,8 +24,8 @@ public class MaterialStack implements Cloneable {
     public boolean equals(Object aObject) {
         if (aObject == this) return true;
         if (aObject == null) return false;
-        if (aObject instanceof Materials) return aObject == mMaterial;
-        if (aObject instanceof MaterialStack)
+        if (aObject.getClass().equals(Materials.class)) return aObject == mMaterial;
+        if (aObject.getClass().equals(MaterialStack.class))
             return ((MaterialStack) aObject).mMaterial == mMaterial && (mAmount < 0 || ((MaterialStack) aObject).mAmount < 0 || ((MaterialStack) aObject).mAmount == mAmount);
         return false;
     }

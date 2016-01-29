@@ -40,7 +40,7 @@ public class GT_ItemStack {
     @Override
     public boolean equals(Object aStack) {
         if (aStack == this) return true;
-        if (aStack instanceof GT_ItemStack) {
+        if (aStack.getClass().equals(GT_ItemStack.class)) {
             return ((GT_ItemStack) aStack).mItem == mItem && ((GT_ItemStack) aStack).mMetaData == mMetaData;
         }
         return false;

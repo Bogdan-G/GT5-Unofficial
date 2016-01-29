@@ -23,6 +23,6 @@ public class GT_Fluid extends Fluid implements Runnable {
 
     @Override
     public void run() {
-        setIcons(GregTech_API.sBlockIcons.registerIcon(RES_PATH_BLOCK + "fluids/fluid." + mTextureName));
+        setIcons(GregTech_API.sBlockIcons.registerIcon(new StringBuilder().append(RES_PATH_BLOCK).append("fluids/fluid.").append(mTextureName).toString()));
     }
 }

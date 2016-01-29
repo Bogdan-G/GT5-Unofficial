@@ -44,17 +44,17 @@ public class GT_Block_Ores
             GT_ModHandler.addValuableOre(this, i, 1);
         }
         for (int i = 1; i < GregTech_API.sGeneratedMaterials.length; i++) {
-            if (GregTech_API.sGeneratedMaterials[i] != null) {
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + i + ".name", getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 1000) + ".name", getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 2000) + ".name", getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 3000) + ".name", getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 4000) + ".name", getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 16000) + ".name", "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 17000) + ".name", "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 18000) + ".name", "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 19000) + ".name", "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(getUnlocalizedName() + "." + (i + 20000) + ".name", "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+            if (GregTech_API.sGeneratedMaterials[i] != null) {//new StringBuilder().append("A ").append(String.valueOf(B)).toString()
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf(i)).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 1000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 2000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 3000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 4000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 16000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 17000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 18000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 19000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 20000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
                 if ((GregTech_API.sGeneratedMaterials[i].mTypes & 0x8) != 0) {
                     GT_OreDictUnificator.registerOre(OrePrefixes.ore.get(GregTech_API.sGeneratedMaterials[i]), new ItemStack(this, 1, i));
                     GT_OreDictUnificator.registerOre(OrePrefixes.oreNetherrack.get(GregTech_API.sGeneratedMaterials[i]), new ItemStack(this, 1, i + 1000));
@@ -69,8 +69,8 @@ public class GT_Block_Ores
     public void onNeighborChange(IBlockAccess aWorld, int aX, int aY, int aZ, int aTileX, int aTileY, int aTileZ) {
         if (!FUCKING_LOCK) {
             FUCKING_LOCK = true;
-            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-            if ((tTileEntity instanceof GT_TileEntity_Ores)) {
+            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);//warning: Entity/TE, instanceof -> getClass().equals()
+            if ((tTileEntity.getClass().equals(GT_TileEntity_Ores.class))) {
                 ((GT_TileEntity_Ores) tTileEntity).onUpdated();
             }
         }
@@ -80,8 +80,8 @@ public class GT_Block_Ores
     public void onNeighborBlockChange(World aWorld, int aX, int aY, int aZ, Block aBlock) {
         if (!FUCKING_LOCK) {
             FUCKING_LOCK = true;
-            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-            if ((tTileEntity instanceof GT_TileEntity_Ores)) {
+            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);//warning: Entity/TE, instanceof -> getClass().equals()
+            if ((tTileEntity.getClass().equals(GT_TileEntity_Ores.class))) {
                 ((GT_TileEntity_Ores) tTileEntity).onUpdated();
             }
         }
@@ -124,8 +124,8 @@ public class GT_Block_Ores
         return tileentity != null ? tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) : false;
     }
 
-    public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {
-        return (!(entity instanceof EntityDragon)) && (super.canEntityDestroy(world, x, y, z, entity));
+    public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {//warning: Entity/TE, instanceof -> getClass().equals()
+        return (!(entity.getClass().equals(EntityDragon.class))) && (super.canEntityDestroy(world, x, y, z, entity));
     }
 
     public String getHarvestTool(int aMeta) {

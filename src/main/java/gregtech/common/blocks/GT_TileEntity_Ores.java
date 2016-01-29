@@ -58,7 +58,7 @@ public class GT_TileEntity_Ores
             }
             aWorld.setBlock(aX, aY, aZ, GregTech_API.sBlockOres1, getHarvestData((short) aMetaData), 0);
             TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-            if ((tTileEntity instanceof GT_TileEntity_Ores)) {
+            if ((tTileEntity.getClass().equals(GT_TileEntity_Ores.class))) {//warning: Entity/TE, instanceof -> getClass().equals()
                 ((GT_TileEntity_Ores) tTileEntity).mMetaData = ((short) aMetaData);
                 ((GT_TileEntity_Ores) tTileEntity).mNatural = true;
             }

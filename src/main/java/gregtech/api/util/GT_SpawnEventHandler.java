@@ -28,8 +28,8 @@ public class GT_SpawnEventHandler {
         if (event.entityLiving.isCreatureType(EnumCreatureType.monster, false)) {
             for (int[] rep : mobReps) {
                 if (rep[3] == event.entity.worldObj.provider.dimensionId) {
-                    TileEntity tTile = event.entity.worldObj.getTileEntity(rep[0], rep[1], rep[2]);
-                    if (tTile instanceof BaseMetaTileEntity && ((BaseMetaTileEntity) tTile).getMetaTileEntity() instanceof GT_MetaTileEntity_MonsterRepellent) {
+                    TileEntity tTile = event.entity.worldObj.getTileEntity(rep[0], rep[1], rep[2]);//warning: Entity/TE, instanceof -> getClass().equals()
+                    if (tTile.getClass().equals(BaseMetaTileEntity.class) && ((BaseMetaTileEntity) tTile).getMetaTileEntity().getClass().equals(GT_MetaTileEntity_MonsterRepellent.class)) {
                         int r = ((GT_MetaTileEntity_MonsterRepellent) ((BaseMetaTileEntity) tTile).getMetaTileEntity()).mRange;
                         double dx = rep[0] + 0.5F - event.entity.posX;
                         double dy = rep[1] + 0.5F - event.entity.posY;

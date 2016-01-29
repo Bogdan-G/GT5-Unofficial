@@ -585,7 +585,7 @@ public class GregTech_API {
      * Contains all sanity Checks for Tools, like preventing one Tool from being registered for multiple purposes as controls would override each other.
      */
     public static boolean registerTool(ItemStack aTool, Collection<GT_ItemStack> aToolList) {
-        if (aTool == null || GT_Utility.isStackInList(aTool, sToolList) || (!aTool.getItem().isDamageable() && !GT_ModHandler.isElectricItem(aTool) && !(aTool.getItem() instanceof IDamagableItem)))
+        if (aTool == null || GT_Utility.isStackInList(aTool, sToolList) || (!aTool.getItem().isDamageable() && !GT_ModHandler.isElectricItem(aTool) && !(aTool.getItem().getClass().equals(IDamagableItem.class))))
             return false;
         aToolList.add(new GT_ItemStack(GT_Utility.copyAmount(1, aTool)));
         sToolList.add(new GT_ItemStack(GT_Utility.copyAmount(1, aTool)));

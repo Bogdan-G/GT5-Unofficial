@@ -45,7 +45,7 @@ public class GT_Packet_Ores
     public void process(IBlockAccess aWorld) {
         if (aWorld != null) {
             TileEntity tTileEntity = aWorld.getTileEntity(this.mX, this.mY, this.mZ);
-            if ((tTileEntity instanceof GT_TileEntity_Ores)) {
+            if ((tTileEntity instanceof GT_TileEntity_Ores)) {//Revert: warning: Entity/TE, instanceof -> getClass().equals()
                 ((GT_TileEntity_Ores) tTileEntity).mMetaData = this.mMetaData;
             }
             if (((aWorld instanceof World)) && (((World) aWorld).isRemote)) {

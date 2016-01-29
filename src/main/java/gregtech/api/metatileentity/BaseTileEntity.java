@@ -257,56 +257,56 @@ public abstract class BaseTileEntity extends TileEntity implements IHasWorldObje
     @Override
     public final IFluidHandler getITankContainer(int aX, int aY, int aZ) {
         TileEntity tTileEntity = getTileEntity(aX, aY, aZ);
-        if (tTileEntity instanceof IFluidHandler) return (IFluidHandler) tTileEntity;
+        if (tTileEntity.getClass().equals(IFluidHandler.class)) return (IFluidHandler) tTileEntity;
         return null;
     }
 
     @Override
     public final IFluidHandler getITankContainerOffset(int aX, int aY, int aZ) {
         TileEntity tTileEntity = getTileEntityOffset(aX, aY, aZ);
-        if (tTileEntity instanceof IFluidHandler) return (IFluidHandler) tTileEntity;
+        if (tTileEntity.getClass().equals(IFluidHandler.class)) return (IFluidHandler) tTileEntity;
         return null;
     }
 
     @Override
     public final IFluidHandler getITankContainerAtSide(byte aSide) {
         TileEntity tTileEntity = getTileEntityAtSide(aSide);
-        if (tTileEntity instanceof IFluidHandler) return (IFluidHandler) tTileEntity;
+        if (tTileEntity.getClass().equals(IFluidHandler.class)) return (IFluidHandler) tTileEntity;
         return null;
     }
 
     @Override
     public final IFluidHandler getITankContainerAtSideAndDistance(byte aSide, int aDistance) {
         TileEntity tTileEntity = getTileEntityAtSideAndDistance(aSide, aDistance);
-        if (tTileEntity instanceof IFluidHandler) return (IFluidHandler) tTileEntity;
+        if (tTileEntity.getClass().equals(IFluidHandler.class)) return (IFluidHandler) tTileEntity;
         return null;
     }
 
     @Override
     public final IGregTechTileEntity getIGregTechTileEntity(int aX, int aY, int aZ) {
-        TileEntity tTileEntity = getTileEntity(aX, aY, aZ);
-        if (tTileEntity instanceof IGregTechTileEntity) return (IGregTechTileEntity) tTileEntity;
+        TileEntity tTileEntity = getTileEntity(aX, aY, aZ);//warning: Entity/TE, instanceof -> getClass().equals()
+        if (tTileEntity.getClass().equals(IGregTechTileEntity.class)) return (IGregTechTileEntity) tTileEntity;
         return null;
     }
 
     @Override
     public final IGregTechTileEntity getIGregTechTileEntityOffset(int aX, int aY, int aZ) {
-        TileEntity tTileEntity = getTileEntityOffset(aX, aY, aZ);
-        if (tTileEntity instanceof IGregTechTileEntity) return (IGregTechTileEntity) tTileEntity;
+        TileEntity tTileEntity = getTileEntityOffset(aX, aY, aZ);//warning: Entity/TE, instanceof -> getClass().equals()
+        if (tTileEntity.getClass().equals(IGregTechTileEntity.class)) return (IGregTechTileEntity) tTileEntity;
         return null;
     }
 
     @Override
     public final IGregTechTileEntity getIGregTechTileEntityAtSide(byte aSide) {
-        TileEntity tTileEntity = getTileEntityAtSide(aSide);
-        if (tTileEntity instanceof IGregTechTileEntity) return (IGregTechTileEntity) tTileEntity;
+        TileEntity tTileEntity = getTileEntityAtSide(aSide);//warning: Entity/TE, instanceof -> getClass().equals()
+        if (tTileEntity.getClass().equals(IGregTechTileEntity.class)) return (IGregTechTileEntity) tTileEntity;
         return null;
     }
 
     @Override
     public final IGregTechTileEntity getIGregTechTileEntityAtSideAndDistance(byte aSide, int aDistance) {
-        TileEntity tTileEntity = getTileEntityAtSideAndDistance(aSide, aDistance);
-        if (tTileEntity instanceof IGregTechTileEntity) return (IGregTechTileEntity) tTileEntity;
+        TileEntity tTileEntity = getTileEntityAtSideAndDistance(aSide, aDistance);//warning: Entity/TE, instanceof -> getClass().equals()
+        if (tTileEntity.getClass().equals(IGregTechTileEntity.class)) return (IGregTechTileEntity) tTileEntity;
         return null;
     }
 

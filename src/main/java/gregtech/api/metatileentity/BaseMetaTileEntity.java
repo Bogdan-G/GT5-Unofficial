@@ -396,8 +396,8 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
                                 }
                                 if (getEUCapacity() > 0) {
                                     if (GregTech_API.sMachineFireExplosions && getRandomNumber(1000) == 0) {
-                                        Block tBlock = getBlockAtSide((byte) getRandomNumber(6));
-                                        if (tBlock != null && tBlock instanceof BlockFire) doEnergyExplosion();
+                                        Block tBlock = getBlockAtSide((byte) getRandomNumber(6));//TE
+                                        if (tBlock != null && tBlock.getClass().equals(BlockFire.class)) doEnergyExplosion();
                                     }
 
                                     if (!hasValidMetaTileEntity()) {

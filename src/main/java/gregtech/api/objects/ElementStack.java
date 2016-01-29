@@ -24,8 +24,8 @@ public class ElementStack implements Cloneable {
     public boolean equals(Object aObject) {
         if (aObject == this) return true;
         if (aObject == null) return false;
-        if (aObject instanceof Element) return aObject == mElement;
-        if (aObject instanceof ElementStack)
+        if (aObject.getClass().equals(Element.class)) return aObject == mElement;
+        if (aObject.getClass().equals(ElementStack.class))
             return ((ElementStack) aObject).mElement == mElement && (mAmount < 0 || ((ElementStack) aObject).mAmount < 0 || ((ElementStack) aObject).mAmount == mAmount);
         return false;
     }
