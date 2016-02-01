@@ -71,7 +71,7 @@ public class GT_Shapeless_Recipe extends ShapelessOreRecipe implements IGT_Craft
                 if (rNBT == null) rNBT = new NBTTagCompound();
                 for (int i = 0; i < 9; i++) {
                     ItemStack tStack = aGrid.getStackInSlot(i);
-                    if (tStack != null && GT_Utility.getContainerItem(tStack, true) == null && !(tStack.getItem().getClass().equals(GT_MetaGenerated_Tool.class))) {
+                    if (tStack != null && GT_Utility.getContainerItem(tStack, true) == null && !(tStack.getItem() instanceof GT_MetaGenerated_Tool)) {
                         tStack = GT_Utility.copyAmount(1, tStack);
                         GT_ModHandler.dischargeElectricItem(tStack, Integer.MAX_VALUE, Integer.MAX_VALUE, true, false, true);
                         tNBT.setTag("Ingredient." + i, tStack.writeToNBT(new NBTTagCompound()));

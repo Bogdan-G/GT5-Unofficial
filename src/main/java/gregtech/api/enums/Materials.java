@@ -1392,7 +1392,7 @@ public enum Materials implements IColorModulationContainer, ISubTagContainer {
 
     public static Materials get(String aMaterialName) {
         Object tObject = GT_Utility.getFieldContent(Materials.class, aMaterialName, false, false);
-        if (tObject != null && tObject.getClass().equals(Materials.class)) return (Materials) tObject;
+        if (tObject != null && tObject instanceof Materials) return (Materials) tObject;
         return _NULL;
     }
 

@@ -396,8 +396,8 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
                                 }
                                 if (getEUCapacity() > 0) {
                                     if (GregTech_API.sMachineFireExplosions && getRandomNumber(1000) == 0) {
-                                        Block tBlock = getBlockAtSide((byte) getRandomNumber(6));//TE
-                                        if (tBlock != null && tBlock.getClass().equals(BlockFire.class)) doEnergyExplosion();
+                                        Block tBlock = getBlockAtSide((byte) getRandomNumber(6));
+                                        if (tBlock != null && tBlock instanceof BlockFire) doEnergyExplosion();
                                     }
 
                                     if (!hasValidMetaTileEntity()) {
@@ -1104,7 +1104,10 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
                 try {
                     mReleaseEnergy = true;
                     IEnergyConnected.Util.emitEnergyToNetwork(V[5], Math.max(1, getStoredEU() / V[5]), this);
-                } catch (Exception e) {/* Fun Fact: all these "do nothing" Comments you see in my Code, are just there to let Eclipse shut up about the intended empty Brackets, but I need eclipse to yell at me in some of the regular Cases where I forget to add Code */}
+                } catch (Exception e) {
+                /* Fun Fact: all these "do nothing" Comments you see in my Code, are just there to let Eclipse shut up about the intended empty Brackets, but I need eclipse to yell at me in some of the regular Cases where I forget to add Code */
+                GT_Log.out.println("mReleaseEnergy = true;\nIEnergyConnected.Util.emitEnergyToNetwork(V[5], Math.max(1, getStoredEU() / V[5]), this);");
+                }
             }
             mReleaseEnergy = false;
             // Normal Explosion Code

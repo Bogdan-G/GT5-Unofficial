@@ -64,7 +64,7 @@ public enum Dyes implements IColorModulationContainer {
 
     public static Dyes get(String aColor) {
         Object tObject = GT_Utility.getFieldContent(Dyes.class, aColor, false, false);
-        if (tObject != null && tObject.getClass().equals(Dyes.class)) return (Dyes) tObject;
+        if (tObject != null && tObject instanceof Dyes) return (Dyes) tObject;
         return _NULL;
     }
 

@@ -633,7 +633,7 @@ public enum OrePrefixes {
 
     public static OrePrefixes getPrefix(String aPrefixName, OrePrefixes aReplacement) {
         Object tObject = GT_Utility.getFieldContent(OrePrefixes.class, aPrefixName, false, false);
-        if (tObject != null && tObject.getClass().equals(OrePrefixes.class)) return (OrePrefixes) tObject;
+        if (tObject != null && tObject instanceof OrePrefixes) return (OrePrefixes) tObject;
         return aReplacement;
     }
 
@@ -701,7 +701,7 @@ public enum OrePrefixes {
     }
 
     public Object get(Object aMaterial) {
-        if (aMaterial.getClass().equals(Materials.class)) return new ItemData(this, (Materials) aMaterial);
+        if (aMaterial instanceof Materials) return new ItemData(this, (Materials) aMaterial);
         return name() + aMaterial;
     }
 

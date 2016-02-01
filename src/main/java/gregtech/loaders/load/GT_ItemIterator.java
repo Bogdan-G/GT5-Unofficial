@@ -56,13 +56,13 @@ public class GT_ItemIterator
 
         Iterator tIterator = Item.itemRegistry.iterator();
         while (tIterator.hasNext()) {
-            Object tObject;//warning: GT_Generic_Item, instanceof -> getClass().equals()
-            if (((tObject = tIterator.next()) != null) && ((tObject instanceof Item)) && (!(tObject.getClass().equals(GT_Generic_Item.class)))) {
+            Object tObject;
+            if (((tObject = tIterator.next()) != null) && ((tObject instanceof Item)) && (!(tObject instanceof GT_Generic_Item))) {
                 Item tItem = (Item) tObject;
                 String tName;
                 if ((tName = tItem.getUnlocalizedName()) != null) {
                     try {
-                        if ((tItem.getClass().equals(IToolCrowbar.class))) {//warning: IToolCrowbar, instanceof -> getClass().equals()
+                        if ((tItem instanceof IToolCrowbar)) {
                             if ((!tItem.isDamageable()) && (!GT_ModHandler.isElectricItem(new ItemStack(tItem, 1, 0)))) {
                                 if ((GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "infiniteDurabilityRCCrowbars", false)) &&
                                         (GT_ModHandler.removeRecipeByOutput(new ItemStack(tItem, 1, 32767)))) {
@@ -75,7 +75,7 @@ public class GT_ItemIterator
                     } catch (Throwable e) {
                     }
                     try {
-                        if ((tItem.getClass().equals(IToolWrench.class))) {//warning: IToolCrowbar, instanceof -> getClass().equals()
+                        if ((tItem instanceof IToolWrench)) {
                             if ((!tItem.isDamageable()) && (!GT_ModHandler.isElectricItem(new ItemStack(tItem, 1, 0)))) {
                                 if ((GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "infiniteDurabilityBCWrenches", false)) &&
                                         (GT_ModHandler.removeRecipeByOutput(new ItemStack(tItem, 1, 32767)))) {

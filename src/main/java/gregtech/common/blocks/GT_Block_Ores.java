@@ -69,8 +69,8 @@ public class GT_Block_Ores
     public void onNeighborChange(IBlockAccess aWorld, int aX, int aY, int aZ, int aTileX, int aTileY, int aTileZ) {
         if (!FUCKING_LOCK) {
             FUCKING_LOCK = true;
-            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);//warning: Entity/TE, instanceof -> getClass().equals()
-            if ((tTileEntity.getClass().equals(GT_TileEntity_Ores.class))) {
+            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
+            if ((tTileEntity instanceof GT_TileEntity_Ores)) {
                 ((GT_TileEntity_Ores) tTileEntity).onUpdated();
             }
         }
@@ -80,8 +80,8 @@ public class GT_Block_Ores
     public void onNeighborBlockChange(World aWorld, int aX, int aY, int aZ, Block aBlock) {
         if (!FUCKING_LOCK) {
             FUCKING_LOCK = true;
-            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);//warning: Entity/TE, instanceof -> getClass().equals()
-            if ((tTileEntity.getClass().equals(GT_TileEntity_Ores.class))) {
+            TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
+            if ((tTileEntity instanceof GT_TileEntity_Ores)) {
                 ((GT_TileEntity_Ores) tTileEntity).onUpdated();
             }
         }
@@ -124,8 +124,8 @@ public class GT_Block_Ores
         return tileentity != null ? tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) : false;
     }
 
-    public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {//warning: Entity/TE, instanceof -> getClass().equals()
-        return (!(entity.getClass().equals(EntityDragon.class))) && (super.canEntityDestroy(world, x, y, z, entity));
+    public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {
+        return (!(entity instanceof EntityDragon)) && (super.canEntityDestroy(world, x, y, z, entity));
     }
 
     public String getHarvestTool(int aMeta) {

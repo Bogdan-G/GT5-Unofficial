@@ -277,7 +277,7 @@ public class GT_Utility {
             if (aPlayer.isInvisible()) {
                 for (int i = 0; i < 4; i++) {
                     if (aPlayer.inventory.armorInventory[i] != null) {
-                        if (aPlayer.inventory.armorInventory[i].getItem().getClass().equals(GT_EnergyArmor_Item.class)) {
+                        if (aPlayer.inventory.armorInventory[i].getItem() instanceof GT_EnergyArmor_Item) {
                             if ((((GT_EnergyArmor_Item) aPlayer.inventory.armorInventory[i].getItem()).mSpecials & 512) != 0) {
                                 if (GT_ModHandler.canUseElectricItem(aPlayer.inventory.armorInventory[i], 10000)) {
                                     return true;
@@ -1009,7 +1009,7 @@ public class GT_Utility {
     }
 
     public static ItemStack updateItemStack(ItemStack aStack) {
-        if (isStackValid(aStack) && aStack.getItem().getClass().equals(GT_Generic_Item.class))
+        if (isStackValid(aStack) && aStack.getItem() instanceof GT_Generic_Item)
             ((GT_Generic_Item) aStack.getItem()).isItemStackUsable(aStack);
         return aStack;
     }
@@ -1176,9 +1176,9 @@ public class GT_Utility {
     public static int getRadioactivityLevel(ItemStack aStack) {
         ItemData tData = GT_OreDictUnificator.getItemData(aStack);
         if (tData != null && tData.hasValidMaterialData()) {
-            if (tData.mMaterial.mMaterial.mEnchantmentArmors.getClass().equals(Enchantment_Radioactivity.class))
+            if (tData.mMaterial.mMaterial.mEnchantmentArmors instanceof Enchantment_Radioactivity)
                 return tData.mMaterial.mMaterial.mEnchantmentArmorsLevel;
-            if (tData.mMaterial.mMaterial.mEnchantmentTools.getClass().equals(Enchantment_Radioactivity.class))
+            if (tData.mMaterial.mMaterial.mEnchantmentTools instanceof Enchantment_Radioactivity)
                 return tData.mMaterial.mMaterial.mEnchantmentToolsLevel;
         }
         return EnchantmentHelper.getEnchantmentLevel(Enchantment_Radioactivity.INSTANCE.effectId, aStack);
@@ -1582,16 +1582,16 @@ public class GT_Utility {
             } catch (Throwable e) {
                 if (D1) e.printStackTrace(GT_Log.err);
             }
-            try {//warning: Entity/TE, instanceof -> getClass().equals()
-                if (tTileEntity.getClass().equals(IUpgradableMachine.class)) {
+            try {
+                if (tTileEntity instanceof IUpgradableMachine) {
                     rEUAmount += 500;
                     if (((IUpgradableMachine) tTileEntity).hasMufflerUpgrade()) tList.add("Has Muffler Upgrade");
                 }
             } catch (Throwable e) {
                 if (D1) e.printStackTrace(GT_Log.err);
             }
-            try {//warning: Entity/TE, instanceof -> getClass().equals()
-                if (tTileEntity.getClass().equals(IMachineProgress.class)) {
+            try {
+                if (tTileEntity instanceof IMachineProgress) {
                     rEUAmount += 400;
                     int tValue = 0;
                     if (0 < (tValue = ((IMachineProgress) tTileEntity).getMaxProgress()))
@@ -1600,8 +1600,8 @@ public class GT_Utility {
             } catch (Throwable e) {
                 if (D1) e.printStackTrace(GT_Log.err);
             }
-            try {//warning: Entity/TE, instanceof -> getClass().equals()
-                if (tTileEntity.getClass().equals(ICoverable.class)) {
+            try {
+                if (tTileEntity instanceof ICoverable) {
                     rEUAmount += 300;
                     String tString = ((ICoverable) tTileEntity).getCoverBehaviorAtSide((byte) aSide).getDescription((byte) aSide, ((ICoverable) tTileEntity).getCoverIDAtSide((byte) aSide), ((ICoverable) tTileEntity).getCoverDataAtSide((byte) aSide), (ICoverable) tTileEntity);
                     if (tString != null && !tString.equals(E)) tList.add(tString);
@@ -1609,8 +1609,8 @@ public class GT_Utility {
             } catch (Throwable e) {
                 if (D1) e.printStackTrace(GT_Log.err);
             }
-            try {//warning: Entity/TE, instanceof -> getClass().equals()
-                if (tTileEntity.getClass().equals(IBasicEnergyContainer.class) && ((IBasicEnergyContainer) tTileEntity).getEUCapacity() > 0) {
+            try {
+                if (tTileEntity instanceof IBasicEnergyContainer && ((IBasicEnergyContainer) tTileEntity).getEUCapacity() > 0) {
                     tList.add("Max IN: " + ((IBasicEnergyContainer) tTileEntity).getInputVoltage() + " EU");
                     tList.add("Max OUT: " + ((IBasicEnergyContainer) tTileEntity).getOutputVoltage() + " EU at " + ((IBasicEnergyContainer) tTileEntity).getOutputAmperage() + " Amperes");
                     tList.add("Energy: " + GT_Utility.formatNumbers(((IBasicEnergyContainer) tTileEntity).getStoredEU()) + " / " + GT_Utility.formatNumbers(((IBasicEnergyContainer) tTileEntity).getEUCapacity()) + "EU");
@@ -1618,15 +1618,15 @@ public class GT_Utility {
             } catch (Throwable e) {
                 if (D1) e.printStackTrace(GT_Log.err);
             }
-            try {//warning: Entity/TE, instanceof -> getClass().equals()
-                if (tTileEntity.getClass().equals(IGregTechTileEntity.class)) {
+            try {
+                if (tTileEntity instanceof IGregTechTileEntity) {
                     tList.add("Owned by: " + ((IGregTechTileEntity) tTileEntity).getOwnerName());
                 }
             } catch (Throwable e) {
                 if (D1) e.printStackTrace(GT_Log.err);
             }
-            try {//warning: Entity/TE, instanceof -> getClass().equals()
-                if (tTileEntity.getClass().equals(IGregTechDeviceInformation.class) && ((IGregTechDeviceInformation) tTileEntity).isGivingInformation()) {
+            try {
+                if (tTileEntity instanceof IGregTechDeviceInformation && ((IGregTechDeviceInformation) tTileEntity).isGivingInformation()) {
                     tList.addAll(Arrays.asList(((IGregTechDeviceInformation) tTileEntity).getInfoData()));
                 }
             } catch (Throwable e) {
