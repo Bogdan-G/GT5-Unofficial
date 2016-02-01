@@ -94,7 +94,10 @@ public class GT_Utility {
         Field rField = null;
         try {
             rField = aObject.getClass().getDeclaredField(aField);
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rField = aObject.getClass().getDeclaredField(aField);");
+        }
         return rField;
     }
 
@@ -103,7 +106,10 @@ public class GT_Utility {
         try {
             rField = aObject.getClass().getDeclaredField(aField);
             rField.setAccessible(true);
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rField = aObject.getClass().getDeclaredField(aField);");
+        }
         return rField;
     }
 
@@ -112,7 +118,10 @@ public class GT_Utility {
         try {
             rField = aObject.getDeclaredField(aField);
             rField.setAccessible(true);
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rField = aObject.getDeclaredField(aField); rField.setAccessible(true);");
+        }
         return rField;
     }
 
@@ -121,7 +130,10 @@ public class GT_Utility {
         try {
             rMethod = aObject.getMethod(aMethod, aParameterTypes);
             rMethod.setAccessible(true);
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rMethod = aObject.getMethod(aMethod, aParameterTypes);rMethod.setAccessible(true);");
+        }
         return rMethod;
     }
 
@@ -130,7 +142,10 @@ public class GT_Utility {
         try {
             rMethod = aObject.getClass().getMethod(aMethod, aParameterTypes);
             rMethod.setAccessible(true);
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rMethod = aObject.getClass().getMethod(aMethod, aParameterTypes);rMethod.setAccessible(true);");
+        }
         return rMethod;
     }
 
@@ -200,7 +215,10 @@ public class GT_Utility {
                 for (Constructor tConstructor : Class.forName(aClass).getConstructors()) {
                     try {
                         return tConstructor.newInstance(aParameters);
-                    } catch (Throwable e) {/*Do nothing*/}
+                    } catch (Throwable e) {
+                    /*Do nothing*/
+                    GT_Log.out.println("return tConstructor.newInstance(aParameters);");
+                    }
                 }
             } catch (Throwable e) {
                 if (aLogErrors) e.printStackTrace(GT_Log.err);
@@ -326,12 +344,18 @@ public class GT_Utility {
                 Class tClass = IItemDuct.class;
                 tClass.getCanonicalName();
                 TE_CHECK = true;
-            } catch (Throwable e) {/**/}
+            } catch (Throwable e) {
+            /**/
+            GT_Log.out.println("checkAvailabilities() - IItemDuct.class");
+            }
             try {
                 Class tClass = buildcraft.api.transport.IPipeTile.class;
                 tClass.getCanonicalName();
                 BC_CHECK = true;
-            } catch (Throwable e) {/**/}
+            } catch (Throwable e) {
+            /**/
+            GT_Log.out.println("checkAvailabilities() - buildcraft.api.transport.IPipeTile.class");
+            }
             CHECK_ALL = false;
         }
     }
@@ -1415,10 +1439,16 @@ public class GT_Utility {
         try {
             if (DimensionManager.getProvider(aDimensionID).getClass().getName().contains("com.xcompwiz.mystcraft"))
                 return true;
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("public static boolean isRealDimension(int aDimensionID) - com.xcompwiz.mystcraft");
+        }
         try {
             if (DimensionManager.getProvider(aDimensionID).getClass().getName().contains("TwilightForest")) return true;
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("public static boolean isRealDimension(int aDimensionID) - TwilightForest");
+        }
         return GregTech_API.sDimensionalList.contains(aDimensionID);
     }
 

@@ -36,7 +36,10 @@ public class GT_Config implements Runnable {
         if (rName != null) return rName.toString();
         try {
             if (GT_Utility.isStringValid(rName = aStack.getUnlocalizedName())) return rName.toString();
-        } catch (Throwable e) {/*Do nothing*/}
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("if (GT_Utility.isStringValid(rName = aStack.getUnlocalizedName())) return rName.toString();");
+        }
         String sName = aStack.getItem().toString();
         String[] tmp = sName.split("@");
         if (tmp.length > 0) sName = tmp[0];
