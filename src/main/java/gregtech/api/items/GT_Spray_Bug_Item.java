@@ -63,8 +63,7 @@ public class GT_Spray_Bug_Item extends GT_Tool_Item {
             }
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod:  if (aTileEntity instanceof ic2.api.crops.ICropTile) { int tCropBefore = ((ic2.api.crops.ICropTile) aTileEntity).getWeedExStorage(); if (tCropBefore <= 100 && GT_ModHandler.damageOrDechargeItem(aStack, 1, 1000, aPlayer)) {((ic2.api.crops.ICropTile) aTileEntity).setWeedExStorage(tCropBefore + 100); GT_Utility.sendSoundToPlayers(aWorld, GregTech_API.sSoundList.get(102), 1.0F, -1, aX, aY, aZ); return true;");
-        continue;
+        GT_Log.out.println(" if (aTileEntity instanceof ic2.api.crops.ICropTile) { int tCropBefore = ((ic2.api.crops.ICropTile) aTileEntity).getWeedExStorage(); if (tCropBefore <= 100 && GT_ModHandler.damageOrDechargeItem(aStack, 1, 1000, aPlayer)) {((ic2.api.crops.ICropTile) aTileEntity).setWeedExStorage(tCropBefore + 100); GT_Utility.sendSoundToPlayers(aWorld, GregTech_API.sSoundList.get(102), 1.0F, -1, aX, aY, aZ); return true;");
         }
 
         return false;

@@ -322,16 +322,14 @@ public class GregTech_API {
 //			return (Item)Class.forName("gregtech.api.items.GT_CoolantCellIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxStore);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return new GT_CoolantCellIC_Item(aUnlocalized, aEnglish, aMaxStore);");
-        continue;
+        GT_Log.out.println("return new GT_CoolantCellIC_Item(aUnlocalized, aEnglish, aMaxStore);");
         }
         try {
             return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);
 //			return (Item)Class.forName("gregtech.api.items.GT_CoolantCell_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxStore);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
-        continue;
+        GT_Log.out.println("return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
         }
         return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", false);
     }
@@ -344,15 +342,13 @@ public class GregTech_API {
             return (Item) Class.forName("gregtechmod.api.items.GT_EnergyArmorIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aDamageEnergyCost, aSpecials, aArmorAbsorbtionPercentage, aChargeProvider, aType, aArmorIndex);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
-        continue;
+        GT_Log.out.println("return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
         }
         try {
             return (Item) Class.forName("gregtechmod.api.items.GT_EnergyArmor_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aDamageEnergyCost, aSpecials, aArmorAbsorbtionPercentage, aChargeProvider, aType, aArmorIndex);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
-        continue;
+        GT_Log.out.println("return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
         }
         return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", false);
     }
@@ -365,15 +361,13 @@ public class GregTech_API {
             return (Item) Class.forName("gregtechmod.api.items.GT_EnergyStoreIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (Item) Class.forName(_gregtechmod.api.items.GT_EnergyStoreIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);");
-        continue;
+        GT_Log.out.println("return (Item) Class.forName(_gregtechmod.api.items.GT_EnergyStoreIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);");
         }
         try {
             return (Item) Class.forName("gregtechmod.api.items.GT_EnergyStore_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (Item) Class.forName(_gregtechmod.api.items.GT_EnergyStore_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);");
-        continue;
+        GT_Log.out.println("return (Item) Class.forName(_gregtechmod.api.items.GT_EnergyStore_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);");
         }
         return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", false);
     }
@@ -386,8 +380,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_HardHammer_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_HardHammer_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_HardHammer_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -400,15 +393,13 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_CrowbarRC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_CrowbarRC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_CrowbarRC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
         }
         try {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_Crowbar_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_Crowbar_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_Crowbar_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -421,8 +412,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_Wrench_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_Wrench_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_Wrench_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -435,8 +425,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_ScrewdriverIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_ScrewdriverIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_ScrewdriverIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -449,8 +438,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_WrenchIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_WrenchIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_WrenchIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -463,8 +451,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_SawIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_SawIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_SawIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -477,8 +464,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_DrillIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_DrillIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_DrillIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -491,8 +477,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_SolderingToolIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_SolderingToolIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_SolderingToolIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
     }
@@ -505,8 +490,7 @@ public class GregTech_API {
             return (GT_Tool_Item) Class.forName("gregtechmod.api.items.GT_EmptyToolIC_Item").getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aChargedGTID);
         } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_EmptyToolIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aChargedGTID);");
-        continue;
+        GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_EmptyToolIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aChargedGTID);");
         }
         return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, 0, false);
     }
@@ -520,8 +504,7 @@ public class GregTech_API {
                 return (BaseMetaTileEntity) (sBaseMetaTileEntityClass = BaseMetaTileEntity.class).newInstance();
             } catch (Throwable e) {
         /*Do nothing*/
-        GT_Log.out.println("GT_Mod: return (BaseMetaTileEntity) (sBaseMetaTileEntityClass = BaseMetaTileEntity.class).newInstance();");
-        continue;
+        GT_Log.out.println("return (BaseMetaTileEntity) (sBaseMetaTileEntityClass = BaseMetaTileEntity.class).newInstance();");
         }
         }
 
@@ -531,7 +514,6 @@ public class GregTech_API {
             GT_Log.err.println("GT_Mod: Fatal Error ocurred while initializing TileEntities, crashing Minecraft.");
             e.printStackTrace(GT_Log.err);
             throw new RuntimeException(e);
-            continue;
         }
     }
 
