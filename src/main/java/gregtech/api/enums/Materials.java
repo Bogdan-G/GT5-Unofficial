@@ -1505,7 +1505,8 @@ public enum Materials implements IColorModulationContainer, ISubTagContainer {
     public boolean remove(ItemStack aStack) {
         if (aStack == null) return false;
         boolean temp = false;
-        for (int i = 0; i < mMaterialItems.size(); i++)
+        int mMaterialItems_sS=mMaterialItems.size();
+        for (int i = 0; i < mMaterialItems_sS; i++)
             if (GT_Utility.areStacksEqual(aStack, mMaterialItems.get(i))) {
                 mMaterialItems.remove(i--);
                 temp = true;
