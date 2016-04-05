@@ -17,13 +17,14 @@ public class GT_PlayerActivityLogger
                 GT_Mod.gregtechproxy.mBufferedPlayerActivity = new ArrayList();
                 String tLastOutput = "";
                 int i = 0;
-                for (int j = tList.size(); i < j; i++) {
+                int j=tList.size();
+                for (; i < j; i++) {
                     if (!tLastOutput.equals(tList.get(i))) {
                         GT_Log.pal.println((String) tList.get(i));
                     }
                     tLastOutput = (String) tList.get(i);
                 }
-                Thread.sleep(10000L);
+                Thread.sleep(30000L);//Thread.sleep(10000L);
             }
         } catch (Throwable e) {
         }

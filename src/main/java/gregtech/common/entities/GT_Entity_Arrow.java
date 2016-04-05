@@ -111,7 +111,8 @@ public class GT_Entity_Arrow
             Entity tHitEntity = null;
             List tAllPotentiallyHitEntities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double tLargestDistance = 1.7976931348623157E+308D;
-            for (int i = 0; i < tAllPotentiallyHitEntities.size(); i++) {
+            int tAllPotentiallyHitEntities_sS=tAllPotentiallyHitEntities.size();
+            for (int i = 0; i < tAllPotentiallyHitEntities_sS; i++) {
                 Entity entity1 = (Entity) tAllPotentiallyHitEntities.get(i);
                 if ((entity1.canBeCollidedWith()) && ((entity1 != tShootingEntity) || (this.ticksInAir >= 5))) {
                     AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand(0.3D, 0.3D, 0.3D);
