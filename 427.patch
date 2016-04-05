@@ -1,0 +1,1039 @@
+From af5cef9c05c5e5e12fb250c3e7b5ae1f4e113b60 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?L=C3=A9a=20Gris?= <lea.gris@noiraude.net>
+Date: Fri, 29 Jan 2016 15:09:07 +0100
+Subject: [PATCH] Fix textures in wrong BMP format to PNG Script to fix ```Bash
+ list=$(find ./ -type f -name \*.png -exec grep -l BM6 {} \;) for v in $list
+ do   f=$(echo $v | sed -e 's/\(.*\)\.png/\1/g')   mv "$f.png" "$f.bmp"  
+ convert "$f.bmp" "$f.png"   find ./ -type f -name "$f.bmp" -delete done ```
+
+---
+ .../gregtech/textures/blocks/iconsets/FUSIONII_1.png   | Bin 822 -> 597 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_10.png  | Bin 822 -> 592 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_11.png  | Bin 822 -> 618 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_12.png  | Bin 822 -> 586 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_2.png   | Bin 822 -> 603 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_3.png   | Bin 822 -> 535 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_4.png   | Bin 822 -> 544 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_5.png   | Bin 822 -> 558 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_6.png   | Bin 822 -> 562 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_7.png   | Bin 822 -> 488 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_8.png   | Bin 822 -> 646 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONII_9.png   | Bin 822 -> 582 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_1.png    | Bin 822 -> 601 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_10.png   | Bin 822 -> 595 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_11.png   | Bin 822 -> 626 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_12.png   | Bin 822 -> 594 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_2.png    | Bin 822 -> 611 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_3.png    | Bin 822 -> 542 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_4.png    | Bin 822 -> 551 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_5.png    | Bin 822 -> 567 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_6.png    | Bin 822 -> 569 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_7.png    | Bin 822 -> 495 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_8.png    | Bin 822 -> 649 bytes
+ .../gregtech/textures/blocks/iconsets/FUSIONI_9.png    | Bin 822 -> 589 bytes
+ .../blocks/iconsets/MACHINE_CASING_DRAGONEGG.png       | Bin 822 -> 472 bytes
+ .../textures/blocks/iconsets/MACHINE_CASING_FUSION.png | Bin 822 -> 649 bytes
+ .../blocks/iconsets/MACHINE_CASING_FUSION_2.png        | Bin 822 -> 646 bytes
+ .../blocks/iconsets/MACHINE_CASING_FUSION_COIL.png     | Bin 822 -> 549 bytes
+ .../blocks/iconsets/MACHINE_CASING_FUSION_GLASS.png    | Bin 822 -> 616 bytes
+ .../iconsets/MACHINE_CASING_FUSION_GLASS_YELLOW.png    | Bin 822 -> 594 bytes
+ .../textures/blocks/iconsets/MACHINE_CASING_MAGIC.png  | Bin 822 -> 500 bytes
+ .../blocks/iconsets/MACHINE_CASING_MAGIC_ACTIVE.png    | Bin 822 -> 500 bytes
+ .../blocks/iconsets/MACHINE_CASING_MAGIC_FRONT.png     | Bin 822 -> 330 bytes
+ .../iconsets/MACHINE_CASING_MAGIC_FRONT_ACTIVE.png     | Bin 822 -> 330 bytes
+ .../textures/blocks/iconsets/OVERLAY_TELEPORTER.png    | Bin 822 -> 577 bytes
+ .../blocks/iconsets/OVERLAY_TELEPORTER_ACTIVE.png      | Bin 822 -> 577 bytes
+ .../textures/blocks/iconsets/VENT_ADVANCED.png         | Bin 3126 -> 720 bytes
+ .../gregtech/textures/blocks/iconsets/VENT_NORMAL.png  | Bin 3126 -> 606 bytes
+ 38 files changed, 0 insertions(+), 0 deletions(-)
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_1.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_1.png
+index 62bb0b0b5aaaac2af0d2236d0c25f41dbecef053..102e96f3c281a40b621ed27352a95ec71b050593 100644
+GIT binary patch
+literal 597
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{j>32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;|FNI{AN~1%|Ih#1zyBZk`TxP6|95}?Kl$_j&ENko{rZ3C=l}gb
+z|DXT$fA5d~*M9#${p<gg-~TWCn!Ie&q@^2MrY&lmG_R&-W>wepo3G#8c=_t;v*(u{
+zKRI{*!O5Gqj$gZR?CSNym#!Q*cj5p4|K^iDUjm)YnB?v5VzGdI=`|pSy~NYkmHh#u
+zEFY_R*Y)fPK%wQHE{-7*mtA{b3pFVSxNV;umNs!gLk0KdO`BF<{k=c3`|yjO2YJ%>
+z{}oFxndg(<XC1Gzck2Fo42riKg4`qzoAYqE$OwvQCTs85#MOFe=U=rTw;2Z(yl}kO
+z`)iU!Q0gw8&YOlz+DlbWb9=Cw&-K#C^Gj^v*HA2PK5$j%daC}0!u6|HwQx1h_26?~
+z8#p2OY{uC`1{U$_dc7Z%)!W4Hdv5lA+h2?O_vLpvNPIP%kt_vtvTBKIL`h0wNvc(H
+zQ7VvPFfuSS(={;EHL?sbG_^7?wK6r)HZZg@FxX;#-WEkeZhlH;S|y4G6DwmQD<eaQ
+V25bAThkzOwJYD@<);T3K0RVNO6nFpt
+
+literal 822
+zcmah{+e!ja6gB#R9{Ys8zz^uX|EcID2%<173nKz6vyddaJQM^`*<_jJW%4%KG@?;-
+z`G95=PHXm_ITlLEp3Qd8T5IofW(|*c`#tpYA`jsiaGpNTAoV@Yd;Y`u^Fw=otGvDx
+zpPOpk$moxETKOh8GqyZCUe!{S(lw%7Oco!Mf_j<DobQBuhuez>TY<gJ`TfWO7xAzk
+zvAf|92d6@T$raxO=nw(eN{e<wwCkd6P=T7m5G`G_3c|_>D@&0UU#G%Mxd4fD@ldcS
+zB?k=UzwlsTC^A@@uvDA%4_;2BZCf>Ap3y$MIWnI@7Oc;M&@_ap5Z;}O=@981w33-{
+z@kH-|)al;%;MfQHNvC7qC-u4L&i4L{=S!eXx?w*%5V!T^{_><WOCs&BKxz(N-Wv_-
+zeD2>Y&^!A`N*9KwIQoi!g%Gi|Ik*dcL$L9Xx!?}l&qhW=(a35%wtjLPODacdE&=Pp
+aic8a@`Rqlha0PqUs<-g@lYZZ9<i7!9SEfY(
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_10.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_10.png
+index f2f1bf2d1848671e5825392136d8f80912351d0e..292f4d09b058ce2172080c7560838514d700785f 100644
+GIT binary patch
+literal 592
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{R*32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bIDkNy1r=+FQAfBxV8{r|zA|95})Em-sa<j?N8D=Rvt{=fOV
+zedf}#)=B%$ocn+2SM!twyHB3}f9?1G^S}O|{#8F=&aM-u{$Kh1|H7}vN%M9dKRJ2X
+zrvFENZaaMR=Ib~A5B)rF?!y27{~t)?iU8frnB?v5Vs5ZwhdYqNUgGKN%Km^+mXFm!
+zDx-`MD74hm#W6(UvTNUUu_glnm+Nd@x()`sfp1(~kAC_;|5<~==MB%FygQTAVRbjI
+z{=tsJ6V2!Oq!%Zh;XgE?eNM95!KRj$5Z$v<3TOKZ7@BMU_LM$3xNu9J(khm#s~El8
+zg>ICpUZ~j0=CE|#)Vys|G$PBSQdRs4T~f3c|B2-m@crKYSbo9BDK|g2>hy?qtgoDQ
+z_uUb>v--u_T;DzQ(<ZxgEIJ^N|LrH!`y9#m;A2vt2vjX`jVMV;EJ?LWE=mPb3`Pcq
+zX1WH3x<-~EhNe~qrdFnA+6IPJ1_sJ2?twx8p&>UvB{QuOMT3czv5}RLAw+|<{ntZ4
+O4Gf;HelF{r5}E**u@3A2
+
+literal 822
+zcmaKq+b#o96oxBaz@<m<1RlV>*O9ss5h-zKRY?R@l$4>wMMWh-wbhfJRYr|UUGf5*
+zHd+3?*Vr9(Xx6N(wfn8Z{%1x;hx;A!Hw-_7XTW;;9E0-QVg1hu`;T}1&_8cxsg;(N
+zq!uhL4JVw!#|T(4e+_@Ozuak1kF^bI*U2oBXeB$W&W<N;BS<?<>by!GfwBgPlBz5z
+zkXazVcQSo<fi=2}f)U7xqNFBZwB7JbWKz*Td6ZzNENts!mMP$y%BC;><JCC1t+ut0
+z&s_-~qj>?o1yT;UKM!iq$*$+25*Iw5%PMH{yXmyI=JHODSv=qFCv0>tey};WGUJ4{
+zcI6?6J+;S2fkm+ocoso6w*x(Kc*k9<CIqkcS2vaGDW2bTmsh&6N?(E~o&)GpDaEXP
+zRLS?wssy6pO9KxN!@D@%cAo~9VCci11CFr_0PtGK9}2FAwLtV-OU5JRVhkeSQ}nr<
+WrNRv^s6VFaPZ{Gm_hQ_?HA|n|>!hOq
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_11.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_11.png
+index 983fdda99760d978717bfda0a597543659ce2a70..54a5c8fba04b9126176da959d23043e01b20f0a8 100644
+GIT binary patch
+literal 618
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92O6(2r32~jbVs+2FRsXmA
+z_`mnZ|NTGzANu+K*w6n*e*QoG>;Ktb|Ih!r_~`Nfo4^0x{{8>{pZ|A%_b*&~=;G!7
+zkN*6B@Mpr}_5F+19ldg`Z^4=)m#_Xm`LlcO%8HJu?K78_wNC1tzk1)9bN?^>YM!!S
+z_sP@$ul=r{FlX0^Q~$60{(s?D<D_{zkDr{pY}2Hr8z(N=&@ydNP0!4#uIZJX)3zNx
+zdh_+08!um7efIp)<0t3tKR9#e?uqL+Pu{$B{MwCUSFazwbmhRg3;+NB=lZ={5$F-d
+zByV>YJI@q`$3PByiKnkC`vXQ<K2{5<j50=`&?-+C#}J9juDy|BO$Gui>RKHqRA#ZT
+zevcIqy(9Yd-}NGg303;?D@)25B9=xOpV^f-BkXXRZ^9YJc}g!5R`V`Xso>k><nh&b
+zR?DLAf3z;V4QNsp6P?$UWU%;kqkrKU1?{R@A(Kwaa|s-F(_b!o<aH^0mewYhj~91{
+zgp{gXz8Qbv(VcB#-WxP#aBhscUABR78}C=WE9-9GVsF>5JM^+<=e>9R7FB8|PgmFP
+zyJ8`nZ;^ek9_VV-64!{5l*E!$tK_0oAjM#0U}&amV5n<k8DeN^WngM$YNl;qXk}oa
+ryyBh+iiX_$l+3hB6b&X;#zs~~h7b+b_FoSHH86O(`njxgN@xNAO}inB
+
+literal 822
+zcmaKqSxN&z5QZaOz(<eZ33346y^g2|A}Vgt#Hf*gMvV*Z8zQK<5X~|s#+ZH7Fd-4e
+z<p9nkQ2yOL(*{BuYKoekuj;R^?)DCQvyDG?_%^&P=G$az<?A-{zxWXT`%C@&$iKg3
+zUdzd%7B9TS)Lg_f+C4Yc^Q0>IY#5fygfgkybn+$<zuxjWj@G9S*WCLnu7lMn5$yS$
+zu-#>+-!tfQ_j?_^NJo+2&504EYKf{vs%ktyEKH+HfhuV-5@b9uL!uHs)fEenq{X8G
+zOUZIRO7pJ1yU1BX9$65DN0v%Pl9px$qRRPyyj0}fZZA&6W0#B<ox_V=$UxK=LK<Np
+zm=fbHU8q-{8<<LK-eLDpr^%xx`mBcwT%B)xb76dTq)QK(E37NNE`oZ$voy*20WXHY
+zi`Qdv1t*wI2N^H>mpkQJl4PgwOn<zb8y8}7a!@sim{004VD=+ZY5-Xu0qWzXfrp3T
+u1hG;JFvc2=;Bo!HZ*Ta({~XiL1?g9$2MCJ#Ef08%3u)Z5D+H`udi(`)(56KI
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_12.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_12.png
+index 1ad1cf69eb60b82b1bcd89d49a26dd8104959c8c..16dd6ee0a1f6c76fbdfe1b998830d21fb876f450 100644
+GIT binary patch
+literal 586
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92O3V-N32~jbVs+2FRsXmA
+z_`mnZ|NTGzANu+K*w6n*e*QoG>;Ktb|Ih!r_~`MW3zz=i{Qdv-@BjDz{J;CVf8pAr
+zSFTN3y7B*`KgX_K|Nr36l;xYNyJt*Yv8ASG=Hz9Y{$Kia{MwBZ*KbZ=z3u<C-~X@t
+z{(s@ugvIM8F4@q(XkE*+MU9i@Rdr3T?3{M<^_v?nUtN9n{L<qm=k7l^bLZ~Ko41Z!
+zzIyo5l>_H4{Qv(y&uHa)pi>!>yxm<)R&IRx7sz2R@$_|Nf50fq$7&&!QN{=qTH)#9
+z7$R}mw)du3lY)RldyIjXgX<~Q=rfnTJ^lZG?ZFe(eEh|UdJHMgemZ(IEA%|;(Mj-3
+z($f**_vctLGsw%rV)=xAr_ALVOSJctFMeX<(#U_*r9)fqM|VJk__oxEW$jLpiIc1!
+zSur#_-Ch&+O`B_3fN)fS{H(L}K}zdpnse&pMT#uc*doz-=dGl3;;J>aDY@5Gj|bo6
+zXE`_h_1k|LZT~WT{#DiQV?8Al$IZ;K2k2(i64!{5l*E!$tK_0oAjM#0U}&amV5n<k
+z8DeN^WngM$YNl;qXk}oayyBh+iiX_$l+3hB6b&X;#zs~~h7b+b_FoSHH86O(`njxg
+HN@xNA++qjD
+
+literal 822
+zcmaJ<*-pYh6vg-hKKcoM0UzMIALR04;)_axqJqAVh#Qf(6W@#mD{2(1wJcSe5-=K<
+z51^&V^~~H_OEEULlRGo#o;i0J9*Oox<QK&{gnz*M`yzw#JmTH+hS#r8<Kw;l_F8#q
+zX$`AvKHnO(tK{@(YG&-wxUN?(VYN!J@}TJ2xmrHM_Hc9IU?Z`&Hn+b%&(3Zp4%=Cc
+zXOdIt#N<kB0^uOpPRGEO&n~$QaxHS30kf!MQb#98CFf4s4Yf}Q_~Trv3&~Lk=a8xg
+zcK*jB3Xft%ltGRrqQDRRLQhahuP@bhp2$8Gc;w4GUKUWo=`cS(B<0x(A@^T=lR)yf
+zNlA8rmS@L>9?q^8Y|6TE;?ScIdV!iVo(tmpAxG#}sH$HaZ7m9<BoARiTf6v!mvs}j
+zoT-%OgGJ*c8}ObUzlJ~t3gU;b!+M1NAikTNksiN7np(gVp@TRHu|bA^f?JFqkhyFc
+cYdbG`jrO6!5Q%q%BYljGQxd}fSgU#e4S@8h5C8xG
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_2.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_2.png
+index 86fe13b8f7213617325414ab5b3491793e84631f..108e2eaa6c661614c0d52d026c79922911281d44 100644
+GIT binary patch
+literal 603
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{a;32~jbVs+2FRsXmA
+z_`mnZ|NTGzANu+K*w6n*e*QoG>;Ktb|Ih!r_~`MW3zz=i{Qdv-@BjDz{J;CVf8p9g
+z7cU>Za&6MmjsGA0Id=8>{|A32EM7ll`R4vb>-rX~Idb`Gb@z;^E4FmcU0KmFwWeq0
+z<Yk-MXD%&kopk)#jo$gI_nkR+;`+_$tGE5X^s9Nwg54)i|G)OTe!`qxCr<sp^85dV
+zUyYOI?L2<6vUA$D!$)tve)Iq2&jaT!{Qv)7Y@4qx(B+It-tI1z*BPcd06FX>p1!W^
+z4;W?nSS_S7${2w{t2|vCLnJQS_H_z1DTpx0i@Hy9&`L@ziz-W>{`dd%uSO;532m%m
+z3?9pGFYXCG<#Jz{Swbj&mAq8D46A_KF^Q)WR2p`O9sB3oq<(D2`)N^rP9k2Xo^?41
+zy6Z(4`zB6HT+Oz2o_@m4LrY42yyktP@kT$J*KX>P3F*s@u6oPYRlC{fl)a4q+5?Yn
+z3QyM-nHjqE!uCs_-|_dD?bl&_d|rG{=L)T37RNgSKmBA9Tp_$n)JsVV=xWsx*NBpo
+z#FA92<f2p{#b9J$Xr^mmsB2^yVrXh*U}|M*rfpzoWniGZ;+_bKhTQy=%(O}r4JKB`
+aMpj0K5DnJ$Uk?E_FnGH9xvX<aXaWF0tPaWm
+
+literal 822
+zcmZ{i>q-Ja6vvHTppQL5Pv8Uez1NANAR?kdOEIm4+N`iFyHJTxk%f8NEM4y{B8Gje
+z2hdeG{pZ5AiY;e{Gc&()=6}x2<dl8X#y>m83H)R7AF++|b(`E56EXgL>t~A7$Wlk;
+zmZA<U!3`^7iZM>WwA}MYHGOlu*=y2(bsN;Jlc5ny#WQTJ%_d)>dMy(P`Ffw6Z&A;*
+zCb5t*56P2}C&ja<rtiQ<!`pwDg~y33q{?8Nvg=-W&D{UXBM^sTM3hcOkpkYOtoi``
+zOplp%sKeEU_t$f8F<CFqBdb8|q8yPQTYP$T<gSzwe&;;vkKkLZC&Nvrpnt`)JiX(X
+zV|sW$hmZ}~XB2+A=kTr0)GDd#pvP=J)=huFIS*_=Pqm!9J@H~oBp+a`)5}8_V95*p
+zW~Ket&2FJif|q*03j+y9^rt@x{V5gV$j|g!`F>1DLVmnA@I@^S2RDcnt6KQh+Od0a
+i-~t~GDd5`?YClrviM?C-p5bsGFUNRiPYBpotMCi@h^B4;
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_3.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_3.png
+index 8bbbf40ab8d7354f9ed2101abb0588c1080a0016..1cc144aa9df946d16562246db642785013ff5b12 100644
+GIT binary patch
+literal 535
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N>l{+gt*RIvASp8s{dPl
+z{NMZI|Nfu<5B>aq?C1X@KmVWp_5bXz|L1>QeDwIxg-ic${{Daa_y7BU{@?xGzi{o*
+zE7vA1-T42}pJP|A|9|jj%JR+C-7}`H*izFobMmrH|1bSIe(lDI>o=#b-uD06@BdeR
+z|G)67vUA$a*Khux{CVKqh5!Hm7jW8s2D*VU$=lsUU6+4_GLXYw;_2(k{(w=IkJUmd
+zql^(KG{@7$F+}3BZC|fglLC*M`zg06%{hT--;!_swof{Iq57Ofy7)IkhRrLpx>Iy_
+ztu?p4F}uxKE$ib!hiZ|D0SRgrXPtrqS>8sz_m-X+*lNe4y+T>_gS=D0%c3x~XOd0X
+z>nFx!<cYC~Y93cR8865)cg>Omrg!AM)fevknI$^w$Cq;}Uj)r?t?9kDTH;sg>5Gbc
+zd24!RtGOuIUYPZs|H(%FPvP6I>jT}XTH+c}l9E`GYL#4+3Zxi}3=GY54GeXSEJF-U
+ztqe@9OwF_n46O_dlvmsnLD7(#pOTqYiK4;8%Gk)t$Pl8z+WzYypaup{S3j3^P6<r_
+D+id3L
+
+literal 822
+zcmah{%}T>S5RUi)9(@F#pby~P2NHb&u^{;GrQks=77uFiCQ6A>DQYY=HAsoXqdq{B
+z2F7n@)@`~343lAY_nU9Onc2mq+N>vE4SoUtocU+GdD-{Oxh~ZIe8;Dadfuh%Q7oVg
+z=8IuRm+&0|EPTFwkM1vyw~B-u8xLvxL3v0_B@DZ3%Sed_5AEho@hSL}3Tp{*N?%f5
+zD2H`vbWOltwe}{k5*{~lN@T$Q;E{++;gJ<n-s3FrLqF@Ww3UIVMLF3G<GEhpF;$>;
+zEl2rrq|1bxc2HlP;8X5NwTUEjb$@+@^+-P}kVDgFE*yG%8oUMPN1L|!*tfA0C_d`n
+zU7l>?NXZ?Hv&7&GUhB1$PLEr~Fn{o;$F>p3QbSyRpZQsT89z;~DXJFr_QDQc5hjQo
+nhpk*YPR|ZEfNV7z@S`@*8skHU^)+%JF`iBS#E${6uk`g7&7-$z
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_4.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_4.png
+index e6175b3525680782cd786d7ff37fde2615083725..d5ac6826be39ec80ba3dd482369a42dc2f011d60 100644
+GIT binary patch
+literal 544
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92O0)#{gt*RIv3mBB6$@6c
+zTfKePwj;+5UAT1Q^3}@DX%+2L4xYbw^vbmp*KeM>b^FYnyJzp-yZGpF&%9N=^H=vT
+zTsv{eh6#(;_b*!a|Jcv}kN*6>|L6bh-~W&N{Quz3|GU5cpZxj%=I{TPe*Hi6^Z)*z
+z|Ih#WzxT)gYrp@W{`LRL@BbHmO<uO?=Ib{H&RzKb|Noa)7iEC%VNCLNchOea`Gf<=
+zVK4FYb!C6RD9gucA(c_a2o##>>Eak7aoM%+rcjfC0LyjZ{O}G-&IE%+|NgUEEmZn)
+zIBaRT5$DCEol*JQj^@={%sV$-+wlIWRYFq*W_+LIskOlP*bSX2r@0O#&hOu9D8$L~
+zmF38eSzbDo({~A#?wZV^<-07?`cu?WzvXki{1q3b%`xkbe2{gytxhPTrcI){i=%H*
+z9j~Ip2cRbuy`l|jEvodFZk5>d_&xu6De;fHonrfdj#MpijVMV;EJ?LWE=mPb3`Pcq
+zX1WH3x<-~EhNe~qrdFnA+6IPJ1_sJ2?unpi$jwj5OshoEU}9x#WMyOs(O_-=^$<`4
+NgQu&X%Q~loCIH>e?&tsj
+
+literal 822
+zcmah{T}s115RP~OA3cI6=mC89K6(NXlq!lZLj5aJ3|8?$K@hdXpjK^KYfG%LQXlmI
+z<_E@aXO>M`gNDg4yZe1J-^}jxOkv#OuK+)Ve?tFb)+Fy+`dk*`zdrr_(qdGn@RrS`
+z5azI9N0#t40?d27gg@R}P5LxqaX@j8B9Bxm&al2PCz+E0CGU(!V60Dy(q>A7B3PZi
+z&y|K0W55WwqM~#(_#ZqdD9Xgxr>Lb^f922CVzp=|ykI>jEdrzqEG3ZqQi$cLxk10|
+zGYd)bjU{2K8qf3`WRPhbdXV28nmh(FauH^!^b1~wz)H+%ZXnm4>NlOTJVQ~pz}YlD
+zJ38)K&u5qgdaB1zeqp4F&hMyK2eUVq4z`O&<rUcB?y`6ZB(Clh0Z_<FsZ!pk+FNI*
+lw(Fd<yxQ}VgQvJQKih0vb=uc{_onx97rfrT1rHyC<`1w2wVnU~
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_5.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_5.png
+index 58b591f5a6f0214de20fde7527e93d15e42a4bf0..76d6f6c11c6b9c0a9fbd3712cb0006cb63988fab 100644
+GIT binary patch
+literal 558
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N=yjw32~jbVs+2FRsXmA
+z_`mnZ|NTGzANu+K*w6n*e*QoG>;Ktb|Ih!r_~`Nfo4^0x{{8>{pZ|A%_b*&~=;G!7
+zkN*6B@Mpr}_5F+19ldg`Z^4=)m#_Xm`LlcO%8HJu?K78_wNC1tzk1)9bN?^>YM!!S
+z_sP@$ul=r{FlX0^Q~$60{(s?D<D_{zkDr{pY*S_Dv~7ov-hBP$z_|<m|NpPpVEF^+
+zHpV1xcNcx-D++=@4tt5GuPgflMp-^q3#p7UMxfAaPZ!4!iOa5ioI-~bcwB|2Hr!}%
+ziY>VRy6*qunb(r;^PKr`;y**f-hU1g!@AB~c*G&VU1l05*01j1SfJYz+4949X@|!5
+zw--N`s0sI3y2t1iB_6I}^gOoHaZUU>7Z26#BCmN>#9y6zku+hsS7%G#i*398Jht4B
+z@2gkrRnI;rZeVnSqkiq0y>}Vqe@>sO__yYuw6B*-)M+;^`}h@~1OzJ%CtU<OQ?<l3
+zq9i4;B-JXpC>2OC7#SFv=^7a78d-)Inpzo{TA7+@8yH#{7$~o}CxW6OH$NpatrA6p
+ciIuUDm60JtgSGwFLqH7-p00i_>zopr0P1-6^Z)<=
+
+literal 822
+zcmaKq=}N;u5XU3FfFFGXpP&!mcV9>JlZc3lM@v0G&{!2ktp|t*Djw8Ujny8u7J`&W
+z{iqMnCV}z4GjS8^5hlyb?r+ZB-o99;!Cwq(5B{#;?=ZS~-w4jdkoDu;-Z7`#Jhd#A
+z8)`waEZ7kfYleW83RhSUH)nl^+Qh4q_d;%oR49(HFfo|BK8EQx$bV%XiWY~IOO;)U
+z<QB<H4qLY;C?jMv423f)mzshRb}2D*e|P#P4;Lh5N6#kriBfYTdF$*yUZ>+~(<{@3
+zhYQ6cwG<#-z!XK|OCpC3))UW_tm0*#y)cvC#iotLvE*ofz)N>O;d<Ek_VVQX_yA@b
+zoje8-HKY1&YDU!qUWUNIqd=R!zZS1mbBfpX>rS~m&C6Yfyq=p(>1!aG7X|aFlrup+
+z+U0v>?Si4<rGdu^!3|<ZpNbOg9jAM%aq#Ia6MXZCn&;HIRPPoU)q94*I$n<ZsGbn8
+Hw?_FBzkju!
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_6.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_6.png
+index ac2ac3818fc7e4b647f82cef5b851a7c9c488b8e..f9fdf7531636bfca284dbbe491bc3bc3e5952805 100644
+GIT binary patch
+literal 562
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N=yjw32~jbVs+2FRsXmA
+z_`mnZ|NTGzANu+K*w6n*e*QoG>;Ktb|Ih!r_~`Nfo4^0x{{8>{pZ|A%_b*)g|IwfS
+z5B~f=`Sbs!U;nTD{(t57{|mn+FWWR}>Bb3**H2usp?}f3mT8L`C(WzrnOW5}y|Q!K
+z&DU>kynJ=_+4D<}pPak@;LM%7C$8T-dGprsYd4Nvy?*5K)x(#r95{F3|NsA;Q>HKh
+z-Nu;Y?e3zld__SJ$YC$>^mS!_z$nYdY9W<T#t0Oe@9E+gB5~QZ_oi5r0S{~N!lhxC
+zE;VuQXxzQy&;RE$Gg>Xx`Dfm{!_?t9$!n_T$}d+sBsnH7PL<&mW16C#!(!NdsC|V8
+zOI81B=a4B27RV}m)c-RzC4lW+lFa=L3%q)sOl`ST^^V7^;$N3gol1m{yW{f8)Jcv3
+zkMCs6ZCLgoe8<sC5<*F#=C60%%;|cYcfX8@@A&1PMSDx%?tL$R{`zm`dpi7^x3(Wl
+z1Ugl<#5JNMC9x#cD!C{XNHG{07@FxC80s2Xh8UV!8JJp`nrRytS{WE9uec|Iq9Hdw
+iB{QuOMT3czv5}RLAw+|<{ntZ44Gf;HelF{r5}E);{s6ZC
+
+literal 822
+zcmah{%Syvg5UuzFF8u_*pdaAg4^rF+Zj?f`Ld8wMsznr^xD`c1wNz`3eMK!PttdV|
+zph*McxidGnN{WWbFqxb=bMDNYoJx)+_({S~;2qQNNMfAx3H@I_#D9IdAMee#*V;?h
+zX?x|?^NriM&Mr)^F3vo<#b*5q)~FR~4|dhLtd!4ptkiLS<!CE&u(5Qwxh%ncE)CmT
+zPv^4pR%UK3HH&hP034Jk>`>UI(BlBHm`D8<^{W(AD7a%QQSX%eVgxYA2oDBTQrBQG
+z|Aj{tn!=;XrNB{D|KLqWR@;9f|BUsBa(Fp~34~u7A?cBCGd}8z?jRX%EXlu!@LWCw
+z+2Xm$!J!BI1)Wjz<h%rNuk;IEhQLbVu%8)_D}JNjoRoVRq}l?rX}p;mHyW(_cNNM9
+zdQ3?SBV9DVO}IiZY!DeEKx3le;1hpw{eaxvw%~gwylbov6UL!12Lv4B+61@iG62@?
+G+<yZ_>$gAv
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_7.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_7.png
+index 014df80d0cda07da7c74e9822667442bdbbd41c6..acc12e8c7f03919cc89942f33b6a8398df0db0f5 100644
+GIT binary patch
+literal 488
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N`wdagt*RIvASp8s{dPl
+z{NMZI|Nfu<5B>aq?C1X@KmVWp_5bXz|L1>QeDwJL&ENlT|Nejf&;Pr>`xmbL|LD*E
+z2Y>#b{Q3XVum9J6|G)D4|Ak+Zmu;%-oObi|n*--A{Qv(yX}(bs&<e&RZ+91&IV_Is
+zKn{C}r>`sf14dasRtu?&GDe_KpQnpsh{R>rK5n5y3Op{tnv5G68?*l2`9CjDEB8Ln
+znGZK~1U?@1jcfWYw7xU{h)uQ`*R*>xmo(V~@H$^H6LC5G*Fr4Rk?CL!!$$Fc-b`Q9
+zV%;`M3a_|wa8Jdnol)th*WL>DxH5TKsTHf+bJd;B3qDRvDiIO9<5Ia!)A2+0|EE%_
+zduH0nREu*m&aU|Pk756OUaL#n1*?EAQ!R0gC`m~yNwrEYN(E93Mh1pvx(0^2MwTIl
+zrd9@~R;Fg!28LD!2Ffe$iJ)l6%}>cpt3=UYVr6V(Wn>7^U~T{P5Kseyr>mdKI;Vst
+E07PKO4*&oF
+
+literal 822
+zcmah{L23d)5M0RzJmv|$zz2BuL3u(T;31Hs;6=ocOYj;Jf(T(rq9TIGvcVkn0q*QV
+zr@DHWUCoj#y+hATRd;pwbh_<}h+i9P3xCu9jp&l+k-xW%t%v<)+`n<LWN);YWUwg>
+zC$`1<DuB&DUa&q6Z;MpUEKelgikpjuVuZWvD~nw0r1&BpPOwyzvLfYE94waOlWHh2
+z0St#3m9qBWfAF9nDT(<;+)`P8#joa~T9lJLQx8&`0ILF9b1c3kqCD*z^xHXE2vTp9
+zgsyr#={3ltQaJP={_LdlXvo<h!dCSg-kLxq;kMSXahLi-rIZ&aIt51a_-gA|weQa<
+z3-nS?p!~vE79W4AuMUO@;v@+0m`d%qeHiqBydU+k9w(eN#)l5udxk?F&&Iv$V*u=X
+GxA*~)n#P#`
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_8.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_8.png
+index 10ea4d8cba0a811955975152fd3f5f0f8e5e6149..1223f4c109a49932384460cb2e8afcac454535ac 100644
+GIT binary patch
+literal 646
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N}LJs32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG>mTvt2=+FQAfBxV8eeCM>{}295S-$!I-QRr+)>L=Tn7U$1
+z_uQ2g9aC$1W=>wV>Hp2&?K78_wN5&I?Z&<{=ccdT_W#na<|zwypFI8l+VB78fBirG
+ztA4_qT_;Zczw-P4g<p-6=IuOwvSr$$s;=qV4j;Yw`pu1(udY6Oe(CX(bN3&dym{;J
+zr7H){UHJe1zry|W6rjHtlf2zsoYODxCILC@C7!;n><<`a`B*KaGRhc%LfbuE977~7
+z+x9*eYck+*d(6bjektr$P@stW+#TO*{<j+`{rG#ra;Ik=L(xyCjVUvpcBO`Ae`T98
+zXPGyL>Xf9^JZ_!-V!cZq%USD~cKj0TlFps8JXc|6tAoePxg0F}zRRXANOmxH2^U)8
+zxSsza!&IZQ1tx604z*jm9&2Yc@cp#+GEq<P-`v;zFlXNnW)r=~SF4!IR=6-Vz18dc
+z&OW7TO2rhz?>qYao=NImzx_9G^V!S6+4n2<+RKzn?UK#7SP1ljYKdz^NlIc#s#S7P
+zDv)9@GB7mLH89jQvJ5dawK6cZGBwjSFtjo-P+oCQ1Vuw`eoAIqC5i?UD`O)oBSVM=
+UYx}Q<fEpM)UHx3vIVCg!0KdQ~hX4Qo
+
+literal 822
+zcmZ{iX->jW5XUiIz>glm6L<i>dmV#IVvHIWTo3^@Dk5%Z-8C37F$ykhB9ygYEkUDk
+zIRTJ7|9w-NDxsOa%xix$Z|47|qqDu)#GiJoZFpO>x5?DXznirGw4wF;OZxoCzrST(
+zU&N9Um!D!%F612Ro*VBeNa1|;9+u18Wl}e3F_?&7VSBted$eIYShF6k&ych4nTGAH
+zPJ5g~F5AGuL?6PD<TmI-wo|X8R$?`U)yf7_SXE}#G^-?7<xw>RhVRe8`-HhaBt;>d
+zLb9BXvL$POB;;?%BMOINMU=!UB6HgZqu~qGuhwI%q~7P%3M-TG*d_H#d9*H23AID{
+z=^%wc5U7OSp^wIwS+&@}B(||IVjJ$7xAdy@P<QpP%yr|9Z!cRMqh{O%G$)<}(fxnU
+zu6qjgWYf1NTXvP?$^S9NEp8C7#&g}&ztkx&PlwfuD>CA>dUOpz{tBY=<UpTPGJyPQ
+z{YL(8a)Ob6$29?7Oa$QIE-+n~Hy8~bR&wYIjURZy>+-HI?h9`JnQ(XGLpVghDB4HN
+V$;WG)j)5r_BAD}M`QfFU`~k~Fh8h3>
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_9.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONII_9.png
+index 9407286b72c431d964db94b268b88e4ae5134e4a..989a9f4f956b3f71450e885a0daaf0f243d0d128 100644
+GIT binary patch
+literal 582
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92O3VrH32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_acT($bCpAN~1%|Ih#1zyBZkdF<--{}295S-$!I-QWL@{jBbuF?Ge3
+znx2`Hmu>og^Y{Ntzy2TkdHmXq|NDPVU%l=B`CtF{{`i0G_y5zs{$Kh1|H7}EuiyMX
+z`SZZJ3;+NBcUXPD0_aZ0ByV>YWAm#uaX=1xiKnkC`vXQ<K2{5<j50=`&~i@~#}J9j
+zwtY8+nhbbcA2(_22ywW5%*)lxRr}HZ`Z=1xRq{rYCqG-lu=!__<eEcY)w;It{>#Wz
+z=5xu!dvnh#%|wB@md_8ldbOP9*ipoxxa-oLtvjd8Vz3pln-%uvgttImYw67=W$X{*
+zCI#&ZDP`7WOx@abJD4N)VC|F%{2lXykGqDJ>+_%Z@vcWPK*O-<&*gI2#%*)zZc6tm
+zHtQQ7USO&udUwNp`L{iiY46#WJ_9;gwZt`|BqgyV)hf9t6-Y4{85o-B8W`#tS%w&z
+zS{ayHnVM-E7+M(^D6hCDf}$ZeKP5A*5=DcFm9dePks(Bbwf)yaKn)C@u6{1-oD!M<
+De}@N5
+
+literal 822
+zcmah{*-FDu5UuzFKKcoMK|jEE|3}ex5i5168$#Wx7K3%Af*@*%ajDw0cCpr2iI4gL
+zCM}F-?!>eW1;b>Rx%bSuXXf6)p>S_VePQ?k{C(cv6Y5v%A#Yz2@!wz7-FU>!l5?lb
+zAP1%^!-}Nv83N3Fx_l|$9Bt1v>lCntMU5J{CNY&_SeO_=Nwso&lALdTD7;Ng-|ECA
+zMOBg`7nY@;a{@lCEw*57c$~;3We@xh9)&m*9#vIx3tR<$=x04XZP!4lMLW&~<GEkO
+z<8^`Fr5)kNmZWta+Hz#9g|~So-AzftRF@`4S&y1$7o_FQnHz^5ohl{caBJ2dKGyv>
+z5D30pyguHEVN1vZm_Uk)^YGHI-)ZM{ix}oN{`B}`1hQ=)L4KY2S${jelUzzfE&45(
+z8N4EGb!u-tdXSib?Qc$tmq6mwMic->CgaJ(N=jQhJJk$5jq=j7j;9zKAI|5la5^4X
+P?e*Szdw91VKkfW4>kp=G
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_1.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_1.png
+index 5804a0aa2498c5ab547c772cd6610b89d40cd3e8..da68d56cab625114b3d65cb225ef965300296483 100644
+GIT binary patch
+literal 601
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{a;32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_aboGQX{6(#ndyr3D=e!*ZIdC$1>zUL0N2mDe^ut!`#$RzqNFRbu5N
+z-^8-4rn#{tJsAzNld7gBR7{+_Y}2Hr8(XF=YMeB$re|hV*YumO-`sfl>gu!SmmWVk
+zcmKi3o41Z%yK(I5^~0C095{F3|NsAz*+P;)mop}LySrFkXPD{$<gk}``ns||V3g%!
+zwUEjvV+0DV@N{tuk+|&IdsC>%fXDT*Td0e+?v|xGT#uT%v|s(NpQ(Ad@$-e5^X}YX
+z;Ava@@rdH(n|ER>PKyTY`X>3fr?`fBzLSPPW}wz4r;ODB8FOyuuL<ek<T=GB@^*!G
+zr^3Z$rv+xqDsKpiyp+S-DY7isTlb8nPlufD)otQCW~EhL<jlGAG&Rzp^I+JK-_CU|
+zj{c(QqWnz%Yj$31IrR2l#Xg(qSKcrCX>tF){2nt&zLdEKwgBC%TH+c}l9E`GYL#4+
+z3Zxi}3=GY54GeXSEJF-Utqe@9OwF_n46O_dlvmsnLD7(#pOTqYiK4;8%Gk)t$Pl8z
+T+WzYypaup{S3j3^P6<r_@X!7L
+
+literal 822
+zcmaKq+e$)F5QdFjpvxYiC-4Ef_o9n}h#-R^Bq~BeO~MXXnPu+E5J~eCmSl&Eg04E4
+z9Vk=tTvlWh9Uh`Tf7xs_+{{|c%=+eEvlr8>kk`vfpB#G=RzrE!$r?*}S^1m+_n+_F
+z*Jt+QJ@r;hygWw>k2kr@rEONbYSQI%SK0IhER%|)?!(E%SuA?I<uvbaEbaM)9q;0<
+z&q^ocvB0+77LRSpDU93AdXz&1uvy)?Dd+>%QU8Jlj%WzIb83g7Z$;NFXq8q?7swH%
+z!Zh3=GExUTOV%b--~rd>QHx8lqsnC*u#feks)oMwE_Uml8PfH%pdTnuhk1l_sLzX#
+zgiZFhfoGmo5c${Gl0nr<p5@gfo`^?qa0-3nU^_EnUK&b$k!SN1mjcy3#9?Cp0QjdB
+zB%6UCdFj)Els-sBA^Wf3D;S3C7Cc4>7Ie*Hx-f4r4jy(o%y9hv$bd88bA*EHM~A^k
+h_#hEG#pq%bm!~!HyOVVC9OM0vzs8(D6>f{K@n1<=y9)pS
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_10.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_10.png
+index 923c7e606faa85aa8730396a99e3370390adc976..1ece64c12081d36d48dc49aa49378d566f757fa0 100644
+GIT binary patch
+literal 595
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{j>32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG<`E50mR#x;aE$CQSJ#j@z_u{?<Yod#~y63K}=$M+<Hotx5
+z(z4b``_7z8tDD(8Wx?)~r?Z;oCRR?0E$OMBFlX0^QyC4jld7gBR7`A~G;inelarTi
+z3d?EUcKGPc*Kb0zn+}}2@c;k+c_phJ0iDg5<n8Wav4DN)H6Vw*#M9T6{Q;vaAFG8_
+zMj0beXsM@*V~E6M*S_mwO$Guk*V(#s9SnE_-?$uYdiwwW8AiwFiRVw=oq1DW>#ezY
+z=L>%`=UYhmFFP_rzD1GW@_0{^Bq!&}s9B~Cv-BS_u>Jle`T9h&bLL%_5YAPh%+L5#
+zH@x;*@G*(A!7ElfcCBXMrZ*<1Jmx&=II+LylX-nZ#;&_>>lu36&&c_wB(8C&Ik)-r
+zSGPC!{upgvR3QH)#muusgNx^5(tG|7e<brO7yJkLLAAs+q9i4;B-JXpC>2OC7#SFv
+z=^7a78d-)Inpzo{TA7+@8yH#{7$~o}CxW6OH$NpatrA6piIuUDm60JtgSGwFLqH7-
+Mp00i_>zopr0IK5soB#j-
+
+literal 822
+zcmaKq+e!jq5XX&PpvxYiC-4Ef@3J5ws4gNZDneqd=%A#Q=3&!7OkGoBZOftyBZDZ@
+zQZsY216FoXm-P_+apdE}tYvnXneR7;Z+1Jow5^)jqlNCk+g5*DH0`yxrhZNi>F=+~
+zZop>K^{-9$K}?gq5aW0cgt>?q#=3!(is#TrI~!5E&>&%}E@YYV%nqRxRoGnBXD$<P
+zW8%E*ngb7m30$Q3mPU{w>IYrIKtNp1U7w&SV|atwA;oVP1&^{@&c%E-`4^8|G=)ZD
+z&@|y)7?#||o80L?JZneOD#7();S4-Y4oz`pP<?8I;6d2=SWbgyeQ|`HG!={#^_s<%
+z8RC%+`Ay=!bOa;jw|XoBc1sZ!=Uv|3lkAuWJS~BW^FV_g-*!AbWWcle0kA9cFor=j
+z#<RUqBj~1C*iTta(L5}LFU#Agk3S7OGz8ybKjb)!xFD!Qnhdfr3;^(o9FQZvxFRKw
+km8*2(zLdfe@GH8_f_is>3s#=9uP^!PTj9NW`}v{%02fud6951J
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_11.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_11.png
+index 2d8ecc34a306f8b8313233b6b637684b73324514..0234f682cb23c7a7e3ea6b14b4dfa69662b62953 100644
+GIT binary patch
+literal 626
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N*oUG32~jbVs+2FRql~F
+zzKLalsa2ubO_BL+VL8pASq-rzJ#l6I2^AABK6;$jHou@_VMX84lJ3R*3)ddHc)4cM
+z%Ib+LCM;gxzi8djE7$rKtT}S|YIIRo_uQ2g9aGz9E-h=F)H{FmzBA|2>Si`iS+M)$
+z>8z%?iItP;C(PM(;#5Y%?4+uxjg#i>JbrTWvQ3kgZk)JeL(8;9H9a${x~5llPTO|)
+z=*`z}ZoGVT_1W`FkDr{o|KQA>yC<&SJbClh@oP7ZUA=zz(v<_}F8u%h-)nx02hcl=
+zN#5=*4*zb(+yHXeOFVsD*&i^<^08V-Wt1@jh1PhwIEF}EcI~|>)}$cfs?WP@W&`6i
+zGk&v(uv;-<|Nn=_`WCN0$~?Q6k6}sB+N)dJ)@8e0R?$^BvPh@(@xn4`lg14)UR;V#
+z&TEJW-T$n;+>c$j=hC7>L4iDJC9xk2{ERPrij!ycyCjosz|!AY5^SXTLAzBnQ0Zny
+z4A+{d$uHmN7Zkpe?pBqMIKvXZw$}It!_BrVajoMUzaLcW>MyX0U$_0Ya^F19Peu3V
+z>qmVP*}Sjr{(7LhRZCnWN>UO_QmvAUQh^kMk%6I^u7RPhk!6UXsg;4Lm8q$=fuWUw
+sfsn(IP81Ef`6-!cl_(latc;DUj0_<ftnI%Z0%~CJboFyt=akR{0Hyf_<p2Nx
+
+literal 822
+zcmaKq*-AoT5XX&PpvxYiC-4Ef>B@^P3?zySiZH1N5i=>%GD~wgr6J{>q1k>BR1lF_
+zSt7Y>6h%hS@(}%T<U>x&Va~_Qe7{-FoM{ya8wJ%zh_eN6Q|)aKG*|tC+C3R`etnid
+z-b-(<`Ik!O=`r<ipDY)zoO5H#^Xj{DqExtq6!RDP?0GH|yG@;Lc+C6ji+dq%CurMU
+zvy-wNutK){)_`-`!%ex&8iXTBJa%AKbVWE#*ghVzsGu-`88j(Yv;z)xFE=K&t9lTa
+zxICO6?PN^70-i$LIvIGRUA0YKUmg9$BNjz*BFbwRa!vI6mh?A?<9~Qoj=GI{7gEU+
+z@W?=U$Pbeg%1?#h#6U15@Z_f`zj5SOK}#XmEH|Sh9x&u5i4oBil!)8pFscm067n#A
+zy;-ks`Yh-NJT*_r>j9pQKUm1c!L$AW(3kQ^G=pr6XLF-MY#_WS%qN>ZqkdQjk6|YA
+zW7ELngkW6ouv=2taA4vV>jyp>_JEg5+LTg}y02X~C`LuSyhAG!L!e`Gtjcce8?efA
+F`Ws0oychrg
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_12.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_12.png
+index 93bc9e05e67a2b229ecbe8fcdce408858f929714..4133cfda64232cd0a5d7976e429237d1cf461ad3 100644
+GIT binary patch
+literal 594
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N-PcV32~jbVs+2FRql~F
+zzKLalsa2ubO_BL+VL8pASq-rzJ#l6I2^AABK6-rU!lk^n`2`&dEBcm}bT95-xc2Ck
+zYm=64teLd(*wyRR6IV=GzPY-4#?%#CYI<f)UbZQ%Zszf8H%?r?IeqoE#L7uoO>;9E
+zW+zomov?WQ#3dX07p-fVwy1H^ysED0m7UXWzJ7D#<*TdDo?m+W<lOxSXYSlRdGpqh
+z%U2Iyx^m#$h5!HmJKbjix|e}5$=lt<%zb~yMIeX0#M9T6{Q;vaAFG8_Mj0beXqBgn
+zV~E6M+uqw^O$q`G(@iewFp6rLo;juSw(jTu_-w<Xa}N{Q%NP`dkI${T@_lcD*d$9G
+zk0U!AA0!$!s!R<k;!YOX<mizq+M3e&y-cL1QsaZ7{KtZ$Z1sX%tM6>#IrJt#!^_9W
+zd&@V+#Q|!om;CH%I`_2W(V5n)&+}FKuWdEv(#d<R;4o3!j$`BP>xx{l%g!q1-ZHbB
+z*R@W)U|&rBclWF1{%bd1|NWVD!fxSZ0ZQTBKv%1lxJHzuB$lLFB^RXvDF!10Lo;0i
+zLtP`w5JOWd15+zgGi?JyD+2@N7579?H00)|WTsW3XfUxdHnK7@glMp~|9S|hfx*+&
+K&t;ucLK6UQc=PoD
+
+literal 822
+zcmaKq%SwV#6orjmpka^D6Z8O08Z~HO;Gn3W2#abUkr%=)M5Sc@r6!S~W?9lb8b|ja
+z#7s@2C^CvJ57CEP4nHKx{x|FFz4mgQOG8tAwW0K@C)e@Sl)oxNZK-Z3_hljZ=ezLr
+zng4jtz7^9i&&j99o5KB-f7%+Du{{*7^SMjnK6{b9JIka`Q^{kN`)l)iF>NP0x4Y^U
+zupRLbTVYScKM~SKgKh`oh-`-3s2#?Aaj!i#JG`MeRIrS?EKANFpRH4~c6f)|-Ims&
+zjwbj=iGZRh0AEIy$IS2{|IcTTKP5A@GT9#->1GOj{NqQ-Rs`ZUJT++RYL@+qj?@tp
+zAo{daeY~%Qy>mXoCnHiZ#FEo&Ty)v-BfI;{<cOpNpo>0t!I?{utO%;2fbesf^MmyT
+ziXyJM6~W|yN%-O)j@p`@FJ=&gFMi-lKm$~qqJ@9-@vrCWl@%7Z@YAUiUJ=JdMRf(}
+n_fD7R2Qv{5k^4-I+%?xX)@#HhIvh0t=Gl0L+IVl!im$i7i-^0u
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_2.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_2.png
+index b13be5bf8df69bf31c1ca0d6bfc9cb2132db58d3..09045448fba975304c1142bae7ba387b71b125d5 100644
+GIT binary patch
+literal 611
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N^A-632~jbVs+2FRql~F
+zzKLalsa2ubO_BL+VL8pASq-rzJ#l6I2^AABK6-rU!lk^n`2`&dEBcm}bT95-xc1P+
+z%SW$Vo3wOe&7_sbu3oR6xMITM^;4E_?q9U7Z^4=)m#<cL&zQPmOZVKB6&+J+dS*^u
+zwyAyQ(z4b`$FJS!oxghDnR6$u-<-aBTUy=B<|zwypFEw_G&iwwQvHNEyH1?SXqcT;
+zHMMclyq(8SR(4L?cKGPc*KeYWx(=MX@c;k+*G7xof$nEa@^*Kzw&eSg1LUxmc>21s
+zKVX#QW3`aVC}RW)t?_hm43W5O+t(@7q#(i|KXpMQ)5?yiH#2XhrcVF+zx}IGNqRyX
+zs~CgF^4ps=Hs`+j5^L0;_;JS%#ljC0`5jkG5n}VJ>Bw66<^GY1q@Letnm<(>6fN@C
+zafk$FG?`vzNz>exb>Y-crfJ$fMa|pqIkY+b-xT#QxR5DwRn(Rn?-cHvYpd=#{P7Bx
+z&OGktMXfeh7m0le6MOf!@#3@TOPz0iX3c*TBD%Eap^NUPpG@;7iM;r%Ai5UlZq*Xk
+zh?11Vl2ohYqEsNoU}RuurfXoRYh)Q>Xli9(YGrDsZD43+V4%F>o(PJD-29Zxv`Q2W
+dCRWBqRz`*p4c7Kw4*@kWc)I$ztaD0e0szia|L_0+
+
+literal 822
+zcmZ{i+e$)F5QdFjpvxYiC-4Ef>B@^P3?zySiZH1N5l@sUnWcHyX(i<;u{1l-0il8j
+z%hU?dOwHT6tcU2wkzu2@nZ1}b>zjYgEM`z9?Ugh?Db@k}eXYMo(%+0rTIaN(_4lW7
+z9CA7}V;hU3Fx$KWW>t^Cc#DW-Rt~IGeE6*8E)TcjE?t|&9Ga+o!Ecy^6e(=4>$8vP
+zMm>L>@F%=R@JYeMhAmR|%ri(4^h&R8A|$L7ayQ`9sU61Hq3e(mw5Y)2mVM9iOaAsh
+z9*MXVD-y%DxxmtN#Akgi+@XHd!?Il+sx}qgEWX`SzobKP2$DnkIHK)&%u}sA1)L_l
+z5Aj&>CS46B#RF@?s&?05L_O49Cy9Q!@nq29x9jTF=Zm;NL97gLgq@R!3-#1KvR6kw
+z1WBAvJDsxwH(=taelXm!n8&41BcAF3PX-K5*DSnGrJR92>KF53W%i+uc?17m%D};M
+vA;PERh<nHBY19oql?Z`XD~7a6nPF-eb4$}`R>@)TF*$DSIOYx5_gDE3S%bR8
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_3.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_3.png
+index e500b1033a08a21bac56f2d1e939fce4b2a08075..2d535f107ffe7066d60d18f7bea1f19d6dd0cdd3 100644
+GIT binary patch
+literal 542
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92O4J4Tgt*RIvASp8D)-17
+z-^8-O)T+?zrpWxZu$<=5tcKW<p1899go=q5A3Z*F;Zk1P{DO{!6@5!fx)=8^TzmA&
+zwMk1i)=XM??CSOEi7Tco-(1~2W9o`6H9a#YFWZz>H}m+l8z-*coW6QnV&$Z)rnwmn
+zvy-Z(R(4Li`T9+CQP+WU7ykeMzu{VWD$pg2N#5=*ny0q6ssK6cC7!;n><<`a`B*Ka
+zGRhc%LUTP`977~7+x9gIH7W44ZNK8XNhZZ*X5_Tg_y1dXo%io9+|K{anBh)JrDM#r
+zlx?E#68g8^=(s$I*{S%;z1uAuhcm_ORE}Pl^VM#vUrWdf=iN?LlbHT1@=P~NbB&pk
+zxT8!;v-4M&(|V;NHy%6==c#=i-ZWL_UH{V0+xGF^)H3;KDY1AFZ<*LTQ@*KP`=YnW
+z@P3qj*qk=2W5(A7O#AKg`~($tiW!Il9jaR58c~vxSdwa$T$Bo=7>o=I&2$Y6b&V`T
+z3{9;JOs!1Kv<(cc3=EW4+!I03kei>9nO2FS!Nkhg$jZnNqQTn!>mi^922WQ%mvv4F
+FO#qcg(ro|$
+
+literal 822
+zcmaKq%SwV_5QdFzpk<fP6?6e@TDfRpAW>vcgh@q+cp}6=DkagflE{#-ENRh!))91A
+zg+*y@Ygrf3gRcxyKmE)<%s2DS`_0TZL+-&|SNj`85AgSO{vKC<+wbbcb&&r4YMquc
+znc(>P(ioCj@FFXLQN)gTl5-wl^{1Qn#>2(YW@RJ%OAgb)^6FwCIt7&&w$~!0w3?4s
+z)j~BF1Amf_n{Xs$FEL9>KH|%TCrJ$X+~BWkI|egD*O9WH^n(ZdKb}M`MU!}tnlCQT
+zkOe>WQ;*R)8mg9dqSGVlS3L4VC`0^&%+Jt@nK<(i9u0}3sHBA7vzv}lkGlJdq+e^C
+zDE!U0`}0a(PP75cV}|gJ*SpK(Eu12^sH4Hd39tIWSZm#QE)^Si)dOAv48t*t5cR`P
+z{oVL(X0yc){-u7)7BMb77M0Q6JJGXp7G$kjLI=FVyfx3q-f9~eHG<9BWJ43|8?euh
+F=O1(<s;U40
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_4.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_4.png
+index e887123149a24960f2d84d3d2e0450a9b0953f01..b9890766268d769dda5f96c36d52dd39c34e3e4a 100644
+GIT binary patch
+literal 551
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N^}MIgt*RIv3mBB6$@6c
+zTfKePwj;+5UAT1Q^3}@DX%+2L4xYbw^vbmp*KeM>b^FYnyJzp-yZGpF&%9N=^H=vT
+zTsv{eh6#(;_b*x(ncr43X=O#<(t?hKVL8p!6IYaUFODwi%4?gSRyQ*=t06G8DzS2s
+zZ(><i)7;pSo{WasNmWx5Dke@|w&~{UH=)^02hLsi|Np;}@`EU#s~D5K-CcCg-g2}B
+za@b2eeO=ifFv{|=T1aJ-F#?5VdAc};NL+U9yD8LUAi#26I6wTr92NtKkH7xEFLrW$
+z(Z1H}eTvYcn>8C_)^0vqw%uOFKRs#R6W2ho)XvJYGh0}+7H;))y0t_>=iAGOOx+0%
+z0lf}9t2Z8*uz90)&{6Ba1wrbsmZ>gJd9&rzsUIRjMTfL%XS1xk*8ASA@z`$ug^L>=
+zD6DdSKVRU_um79)52g6z^PS^N<Z1iy;XC^VZwa=G9RkKcSE`n{MwFx^mZVxG7o`Fz
+z1|tJQGhG8iT_ej7LsKgQQ!7(5Z39Cq0|Vt1_e4-M<mRVjrd6V7FtIW=vNAG+Xt1{b
+RdI+e2!PC{xWt~$(69A}x-nRe%
+
+literal 822
+zcmaKq+e$)F5Qca30$uh9J%JC<y%${=L<AWWVNnqhY7t^!C(E=0gru1kyEa*LQP5R|
+zMMMYfh?QN`Wj#b+jw}`$ZvH*Y%=+h_S;K0!+v<(dXTvt}H<bT6qp_4X%I6Y@{rN8J
+z#6ux>$INg$2oAP^iT+lgLNb9q2ejPn3HD%XadX~Nfz+%!IW@HG>q1HtR;In8yd51g
+zBct$f6bLDa`FkmedYutZCxs(UJ53cwccdL9YXKL0$hG;@(iBT!A~>)*-a}OleZ7}V
+z%XNI+EzBd6V<oQ~(U(Rffh<k+<p_~~AtU)+4)m35HIw^_vaA<<b}Jc`*F)V$P580|
+z5!VUTKH@;l4?)eQlVunLg|Dv;n!XUd3SZ5mN-78{lxgAfgn*Tp+f9b|(-E+jS`aIa
+z_?e9`gg>SkH`B3<wSIhLU1SgMb7xNvS)St3q$huO`uuoac)5Igy(+$6e-v-NKJ&jZ
+C^{My(
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_5.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_5.png
+index cbdf3ef6d07a3c8f5b074530c7a898fa3b5f893b..dc6b0d1623b98f7dac6d2f23a2d52b801960c59f 100644
+GIT binary patch
+literal 567
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N=ysz32~jbVs+2FRql~F
+zzKLalsa2ubO_BL+VL8pASq-rzJ#l6I2^AABK6;$jHou@_VMX84lJ3R*3)ddHc)4cM
+z%Ib+LCM;gxzi8djE7$rKtT}S|YIIRo_uQ2g9aGz9E-h=F)H{FmzBA|2>Si`iS+M)$
+z>8z%?iItP;C(PM(;#5Y%?4+uxjg#i>JbrTWvQ3qp)3zNxdh_+01LrRM|Nq}))#|B0
+z7cwS!ySo_Pye(S<<gk}``ns||V3g%!wUEjvV+0D#^K@|xk+|&I$0>A3fyY&NYrq=c
+zfEC>Dysz%M|G#9})*I%`#x|eq84}jpdra{QPHmIyV=z=-w{cU34dYXmJjI?vKj&+@
+zRP4;}pSH|+X2K$ghfzlkwf$sj>IrU+*d5b3!7J<Jb!m<_ul&y6I~m;S64U<t?K)wh
+zv)|hv$9p_pY4V&~LNcdiZ&+&CZf3hj`r3=Xd}hrzQPfzvHAm~<d2u~sL9<;muet+W
+zs#@Y2QIe8al4_M)lnSI6j0_CTbPWu3jVwb9O|1+}txV0d4GgUe43t;g6G73Co1c=I
+gR*9m)#LC#n%E%C+!P@@oA)p2ZPgg&ebxsLQ01#8)S^xk5
+
+literal 822
+zcmaKq%SwV#5P*$dpk<HH6ZimaTDfRpAW>vcgh@q+s70BQS(>*pkn)xonq8npP(ef`
+zWrZYG(6*NK5Pdju_%Z8e{$b9XZ!Tw;UW2|<*ZB149{#T8-=XVn_;t;DIf(xLdf!h4
+zgSMfy*+IlNZ9=@(0Yn|~cqWZt&($mR$=*gj<Y<vxz?SvT#9gDLk_=m`&hpJE$6{>0
+z5S@d^P{NUrZTAErF{e4|7)iyJDtBiTRgBh<a)cy37I@O`L>3?J&;R0yr6`)fv~Mc0
+zFrL};K2|RN;Z-^5wv=A4K3&2~=V<XOL-I=@oX5GyYyB2p)#Zwrv=v&)Cstz1cHs#}
+zev`act}u$pK-}+Ow&GEK?NMtVWJ2@<FGG;zTA;-~+6}+Gl;KtX0P4wFm}bbPcr`aE
+zgl-$feCoAp=|_cV(`s$<vuW^XgmK}~0@!Le*xVjw!|<g-3f^k!vzraBv3~ZJiY&9+
+SVnndnoUnbEeFOXasQmyj!>a`V
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_6.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_6.png
+index a7ef6ba6da7ad88a2e886021ec42595e1ae23499..88aec9b0d295ffebf175fdee0a3d0c64b4a43964 100644
+GIT binary patch
+literal 569
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N=ysz32~jbVs+2FRql~F
+zzKLalsa2ubO_BL+VL8pASq-rzJ#l6I2^AABK6;$jHou@_VMX84lJ3R*3)j|6T3J1D
+zMRZYDTHVaV%1K#Gb2A!dCsj?Iylm5?r5h(KUO#ckhW<tCTBa>(oHVbdXJ%E`^vcd@
+zH($TG@$%KxXU{J^esb>qgEM#Tp16MV<jq^huiZFy_4<*^R}Wvha^T#B|NsBLpA(k>
+zbRlDsx4Vns&D*j?Kn{C}r>`sf14dasR`agw*%N?53p`yMLnJP{_TCh0GT>nqKIr6n
+z=@OHkg4T}i)Bo$|t_+(|{At3=v$_m^O$AzuEX0bYJ&+Ly4&poOEZJnx^GU!pPU5vF
+z_v!a_S6!NfWkQ&B{<ZF(#8LEmm&~oZ76+$3@$8l;N{v|_dTqygi$u3IiwZ<)W{IU5
+zaOA~I31U;Q{2^MkQ%hKE$GTU(q2|8Z?!LXv_prcbuKxAt>-T>D`&hHrK6akKZ86@e
+zJfK@uOI#yLQW8s2t&)pUffR$0fuWhMfuXLEWr(4vm4T_1sj0Ssp_PGwki(Hq6b-rg
+jDVb@NC>l(xjE$^}3?Uk<?Y|xZYGCkm^>bP0l+XkKsvG43
+
+literal 822
+zcmaKq-AV#c5XX&PpvxYiC+GpX>B@^P3?zySiZH1N5j6?3kTS{K$dJfTGpy+I34)>z
+z2r0|dD2j}tkB8`oBg<h8m)XP2oZtM<?Cj|<w>O)rPdjTHZ%gfMGPPForrN#)vi|;*
+zzrRYKABFcy{`DpI{B&I|UdHA<t0C`W`Kt7AffWnqg}bx+{OL{ZWG4|m-daA&Xb0(~
+z!_BBT`>6=FmyD!hvk7fF9`;d=2yochyRG@M(aFrB8%H<7^n!EEKfK}{&^)%NyC2eJ
+zGlwR6bVhaHrDQ!|hX-!VQ_G>ORBZ%D<5NRaHPBbjl5Uf8<KDq8`awZ-Bu^-g=*vMQ
+zu^C4<yyT?{k$+8E^4l%KOL;xXh-3?gUG#%vR>|mjHB^0_m*z!W1?qjoF};5P`BDQZ
+z%^)beIyy*oAcjKe-@qFf38h<jt`Nq!$QVd{ION&o`a$ky6RZwvC;yt?7Z|b7Bsz>5
+Q!{^#WTz%X(u*%!*A7jX?{Qv*}
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_7.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_7.png
+index 9193deca081b2e480d52f6d82e0bfeff94a5b16c..8f307b521701f0ea3a1c2ab72219d2403bc43fa8 100644
+GIT binary patch
+literal 495
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92O2h{Egt*RIvASp8D)-17
+z-^8-O)T+?zrpWxZu$<=5tcKW<p1899go=q5A3e@%n_tkeu%d5iN%!LZg==djt*oB7
+zBD$z6t!`#w<)o~pxfu<!ld7gpUbd;SbK1?<Zw{Qh@c;k+eTw^604-un@^*KTE8<en
+z26EU-Jbhi+A27=Dv06xFlraK@`aNA7LnJP{_Hhd}EAY5XUgem@D>C6)-Mjj;c{;CV
+zH%iLQW>wl(@>d~G=4ib7KEcmx4t7LTrB7mUa=vOhu_#zT^7~tfP*zTs!;DAbe&`p5
+zY$}z!nC7z}Ncyu;5a&s&;u9z5IVsJ3vf!_#ftCJNYZfW_tH1kfnr3&L-|8pu=T`mB
+zs>1wb{J(=-<{VaIuCKRM<+ICe`@A0LG}RK<h?11Vl2ohYqEsNoU}RuurfXoRYh)Q>
+zXli9(YGrDsZD43+V4%F>o(PJD-29Zxv`Q2WCRWBqRz`*p4c7Kw4*@kWc)I$ztaD0e
+F0stISt^xo6
+
+literal 822
+zcmaKq&q_jJ5XEow0xf%lp1=oa)5=8)1BpU|LQE<`L@h!LB>#|T6hvf56l%2b33>v_
+zrQ2NEL-fNV!=T~i++k+EGiT<`{Wim))nNLBup7K<vv(y}pXP(vxdPeW$*9+=)zW*F
+z^IcFnje_gc4zQ3+@i+qQd+>$rzu&#xX6Nu)O}B5(?(+voN#UWKlXACt*=bzB$1xC6
+z@>EDr(#*vh*%*bHc$lWf@s8S2@?1>9hrFCmElsf$zLZWLua2l%qVIcYT0SR#xXnD8
+z9IL!J(pMvrKufc}93k>AG*TfMLEmH-nS8I5wO;hutumJPq4!Y}UrUg<CoKAi1DhX$
+z&F0A(20`)t>Y(|B_$qvx$4cf17HV4fTp_@^$k?eITMi+opY1x#k4_7lif-|*`F-45
+VhD3)|1AMMcJ+se!gEsyd{sBy5n(6=m
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_8.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_8.png
+index d172b46f89f696084853a9fac8abd2f63a4cfc8b..f47e861ce2b75733c8fc4c084c43799c8c73220f 100644
+GIT binary patch
+literal 649
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N}Lby32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG>mTs(>w6daaX+g)rV^^<NPh2r&`R0=D#eECbRCmvqx?)TB
+z+?5p_Q)_x=PF}VtuWf$&%%x?mla61zvG2^e>8rP;)y-_4vS9bg(^*Y(6Dudhmh{w5
+zn6vA|sf>o%NmWx5Dke5gnz!@#$(Cu0s=B6cJACx!>o+%EzPkGC`K8BC&fR}-^5(6>
+zm#!Q*cj5p4{~56djsd;KnB?v5;_`FLjDtW9dx@v7EBgaRSw2?tuIt$ofI{0nT^vIs
+zF5C7#7i%)$aeK@l;?gRX>Frv0eed^gfA61cc<^2M`4hFBj3=IQyZV}YrCwfj<Em6f
+z>2cK-A+L>9dCWfZ4Ub*!sA6tnG5D!0Vm`~l|8_uy8k3$&*&#ueI-64t-tA>A>r^}r
+z`-xZ8hIE-UKjaW$lFU{;93H|hy0KoR{8)nTroN8{OU(W=o9Inj{grKv$0wGS+jooV
+zEf!r_eq{N)=kxgXZZ2$m{q|qQt!agInxZe>pBI;Nmpb2LaZeEF1=SMQh?11Vl2ohY
+zqEsNoU}RuurfXoRYh)Q>Xli9(YGrDwZD43+U?Ajhq!UF$ZhlH;S|y4G6DwmQD<eaQ
+V25bAThkzOwJYD@<);T3K0RU8_AX5MU
+
+literal 822
+zcmZ`%*)Bs-6s`CHk3PW{^aH&61PLBQJcx%zZikp@X?3_-G}VDBmrISQs6^=8s?ySt
+zA}Yl25mvgJlP0a3eRtN`XYF<N*=KilNn0h=PYU0GzpeJSNZPA$No}7N<bQvP-(Q8#
+zkL-IT^ZJr1KP8L#*wUPQd0tT}#tXS9ET4^J??Vrn;9cqx%cIT3Ll3|2HXdx42zb{G
+zu)Q_I`qH$6pRnpwNQX!`=!4pcU=d78kDlA+Rm`w-Yh||a0gIxKm-m{u9wf%2XW;w9
+zWkzEFd`huT4uY?fb*~!75;6aOd?eyfcw{+ehpeOhF7woN{2cY89wyrqP_?3SA(gzK
+z`;rdDAxMDqu|-QX1YN@2(I4W&uW5#x8cOn5)%?uJidKnw=yr`vw1~C<w(VMrhQnK+
+z=M;oz1Quan*QG~2xrgxamKi}3XS<C6F9<U6seW+SmFxL96l%n$dcY?G4WMZj`g5NS
+zKp*wj^XruvhW?I22Y%)*0D!l^bYb3LG<fg?C_>{0z9=|^4VzbV`A@}2$cJ<^0i$SE
+WbLrbFoQ{EcEG01K&*huSTlx=HdfMgy
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_9.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/FUSIONI_9.png
+index a9f041ebd594aba268720092ccca613d835b7214..f59ff5321541f56a68473bda079707e9b5fa5e46 100644
+GIT binary patch
+literal 589
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N-PTS32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_acT($bAJlU7#rEiLF+7?#s~?CSOEi7Tco-(1qYI5NMjx_idd6<cb0
+zW=>wVDX(pQTHVahtcK&)ZUm-QO<%n&v2v1cVp&$x+}M(yjE31sRZ|lxCf<DgCc3CA
+zG`s1*xeNdQ|9AQp0CFv3lDE5y>Ah_?vw<A;5>H=O_6Llze5@8y8D)$>p%tDkjv*44
+zZTqstn-qB3t{>HT>y*XVtrEOhXVaSh|8GmlJ^H($_*;)HbArh{pXNx5c$bewTkkm>
+z*ycGaEpuAnT~(e%w$EdBcyty>Fog3dy138UZ8kkfctQIi_sd<fm7IrGZqS>3=bgeF
+z?;x+~tM)lKJ4CL1^i9MmxIkX@iRh!-`yVe_b$d5^O3jvI0vb~!9R9tzCEmE~&;L!v
+zQqFAoX}{vKU9^53-e>>ruw?y4>6&vuH>;MoMwFx^mZVxG7o`Fz1|tJQGhG8iT_ej7
+zLsKgQQ!7(5Z39Cq0|Vt1_e4-M<mRVjrd6V7FtIW=vNAG+Xt1{bdI+e2!PC{xWt~$(
+F699Fj^u+)G
+
+literal 822
+zcmaKqUoXO86vs1fz@?Yq74!n!ci|$NnN2okG0d7(nzd~H6)A<*NDA?r{2iMsEHU$+
+zO2`G5ya*pod)8=vJHNB@oab}C&pE%}Q)|#y>V6(QzJ|A|_*UqufAYHGzAVIle&pBY
+zJswNbSZ^aX)ZKs$cGhERNygP-1iQI9e9WG1FHbE^Sbtf}ZHbQb1nn(IiNf@#jgoxs
+zY&Q{1`1;{j{SIX;DG58<De>D(K5H|DeI^6^o;IT}707Xv%(=|)!2k0Uawwj{$WT{k
+zpp7c@>7Ra-Y}r7%WgL5Joy;pbl1ESi(PvBL`Dh`JgYP3e9+9#pEji7`S$9AE$aH^6
+z=2e5Ui+(PX-dgfY60ZQ2QGxK;hm)O^07(&7yJZ7@obb{=j2f+!=TK3Dmww>IzzE7#
+zu|@yr(|;*ns;pwshrhcy<`!v@@%5;8Gw#DSVw2(}kT|*M1^6Zt^NDyksVyArYw6S;
+f<(c~wS1~Yby}dr-bS~KQ(|O_L;<a%3{&xEXS+%*i
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_DRAGONEGG.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_DRAGONEGG.png
+index 2e87357a6759440508b64e96f3711ecda138d189..d70bfa5229b4007acf099134efddfb159b7da98d 100644
+GIT binary patch
+literal 472
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N(2V@gt)eK^<8`Z;`)o1
+zH($NJ{r26hH*asgeskyD`-X;w&bh1ZefZeG(D0w(|BaWg?tlDr_1W{g?>}68^!VYI
+zFQ;$cIeYis$(y&%-G6ZG>h&X+uO7a1<^TWxa!Th{0}W?P@^*KTDouZ41mv)nc>21s
+zKVX#QW3`aVC}RW)wRpNXhDcma?Y}9;tjOW)F4CH{ygT;)fA`r2x$$cJRXfxgPHzgH
+z6w@UZI>(gRL~vt36VrwQ{v{0Tj!&PZtQ7jNv)?X5DPu#QAEOLonAD2K8=Mb%e!ni*
+z&9Y(sVISoto~la;Oa-ZvXS_1Ym;Rw|_P)pA_AB9}%iE?c+xqNy&AxlT&(||}zhYOK
+z_^V0^=pNM)*NBpo#FA92<f2p{#b9J$Xr^mmsB2^yVrXh*U}|M*rfpzoWniGZ;+_bK
+mhTQy=%(O}r4JKB`Mpj0K5DnJ$Uk?E_FnGH9xvX<aXaWF0p1UFd
+
+literal 822
+zcmb7?OKJi^5Qba4fJ={%6L^5^z0<4$X5kIIfY*o!AtaFKsN>rRzTddlU%#<vMmIJ!
+zMRnCzkM8N$d@k*-D<}P;FB5+$m%aL39A|?rzP~*yyKQf~=^plj&AKCFy=t$Pkz~1u
+zhJ&AO=c^f3!&;^O_d#WmCc)hjZvuZjj>P+5xm1w&9;LLS&jfE6Fk5W#{oc3DLn(lh
+zI|VL4;~_eqHQ{w$<3;*%$+|7wgU{2KvVMxS82|tJ^Thr~^(i%-gz&oaThDmxM17)*
+zc?*8O>*KK&c4Qkyfc~KII=ehX>24ZhHf<QMdEn_{iMEv?-tGrpDTyq2ktWQetw_Bt
+Qy*G*KpfRv{e(+D}Gc+mQBme*a
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION.png
+index d172b46f89f696084853a9fac8abd2f63a4cfc8b..f47e861ce2b75733c8fc4c084c43799c8c73220f 100644
+GIT binary patch
+literal 649
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N}Lby32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG>mTs(>w6daaX+g)rV^^<NPh2r&`R0=D#eECbRCmvqx?)TB
+z+?5p_Q)_x=PF}VtuWf$&%%x?mla61zvG2^e>8rP;)y-_4vS9bg(^*Y(6Dudhmh{w5
+zn6vA|sf>o%NmWx5Dke5gnz!@#$(Cu0s=B6cJACx!>o+%EzPkGC`K8BC&fR}-^5(6>
+zm#!Q*cj5p4{~56djsd;KnB?v5;_`FLjDtW9dx@v7EBgaRSw2?tuIt$ofI{0nT^vIs
+zF5C7#7i%)$aeK@l;?gRX>Frv0eed^gfA61cc<^2M`4hFBj3=IQyZV}YrCwfj<Em6f
+z>2cK-A+L>9dCWfZ4Ub*!sA6tnG5D!0Vm`~l|8_uy8k3$&*&#ueI-64t-tA>A>r^}r
+z`-xZ8hIE-UKjaW$lFU{;93H|hy0KoR{8)nTroN8{OU(W=o9Inj{grKv$0wGS+jooV
+zEf!r_eq{N)=kxgXZZ2$m{q|qQt!agInxZe>pBI;Nmpb2LaZeEF1=SMQh?11Vl2ohY
+zqEsNoU}RuurfXoRYh)Q>Xli9(YGrDwZD43+U?Ajhq!UF$ZhlH;S|y4G6DwmQD<eaQ
+V25bAThkzOwJYD@<);T3K0RU8_AX5MU
+
+literal 822
+zcmZ`%*)Bs-6s`CHk3PW{^aH&61PLBQJcx%zZikp@X?3_-G}VDBmrISQs6^=8s?ySt
+zA}Yl25mvgJlP0a3eRtN`XYF<N*=KilNn0h=PYU0GzpeJSNZPA$No}7N<bQvP-(Q8#
+zkL-IT^ZJr1KP8L#*wUPQd0tT}#tXS9ET4^J??Vrn;9cqx%cIT3Ll3|2HXdx42zb{G
+zu)Q_I`qH$6pRnpwNQX!`=!4pcU=d78kDlA+Rm`w-Yh||a0gIxKm-m{u9wf%2XW;w9
+zWkzEFd`huT4uY?fb*~!75;6aOd?eyfcw{+ehpeOhF7woN{2cY89wyrqP_?3SA(gzK
+z`;rdDAxMDqu|-QX1YN@2(I4W&uW5#x8cOn5)%?uJidKnw=yr`vw1~C<w(VMrhQnK+
+z=M;oz1Quan*QG~2xrgxamKi}3XS<C6F9<U6seW+SmFxL96l%n$dcY?G4WMZj`g5NS
+zKp*wj^XruvhW?I22Y%)*0D!l^bYb3LG<fg?C_>{0z9=|^4VzbV`A@}2$cJ<^0i$SE
+WbLrbFoQ{EcEG01K&*huSTlx=HdfMgy
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_2.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_2.png
+index 10ea4d8cba0a811955975152fd3f5f0f8e5e6149..1223f4c109a49932384460cb2e8afcac454535ac 100644
+GIT binary patch
+literal 646
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N}LJs32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG>mTvt2=+FQAfBxV8eeCM>{}295S-$!I-QRr+)>L=Tn7U$1
+z_uQ2g9aC$1W=>wV>Hp2&?K78_wN5&I?Z&<{=ccdT_W#na<|zwypFI8l+VB78fBirG
+ztA4_qT_;Zczw-P4g<p-6=IuOwvSr$$s;=qV4j;Yw`pu1(udY6Oe(CX(bN3&dym{;J
+zr7H){UHJe1zry|W6rjHtlf2zsoYODxCILC@C7!;n><<`a`B*KaGRhc%LfbuE977~7
+z+x9*eYck+*d(6bjektr$P@stW+#TO*{<j+`{rG#ra;Ik=L(xyCjVUvpcBO`Ae`T98
+zXPGyL>Xf9^JZ_!-V!cZq%USD~cKj0TlFps8JXc|6tAoePxg0F}zRRXANOmxH2^U)8
+zxSsza!&IZQ1tx604z*jm9&2Yc@cp#+GEq<P-`v;zFlXNnW)r=~SF4!IR=6-Vz18dc
+z&OW7TO2rhz?>qYao=NImzx_9G^V!S6+4n2<+RKzn?UK#7SP1ljYKdz^NlIc#s#S7P
+zDv)9@GB7mLH89jQvJ5dawK6cZGBwjSFtjo-P+oCQ1Vuw`eoAIqC5i?UD`O)oBSVM=
+UYx}Q<fEpM)UHx3vIVCg!0KdQ~hX4Qo
+
+literal 822
+zcmZ{iX->jW5XUiIz>glm6L<i>dmV#IVvHIWTo3^@Dk5%Z-8C37F$ykhB9ygYEkUDk
+zIRTJ7|9w-NDxsOa%xix$Z|47|qqDu)#GiJoZFpO>x5?DXznirGw4wF;OZxoCzrST(
+zU&N9Um!D!%F612Ro*VBeNa1|;9+u18Wl}e3F_?&7VSBted$eIYShF6k&ych4nTGAH
+zPJ5g~F5AGuL?6PD<TmI-wo|X8R$?`U)yf7_SXE}#G^-?7<xw>RhVRe8`-HhaBt;>d
+zLb9BXvL$POB;;?%BMOINMU=!UB6HgZqu~qGuhwI%q~7P%3M-TG*d_H#d9*H23AID{
+z=^%wc5U7OSp^wIwS+&@}B(||IVjJ$7xAdy@P<QpP%yr|9Z!cRMqh{O%G$)<}(fxnU
+zu6qjgWYf1NTXvP?$^S9NEp8C7#&g}&ztkx&PlwfuD>CA>dUOpz{tBY=<UpTPGJyPQ
+z{YL(8a)Ob6$29?7Oa$QIE-+n~Hy8~bR&wYIjURZy>+-HI?h9`JnQ(XGLpVghDB4HN
+V$;WG)j)5r_BAD}M`QfFU`~k~Fh8h3>
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_COIL.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_COIL.png
+index fe13f9cd0c5520eb3037ca51bf3e33e4f3750393..d436d60d5147496ce2f235b021cb9201a94da183 100644
+GIT binary patch
+literal 549
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N+bmMgt#8teCWj1!zZ>M
+zd35u^yO(cI?>c^V&&g9ek9~Uk@zeWHAK!d9xMt6rr>_pJ-}m{$=MS&nA6mQj@vVo?
+zA3Qs{>EM@-pAT=?e_-|QU5mFqyZdC%^6hso-F|xK@s5R??_9j~;QGD)|NqZho(6OW
+z17ni6yNf(4ufSd)hrPtp*OmPNqbwh*g;YivBT(p&r;B5V#AVe9w>KSC;BelUu{Gdg
+z+!UYz#^&jMa+4ENnHr>h_-ZARI|LP$nFt!5i{$$GMB&#Q?T?%Cs$X033aqFO-<2hN
+zdKqI<=0?w>%}aNBG52ihzEFABi_K8^$=Z!}`gZAW&+z@(^Q!Ri_r2n;nm9VTAAPNp
+zzt_HQGyCy7uYW%Ht+8E~U819F!oBOBNq;W(yqfi)F?7v-7l~zW7Mom+oAW+JUGw|4
+z{MUy<Hm5$AWbQF<V&}3c|DN4?Wmxg2p7{^MtW!L>rXuohfWA>Jag8WRNi0dVN-jzT
+zQVd20hGx13hPp<UA%><_2Bub~X4(dZRt5&jEAEM)Xvob^$xN$6(O_a_Y-D9*2+?3|
+S|Md`11B0ilpUXO@geCx#-S86t
+
+literal 822
+zcmYMyNlpS`5Cve27jWqjJOKxA?;(u~7iu&Tf+7xp;uIIUF(Mcg!KfhJGzaj*B4~;~
+zHN1NDs_fOZ{9^9!FYjIPTblhAa?5}D+^il!ytP83ad^Wn%eUU^${lC;`O|rNs~4}%
+zOaCSW_NK!zKr%>2-$|BaC%d(;-T=O`U6o|x(HMpy#K3_$+B!Skt7qw?x_{B{e7rWh
+zfj{1<sWO~_*FF#N>nd)P83q#xfaDuQDt-<U`6+*rp?z=n>5+_fv`Tt|KSYLjKIU$#
+z_x#W<ZB~R@rj|~;u7MUIGZ7(7Vf_Gk^S;H=tAyNAG}EKRY^TIQ3;FWcVM2pwQ*r@E
+zvk2n|C6xfc0<TfKPzfQ28DWrdh8nFz2BZ>)JR(UA&BR+_z7EHNFlY_Z8~Zv1hdHJb
+z36aOqv>-%I8&07TTFJoE!!gk!@_PB086-R&C7S(PgFix<AVF(87qFDG>%ySwvk82B
+iOWH#uJUxyEgFnRM1S23mQH^txga;tiHR$1Z8SpQ|S9Hk$
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_GLASS.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_GLASS.png
+index f9cf9f0f7e85d6878ddef9b530312e7ca4a8496c..dc543897cbe293e8380cb1ee447a520f3514d9bf 100644
+GIT binary patch
+literal 616
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{j>3307!>8x&SYiR54
+zoH%vTta<ZSuGx9~<l#$K4qdo(@chMnXU?tIylvr{^^4bST(W-C$}QVxFIlmA`>wS+
+z_iWg+|H$R5H(tKF{r26hH*c>#dk(Z}?($XhR;+GlXgGB7^7`HT*6i3lXX(m~dk?Hw
+zu_7ZQ<M!>_GiT0Rw`=dFeFy*l|9|Mvp+}D%ZQg%q=AvcuSFN3~aOr~8>$V&`Jayip
+zV^^<FnY-}X^A|T?zu9r@#HwvOPh7uwm;YuU(AkVh-tI0MdpB&|1mv)nc>21sKVX#Q
+zW3`aVC}RW)?ecVS43W5O+J955$$-aYaZsSZ6xWRbsVm<otXS~x|MZy$3gfD(jOY3=
+zik+T%=-R8a)i13N-#L76Q_gYQc{cCQ1lqBbba+nB&Tu_2$3jfWbBPF(yP##uj-?tZ
+zkzx)LF7MSiHHm}2p>X07*T_&|PQxu~0Sh@2*sM~b{x#lnkQV-7e^5?WPtmA7s{F;T
+zc_;Qv`^;Vv9H_Z+#?4ZWS2lI$uD%prfAS!EzD)b}gEjGt>VIBr`yCp4Hbc<F{(h{S
+zs?3|R3qW6}mbgZgq$HN4S|t~y0x1R~14A=i14CUS%Me3TD+5z2Q!{M?Ln{LV<rVit
+nP&DM`r(~v8qG&L&GB&a@GK6Tbw*PtvsDZ)L)z4*}Q$iB}6FUrn
+
+literal 822
+zcmZ{iSxy2$5Qf`$0UterC*T0Sdk^nmVlXi##3zj;Zh#=@u*(wJ6a<W7VpKpxoHrlD
+z1-$}(bdT+*u~O62(0~0^^-oRDIL3uE2j>*eg!PPxN%_C9?$wJrD@O;Ve5`O7Im{SG
+zg?OiZ+UquMTXlk~%W^8Q8;|&6VP9n5gYN}4644!}5Za&nckhFT!CMa}Zk**w(RlCX
+zD)?F@Q!S@Yj#J&vne(sN*!-TgAN&$LYcrLdP6mPD0k500Ud`g_3hai>c(n@3D&QGs
+z)VwqWuGx%Kol?w2L;iK}bPn7Oew3#2zEgxiB4$_o8n3`QMdJ}1J)?#fec(3?gR9|i
+z_#YnHaA;feYdmdea$?QTXQdzb5ns(~nx-m2mEX;S5CSkh>i<h3l|q&>EzWT<fdi%=
+zRtSldN@@^#1Bt1+7NP9_o8MN&g2|tDvsNx8X&(KV*9dMA;4CMFSj*R!`;T{%t;73I
+u9ZgQayspLhrG>fWC8vAE#ro0S#d(2!Zr#+H*Hu;;*^@CpTgn#Yvf)p!dd4UK
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_GLASS_YELLOW.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FUSION_GLASS_YELLOW.png
+index 712c6d800d52811c1eed152da8c636cec13feb8c..c65112622060c44740098bf40482bd163fc30b57 100644
+GIT binary patch
+literal 594
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N-PTS3307!>8x&SYiR54
+zoH%vTta<ZSuGx9~<l#$K4qdo(@chMnXU?tIylvr{^^4bST(W-C$}QVxFIlmA`>wS+
+z_iWg+|H$R5H(tKF{r26hH*c>#dk(Z}?($XhR;+GlXgGB7^7`HT*6i3lXX(m~dk?H#
+z%W(TP!@6C2H|;z4|3Ab3|Nl4dKQwdEviYml&RDo~!RmEe4j!I5Z_%-<*Qd-~c<uR%
+zo3G#OICf&yww))g-^}Q|vJ>c9#w2fd7j<3!70N&kdx@v7EBgaRSw2<^sf;p4pwL=R
+z7sn8Z%f9`u#hMfZTDDKp@#WphvvA6#JuOqi-v7_it+2AJxA<*%hL2(M&qGSy)mzK%
+z^gd_bu+*gI(Oo-FKAx#e*V_%O<{8am?pz}Bs7HutebL(kKbxF_L}V&fKG*gVKGtYp
+z96nW1vhA8whz74ga><{D+YZ{x{WrLuUbgTH+p5?9vL$yn8@V1&+84y}D#-5Gt6#$Y
+zj}vN*c>bPN&dhS0viGjRzZ)ALZ{?V!U!f&yl%y$k3g~dv64!{5l*E!$tK_0oAjM#0
+zU}&amV5n<k8DeN^WngM$YNl;qXk}oayyBh+iiX_$l+3hB6b&X;#zs~~h7b+b_FoSH
+PH86O(`njxgN@xNAmi_*6
+
+literal 822
+zcma))Sxy2`5JjJH1Ae*$SHJ@NcSR-!6GKA$(n#V22!b*-$Png1z#t|@1w=&t#R1#`
+z9{Tlw5))r;zkc0)>sHn6T3xd&3Uyi7SGbn6Ye6il?}heVKFGaNyeMQNxpXL<3>0%p
+zw{z9+H6Pn`4tKZZc=S{Wxg$Y$=-dg;ya&<niB$*#Z^NhY=w<ZT2b`OYEFlKpb+`+^
+zR!LUNiOW*F*KJtm*NmFSx%Wd~B@0C{Afpp8A2i@~IoRvf6p){$%)!8fqG$=#EbwV(
+zTD-b6@?;_m5UYpeGhx4HA3l{spCwP!r9~MbLSPZSOMQbc$!3Vo$8h`%2VD3wtN#}t
+z*`WV;UY{~daT?L}`K{E0KIZ?YU-Th^Y5l(}LQ_IFr<9KZ$kf9KVUcu6YefHLGOs46
+z)^F<1WYK8qt<$QN3o(kvfBFshjyM2@lSGW=$NTfwc)-+w;cM3r=Rm*qtqt4e`nJvL
+g*s(Kyly`HTW1ia&wbp%=k;e8|#KV*_MVVCa8(_D+ng9R*
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC.png
+index c68c3230f0898aa9f71b77c3213ab898ae44865a..6a7f6cc259709ae2835e7c61f01f61905d7c1346 100644
+GIT binary patch
+literal 500
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N<;<tgt)eK^<8`Z;`)o1
+zH($NJ{r26hH*asgeskyD`-X;wdmldDegEOc%UA#Z|8MyJ|Nh5M4FCUMefIp~qsI?E
+ze}4Go%h|j4t~`Bq=FZ)dH*Z~f{N(iQJLm2{ICk~=k;_*PU%ImB;t?UBEsROt?k+ry
+zn*)=99QG1VUsv`AjIw;J7E&2yj6k93o-U3d5|>lYU*|ilz{7e$ts;g)xpiI1pa1#S
+z`hEpydL)!=Fr4GpZg{q_qw{7MCmUA-N5JeEWdWBmG9nY2Ib64FaS`Znj!HYf%}SI#
+zRPD(eZl;q-0e?-VU$R-p_EP>F-&AF<Y+l8Q<tuBy?A7_UV)H?V;}Q;QBMNUW{C00`
+z_Ktf6|4TngRo+PZ?EO~ul+weUd+*JE{CvNUBfFO<cZnX*iK->85hW>!C8<`)MX5lF
+z!N|bSOxM6r*T^!&(A3Jn)XLOM+rZGuz(9G$JrNWQx%nxXX_Y7%OstHJtc(mH8m#TV
+R9s+7$@O1TaS?83{1OOJx(NF*Y
+
+literal 822
+zcmb7?OK!qY3`JA1feu*$D_{YgcTbEMFkn+4q^d0vlmH<K-<JO$=HVnau`=lZ>%}}f
+z$9~r@yuFtTPGV(ziRU$aUYuf*chdI?<m<KSv+H~cPsiY}9~}?AHv65&+HJk*q#gL5
+z1GnY=G<)5KI$tl7N@lm))Iv&r7v1blg+lT7`-~(Qu$CB(<A~*7FAToOjJ%IL4@r_*
+zm9wXV&RQ*9!g2U*dVs<3CI$ezoW~^b%(Yn$#4|4#^OA>&B9@~?h$H~C0T>_m$}Ea4
+zt;%xo?_%CDJ^B29JX45Ao83Q!2`?A7K@VcM+wEp39@!`)WFlVW&mv^eO<&M>7?OBh
+zg-SFgdtiCfLkO={x+OA%`jg-Z?S9mm3?>2EtAqCV^{TJ_Y*4Pb@;%jD86*LSf66}q
+De_SI(
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC_ACTIVE.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC_ACTIVE.png
+index 333efe15ffa8d3b181115958adc4a23714079186..ae0df4605d5a4ee5b20455542bb98f521255dd16 100644
+GIT binary patch
+literal 500
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N<;<tgt)eK^<8`Z;`)o1
+zH($NJ{r26hH*asgeskyD`-X;wdmldDegEOc%UAzFpyB?<PyheRUw!uc;-kk8K7W4r
+z<;&T-_pUsBcIM9AlQ(Z&di><{?K|i0KR9;v`jN|54_~@6c?N4V&=$rdZ+91-#?67r
+zKn{C}r>`sf14dasRtu?&GDe`#bWaz@5Q)pF=dbe}R^Va1pjHvXq1?Kz<j?>7Ykj{0
+zG(8eZHW<$FYd1XG*wJ}2jFXM4fg@n{jIw}B85xlY%^a><wzvp%I7g+O-)1Gs9;)_a
+z4mZ=uq=3IB(=XYqV|yuoj&G{6S2nNW#PXH3U-s&JTe10|!*L0RwGo9k7k<09Hhagt
+zg8!u-r7CZvefEAUdrIly&b{~MKYqU7$C2Gjl)FR^=tR{L*NBpo#FA92<f2p{#b9J$
+zXr^mmsB2^yVrXh*U}|M*rfpzoWniGZ;+_bKhTQy=%(O}r4JKB`Mpj0K5DnJ$Uk?E_
+OFnGH9xvX<aXaWFV-q5iC
+
+literal 822
+zcmb7?OH#r>5QbxM0hjLFasm$E-aBRG!UdO-vdZ#NB@!_q0Tku^6!ycH{F$z7SkN_T
+zx;tO@{4?R^wowZTYvAiVm*sO2Tov`8e6K{ld4G5A+HSJVI$bT3^{S^}xrkYdc|07v
+zrM>5F^ca1#I_(Ed{@)EkZ~OhwQd)jTZT}{uQT*ZXO%V)OOAOnw#rUt2r7u*H_^HZ6
+zQlwYy#7xj$lW|1a&t6RrFc{v%0ARaqpCX=f&8A)PoEMDqQqLjhuKglI5&+r&jL$J|
+z&N*7t<!kxx=;z(^RO_dBP9Yv`cK<ZO%ko_cJ&56M=d&;I$VMS4C*oCgFH#oM^aYKF
+zp@`R2s71#l29`HHr0^P5-clHn>Q90Pu=~+uDwqT))&#})>Eu)M2~f^G3$~dGv<s2|
+H#GmDlac?8v
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC_FRONT.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC_FRONT.png
+index c9437ac9a414539358367f64ac07701be64bab34..c6a9ff85871c7d7f68ccca5f56838fd2502461d6 100644
+GIT binary patch
+literal 330
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!73?$#)eFPF<Nq6*hWMJ6X&;2Kn706de_6YK2
+zV5m}KU}$JzVE6?TYIwoGP-?)y@G60U!D<ErgLuK5U4b@0384U=5ZAV@zT0o#G5r63
+z^YxpC{~#c$zakST%b4Wt?!x*b|K)KYhrPtp*OmPNqbwh*dDr#q2|yuJPZ!4!j_b(@
+z4UBG%1_B8QEgu?r)KnD$7z}%2V`2{Q2umDRHJM_-yiVd+gCxgxrZi0+28IR8dD&)|
+z=1Kz%P%UwdC`m~yNwrEYN(E93Mh1pvx(0^2MwTIlrd9@~R;H%f28LD!20{);I#D#_
+k=BH$)RibDxu`)KYGBSi{u(tnt2&jR<)78&qol`;+0BYl2YXATM
+
+literal 822
+zcmZ?rHDhJ~12Z700mK4O%*Y@C7H5FULpTt!ud9tz^zQ9#A`!%7pkiXIfGdMA{{Lsd
+zgMbENQ{V9aKUTy*RrUXo0K_`{<|8SGI&Waqzj=L=r0@Z%$Dsw6`*B7YX803K63Foj
+MWD|o3nu)0Z0P`&-X8-^I
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC_FRONT_ACTIVE.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MAGIC_FRONT_ACTIVE.png
+index 6977046227ed138af0c7280fc08f5f3de76975b7..bcfb198abec08d8297318934d9c64469156ec062 100644
+GIT binary patch
+literal 330
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!73?$#)eFPF<Nq6*hWMJ6X&;2Kn706de_6YK2
+zV5m}KU}$JzVE6?TYIwoGP-?)y@G60U!D<ErgLuK5U4b@0384U=5ZAV@zT0o#{r@k2
+z^Yxqm{~P}Q|9|(-?ZrS@#w2fd7uFy7FOLH`>?NMQuIvvOW%*bwq%z7FfkLL9E{-7_
+z*OL<(7~LEV1QHTjJ~Z;EsVW3881}@*#2nxemN=|xGR1&-oy4&QNsjGIX_`C?3=5X?
+zvdu8fl?EE1TH+c}l9E`GYL#4+3Zxi}3=GY54GeXSEJF-Utqe@9OwF_n46O_dlvmsn
+nLD7(#pOTqYiK4;8%Gk)t$Pl8z+WzYypaup{S3j3^P6<r_L7-nr
+
+literal 822
+zcmZ?rHDhJ~12Z700mK4O%*Y@C7H5FULpTt!ud9tz^zQ9#A`!%7pkiXIfGdMA<p2N2
+zgMbENs&DxJA1eZyLq+xfkpRRx{N^JmhdOVd)W3Oslcewgs>iAYm-~U@xDaOe6HF4w
+O@e5=Vg9w_5sQ>^E!Yac6
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_TELEPORTER.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_TELEPORTER.png
+index 7aa22a9065deccb29c5fe831bd926a702dbeaea3..6d7514017f4d0241dd28aac4f42687cdc004ec1d 100644
+GIT binary patch
+literal 577
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{a;32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG>mTm;vbL{GM28RDrmT&G`u%^0u#?%#Cy63K}=$Km5GjsB?
+zP3<$6mbFege(lD-Gv}tS-qt*2!S0i%>nF_Fb>dXxq<K4!pKO`7sH$uFw!=qnzJ7D#
+z<*TdDo?m+W<lOxSCvV<5eCf)8a~J;q|F0YS`wP(Jj7i?^E|%9BraAyQ>?NMQuIvvO
+zW%*dmyRK(X018d;ba4!kxE$JZQmDy5z~y%9f=&%@g$GPc$3&0D{{Mg4M~C0p|Ef&f
+z-n<2u-+q;S#@80pv*#mApM1+jdm}#Kf~k{!a2ieZd;2#|tJiR`+ZkPjHpa;8<Z~NN
+ztPIo%3=>&%?Skl954O9jSfo32P0OmeI|?nFo?KbspB8e`V{Y!NO@;b9?!D_@u72m)
+z($Zu1=Ii%ZNZfcSZz2eEn`((`L`h0wNvc(HQ7VvPFfuSS(={;EHL?sbG_^7?wK6r;
+wHZZg@Fc5M$(utxWH$NpatrA6piIuUDm60JtgSGwFLqH7-p00i_>zopr0CrsaKL7v#
+
+literal 822
+zcma)4Z7;)66t4IKKKcoM!G3`6{*KH`f*`}jrn=37s@W)IUQ;oNu=mc?+O69<hL{j9
+z|A8m%awCnTZO%P8r}sI}eeSuZf56pE8J`Qj538rMx~N{`Kh@bc6Vrcx>7O5s_c!ge
+ztv)}=t%s6cFN9`?!gIq-U24?wu)3DhDw(R9F3VR)kGGbN;`G60;4rp`AR3zbYb-qx
+z@r|M!B-ykGwo^VhPEodoLMeX^yeNbL{xM33Cjr@74U82FNrJcK=a|VG=>qyqJr+Vs
+z3N~SVUM^jl_q8Pl01ZKxaCh_vsfEyz0uYaQ=;^^_?}$S^J8RzHj2mx(o;%UA$1Oll
+zt(raAW}N6rMEw90yzLPtp6Ib$(2{};{i!G^@H^DM%ld#<%P9nSi~S8h=IvhtGsFM@
+pyuh=3Y$YLZ$ul9B5mAmNU=$gTTe-W&=@^*%W)XA#*t%`MD8IQFMLPfh
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_TELEPORTER_ACTIVE.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_TELEPORTER_ACTIVE.png
+index b94b3aac3a587ab0d2511429769fdb0ad6cac3aa..9792d34e75b8b7f500f37e6e63e6c4ea21ea0017 100644
+GIT binary patch
+literal 577
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GbKJOS+@4BLl<6e(pbstU$g(vPY0F
+z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N~{a;32~jbV)g7LD;BI?
+zw|e`oZAXqBx^U^p<*SvQ(<<7h96W#V=#^_HuHQU$>-L#DchBCvck$8Vo_VW!=dbQx
+zxOU=_4HFix?_ad;(8bG>mTqKV_<!u`b%y`{r!3#xw_r_m_l&74wsg;3S<x}Irf25l
+zWt-Y(E-h=Fbo|<leP_;1U%jn)%7Wb|PuEYFv+KmE#!2&b9zWSKZBbR%^lgWa-hBP$
+z#>-b%pFO|y_{q8Z4^G~^b@<Yi1LrRM|NmdJ@5v{i%Ndir-CZoNGfZ^=a@b2eeO=if
+zFv{|=T1aJ-F#?4qc)B=-NL&u>IVsd+AmDPlbwQ_wx55LaremT<WB>m@?W4o*?0;1z
+zZg1X#%WuERKI3bP>Dlv<rBA-)qP-EHaKY3`KRAu1`n~-dr`2n?*zJt2LK|abcJjFm
+zCsqdP1cr&MxpqNxtq0rPRV>mSx~65-+#Q7$PEW3^@J|al=`lC=)uuxI9rxb#FIT_w
+zY-#DSd-L^sEF^Bcls6Fsx=ppjHKHUXu_V<hxhNG#F&G&bn&}!C>Ka*w7@Arcm|B^d
+xX&V??85k(9xF>?5AvZrIGp!OugNc=~k(H4lM1!^c*F!)J44$rjF6*2UngDh?`;Gtr
+
+literal 822
+zcma)4+fKqj5MARB_~<A21$=<-{*J**VvHJ8P_Pz|sI?+!wTjnZ#Kb7~B34=`H${yY
+zjhBDGV_U&ACT%l2ndzRHJ$rWg2W;I${cP}kSUvjcBE9N=qVH>o=D$8`AMe$-SLLNC
+zKRt?#`+TjE_00_VXNT)Gp<2$sDoR=@CQEXnAYLLp+FU#gQ~Mj9gU|wkpl|Z8G1Pd#
+zHHvaHNhPA_cEWjEgqRu%h0Gc7QQrRpZmA`0-wuAaRy<?5Y^;MfJA$Pru7z{(*ZCM4
+z8d5^|wK*|=q21S%JOB^`D&g+X#|r;&z(Gw7E;&am^4VT>dZ+Dp3utbI&n`O;KIKyC
+zc#F2eClYi6+`*gaso^_(3<4TbRiC01M}Ld_cNiD&av_cYZ?U)T#=QM&P#$Ce0G{U<
+mF0>rs+1M$cPDW7<5ip9h!!F%k;dBhlT|I|6e`wq^pQUe0O`fX&
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/VENT_ADVANCED.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/VENT_ADVANCED.png
+index c9663bf711e43770019438cbd4dd2c9ac2e53bd5..01fa40f67818baaf4c3377a4eaa6f40b36651b89 100644
+GIT binary patch
+literal 720
+zcmeAS@N?(olHy`uVBq!ia0vp^0zmA*!3-o-7PBt_QY`6?zK#qG8~eHcB(ehe3dtTp
+zz6=aiY77hwEes65fI<x~7#K<o7#Ln9FfdrnU|<k0n6oR;1}L#2z$e6Y-ip<;m#kQ@
+zdfn>nyS5!UcId*TBbTpMc228kpK|d0#iLiQow$DU)UDfR?%X|l_uj=vk9+2=>Ycy3
+zf8pAROEyecyuN?Yx<eN)Pg=V1*wyPmBM%%nFlG7XhK7df?iv68|F7tnTGKPLtaZ}y
+zYd5B@*s|};x#_F7HBVWv`{e2R33GOxIMq05-p=DECokL7GHp>+*Ys_NkKTO!=Eloc
+zSD!t<^!UlS`wvduymk1}l>_H4SPQT&23o+F<n8VvSHz{D4dk$wc>21sKVX#QW3`aV
+zC}RXlt9rUPhFF|FJNdTXVFRAFvk9h4a&kPkn;q<#SSVv~?!&))x2$yERd*FtKDes>
+z@A9AjkLeBXH~uzOIk}aeDopGeAEvD8Jt%N2#MqWSG`rVu%e*rSSKhv3l^(s6OW)5q
+zYwh9>j&oMVE_@i%vOuIj?T}Mv0iXBEfEN)v7|ts@F@9XY^oMKW4o1O8UxZF+XDaEg
+z%Wpc+UD);O8{etWeZPLm{c(<+xyx7n`e|OfgP%{ozWsZ}k+bdJeLwzWwSO*nTum-a
+zKvj-M;rT|@BQ`M|a{TTtTHi$FifVK+E0-*@<QMy=+<!;@9OuG5_KDfy%g@Mf3ApmP
+z{qDnwI-->>OFG>}g!tt?KDT-D?~Htr=evHtlmDhC2)+8qp|<ddvUZ|e?7pWLIrl&A
+z&;Q)%``O~POBFB-RZCnWN>UO_QmvAUQh^kMk%6I^u7RPhk!6UXsg;4Lm8qGwfuWUw
+sf%1xbA}AVi^HVa@Dp53;SQ#5x85u$}SlfR+1k}Lb>FVdQ&MBb@0MEQXNB{r;
+
+literal 3126
+zcmeH}T~8B16o&EM3orc%`~t3x_x>FNYGREN6)`|9Ai-2X)P{{HU`oWqRKCkcrG)}T
+z0V75N_#f&MUvn~<T^6_k6DG5h)0yX-IkV@@bgy2kyIAwL)iKucT;jRHbD`!kBkkY1
+zerWuCP}$#G-~Cnoxl{VSUD*7#P+6Ppc-YX{bYr8EUtgV}ua&3E%abdmiKRl0pTn=7
+z482UgebM@^zYPP}dSA!Abn;GD^DW$&oSMiI?R}>GO>Ya`Fwf8`j`^7n@Y$f#h23n;
+z5#U+t?YY@8@tTLs<#LHc!gaycYESC!eEuW(lh1MZ;Q8ai!Y6ox6*guI-V$f`c)V6u
+zrkEr#Yhsd(*PlMR8Ro0iDlTlKhL@Q32ldp#<6!`ln~h?~hd3jzQ|1x_5B9YHhk0Bq
+ztPDjHPd;eiIQ2p>%f)fxi+5cV&_<T%1L<b?($Y8vwO|Il(GA1U43S9&06xg1GyUCz
+zLC@G|Fg=;YotFTax?f-X@|oQc%-4-MbiTE@xbvg<U+7=5;pN-eIc%i<RUog*@`}`d
+z41bvZaq;3?V)6RdUK*8Br2aXq^zW)#yr+M?7SpG)l9zZ-{{S>M4b2FS)V~Xx?egdP
+z*W1u|>i56Z2!rCfVu;bdygWWe|L{bn$&pdVclEDm!nk$-3^v}?KfE>RKg@gjcL97O
+z^YQNUNEao4r2dtjC4YYZpTX}Rx4vepzG3}KoQ7d&MtoTR5`f7J!;^%oe+vsE{bSgq
+tws7@tOBg5BKanjf#Zi3k{<keWUT}>5WBADXAD+f`ip<FW_1XOX`2$w4`wRd8
+
+diff --git a/src/main/resources/assets/gregtech/textures/blocks/iconsets/VENT_NORMAL.png b/src/main/resources/assets/gregtech/textures/blocks/iconsets/VENT_NORMAL.png
+index 0b49d7534bbcb4ecae6f084c5ec5ae04e1e765a8..f5d3da89ead7fed4dec6f3a941930345939ac3f3 100644
+GIT binary patch
+literal 606
+zcmeAS@N?(olHy`uVBq!ia0vp^0zmA*!3-o-7PBt_QY`6?zK#qG8~eHcB(ehe3dtTp
+zz6=aiY77hwEes65fI<x~7#K<o7#Ln9FfdrnU|<k0n6oR;1}G68;1lB7*420I`HSl>
+zUfz85`u5v*x8A(H`TEVBcke4Zr`>q@>hAjwK!pbm9Ju%4V?#s3{g0pi|NnpV%C)P{
+zo?m?Q_~Dl?4?cfBd-vYSo43y0e{lNtonu$8AGv(>@TDvExpLouIvJC^-CYExZsOGe
+za@b2eeO=ifFv{|=T1aJ-F#@GoJY5_^EKZ-De6#P60go&9*`y9bUD;{pKK#GmIlXPi
+zqt^C`3jCSXDz{Hw%)P#M&Dm}Iifs~={<h6?oY`U(-<mOf`x7U?ZJ(4<z!Bi(_=xwH
+z3WF2_W8^+wksF2<S`u!o>TK0(B^X(K*aEmb*j#lPFR{5WM6=na=PuG+*3BrZ!@fIi
+z>5~cP%f8%BowqczPx1JaU$_7KE`NV7^8K$38_&51x}Iz2`d}yK{EWGBZH<Cp@3rz(
+zO;0{CiOH{B`CajWcI}TEg;@)i^D9kRJoz*`ukzYYfpIlD6SM55T`-kro5L^pu~NRQ
+zemei|&hzf7|LPx3xNwTSy=7K^R8XzW>@a!JKf!i#XWl8qzfTbr1O}06iEBhjN@7W>
+zRdP`(kYX@0Ff`LOFw`}&3^6pdGBC9=HPbdQv@$SIUU5$ZMMG|WN@iLmiUt!aV<Rgg
+XLx=`z`>%(98W=oX{an^LB{Ts5i;nf+
+
+literal 3126
+zcmeH}yG{a85Qee0u=Ejp0%~LL1KClTXkqE|ka$Uq(M07Uf`FRHT|wya3%~huvdgYg
+zs1%$WPG--3GiP?@-wivv+4an9WLdZPZSdRXx0cytWqjS&h1R3P{YB^S{qg;+Ht0XR
+z4XQHwy$Z9}tu!0gwd!TLcwW3aE!>_c^2ew#8rC7l<L2?fUS#4@f4strDSk3}3dt~A
+z`#w}Im=PW_pU>xVxzGh0ub1Z=PH{eplfnaZ+GX)PFPDy)bOZ&N%i~xooDqS<Jh&vK
+zFdxUqm`<m-aF7OG@U7RPcq;jme7c=`@f06kE(9c6cow$q(n0fd);un8o?e?LAC<_b
+znAZ*~#c_S$nG%ly8|)LA<lC*1^1+}NoX9Pvgr|Vsk^IE}_WJkwmu%cAYL%paRX);X
+z_$2)&@wg=EAD2jcCFcG{-WTpl|2j*nQc|b*K5*%~JgoE|3Kbx(f0f1hR95nWkLw?R
+z;e#+{8+l-+_00Q%uGk65(B{@k|9TC1kufNpUci6<{)cU%xfVmZ{^b?&v^Yio@I+?#
+zIQWSE6;0Sr^e-uDmHr(ZgZOd%hk%pUCVX7~A&+erVCJ{_S8g~0uk^qC`ggnO*IfNe
+zoW?M;BR$0RF9E>F1tXM1ME?#8BmHA|Qz^~;{=+P)e<C|89YOpQ{YQ8`Z;Jloe7gSO
+Q8Dyf!tQ5!fS*rg(pKttJe*gdg
+
