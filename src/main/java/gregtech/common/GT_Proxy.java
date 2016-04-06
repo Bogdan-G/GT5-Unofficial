@@ -1426,7 +1426,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                             Class tClass = tEntity.getClass();
                             int tEntityCount = 1;
                             if (tList != null) {
-                                for (Entity nearbyEntity : tList {
+                                for (Entity nearbyEntity : tList) {
                                     if ((nearbyEntity != null) && (nearbyEntity.getClass() == tClass)) {
                                         tEntityCount++;
                                     }

@@ -45,7 +45,8 @@ public class GT_Achievements {
     public GT_Achievements() {
         this.achievementList = new HashMap();
         this.issuedAchievements = new HashMap();
-        for (int i = 0; i < oreList.size(); i++) {
+        int oreList_sS=oreList.size();
+        for (int i = 0; i < oreList_sS; i++) {
             if (GT_Values.D1 && this.achievementList.get(oreList.get(i).name()) == null) {
                 GT_Log.out.println("achievement." + oreList.get(i).name() + "=Find " + oreList.get(i).name() + " Ore");
                 GT_Log.out.println("achievement." + oreList.get(i).name() + ".desc=Height: " + (oreStats.get(i)[0]) + "-" + (oreStats.get(i)[1]) + ", Chance: " + (oreStats.get(i)[2]) + ", " + (oreStats.get(i)[3] == 1 ? "Overworld" : "") + "/" + (oreStats.get(i)[4] == 1 ? "Nether" : "") + "/" + (oreStats.get(i)[5] == 1 ? "End" : ""));
@@ -430,7 +431,8 @@ public class GT_Achievements {
                 issueAchievement(player, "cleandust");
             } else if (data.mPrefix == OrePrefixes.ore || data.mPrefix == OrePrefixes.oreBlackgranite || data.mPrefix == OrePrefixes.oreEndstone
                     || data.mPrefix == OrePrefixes.oreNetherrack || data.mPrefix == OrePrefixes.oreRedgranite) {
-                for (int i = 0; i < data.getAllMaterialStacks().size(); i++) {
+                int data_getAllMaterialStacks_sS=data.getAllMaterialStacks().size();
+                for (int i = 0; i < data_getAllMaterialStacks_sS; i++) {
                     issueAchievement(player, data.getAllMaterialStacks().get(i).mMaterial.name());
                     if (data.getAllMaterialStacks().get(i).mMaterial == Materials.AnyIron) {
                         issueAchievement(player, "iron");
