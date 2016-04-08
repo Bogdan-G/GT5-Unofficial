@@ -1413,23 +1413,22 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                     }
                 }
             }
-            if ((aEvent.world.getTotalWorldTime() % 100L == 0L) && ((this.mItemDespawnTime != 6000) || (this.mMaxEqualEntitiesAtOneSpot > 0))) {
-                for (Iterator<Object> objecti = aEvent.world.loadedEntityList.iterator(); objecti.hasNext()) {
-                    Object object=objecti.next();
-                    if (object != null && object instanceof Entity) {
-                        Entity tEntity = (Entity) object;
+            if ((aEvent.world.getTotalWorldTime() % 1000L == 0L) && ((this.mItemDespawnTime != 6000) || (this.mMaxEqualEntitiesAtOneSpot > 0))) {
+                for (int i = 0; i < aEvent.world.loadedEntityList.size(); i++) {
+                    if (aEvent.world.loadedEntityList.get(i)!=null) {
+                    if ((aEvent.world.loadedEntityList.get(i) instanceof Entity)) {
+                        Entity tEntity = (Entity) aEvent.world.loadedEntityList.get(i);
                         if (((tEntity instanceof EntityItem)) && (this.mItemDespawnTime != 6000) && (((EntityItem) tEntity).lifespan == 6000)) {
                             ((EntityItem) tEntity).lifespan = this.mItemDespawnTime;
                         } else if (((tEntity instanceof EntityLivingBase)) && (this.mMaxEqualEntitiesAtOneSpot > 0) && (!(tEntity instanceof EntityPlayer))
                                 && (((EntityLivingBase) tEntity).canBePushed()) && (((EntityLivingBase) tEntity).getHealth() > 0.0F)) {
-                            List<Object> tList = tEntity.worldObj.getEntitiesWithinAABBExcludingEntity(tEntity,
+                            List tList = tEntity.worldObj.getEntitiesWithinAABBExcludingEntity(tEntity,
                                     tEntity.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
                             Class tClass = tEntity.getClass();
                             int tEntityCount = 1;
                             if (tList != null) {
-                                for (Iterator<Object> nearbyEntityi = tList.iterator(); nearbyEntityi.hasNext()) {
-                                    Object nearbyEntity = nearbyEntityi.next();
-                                    if ((nearbyEntity != null) && (nearbyEntity.getClass() == tClass)) {
+                                for (int j = 0; j < tList.size(); j++) {
+                                    if ((tList.get(j) != null) && (tList.get(j).getClass() == tClass)) {
                                         tEntityCount++;
                                     }
                                 }
@@ -1438,7 +1437,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                                 tEntity.attackEntityFrom(DamageSource.inWall, tEntityCount - this.mMaxEqualEntitiesAtOneSpot);
                             }
                         }
-                    }
+                    }}
                 }
             }
         }
