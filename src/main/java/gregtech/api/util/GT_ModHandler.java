@@ -1342,19 +1342,12 @@ public class GT_ModHandler {
         for (int i = 0; i < 9 && i < aRecipe.length; i++) aCrafting.setInventorySlotContents(i, aRecipe[i]);
         int aList_sS=aList.size();
         try {
+        temp = false;
         for (int i = 0; i < aList_sS; i++) {
-            temp = false;
-            temp = aList.get(i).matches(aCrafting, DW);
-            if (temp) {
+            if (aList.get(i).matches(aCrafting, DW)) {
                 ItemStack tOutput = aList.get(i).getCraftingResult(aCrafting);
-                if (tOutput == null || tOutput.stackSize <= 0) {
-                    // Seriously, who would ever do that shit?
-                    if (!GregTech_API.sPostloadFinished)
-                        throw new GT_ItsNotMyFaultException("Seems another Mod added a Crafting Recipe with null Output. Tell the Developer of said Mod to fix that.");
-                } else {
-                    rList.add(GT_Utility.copy(tOutput));
-                    if (aDeleteFromList) aList.remove(i--);aList_sS=aList.size();
-                }
+                rList.add(GT_Utility.copy(tOutput));
+                if (aDeleteFromList) aList.remove(i--);aList_sS=aList.size();
             }
         }} catch (Throwable e) {
                 e.printStackTrace(GT_Log.err);
