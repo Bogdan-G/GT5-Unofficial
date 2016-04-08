@@ -99,7 +99,7 @@ public class GT_Mod
         Textures.BlockIcons.VOID.name();
         Textures.ItemIcons.VOID.name();
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: GT_Mod", elapsed, "ns");
+        FMLLog.warning("GT Timer: GT_Mod "+elapsed+"ns");
     }
 
     @Mod.EventHandler
@@ -285,7 +285,7 @@ public class GT_Mod
         EntityRegistry.registerModEntity(GT_Entity_Arrow_Potion.class, "GT_Entity_Arrow_Potion", 2, GT_Values.GT, 160, 1, true);
 
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPreLoad, part 1", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPreLoad, part 1 "+elapsed+"ns");
         startT = System.nanoTime();
         new Enchantment_EnderDamage();
         new Enchantment_Radioactivity();
@@ -360,7 +360,7 @@ public class GT_Mod
         GT_Log.out.println("GT_Mod: Preload-Phase finished!");
         GT_Log.ore.println("GT_Mod: Preload-Phase finished!");
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPreLoad, part 2", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPreLoad, part 2 "+elapsed+"ns");
         startT = System.nanoTime();
         for (Runnable tRunnable : GregTech_API.sAfterGTPreload) {
             try {
@@ -370,7 +370,7 @@ public class GT_Mod
             }
         }
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPreLoad, part 3", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPreLoad, part 3 "+elapsed+"ns");
         startT = System.nanoTime();
     }
 
@@ -397,7 +397,7 @@ public class GT_Mod
         GT_Log.out.println("GT_Mod: Load-Phase finished!");
         GT_Log.ore.println("GT_Mod: Load-Phase finished!");
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onLoad, part 1", elapsed, "ns");
+        FMLLog.warning("GT Timer: onLoad, part 1 "+elapsed+"ns");
         startT = System.nanoTime();
         for (Runnable tRunnable : GregTech_API.sAfterGTLoad) {
             try {
@@ -407,7 +407,7 @@ public class GT_Mod
             }
         }
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onLoad, part 2", elapsed, "ns");
+        FMLLog.warning("GT Timer: onLoad, part 2 "+elapsed+"ns");
     }
 
     @Mod.EventHandler
@@ -424,7 +424,7 @@ public class GT_Mod
             }
         }
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 1", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 1 "+elapsed+"ns");
         startT = System.nanoTime();
         gregtechproxy.onPostLoad();
         if (gregtechproxy.mSortToTheEnd) {
@@ -446,7 +446,7 @@ public class GT_Mod
         new GT_CoverLoader().run();
 
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 2", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 2 "+elapsed+"ns");
         startT = System.nanoTime();
         GT_RecipeRegistrator.registerUsagesForMaterials(new ItemStack(Blocks.planks, 1), null, false);
         GT_RecipeRegistrator.registerUsagesForMaterials(new ItemStack(Blocks.cobblestone, 1), null, false);
@@ -462,14 +462,14 @@ public class GT_Mod
 
         GT_Log.out.println("GT_Mod: Activating OreDictionary Handler, this can take some time, as it scans the whole OreDictionary");
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 3", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 3 "+elapsed+"ns");
         startT = System.nanoTime();
         FMLLog.info("If your Log stops here, you were too impatient. Wait a bit more next time, before killing Minecraft with the Task Manager.", new Object[0]);
         gregtechproxy.activateOreDictHandler();
         FMLLog.info("Congratulations, you have been waiting long enough. Have a Cake.", new Object[0]);
         GT_Log.out.println("GT_Mod: " + GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() + " Recipes were left unused.");
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 4, gregtechproxy.activateOreDictHandler", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 4, gregtechproxy.activateOreDictHandler "+elapsed+"ns");
         startT = System.nanoTime();
         if (GT_Values.D1) {
             IRecipe tRecipe;
@@ -522,7 +522,7 @@ public class GT_Mod
             }
         }
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 5", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 5 "+elapsed+"ns");
         startT = System.nanoTime();
         String tName = "";
         if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "ic2_" + (tName = "blastfurnace"), true)) {
@@ -620,7 +620,7 @@ public class GT_Mod
         GT_Log.out.println("GT_Mod: PostLoad-Phase finished!");
         GT_Log.ore.println("GT_Mod: PostLoad-Phase finished!");
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 6", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 6 "+elapsed+"ns");
         startT = System.nanoTime();
         for (Runnable tRunnable : GregTech_API.sAfterGTPostload) {
             try {
@@ -695,7 +695,7 @@ public class GT_Mod
             }
         }
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 7", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 7 "+elapsed+"ns");
         startT = System.nanoTime();
         achievements = new GT_Achievements();
         Map.Entry<IRecipeInput, RecipeOutput> tRecipe;
@@ -785,7 +785,7 @@ public class GT_Mod
             }
         }
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onServerStarting, part 1", elapsed, "ns");
+        FMLLog.warning("GT Timer: onServerStarting, part 1 "+elapsed+"ns");
         startT = System.nanoTime();
         GT_Log.out.println("GT_Mod: Dungeon Loot");
         for (WeightedRandomChestContent tContent : ChestGenHooks.getInfo("dungeonChest").getItems(new Random())) {
@@ -832,7 +832,7 @@ public class GT_Mod
             }
         }
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onServerStarting, part 2", elapsed, "ns");
+        FMLLog.warning("GT Timer: onServerStarting, part 2 "+elapsed+"ns");
         startT = System.nanoTime();
         for (ItemStack tOutput : tStacks) {
             if (gregtechproxy.mRegisteredOres.contains(tOutput)) {
@@ -867,7 +867,7 @@ public class GT_Mod
             }
         }
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onServerStarting, part 3", elapsed, "ns");
+        FMLLog.warning("GT Timer: onServerStarting, part 3 "+elapsed+"ns");
         startT = System.nanoTime();
     }
 
@@ -876,7 +876,7 @@ public class GT_Mod
         long startT = System.nanoTime();
         gregtechproxy.onServerStarted();
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onServerStarted", elapsed, "ns");
+        FMLLog.warning("GT Timer: onServerStarted "+elapsed+"ns");
     }
 
     @Mod.EventHandler
@@ -893,7 +893,7 @@ public class GT_Mod
             }
         }
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onIDChangingEvent", elapsed, "ns");
+        FMLLog.warning("GT Timer: onIDChangingEvent "+elapsed+"ns");
 
     }
 //  public void onIDChangingEvent(FMLModIdMappingEvent aEvent)
@@ -991,7 +991,7 @@ public class GT_Mod
             }
         }
         long elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onServerStopping", elapsed, "ns");
+        FMLLog.warning("GT Timer: onServerStopping "+elapsed+"ns");
     }
 
     public boolean isServerSide() {
