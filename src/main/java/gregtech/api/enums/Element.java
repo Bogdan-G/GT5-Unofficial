@@ -292,7 +292,7 @@ public enum Element {
 
     public static Element get(String aMaterialName) {
         Object tObject = GT_Utility.getFieldContent(Element.class, aMaterialName, false, false);
-        if (tObject != null && tObject instanceof Element) return (Element) tObject;
+        if (tObject instanceof Element) return (Element) tObject;
         return _NULL;
     }
 

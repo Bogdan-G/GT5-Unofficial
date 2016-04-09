@@ -707,7 +707,7 @@ public class GT_Mod
         GregTech_API.sBeforeGTPostload = null;
         GregTech_API.sAfterGTPostload = null;
         elapsed = System.nanoTime() - startT;
-        FMLLog.warning("GT Timer: onPostLoad, part 8", elapsed, "ns");
+        FMLLog.warning("GT Timer: onPostLoad, part 8 "+elapsed+"ns");
     }
 
     @Mod.EventHandler
