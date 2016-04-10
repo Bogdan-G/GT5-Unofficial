@@ -524,10 +524,9 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
                         break;
                 }}
         } catch (Throwable e) {
-                GT_Log.err.println("Encountered Exception while ticking MetaTileEntity in Step " + (tCode - 1) + ". The Game should've crashed now, but I prevented that. Please report immidietly to GregTech Intergalactical!!!");
+                //gregtech.api.util.GT_Log.err.println("Encountered Exception while ticking MetaTileEntity in Step " + (tCode - 1) + ". The Game should've crashed now, but I prevented that. Please report immidietly to GregTech Intergalactical!!!");
                 e.printStackTrace(GT_Log.err);
             }
-        }
 
         if (isServerSide() && hasValidMetaTileEntity()) {
             tTime = System.currentTimeMillis() - tTime;

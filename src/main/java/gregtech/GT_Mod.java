@@ -695,6 +695,7 @@ public class GT_Mod
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent aEvent) {
         long startT = System.nanoTime();
+        try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTServerstart) {
                 tRunnable.run();
         }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}

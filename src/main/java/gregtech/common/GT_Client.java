@@ -204,8 +204,8 @@ public class GT_Client extends GT_Proxy
 
     public void onPostLoad() {
         super.onPostLoad();
-        label0:
         try {
+        label0:
         for (int i = 1; i < GregTech_API.METATILEENTITIES.length; i++)
                 do {
                     if (i >= GregTech_API.METATILEENTITIES.length)
