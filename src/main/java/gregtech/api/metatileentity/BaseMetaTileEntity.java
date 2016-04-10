@@ -251,8 +251,7 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
         mRunningThroughTick = true;
         long tTime = System.currentTimeMillis();
 
-        for (int tCode = 0; hasValidMetaTileEntity() && tCode >= 0; ) {
-            try {
+        try { for (int tCode = 0; hasValidMetaTileEntity() && tCode >= 0; ) {
                 switch (tCode) {
                     case 0:
                         tCode++;
@@ -523,8 +522,8 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
                     default:
                         tCode = -1;
                         break;
-                }
-            } catch (Throwable e) {
+                }}
+        } catch (Throwable e) {
                 GT_Log.err.println("Encountered Exception while ticking MetaTileEntity in Step " + (tCode - 1) + ". The Game should've crashed now, but I prevented that. Please report immidietly to GregTech Intergalactical!!!");
                 e.printStackTrace(GT_Log.err);
             }
@@ -1077,8 +1076,8 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
 
     public boolean playerOwnsThis(EntityPlayer aPlayer, boolean aCheckPrecicely) {
         if (!canAccessData()) return false;
-        if (aCheckPrecicely || privateAccess() || mOwnerName.equals(""))
-            if (mOwnerName.equals("") && isServerSide()) setOwnerName(aPlayer.getDisplayName());
+        if (aCheckPrecicely || privateAccess() || (mOwnerName.length() == 0))
+            if ((mOwnerName.length() == 0) && isServerSide()) setOwnerName(aPlayer.getDisplayName());
             else if (privateAccess() && !aPlayer.getDisplayName().equals("Player") && !mOwnerName.equals("Player") && !mOwnerName.equals(aPlayer.getDisplayName()))
                 return false;
         return true;

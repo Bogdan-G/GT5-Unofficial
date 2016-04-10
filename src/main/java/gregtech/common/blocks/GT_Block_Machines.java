@@ -211,15 +211,12 @@ public class GT_Block_Machines
             GregTech_API.sBlockIcons = aIconRegister;
 
             GT_Log.out.println("GT_Mod: Registering MetaTileEntity specific Textures");
+            try {
             for (IMetaTileEntity tMetaTileEntity : GregTech_API.METATILEENTITIES) {
-                try {
                     if (tMetaTileEntity != null) {
                         tMetaTileEntity.registerIcons(aIconRegister);
                     }
-                } catch (Throwable e) {
-                    e.printStackTrace(GT_Log.err);
-                }
-            }
+            }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
             GT_Log.out.println("GT_Mod: Registering Crop specific Textures");
             try {
                 for (GT_BaseCrop tCrop : GT_BaseCrop.sCropList) {
@@ -230,13 +227,10 @@ public class GT_Block_Machines
             }
             GT_Log.out.println("GT_Mod: Starting Block Icon Load Phase");
             System.out.println("GT_Mod: Starting Block Icon Load Phase");
+            try {
             for (Runnable tRunnable : GregTech_API.sGTBlockIconload) {
-                try {
                     tRunnable.run();
-                } catch (Throwable e) {
-                    e.printStackTrace(GT_Log.err);
-                }
-            }
+            }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
             GT_Log.out.println("GT_Mod: Finished Block Icon Load Phase");
             System.out.println("GT_Mod: Finished Block Icon Load Phase");
         }

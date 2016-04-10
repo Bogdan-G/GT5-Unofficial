@@ -108,13 +108,10 @@ public class GT_Mod
         if (GregTech_API.sPreloadStarted) {
             return;
         }
+        try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTPreload) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         File tFile = new File(new File(aEvent.getModConfigurationDirectory(), "GregTech"), "GregTech.cfg");
         Configuration tMainConfig = new Configuration(tFile);
         tMainConfig.load();
@@ -362,13 +359,10 @@ public class GT_Mod
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPreLoad, part 2 "+elapsed+"ns");
         startT = System.nanoTime();
+        try {
         for (Runnable tRunnable : GregTech_API.sAfterGTPreload) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPreLoad, part 3 "+elapsed+"ns");
         startT = System.nanoTime();
@@ -380,13 +374,10 @@ public class GT_Mod
         if (GregTech_API.sLoadStarted) {
             return;
         }
+        try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTLoad) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         gregtechproxy.onLoad();
         if (gregtechproxy.mSortToTheEnd) {
             new GT_ItemIterator().run();
@@ -399,13 +390,10 @@ public class GT_Mod
         long elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onLoad, part 1 "+elapsed+"ns");
         startT = System.nanoTime();
+        try {
         for (Runnable tRunnable : GregTech_API.sAfterGTLoad) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onLoad, part 2 "+elapsed+"ns");
     }
@@ -416,13 +404,10 @@ public class GT_Mod
         if (GregTech_API.sPostloadStarted) {
             return;
         }
+        try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTPostload) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         long elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPostLoad, part 1 "+elapsed+"ns");
         startT = System.nanoTime();
@@ -622,13 +607,10 @@ public class GT_Mod
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPostLoad, part 6 "+elapsed+"ns");
         startT = System.nanoTime();
+        try {
         for (Runnable tRunnable : GregTech_API.sAfterGTPostload) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         GT_Log.out.println("GT_Mod: Adding Fake Recipes for NEI");
         if (ItemList.FR_Bee_Drone.get(1L, new Object[0]) != null) {
             GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(false, new ItemStack[]{ItemList.FR_Bee_Drone.getWildcard(1L, new Object[0])}, new ItemStack[]{ItemList.FR_Bee_Drone.getWithName(1L, "Scanned Drone", new Object[0])}, null, new FluidStack[]{Materials.Honey.getFluid(50L)}, null, 500, 2, 0);
@@ -714,12 +696,8 @@ public class GT_Mod
     public void onServerStarting(FMLServerStartingEvent aEvent) {
         long startT = System.nanoTime();
         for (Runnable tRunnable : GregTech_API.sBeforeGTServerstart) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         gregtechproxy.onServerStarting();
         GT_Log.out.println("GT_Mod: Unificating outputs of all known Recipe Types.");
         ArrayList<ItemStack> tStacks = new ArrayList(10000);
@@ -859,13 +837,10 @@ public class GT_Mod
         GregTech_API.mServerStarted = true;
         GT_Log.out.println("GT_Mod: ServerStarting-Phase finished!");
         GT_Log.ore.println("GT_Mod: ServerStarting-Phase finished!");
+        try {
         for (Runnable tRunnable : GregTech_API.sAfterGTServerstart) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onServerStarting, part 3 "+elapsed+"ns");
         startT = System.nanoTime();
@@ -884,14 +859,11 @@ public class GT_Mod
         long startT = System.nanoTime();
         GT_Utility.reInit();
         GT_Recipe.reInit();
+        try {
         for (Iterator i$ = GregTech_API.sItemStackMappings.iterator(); i$.hasNext(); ) {
             Map tMap = (Map) i$.next();
-            try {
                 GT_Utility.reMap(tMap);
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         long elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onIDChangingEvent "+elapsed+"ns");
 
@@ -909,13 +881,10 @@ public class GT_Mod
     @Mod.EventHandler
     public void onServerStopping(FMLServerStoppingEvent aEvent) {
         long startT = System.nanoTime();
+        try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTServerstop) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         gregtechproxy.onServerStopping();
         try {
             if ((GT_Values.D1) || (GT_Log.out != System.out)) {
@@ -983,13 +952,10 @@ public class GT_Mod
                 e.printStackTrace(GT_Log.err);
             }
         }
+        try {
         for (Runnable tRunnable : GregTech_API.sAfterGTServerstop) {
-            try {
                 tRunnable.run();
-            } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
-            }
-        }
+        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         long elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onServerStopping "+elapsed+"ns");
     }

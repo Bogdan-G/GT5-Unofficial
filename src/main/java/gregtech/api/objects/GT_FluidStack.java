@@ -30,27 +30,23 @@ public class GT_FluidStack extends FluidStack {
     }
 
     public static void fixAllThoseFuckingFluidIDs() {
-        if (ForgeVersion.getBuildVersion() < 1355) {
+        if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
+            try {
             while (lock) {
-                try {
                     Thread.sleep(1);
-                } catch (InterruptedException e) {
-                }
-            }
+            }} catch (InterruptedException e) {}
             lock = true;
             for (GT_FluidStack tFluid : sAllFluidStacks) tFluid.fixFluidIDForFucksSake();
+            try {
             for (Map<Fluid, ?> tMap : GregTech_API.sFluidMappings)
-                try {
-                    GT_Utility.reMap(tMap);
-                } catch (Throwable e) {
-                    e.printStackTrace(GT_Log.err);
-                }
+                    GT_Utility.reMap(tMap); 
+            } catch (Throwable e) {e.printStackTrace(GT_Log.err);}
             lock = false;
         }
     }
 
     public void fixFluidIDForFucksSake() {
-        if (ForgeVersion.getBuildVersion() < 1355) {
+        if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             int fluidID;
             try {
                 fluidID = this.getFluid().getID();
@@ -67,7 +63,7 @@ public class GT_FluidStack extends FluidStack {
 
     @Override
     public FluidStack copy() {
-        if (ForgeVersion.getBuildVersion() < 1355) {
+        if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             fixFluidIDForFucksSake();
         }
         return new GT_FluidStack(this);

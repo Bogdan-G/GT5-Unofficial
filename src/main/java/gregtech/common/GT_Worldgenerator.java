@@ -91,13 +91,10 @@ public class GT_Worldgenerator
                         if (tBiome == null) {
                             tBiome = BiomeGenBase.plains.biomeName;
                         }
+                        try {
                         for (GT_Worldgen tWorldGen : GregTech_API.sWorldgenList) {
-                            try {
                                 tWorldGen.executeWorldgen(this.mWorld, this.mRandom, this.mBiome, this.mDimensionType, tX, tZ, this.mChunkGenerator, this.mChunkProvider);
-                            } catch (Throwable e) {
-                                e.printStackTrace(GT_Log.err);
-                            }
-                        }
+                        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
                         j++;
                     }
                     i++;

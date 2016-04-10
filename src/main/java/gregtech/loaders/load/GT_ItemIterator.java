@@ -54,14 +54,14 @@ public class GT_ItemIterator
 
         GT_Log.out.println("GT_Mod: Scanning ItemList.");
 
+        try {
         Iterator tIterator = Item.itemRegistry.iterator();
         while (tIterator.hasNext()) {
             Object tObject;
-            if (((tObject = tIterator.next()) instanceof Item)) && (!(tObject instanceof GT_Generic_Item))) {
+            if (((tObject = tIterator.next()) instanceof Item) && (!(tObject instanceof GT_Generic_Item))) {
                 Item tItem = (Item) tObject;
                 String tName;
                 if ((tName = tItem.getUnlocalizedName()) != null) {
-                    try {
                         if ((tItem instanceof IToolCrowbar)) {
                             if ((!tItem.isDamageable()) && (!GT_ModHandler.isElectricItem(new ItemStack(tItem, 1, 0)))) {
                                 if ((GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "infiniteDurabilityRCCrowbars", false)) &&
@@ -72,9 +72,6 @@ public class GT_ItemIterator
                                 GT_Log.out.println("GT_Mod: Registered valid RC Crowbar: " + tName);
                             }
                         }
-                    } catch (Throwable e) {
-                    }
-                    try {
                         if ((tItem instanceof IToolWrench)) {
                             if ((!tItem.isDamageable()) && (!GT_ModHandler.isElectricItem(new ItemStack(tItem, 1, 0)))) {
                                 if ((GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "infiniteDurabilityBCWrenches", false)) &&
@@ -85,8 +82,6 @@ public class GT_ItemIterator
                                 GT_Log.out.println("GT_Mod: Registered valid BC Wrench: " + tName);
                             }
                         }
-                    } catch (Throwable e) {
-                    }
                     Block tBlock = GT_Utility.getBlockFromStack(new ItemStack(tItem, 1, 0));
                     if (tBlock != null) {
                         if (tName.endsWith("beehives")) {
@@ -94,13 +89,9 @@ public class GT_ItemIterator
                             gregtech.common.tools.GT_Tool_Scoop.sBeeHiveMaterial = tBlock.getMaterial();
                         }
                         if (OrePrefixes.stone.mDefaultStackSize < tItem.getItemStackLimit(new ItemStack(tItem, 1, 0))) {
-                            try {
                                 if ((tBlock.isReplaceableOreGen(GT_Values.DW, 0, 0, 0, Blocks.stone)) || (tBlock.isReplaceableOreGen(GT_Values.DW, 0, 0, 0, Blocks.netherrack)) || (tBlock.isReplaceableOreGen(GT_Values.DW, 0, 0, 0, Blocks.end_stone))) {
                                     tItem.setMaxStackSize(OrePrefixes.stone.mDefaultStackSize);
                                 }
-                            } catch (Throwable e) {
-                                e.printStackTrace(GT_Log.err);
-                            }
                         }
                     }
                     if (((tItem instanceof ItemFood)) && (tItem != ItemList.IC2_Food_Can_Filled.getItem()) && (tItem != ItemList.IC2_Food_Can_Spoiled.getItem())) {
@@ -258,6 +249,6 @@ public class GT_ItemIterator
                     }
                 }
             }
-        }
+        }} catch (Throwable e) {/**/}
     }
 }
