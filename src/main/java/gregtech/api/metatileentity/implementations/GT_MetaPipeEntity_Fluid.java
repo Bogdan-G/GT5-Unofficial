@@ -27,7 +27,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashMap;import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map.Entry;
 
 import static gregtech.api.enums.GT_Values.D1;
@@ -186,7 +186,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
             }
 
             if (mLastReceivedFrom == oLastReceivedFrom) {
-                HashMap<IFluidHandler, ForgeDirection> tTanks = new HashMap<IFluidHandler, ForgeDirection>();
+                ConcurrentHashMap<IFluidHandler, ForgeDirection> tTanks = new ConcurrentHashMap<IFluidHandler, ForgeDirection>();
 
                 mConnections = 0;
 

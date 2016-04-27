@@ -34,6 +34,8 @@ public class GT_Block_Ores
         implements ITileEntityProvider {
     public static ThreadLocal<GT_TileEntity_Ores> mTemporaryTileEntity = new ThreadLocal();
     public static boolean FUCKING_LOCK = false;
+    private final String name_text = ".name";
+    private final String Small_text = "Small ";
 
     public GT_Block_Ores() {
         super(GT_Item_Ores.class, "gt.blockores", Material.rock);
@@ -44,17 +46,17 @@ public class GT_Block_Ores
             GT_ModHandler.addValuableOre(this, i, 1);
         }
         for (int i = 1; i < GregTech_API.sGeneratedMaterials.length; i++) {
-            if (GregTech_API.sGeneratedMaterials[i] != null) {//new StringBuilder().append("A ").append(String.valueOf(B)).toString()
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf(i)).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 1000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 2000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 3000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 4000))).append(".name").toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 16000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 17000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 18000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 19000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(String.valueOf((i + 20000))).append(".name").toString(), "Small " + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+            if (GregTech_API.sGeneratedMaterials[i] != null) {//new StringBuilder().append("A ").append(String.valueOf(B)).toString() //heh, im look in docs, fix append(String.valueOf(B)) to append(i)
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(i).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 1000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 2000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 3000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 4000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 16000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 17000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 18000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 19000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 20000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
                 if ((GregTech_API.sGeneratedMaterials[i].mTypes & 0x8) != 0) {
                     GT_OreDictUnificator.registerOre(OrePrefixes.ore.get(GregTech_API.sGeneratedMaterials[i]), new ItemStack(this, 1, i));
                     GT_OreDictUnificator.registerOre(OrePrefixes.oreNetherrack.get(GregTech_API.sGeneratedMaterials[i]), new ItemStack(this, 1, i + 1000));

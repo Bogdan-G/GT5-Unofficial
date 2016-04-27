@@ -29,7 +29,7 @@ public class GT_FluidStack extends FluidStack {
         this(aFluid.getFluid(), aFluid.amount);
     }
 
-    public static void fixAllThoseFuckingFluidIDs() {
+    public static final void fixAllThoseFuckingFluidIDs() {
         if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             try {
             while (lock) {
@@ -45,7 +45,7 @@ public class GT_FluidStack extends FluidStack {
         }
     }
 
-    public void fixFluidIDForFucksSake() {
+    public final void fixFluidIDForFucksSake() {
         if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             int fluidID;
             try {

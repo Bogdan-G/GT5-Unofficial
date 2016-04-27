@@ -309,7 +309,7 @@ public class GT_RecipeRegistrator {
 
                         if (aRecipeReplacing && aPlate != null && sShapesA[i] != null && sShapesA[i].length > 1) {
                             assert aItemData != null;
-                            if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.recipereplacements, new StringBuilder().append(String.valueOf(aItemData.mMaterial.mMaterial)).append(".").append(String.valueOf(sShapesA[i][0])).toString(), true)) {
+                            if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.recipereplacements, new StringBuilder().append(aItemData.mMaterial.mMaterial).append(".").append(sShapesA[i][0]).toString(), true)) {
                                 if (null != (tStack = GT_ModHandler.removeRecipe(tRecipe))) {
                                     switch (sShapesA[i].length) {
                                         case 2:
