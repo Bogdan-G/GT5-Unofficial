@@ -39,7 +39,7 @@ public class GT_Worldgen_Stone
                         double var20 = var7 + (var9 - var7) * var5d;
                         double var22 = var15 + (var17 - var15) * var5d;
                         double var24 = var11 + (var13 - var11) * var5d;
-                        double var6d = var19 * 3.141593F / this.mSize;
+                        float var6d = var19 * 3.141593F / this.mSize;
                         double var26 = aRandom.nextDouble() * this.mSize / 16.0D;
                         double var7d = var26 + 1.0D;
                         double var28 = (MathHelper.sin(var6d) + 1.0F) * var7d;

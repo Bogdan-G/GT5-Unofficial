@@ -63,7 +63,7 @@ public class GT_CapeRenderer
                 double d1 = aPlayer.field_71096_bN + var1f;
                 double d2 = aPlayer.field_71097_bO + var1f;
                 float f6 = aPlayer.prevRenderYawOffset + (aPlayer.renderYawOffset - aPlayer.prevRenderYawOffset) * aPartialTicks;
-                double var2f = f6 * 3.141593F / 180.0F;
+                float var2f = f6 * 3.141593F / 180.0F;
                 double d3 = MathHelper.sin(var2f);
                 double d4 = -MathHelper.cos(var2f);
                 float f7 = (float) d1 * 10.0F;

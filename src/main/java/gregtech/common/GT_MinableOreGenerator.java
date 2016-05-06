@@ -45,7 +45,7 @@ public class GT_MinableOreGenerator
             double var22 = var15 + (var17 - var15) * var19 / this.numberOfBlocks;
             double var24 = var11 + (var13 - var11) * var19 / this.numberOfBlocks;
             double var26 = par2Random.nextDouble() * var7s;
-            double var1c = var19 * 3.141593F / this.numberOfBlocks; double var2c = var26 + 1.0D;
+            float var1c = var19 * 3.141593F / this.numberOfBlocks; double var2c = var26 + 1.0D;
             double var28 = (MathHelper.sin(var1c) + 1.0F) * var2c;
             double var30 = (MathHelper.sin(var1c) + 1.0F) * var2c;
             double var3c = var28 / 2.0D;double var4c = var30 / 2.0D;
