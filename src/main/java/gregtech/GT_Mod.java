@@ -70,8 +70,8 @@ public class GT_Mod
     public static GT_Proxy gregtechproxy;
     public static int MAX_IC2 = 2147483647;
     public static GT_Achievements achievements;
-    private final String general_text = "general";
-    private final String ic2_text = "ic2_";
+    private static final String general_text = "general";
+    private static final String ic2_text = "ic2_";
 
     /*static {
         if ((508 != GregTech_API.VERSION) || (508 != GT_ModHandler.VERSION) || (508 != GT_OreDictUnificator.VERSION) || (508 != GT_Recipe.VERSION) || (508 != GT_Utility.VERSION) || (508 != GT_RecipeRegistrator.VERSION) || (508 != Element.VERSION) || (508 != Materials.VERSION) || (508 != OrePrefixes.VERSION)) {

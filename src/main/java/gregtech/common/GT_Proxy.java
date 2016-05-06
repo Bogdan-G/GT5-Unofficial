@@ -153,11 +153,11 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
     private boolean mOreDictActivated = false;
     public int mWireHeatingTicks = 4;
     // text terms
-    private final String ThermalExpansion_text = "ThermalExpansion";
-    private final String Railcraft_text = "Railcraft";
-    private final String TwilightForest_text = "TwilightForest";
-    private final String Forestry_text = "Forestry";
-    private final String arsmagica2_text = "arsmagica2";
+    private static final String ThermalExpansion_text = "ThermalExpansion";
+    private static final String Railcraft_text = "Railcraft";
+    private static final String TwilightForest_text = "TwilightForest";
+    private static final String Forestry_text = "Forestry";
+    private static final String arsmagica2_text = "arsmagica2";
 
     public GT_Proxy() {
         GameRegistry.registerFuelHandler(this);
@@ -169,7 +169,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
         for (FluidContainerRegistry.FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) {
             onFluidContainerRegistration(new FluidContainerRegistry.FluidContainerRegisterEvent(tData));
         }
-        try {//We need to study
+        try {//need investigation
         for (String tOreName : OreDictionary.getOreNames()) {
             ItemStack tOreStack;
             for (Iterator i$ = OreDictionary.getOres(tOreName).iterator(); i$.hasNext(); registerOre(new OreDictionary.OreRegisterEvent(tOreName, tOreStack))) {
@@ -914,6 +914,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                             aEvent.z, (byte) aEvent.blockMetadata, aEvent.fortuneLevel, aEvent.isSilkTouching, aEvent);
                 }
                 if (EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, aStack) > 2) {
+                    try {
                     for (ItemStack tDrop : aEvent.drops) {
                         ItemStack tSmeltingOutput = GT_ModHandler.getSmeltingOutput(tDrop, false, null);
                         if (tSmeltingOutput != null) {
@@ -921,7 +922,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                             tSmeltingOutput.stackSize = tDrop.stackSize;
                             GT_Utility.setStack(tDrop, tSmeltingOutput);
                         }
-                    }
+                    }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
                 }
             }
         }

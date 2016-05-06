@@ -34,8 +34,8 @@ public class GT_Block_Ores
         implements ITileEntityProvider {
     public static ThreadLocal<GT_TileEntity_Ores> mTemporaryTileEntity = new ThreadLocal();
     public static boolean FUCKING_LOCK = false;
-    private final String name_text = ".name";
-    private final String Small_text = "Small ";
+    private static final String name_text = ".name";
+    private static final String Small_text = "Small ";
 
     public GT_Block_Ores() {
         super(GT_Item_Ores.class, "gt.blockores", Material.rock);

@@ -11,7 +11,7 @@ public abstract class GT_Worldgen_Ore extends GT_Worldgen {
     public final Block mBlock;
     public final Collection<String> mBiomeList;
     public final boolean mAllowToGenerateinVoid;
-    private final String worldgen_text = "worldgen.";
+    private static final String worldgen_text = "worldgen.";
 
     public GT_Worldgen_Ore(String aName, boolean aDefault, Block aBlock, int aBlockMeta, int aDimensionType, int aAmount, int aSize, int aProbability, int aMinY, int aMaxY, Collection<String> aBiomeList, boolean aAllowToGenerateinVoid) {
         super(aName, GregTech_API.sWorldgenList, aDefault);
