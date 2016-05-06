@@ -27,34 +27,42 @@ public class GT_Worldgen_Stone
                 int tZ = aChunkZ + aRandom.nextInt(16);
                 if ((this.mAllowToGenerateinVoid) || (!aWorld.getBlock(tX, tY, tZ).isAir(aWorld, tX, tY, tZ))) {
                     float var6 = aRandom.nextFloat() * 3.141593F;
-                    double var7 = tX + 8 + MathHelper.sin(var6) * this.mSize / 8.0F;
-                    double var9 = tX + 8 - MathHelper.sin(var6) * this.mSize / 8.0F;
-                    double var11 = tZ + 8 + MathHelper.cos(var6) * this.mSize / 8.0F;
-                    double var13 = tZ + 8 - MathHelper.cos(var6) * this.mSize / 8.0F;
-                    double var15 = tY + aRandom.nextInt(3) - 2;
-                    double var17 = tY + aRandom.nextInt(3) - 2;
+                    double var1d = this.mSize / 8.0F;double var2d = tX + 8;double var3d = tZ + 8;double var4d = tY - 2;
+                    double var7 = var2d + MathHelper.sin(var6) * var1d;
+                    double var9 = var2d - MathHelper.sin(var6) * var1d;
+                    double var11 = var3d + MathHelper.cos(var6) * var1d;
+                    double var13 = var3d - MathHelper.cos(var6) * var1d;
+                    double var15 = var4d + aRandom.nextInt(3);
+                    double var17 = var4d + aRandom.nextInt(3);
                     for (int var19 = 0; var19 <= this.mSize; var19++) {
-                        double var20 = var7 + (var9 - var7) * var19 / this.mSize;
-                        double var22 = var15 + (var17 - var15) * var19 / this.mSize;
-                        double var24 = var11 + (var13 - var11) * var19 / this.mSize;
+                        double var5d = var19 / this.mSize;
+                        double var20 = var7 + (var9 - var7) * var5d;
+                        double var22 = var15 + (var17 - var15) * var5d;
+                        double var24 = var11 + (var13 - var11) * var5d;
+                        double var6d = var19 * 3.141593F / this.mSize;
                         double var26 = aRandom.nextDouble() * this.mSize / 16.0D;
-                        double var28 = (MathHelper.sin(var19 * 3.141593F / this.mSize) + 1.0F) * var26 + 1.0D;
-                        double var30 = (MathHelper.sin(var19 * 3.141593F / this.mSize) + 1.0F) * var26 + 1.0D;
-                        int tMinX = MathHelper.floor_double(var20 - var28 / 2.0D);
-                        int tMinY = MathHelper.floor_double(var22 - var30 / 2.0D);
-                        int tMinZ = MathHelper.floor_double(var24 - var28 / 2.0D);
-                        int tMaxX = MathHelper.floor_double(var20 + var28 / 2.0D);
-                        int tMaxY = MathHelper.floor_double(var22 + var30 / 2.0D);
-                        int tMaxZ = MathHelper.floor_double(var24 + var28 / 2.0D);
+                        double var7d = var26 + 1.0D;
+                        double var28 = (MathHelper.sin(var6d) + 1.0F) * var7d;
+                        double var30 = (MathHelper.sin(var6d) + 1.0F) * var7d;
+                        double var8d = var28 / 2.0D;double var9d = var30 / 2.0D;
+                        int tMinX = MathHelper.floor_double(var20 - var8d);
+                        int tMinY = MathHelper.floor_double(var22 - var9d);
+                        int tMinZ = MathHelper.floor_double(var24 - var8d);
+                        int tMaxX = MathHelper.floor_double(var20 + var8d);
+                        int tMaxY = MathHelper.floor_double(var22 + var9d);
+                        int tMaxZ = MathHelper.floor_double(var24 + var8d);
                         for (int eX = tMinX; eX <= tMaxX; eX++) {
-                            double var39 = (eX + 0.5D - var20) / (var28 / 2.0D);
-                            if (var39 * var39 < 1.0D) {
+                            double var39 = (eX + 0.5D - var20) / (var8d);
+                            double var10d = var39 * var39;
+                            if (var10d < 1.0D) {
                                 for (int eY = tMinY; eY <= tMaxY; eY++) {
-                                    double var42 = (eY + 0.5D - var22) / (var30 / 2.0D);
-                                    if (var39 * var39 + var42 * var42 < 1.0D) {
+                                    double var42 = (eY + 0.5D - var22) / (var9d);
+                                    double var11d = var42 * var42;
+                                    double var12d = var10d + var11d;
+                                    if (var12d < 1.0D) {
                                         for (int eZ = tMinZ; eZ <= tMaxZ; eZ++) {
-                                            double var45 = (eZ + 0.5D - var24) / (var28 / 2.0D);
-                                            if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D) {
+                                            double var45 = (eZ + 0.5D - var24) / (var8d);
+                                            if (var12d + var45 * var45 < 1.0D) {
                                                 Block tTargetedBlock = aWorld.getBlock(eX, eY, eZ);
                                                 if (tTargetedBlock == GregTech_API.sBlockOres1) {
                                                     TileEntity tTileEntity = aWorld.getTileEntity(eX, eY, eZ);

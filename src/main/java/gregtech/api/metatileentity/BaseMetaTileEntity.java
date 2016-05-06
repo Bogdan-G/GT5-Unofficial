@@ -412,10 +412,10 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
                                                 || (getCoverIDAtSide((byte) 5) == 0 && worldObj.getPrecipitationHeight(xCoord + 1, zCoord) - 1 < yCoord)) {
                                             if (GregTech_API.sMachineRainExplosions && worldObj.isRaining() && getBiome().rainfall > 0) {
                                                 if (getRandomNumber(10) == 0) {
-                                                    try {
+                                                    //try {
                                                         GT_Mod.instance.achievements.issueAchievement(this.getWorldObj().getPlayerEntityByName(mOwnerName), "badweather");
-                                                    } catch (Exception e) {
-                                                    }
+                                                    //} catch (Exception e) {
+                                                    //}
                                                     doEnergyExplosion();
                                                 } else setOnFire();
                                             }
