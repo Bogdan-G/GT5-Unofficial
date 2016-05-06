@@ -9,14 +9,19 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        //classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
     }
 }
 
 apply plugin: 'forge'
 apply plugin: 'idea'
+//apply plugin: "net.ltgt.errorprone"
 
 file "build.properties" withReader {
     def prop = new Properties()

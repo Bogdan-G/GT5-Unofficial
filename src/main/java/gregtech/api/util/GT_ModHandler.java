@@ -1272,7 +1272,7 @@ public class GT_ModHandler {
             for (IRecipe tRecipe : (ArrayList<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
                 ItemStack tStack = tRecipe.getRecipeOutput();
                 if (GT_Utility.isStackValid(tStack) && tStack.getMaxStackSize() == 1 && tStack.getMaxDamage() > 0 && !(tStack.getItem() instanceof ItemBlock) && !(tStack.getItem() instanceof IReactorComponent) && !isElectricItem(tStack) && !GT_Utility.isStackInList(tStack, sNonReplaceableItems)) {
-                    if (!(tRecipe instanceof ShapelessRecipes) || tRecipe instanceof ShapelessOreRecipe) {
+                    //if (!(tRecipe instanceof ShapelessRecipes) || tRecipe instanceof ShapelessOreRecipe) {
                         if (tRecipe instanceof ShapedOreRecipe) {
                             boolean temp = true;
                             for (Object tObject : ((ShapedOreRecipe) tRecipe).getInput())
@@ -1299,7 +1299,7 @@ public class GT_ModHandler {
                         } else {
                             sSingleNonBlockDamagableRecipeList.add(tRecipe);
                         }
-                    }
+                    //}
                 }
             }
             GT_Log.out.println("GT_Mod: Created a List of Tool Recipes containing " + sSingleNonBlockDamagableRecipeList.size() + " Recipes for recycling." + (sSingleNonBlockDamagableRecipeList.size() > 1024 ? " Scanning all these Recipes is the reason for the startup Lag you receive right now." : E));
@@ -1401,7 +1401,7 @@ public class GT_ModHandler {
             for (Entry<IRecipeInput, RecipeOutput> tEntry : aRecipeList.entrySet()) {
                 if (tEntry.getKey().matches(aInput)) {
                     if (tEntry.getKey().getAmount() <= aInput.stackSize) {
-                        ItemStack[] tList = (ItemStack[]) tEntry.getValue().items.toArray();
+                        ItemStack[] tList = (ItemStack[]) tEntry.getValue().items.toArray(new String[tEntry.getValue().items.size()]);
                         if (tList.length == 0) break;
                         ItemStack[] rList = new ItemStack[aOutputSlots.length];
                         rRecipeMetaData.setTag("return", tEntry.getValue().metadata);

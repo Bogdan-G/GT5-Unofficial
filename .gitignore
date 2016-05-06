@@ -6,3 +6,4 @@ thumbs.db
 /build/
 /builds/
 *.DS_Store
+/findbugs/*
