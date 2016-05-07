@@ -93,7 +93,7 @@ public class ProcessingDust implements gregtech.api.interfaces.IOreRecipeRegistr
                     if ((!ItemList.Cell_Air.isStackEqual(tList.get(i))) && ((tFluid = GT_Utility.getFluidForFilledItem((ItemStack) tList.get(i), true)) != null)) {
                         tFluid.amount *= ((ItemStack) tList.get(i)).stackSize;
                         tCapsuleCount -= GT_ModHandler.getCapsuleCellContainerCountMultipliedWithStackSize(new ItemStack[]{(ItemStack) tList.get(i)});
-                        tList.remove(i);tList_sS=tList.size();
+                        tList.remove(i);//tList_sS=tList.size(); //kek
                         break;
                     }
                 }

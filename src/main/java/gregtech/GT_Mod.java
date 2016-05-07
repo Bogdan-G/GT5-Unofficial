@@ -367,7 +367,7 @@ public class GT_Mod
         }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPreLoad, part 3 "+elapsed+"ns");
-        startT = System.nanoTime();
+        //startT = System.nanoTime();
     }
 
     @Mod.EventHandler
@@ -846,7 +846,7 @@ public class GT_Mod
         }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onServerStarting, part 3 "+elapsed+"ns");
-        startT = System.nanoTime();
+        //startT = System.nanoTime();
     }
 
     @Mod.EventHandler

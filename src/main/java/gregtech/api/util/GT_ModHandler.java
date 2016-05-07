@@ -1180,7 +1180,7 @@ public class GT_ModHandler {
                 IRecipe tRecipe = sAllRecipeList.get(i);
                 if (tRecipe.matches(aCrafting, aWorld)) {
                     if (i > 10) {
-                        sAllRecipeList.remove(i);sAllRecipeList_sS=sAllRecipeList.size();
+                        sAllRecipeList.remove(i);//sAllRecipeList_sS=sAllRecipeList.size();
                         sAllRecipeList.add(i - 10, tRecipe);
                     }
                     return tRecipe.getCraftingResult(aCrafting);
