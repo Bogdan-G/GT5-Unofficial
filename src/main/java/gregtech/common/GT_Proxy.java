@@ -877,7 +877,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
         if ((aEvent.entityPlayer == null) || (aEvent.entityPlayer.worldObj == null) || (aEvent.action == null) || (aEvent.world.provider == null)) {
             return;
         }
-        if ((!aEvent.entityPlayer.worldObj.isRemote) && (aEvent.action != null) && (aEvent.action != PlayerInteractEvent.Action.RIGHT_CLICK_AIR)
+        if ((!aEvent.entityPlayer.worldObj.isRemote) /*&& (aEvent.action != null) */&& (aEvent.action != PlayerInteractEvent.Action.RIGHT_CLICK_AIR)
                 && (GT_Log.pal != null)) {
             this.mBufferedPlayerActivity.add(new StringBuilder().append(getDataAndTime()).append(";").append(aEvent.action.name()).append(";").append(aEvent.entityPlayer.getDisplayName()).append(";DIM:").append(aEvent.world.provider.dimensionId).append(";").append(aEvent.x).append(";").append(aEvent.y).append(";").append(aEvent.z).append(";|;").append(aEvent.x / 10).append(";").append(aEvent.y / 10).append(";").append(aEvent.z / 10).toString());
             // empty

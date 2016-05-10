@@ -183,8 +183,10 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
         int tCode = 0;
 
         try { for (tCode = 0; hasValidMetaTileEntity() && tCode >= 0; ) {
-                switch (tCode) {
-                    case 0:
+                //replace switch in if
+                //switch (tCode) {
+                    //case 0:
+                    if (tCode == 0) {
                         tCode++;
                         if (mTickTimer++ == 0) {
                             oX = xCoord;
@@ -197,8 +199,9 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
                             worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
                             mMetaTileEntity.onFirstTick(this);
                             if (!hasValidMetaTileEntity()) return;
-                        }
-                    case 1:
+                        }}
+                    //case 1:
+                    if (tCode == 1) {
                         tCode++;
                         if (isClientSide()) {
                             if (mColor != oColor) {
@@ -211,13 +214,14 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
                                 //worldObj.func_147479_m(xCoord, yCoord, zCoord);
                                 mNeedsUpdate = false;
                             }
-                        }
-                    case 2:
+                        }}
+                    /*case 2:
                     case 3:
                     case 4:
                     case 5:
                     case 6:
-                    case 7:
+                    case 7:*/
+                    if (tCode >= 2 && tCode <= 7) {
                         if (isServerSide() && mTickTimer > 10) {
                             for (byte i = (byte) (tCode - 2); i < 6; i++)
                                 if (getCoverIDAtSide(i) != 0) {
@@ -233,12 +237,14 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
                             if ((mConnections & -64) == 64 && getRandomNumber(1000) == 0) {
                                 mConnections = (byte) ((mConnections & ~64) | -128);
                             }
-                        }
-                    case 8:
+                        }}
+                    //case 8:
+                    if (tCode == 8) {
                         tCode = 9;
                         mMetaTileEntity.onPreTick(this, mTickTimer);
-                        if (!hasValidMetaTileEntity()) return;
-                    case 9:
+                        if (!hasValidMetaTileEntity()) return;}
+                    //case 9:
+                    if (tCode == 9) {
                         tCode++;
                         if (isServerSide()) {
                             if (mTickTimer == 10) {
@@ -254,12 +260,14 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
                                 issueClientUpdate();
                                 clearTileEntityBuffer();
                             }
-                        }
-                    case 10:
+                        }}
+                    //case 10:
+                    if (tCode == 10) {
                         tCode++;
                         mMetaTileEntity.onPostTick(this, mTickTimer);
-                        if (!hasValidMetaTileEntity()) return;
-                    case 11:
+                        if (!hasValidMetaTileEntity()) return;}
+                    //case 11:
+                    if (tCode == 11) {
                         tCode++;
                         if (isServerSide()) {
                             if (mTickTimer % 10 == 0) {
@@ -282,10 +290,11 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
                                 worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockOffset(0, 0, 0));
                                 mNeedsBlockUpdate = false;
                             }
-                        }
-                    default:
+                        }}
+                    //default:
+                    if (tCode > 11) {
                         tCode = -1;
-                        break;
+                        break;}
                 }
         }} catch (Throwable e) {
                 gregtech.api.util.GT_Log.err.println("Encountered Exception while ticking MetaTileEntity in Step " + (tCode - 1) + ". The Game should've crashed now, but I prevented that. Please report immidietly to GregTech Intergalactical!!!");
