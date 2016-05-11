@@ -26,6 +26,7 @@ public enum ConfigCategories {
         recipereplacements,
         storageblockcrafting,
         storageblockdecrafting;
+        crops;
     }
 
     public enum Machines {
