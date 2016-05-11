@@ -295,7 +295,7 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
                     if (tCode > 11) {
                         tCode = -1;
                         break;}
-                }
+                //}
         }} catch (Throwable e) {
                 gregtech.api.util.GT_Log.err.println("Encountered Exception while ticking MetaTileEntity in Step " + (tCode - 1) + ". The Game should've crashed now, but I prevented that. Please report immidietly to GregTech Intergalactical!!!");
                 e.printStackTrace(GT_Log.err);
