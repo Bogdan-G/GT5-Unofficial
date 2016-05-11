@@ -1,0 +1,26 @@
+From fa3e5c0a44b6015a8e338b11a90fd60797da163e Mon Sep 17 00:00:00 2001
+From: Techlone <techlone.mc@gmail.com>
+Date: Tue, 15 Mar 2016 13:41:02 +0500
+Subject: [PATCH] Fix boost of starting of fusion reactors
+
+---
+ .../machines/multi/GT_MetaTileEntity_FusionComputer.java            | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/main/java/gregtech/common/tileentities/machines/multi/GT_MetaTileEntity_FusionComputer.java b/src/main/java/gregtech/common/tileentities/machines/multi/GT_MetaTileEntity_FusionComputer.java
+index 3e7ec93..f6edc08 100644
+--- a/src/main/java/gregtech/common/tileentities/machines/multi/GT_MetaTileEntity_FusionComputer.java
++++ b/src/main/java/gregtech/common/tileentities/machines/multi/GT_MetaTileEntity_FusionComputer.java
+@@ -367,7 +367,11 @@ public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+                                 turnCasingActive(mMaxProgresstime > 0);
+                                 if (aBaseMetaTileEntity.isAllowedToWork()) {
+                                     this.mEUStore = (int) aBaseMetaTileEntity.getStoredEU();
+-                                    if (checkRecipe(mInventory[1]) && aBaseMetaTileEntity.getStoredEU() >= this.mLastRecipe.mSpecialValue) {
++                                    if (checkRecipe(mInventory[1])) {
++                                        if (this.mEUStore < this.mLastRecipe.mSpecialValue) {
++                                            mMaxProgresstime = 0;
++                                            turnCasingActive(false);
++                                        }
+                                         aBaseMetaTileEntity.decreaseStoredEnergyUnits(this.mLastRecipe.mSpecialValue, true);
+                                     }
+                                 }
