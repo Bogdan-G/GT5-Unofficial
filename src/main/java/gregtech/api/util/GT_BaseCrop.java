@@ -193,11 +193,6 @@ public class GT_BaseCrop extends CropCard implements ICropCardInfo {
         return maxSize();
     }
 
-    @Override
-    public int getOptimalHavestSize(ICropTile crop) {
-        return maxSize();
-    }
-
     public boolean isBlockBelow(ICropTile aCrop) {
         if (aCrop == null) {
             return false;
