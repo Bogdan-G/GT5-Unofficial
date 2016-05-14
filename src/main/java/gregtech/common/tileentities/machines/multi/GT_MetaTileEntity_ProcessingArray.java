@@ -180,9 +180,9 @@ public class GT_MetaTileEntity_ProcessingArray extends GT_MetaTileEntity_MultiBl
         if (tInputList.size() > 0 || tFluids.length > 0) {
             GT_Recipe tRecipe = map.findRecipe(getBaseMetaTileEntity(), mLastRecipe, false, gregtech.api.enums.GT_Values.V[tTier], tFluids, tInputs);
             if (tRecipe != null) {
-                if (tRecipe.mFluidInputs != null) {
+                //if (tRecipe.mFluidInputs != null) {
 
-                }
+                //}
                 mLastRecipe = tRecipe;
                 this.mEUt = 0;
                 this.mOutputItems = null;

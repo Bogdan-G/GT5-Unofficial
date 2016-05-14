@@ -290,7 +290,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
         chargeFromArmor(aStack, aPlayer);
         if (aPlayer instanceof EntityPlayer && ((EntityPlayer) aPlayer).capabilities.isCreativeMode) return true;
         double tTransfer = discharge(aStack, aAmount, Integer.MAX_VALUE, true, false, true);
-        if (tTransfer == aAmount) {
+        if (/*tTransfer == aAmount*/Math.abs(tTransfer - aAmount) < .0000001) {
             discharge(aStack, aAmount, Integer.MAX_VALUE, true, false, false);
             chargeFromArmor(aStack, aPlayer);
             return true;

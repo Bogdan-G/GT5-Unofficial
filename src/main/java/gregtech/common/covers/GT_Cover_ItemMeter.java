@@ -29,7 +29,7 @@ public class GT_Cover_ItemMeter
         }
         tAll /= 14;
         if (tAll > 0) {
-            aTileEntity.setOutputRedstoneSignal(aSide, aCoverVariable != 1 ? 0 : tFull > 0 ? (byte) (tFull / tAll + 1) : (byte) (15 - (tFull > 0 ? tFull / tAll + 1 : 0)));
+            aTileEntity.setOutputRedstoneSignal(aSide, aCoverVariable != 1 ? 0 : tFull > 0 ? (byte) (tFull / tAll + 1) : (byte) (15/* - (tFull > 0 ? tFull / tAll + 1 : 0)*/));
         } else {
             aTileEntity.setOutputRedstoneSignal(aSide, (byte) (aCoverVariable != 1 ? 0 : 15));
         }
