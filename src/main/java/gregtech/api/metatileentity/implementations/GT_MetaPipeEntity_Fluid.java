@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import java.util.ArrayList;
 import java.util.HashMap;import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map.Entry;
+import org.bogdang.modifications.random.XSTR;
 
 import static gregtech.api.enums.GT_Values.D1;
 
@@ -264,7 +265,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
             GT_Utility.doSoundAtClient(GregTech_API.sSoundList.get(4), 5, 1.0F, aX, aY, aZ);
             for (byte i = 0; i < 6; i++)
                 for (int l = 0; l < 2; ++l)
-                    getBaseMetaTileEntity().getWorld().spawnParticle("largesmoke", aX - 0.5 + Math.random(), aY - 0.5 + Math.random(), aZ - 0.5 + Math.random(), ForgeDirection.getOrientation(i).offsetX / 5.0, ForgeDirection.getOrientation(i).offsetY / 5.0, ForgeDirection.getOrientation(i).offsetZ / 5.0);
+                    getBaseMetaTileEntity().getWorld().spawnParticle("largesmoke", aX - 0.5 + (new XSTR()).nextDouble(), aY - 0.5 + (new XSTR()).nextDouble(), aZ - 0.5 + (new XSTR()).nextDouble(), ForgeDirection.getOrientation(i).offsetX / 5.0, ForgeDirection.getOrientation(i).offsetY / 5.0, ForgeDirection.getOrientation(i).offsetZ / 5.0);
         }
     }
 
