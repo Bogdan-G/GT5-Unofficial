@@ -22,6 +22,7 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import java.util.List;
 import java.util.Random;
+import org.bogdang.modifications.random.XSTR;
 
 public class Behaviour_Prospecting
         extends Behaviour_None {
@@ -87,7 +88,7 @@ public class Behaviour_Prospecting
                         break;
                     }
                 }
-                Random tRandom = new Random(aX ^ aY ^ aZ ^ aSide);
+                Random tRandom = new XSTR(aX ^ aY ^ aZ ^ aSide);
                 i = 0;
                 for (int j = 9 + 2 * tQuality; i < j; i++) {
                     tX = aX - 4 - tQuality + tRandom.nextInt(j);

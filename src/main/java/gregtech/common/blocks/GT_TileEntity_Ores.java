@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Random;
+import org.bogdang.modifications.random.XSTR;
 
 public class GT_TileEntity_Ores
         extends TileEntity
@@ -138,7 +139,7 @@ public class GT_TileEntity_Ores
             aFortune = 0;
         }
         if (aMaterial != null) {
-            Random tRandom = new Random(this.xCoord ^ this.yCoord ^ this.zCoord);
+            Random tRandom = new XSTR(this.xCoord ^ this.yCoord ^ this.zCoord);
             ArrayList<ItemStack> tSelector = new ArrayList();
 
 
