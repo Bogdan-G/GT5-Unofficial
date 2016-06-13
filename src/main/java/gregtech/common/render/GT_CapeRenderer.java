@@ -27,7 +27,8 @@ public class GT_CapeRenderer
         setRenderManager(RenderManager.instance);
     }
 
-    public void receiveRenderSpecialsEvent(RenderPlayerEvent.Specials.Pre aEvent) {
+    //always off in BMPL
+    /*public void receiveRenderSpecialsEvent(RenderPlayerEvent.Specials.Pre aEvent) {
         AbstractClientPlayer aPlayer = (AbstractClientPlayer) aEvent.entityPlayer;
         if (GT_Utility.getFullInvisibility(aPlayer)) {
             aEvent.setCanceled(true);
@@ -63,12 +64,13 @@ public class GT_CapeRenderer
                 float d1 = (float) aPlayer.field_71096_bN + var1f;
                 float d2 = (float) aPlayer.field_71097_bO + var1f;
                 float f6 = (float) (aPlayer.prevRenderYawOffset + (aPlayer.renderYawOffset - aPlayer.prevRenderYawOffset) * aPartialTicks);
-                float var2f = f6 * 3.141593F / 180.0F;
+                float math_pi = 3.141593F;//FB: CNT - CNT_ROUGH_CONSTANT_VALUE
+                float var2f = f6 * math_pi / 180.0F;
                 float d3 = MathHelper.sin(var2f);
                 float d4 = -MathHelper.cos(var2f);
-                float f7 = /*(float) */d1 * 10.0F;
-                float f8 = /*(float) */(d0 * d3 + d2 * d4) * 100.0F;
-                float f9 = /*(float) */(d0 * d4 - d2 * d3) * 100.0F;
+                float f7 = d1 * 10.0F;
+                float f8 = (d0 * d3 + d2 * d4) * 100.0F;
+                float f9 = (d0 * d4 - d2 * d3) * 100.0F;
                 if (f7 < -6.0F) {
                     f7 = -6.0F;
                 }
@@ -95,5 +97,5 @@ public class GT_CapeRenderer
                 e.printStackTrace(GT_Log.err);
             }
         }
-    }
+    }*/
 }

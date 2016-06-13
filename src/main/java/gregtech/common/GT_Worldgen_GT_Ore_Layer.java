@@ -28,7 +28,7 @@ public class GT_Worldgen_GT_Ore_Layer
     public final boolean mOverworld;
     public final boolean mNether;
     public final boolean mEnd;
-    private final String worldgen_text = "worldgen.";
+    private static final String worldgen_text = "worldgen.";
 
     public GT_Worldgen_GT_Ore_Layer(String aName, boolean aDefault, int aMinY, int aMaxY, int aWeight, int aDensity, int aSize, boolean aOverworld, boolean aNether, boolean aEnd, Materials aPrimary, Materials aSecondary, Materials aBetween, Materials aSporadic) {
         super(aName, sList, aDefault);

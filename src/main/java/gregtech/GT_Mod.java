@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.*;
+import java.util.Locale;
 import java.util.Map.Entry;
 import org.bogdang.modifications.random.XSTR;
 
@@ -108,6 +109,7 @@ public class GT_Mod
     @Mod.EventHandler
     public void onPreLoad(FMLPreInitializationEvent aEvent) {
         long startT = System.nanoTime();
+        Locale.setDefault(Locale.ENGLISH);
         if (GregTech_API.sPreloadStarted) {
             return;
         }

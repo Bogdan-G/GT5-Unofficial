@@ -7,3 +7,4 @@ thumbs.db
 /builds/
 *.DS_Store
 /findbugs/*
+/fb/*

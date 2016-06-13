@@ -18,7 +18,7 @@ public class GT_Worldgen_GT_Ore_SmallPieces
     public final boolean mOverworld;
     public final boolean mNether;
     public final boolean mEnd;
-    private final String worldgen_text = "worldgen.";
+    private static final String worldgen_text = "worldgen.";
 
     public GT_Worldgen_GT_Ore_SmallPieces(String aName, boolean aDefault, int aMinY, int aMaxY, int aAmount, boolean aOverworld, boolean aNether, boolean aEnd, Materials aPrimary) {
         super(aName, GregTech_API.sWorldgenList, aDefault);

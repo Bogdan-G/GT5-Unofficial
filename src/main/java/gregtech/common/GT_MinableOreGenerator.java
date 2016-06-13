@@ -29,11 +29,12 @@ public class GT_MinableOreGenerator
     }
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5) {
-        float var6 = par2Random.nextFloat() * 3.141593F;
+        float math_pi = 3.141593F;//FB: CNT - CNT_ROUGH_CONSTANT_VALUE
+        float var6 = par2Random.nextFloat() * math_pi;
         float var1s = this.numberOfBlocks / 8.0F;
         float var4s = par4 - 2;float var5s = par3 + 8;float var6s = par5 + 8;
         float var7s = this.numberOfBlocks / 16.0F;
-        float var8s = 3.141593F / this.numberOfBlocks;
+        float var8s = math_pi / this.numberOfBlocks;
         float var7 = var5s + MathHelper.sin(var6) * var1s;
         float var9 = var5s - MathHelper.sin(var6) * var1s;
         float var11 = var6s + MathHelper.cos(var6) * var1s;
@@ -45,7 +46,7 @@ public class GT_MinableOreGenerator
             float var22 = var15 + (var17 - var15) * var19 / this.numberOfBlocks;
             float var24 = var11 + (var13 - var11) * var19 / this.numberOfBlocks;
             float var26 = par2Random.nextFloat() * var7s;
-            float var1c = var19 * 3.141593F / this.numberOfBlocks; float var2c = var26 + 1.0F;
+            float var1c = var19 * var8s; float var2c = var26 + 1.0F;
             float var28 = (MathHelper.sin(var1c) + 1.0F) * var2c;
             float var30 = (MathHelper.sin(var1c) + 1.0F) * var2c;
             float var3c = var28 / 2.0F;float var4c = var30 / 2.0F;

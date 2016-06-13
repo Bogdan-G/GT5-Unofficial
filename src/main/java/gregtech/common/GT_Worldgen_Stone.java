@@ -26,7 +26,8 @@ public class GT_Worldgen_Stone
                 int tY = this.mMinY + aRandom.nextInt(this.mMaxY - this.mMinY);
                 int tZ = aChunkZ + aRandom.nextInt(16);
                 if ((this.mAllowToGenerateinVoid) || (!aWorld.getBlock(tX, tY, tZ).isAir(aWorld, tX, tY, tZ))) {
-                    float var6 = aRandom.nextFloat() * 3.141593F;
+                    float math_pi = 3.141593F;//FB: CNT - CNT_ROUGH_CONSTANT_VALUE
+                    float var6 = aRandom.nextFloat() * math_pi;
                     float var1d = this.mSize / 8.0F;float var2d = tX + 8;float var3d = tZ + 8;float var4d = tY - 2;
                     float var7 = var2d + MathHelper.sin(var6) * var1d;
                     float var9 = var2d - MathHelper.sin(var6) * var1d;
@@ -39,7 +40,7 @@ public class GT_Worldgen_Stone
                         float var20 = var7 + (var9 - var7) * var5d;
                         float var22 = var15 + (var17 - var15) * var5d;
                         float var24 = var11 + (var13 - var11) * var5d;
-                        float var6d = var19 * 3.141593F / this.mSize;
+                        float var6d = var19 * math_pi / this.mSize;
                         float var26 = aRandom.nextFloat() * this.mSize / 16.0F;
                         float var7d = var26 + 1.0F;
                         float var28 = (MathHelper.sin(var6d) + 1.0F) * var7d;

@@ -88,7 +88,7 @@ public class GT_Worldgenerator
                 for (int tX = this.mX - 16; i < 3; tX += 16) {
                     int j = 0;
                     for (int tZ = this.mZ - 16; j < 3; tZ += 16) {
-                        String tBiome = this.mWorld.getBiomeGenForCoords(tX + 8, tZ + 8).biomeName;
+                        //String tBiome = this.mWorld.getBiomeGenForCoords(tX + 8, tZ + 8).biomeName;
                         /*if (tBiome == null) {
                             tBiome = BiomeGenBase.plains.biomeName;//FindBugs: DLS - DLS_DEAD_LOCAL_STORE
                         }*/

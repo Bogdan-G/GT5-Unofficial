@@ -29,7 +29,8 @@ public class GT_FluidStack extends FluidStack {
         this(aFluid.getFluid(), aFluid.amount);
     }
 
-    public static final void fixAllThoseFuckingFluidIDs() {
+    //dead code
+    /*public static final void fixAllThoseFuckingFluidIDs() {
         if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             try {
             while (lock) {
@@ -43,10 +44,11 @@ public class GT_FluidStack extends FluidStack {
             } catch (Throwable e) {e.printStackTrace(GT_Log.err);}
             lock = false;
         }
-    }
+    }*/
 
-    @Deprecated
-    public final void fixFluidIDForFucksSake() {
+    //dead code
+    /*@*//*Deprecated*/
+    /*public final void fixFluidIDForFucksSake() {
         if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             int fluidID;
             try {
@@ -60,13 +62,13 @@ public class GT_FluidStack extends FluidStack {
                 fluidID = -1;
             }
         }
-    }
+    }*/
 
     @Override
     public FluidStack copy() {
-        if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
+        /*if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
             fixFluidIDForFucksSake();
-        }
+        }*/
         return new GT_FluidStack(this);
     }
 }
