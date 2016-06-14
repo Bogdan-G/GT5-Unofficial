@@ -189,7 +189,7 @@ public class GregTech_API {
     public static int mRFtoEU = 20;
     public static boolean mRFExplosions = true;
     public static boolean mServerStarted = false;
-    private static final String mii = MOD_ID_IC2.toLowerCase();
+    private static final String mii = MOD_ID_IC2.toLowerCase(Locale.ENGLISH);
     /**
      * Getting assigned by the Mod loading
      */

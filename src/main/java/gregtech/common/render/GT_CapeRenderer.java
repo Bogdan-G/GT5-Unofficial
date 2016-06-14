@@ -1,4 +1,5 @@
-package gregtech.common.render;
+//rly, off class
+/*package gregtech.common.render;
 
 import gregtech.api.enums.GT_Values;
 import gregtech.api.util.GT_Log;
@@ -25,7 +26,7 @@ public class GT_CapeRenderer
     public GT_CapeRenderer(Collection<String> aCapeList) {
         this.mCapeList = aCapeList;
         setRenderManager(RenderManager.instance);
-    }
+    }*/
 
     //always off in BMPL
     /*public void receiveRenderSpecialsEvent(RenderPlayerEvent.Specials.Pre aEvent) {
@@ -98,4 +99,4 @@ public class GT_CapeRenderer
             }
         }
     }*/
-}
+//}

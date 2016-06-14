@@ -188,14 +188,14 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
 
         if (!aPlayer.worldObj.isRemote && (mSpecials & (16 | 32)) != 0) {
             //if (GregTech_API.sWorldTickCounter%20==0) {
-            ItemStack tTargetChargeItem = aStack, tTargetDechargeItem = aStack;
+            ItemStack tTargetChargeItem = aStack/*, tTargetDechargeItem = aStack*/;
 
             if (GT_ModHandler.chargeElectricItem(tTargetChargeItem, 1, Integer.MAX_VALUE, true, true) < 1) {
                 tTargetChargeItem = aPlayer.inventory.armorInventory[2];
             }
-            if (GT_ModHandler.dischargeElectricItem(tTargetDechargeItem, 10, Integer.MAX_VALUE, true, true, true) < 10) {
-                /*tTargetDechargeItem = aPlayer.inventory.armorInventory[2];*/
-            }
+            /*if (GT_ModHandler.dischargeElectricItem(tTargetDechargeItem, 10, Integer.MAX_VALUE, true, true, true) < 10) {
+                tTargetDechargeItem = aPlayer.inventory.armorInventory[2];
+            }*/
 
             if (tTargetChargeItem == null || !GT_ModHandler.isElectricItem(tTargetChargeItem)) {
                 tTargetChargeItem = null;

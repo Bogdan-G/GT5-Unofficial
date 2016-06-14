@@ -16,12 +16,12 @@ import java.util.Map;
  */
 public class GT_FluidStack extends FluidStack {
     private static final Collection<GT_FluidStack> sAllFluidStacks = new ArrayList<GT_FluidStack>(5000);
-    private static boolean lock = false;
-    private Fluid mFluid;
+    //private static boolean lock = false;
+    //private Fluid mFluid;
 
     public GT_FluidStack(Fluid aFluid, int aAmount) {
         super(aFluid, aAmount);
-        mFluid = aFluid;
+        //mFluid = aFluid;
         if(!GregTech_API.mServerStarted){sAllFluidStacks.add(this);}
     }
 

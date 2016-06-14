@@ -135,9 +135,10 @@ public abstract class GT_MetaTileEntity_FusionComputer extends GT_MetaTileEntity
         return false;
     }
 
+    //FB: UPM - UPM_UNCALLED_PRIVATE_METHOD
     //FindBugs
-    @Deprecated
-    private boolean checkTier(byte tier, ArrayList<GT_MetaTileEntity_Hatch> list) {
+    /*@*//*Deprecated*/
+    /*private boolean checkTier(byte tier, ArrayList<GT_MetaTileEntity_Hatch> list) {
         if (list != null) {
             int list_sS=list.size();
             for (int i = 0; i < list_sS; i++) {
@@ -147,7 +148,7 @@ public abstract class GT_MetaTileEntity_FusionComputer extends GT_MetaTileEntity
             }
         }
         return true;
-    }
+    }*/
 
     private boolean checkCoils(int aX, int aY, int aZ) {
         return (isFusionCoil(aX + 6, aY, aZ - 1)) && (isFusionCoil(aX + 6, aY, aZ)) && (isFusionCoil(aX + 6, aY, aZ + 1)) && (isFusionCoil(aX + 5, aY, aZ - 3)) && (isFusionCoil(aX + 5, aY, aZ - 2))

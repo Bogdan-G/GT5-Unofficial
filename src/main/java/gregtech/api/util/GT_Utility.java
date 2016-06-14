@@ -235,7 +235,7 @@ public class GT_Utility {
 
     public static String capitalizeString(String aString) {
         if (aString != null && aString.length() > 0)
-            return aString.substring(0, 1).toUpperCase() + aString.substring(1);
+            return aString.substring(0, 1).toUpperCase(Locale.ENGLISH) + aString.substring(1);
         return E;
     }
 

@@ -54,8 +54,8 @@ public class GT_Client extends GT_Proxy
         });
     }
 
-    private final HashSet mCapeList = new HashSet();
-    private final GT_CapeRenderer mCapeRenderer;
+    //private final HashSet mCapeList = new HashSet();
+    //private final GT_CapeRenderer mCapeRenderer;
     private final List mPosR;
     private final List mPosG;
     private final List mPosB;
@@ -74,14 +74,14 @@ public class GT_Client extends GT_Proxy
     private final List mMoltenNegA = Arrays.asList(new Object[0]);
     private long mAnimationTick;
     private boolean mAnimationDirection;
-    private boolean isFirstClientPlayerTick;
-    private String mMessage;
+    //private boolean isFirstClientPlayerTick;
+    //private String mMessage;
     public GT_Client() {
-        mCapeRenderer = new GT_CapeRenderer(mCapeList);
+        //mCapeRenderer = new GT_CapeRenderer(mCapeList);
         mAnimationTick = 0L;
         mAnimationDirection = false;
-        isFirstClientPlayerTick = true;
-        mMessage = "";
+        //isFirstClientPlayerTick = true;
+        //mMessage = "";
         mPosR = Arrays.asList(new Materials[]{
                 /**Materials.ChargedCertusQuartz, **/Materials.Enderium, Materials.Vinteum, Materials.Uranium235, Materials.InfusedGold, Materials.Plutonium241, Materials.NaquadahEnriched, Materials.Naquadria, Materials.InfusedOrder, Materials.Force,
                 Materials.Pyrotheum, Materials.Sunnarium, Materials.Glowstone, Materials.Thaumium, Materials.InfusedVis, Materials.InfusedAir, Materials.InfusedFire, Materials.FierySteel, Materials.Firestone
@@ -169,7 +169,7 @@ public class GT_Client extends GT_Proxy
 
     public void onPreLoad() {
         super.onPreLoad();
-        String arr$[] = {
+        /*String arr$[] = {
                 "renadi", "hanakocz", "MysteryDump", "Flaver4", "x_Fame", "Peluche321", "Goshen_Ithilien", "manf", "Bimgo", "leagris",
                 "IAmMinecrafter02", "Cerous", "Devilin_Pixy", "Bkarlsson87", "BadAlchemy", "CaballoCraft", "melanclock", "Resursator", "demanzke", "AndrewAmmerlaan",
                 "Deathlycraft", "Jirajha", "Axlegear", "kei_kouma", "Dracion", "dungi", "Dorfschwein", "Zero Tw0", "mattiagraz85", "sebastiank30",
@@ -187,8 +187,8 @@ public class GT_Client extends GT_Proxy
         int len$ = arr$.length;
         for (int i$ = 0; i$ < len$; i$++) {
             String tName = arr$[i$];
-            mCapeList.add(tName.toLowerCase());
-        }
+            mCapeList.add(tName.toLowerCase(Locale.ENGLISH));
+        }*/
 
         (new Thread(this)).start();
     }

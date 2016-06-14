@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.List;
 
 import static gregtech.api.enums.GT_Values.GT;
@@ -79,7 +80,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
         } else {
             throw new IllegalArgumentException("MetaMachine-Slot Nr. " + aID + " is already occupied!");
         }
-        mName = aBasicName.replaceAll(" ", "_").toLowerCase();
+        mName = aBasicName.replaceAll(" ", "_").toLowerCase(Locale.ENGLISH);
         setBaseMetaTileEntity(GregTech_API.constructBaseMetaTileEntity());
         getBaseMetaTileEntity().setMetaTileID((short) aID);
         GT_LanguageManager.addStringLocalization("gt.blockmachines." + mName + ".name", aRegionalName);
