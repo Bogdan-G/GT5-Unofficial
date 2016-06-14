@@ -261,13 +261,14 @@ public class GT_RecipeRegistrator {
      * @param aOutput          the Dust you usually get from macerating aMat
      * @param aRecipeReplacing allows to replace the Recipe with a Plate variant
      */
-    public static synchronized void registerUsagesForMaterials(ItemStack aMat, String aPlate, boolean aRecipeReplacing) {
+    public static void registerUsagesForMaterials(ItemStack aMat, String aPlate, boolean aRecipeReplacing) {
+    // public static synchronized void 
         if (aMat == null) return;
         aMat = GT_Utility.copy(aMat);
         ItemStack tStack;
         ItemData aItemData = GT_OreDictUnificator.getItemData(aMat);
-        if (aItemData == null || aItemData.mPrefix != OrePrefixes.ingot) aPlate = null;
-        if (aPlate != null && GT_OreDictUnificator.getFirstOre(aPlate, 1) == null) aPlate = null;
+        if (aItemData == null || aItemData.mPrefix != OrePrefixes.ingot) {aPlate = null;}
+        if (aPlate != null && GT_OreDictUnificator.getFirstOre(aPlate, 1) == null) {aPlate = null;}
 
         sMt1.func_150996_a(aMat.getItem());
         sMt1.stackSize = 1;
@@ -304,12 +305,12 @@ public class GT_RecipeRegistrator {
                         if (tMat == sMt2) tAmount2++;
                     }
                     for (ItemStack tCrafted : GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe)) {
-                        if (aItemData != null && aItemData.hasValidPrefixMaterialData())
-                            GT_OreDictUnificator.addItemData(tCrafted, new ItemData(aItemData.mMaterial.mMaterial, aItemData.mMaterial.mAmount * tAmount1, new MaterialStack(tMaterial, OrePrefixes.stick.mMaterialAmount * tAmount2)));
+                        if (aItemData != null && aItemData.hasValidPrefixMaterialData()) {
+                            GT_OreDictUnificator.addItemData(tCrafted, new ItemData(aItemData.mMaterial.mMaterial, aItemData.mMaterial.mAmount * tAmount1, new MaterialStack(tMaterial, OrePrefixes.stick.mMaterialAmount * tAmount2)));}
 
                         if (aRecipeReplacing && aPlate != null && sShapesA[i] != null && sShapesA[i].length > 1) {
                             assert aItemData != null;
-                            if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.recipereplacements, new StringBuilder().append(aItemData.mMaterial.mMaterial).append(".").append(sShapesA[i][0]).toString(), true)) {
+                            if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.recipereplacements, new StringBuilder().append(aItemData.mMaterial.mMaterial).append('.').append(sShapesA[i][0]).toString(), true)) {
                                 if (null != (tStack = GT_ModHandler.removeRecipe(tRecipe))) {
                                     switch (sShapesA[i].length) {
                                         case 2:

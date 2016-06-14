@@ -1266,8 +1266,8 @@ public class GT_ModHandler {
      * This also removes old Recipes from the List.
      */
     public static ArrayList<ItemStack> getVanillyToolRecipeOutputs(ItemStack... aRecipe) {
-        if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished)
-            sSingleNonBlockDamagableRecipeList.clear();
+        if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished) {
+            sSingleNonBlockDamagableRecipeList.clear();}
         if (sSingleNonBlockDamagableRecipeList.isEmpty()) {
             for (IRecipe tRecipe : (ArrayList<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
                 ItemStack tStack = tRecipe.getRecipeOutput();
@@ -1275,7 +1275,7 @@ public class GT_ModHandler {
                     //if (!(tRecipe instanceof ShapelessRecipes) || tRecipe instanceof ShapelessOreRecipe) {
                         if (tRecipe instanceof ShapedOreRecipe) {
                             boolean temp = true;
-                            for (Object tObject : ((ShapedOreRecipe) tRecipe).getInput())
+                            for (Object tObject : ((ShapedOreRecipe) tRecipe).getInput()) {
                                 if (tObject != null) {
                                     if (tObject instanceof ItemStack && (((ItemStack) tObject).getItem() == null || ((ItemStack) tObject).getMaxStackSize() < 2 || ((ItemStack) tObject).getMaxDamage() > 0 || ((ItemStack) tObject).getItem() instanceof ItemBlock)) {
                                         temp = false;
@@ -1285,8 +1285,8 @@ public class GT_ModHandler {
                                         temp = false;
                                         break;
                                     }
-                                }
-                            if (temp) sSingleNonBlockDamagableRecipeList.add(tRecipe);
+                                }}
+                            if (temp) {sSingleNonBlockDamagableRecipeList.add(tRecipe);}
                         } else if (tRecipe instanceof ShapedRecipes) {
                             boolean temp = true;
                             for (ItemStack tObject : ((ShapedRecipes) tRecipe).recipeItems) {
@@ -1295,7 +1295,7 @@ public class GT_ModHandler {
                                     break;
                                 }
                             }
-                            if (temp) sSingleNonBlockDamagableRecipeList.add(tRecipe);
+                            if (temp) {sSingleNonBlockDamagableRecipeList.add(tRecipe);}
                         } else {
                             sSingleNonBlockDamagableRecipeList.add(tRecipe);
                         }
@@ -1305,8 +1305,8 @@ public class GT_ModHandler {
             GT_Log.out.println("GT_Mod: Created a List of Tool Recipes containing " + sSingleNonBlockDamagableRecipeList.size() + " Recipes for recycling." + (sSingleNonBlockDamagableRecipeList.size() > 1024 ? " Scanning all these Recipes is the reason for the startup Lag you receive right now." : E));
         }
         ArrayList<ItemStack> rList = getRecipeOutputs(sSingleNonBlockDamagableRecipeList, true, aRecipe);
-        if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished)
-            sSingleNonBlockDamagableRecipeList.clear();
+        if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished) {
+            sSingleNonBlockDamagableRecipeList.clear();}
         return rList;
     }
 
@@ -1324,7 +1324,7 @@ public class GT_ModHandler {
      */
     public static ArrayList<ItemStack> getRecipeOutputs(List<IRecipe> aList, boolean aDeleteFromList, ItemStack... aRecipe) {
         ArrayList<ItemStack> rList = new ArrayList<ItemStack>();
-        if (aRecipe == null) return rList;
+        if (aRecipe == null) {return rList;}
         boolean temp = false;
         for (byte i = 0; i < aRecipe.length; i++) {
             if (aRecipe[i] != null) {
@@ -1332,22 +1332,23 @@ public class GT_ModHandler {
                 break;
             }
         }
-        if (!temp) return rList;
+        if (!temp) {return rList;}
         InventoryCrafting aCrafting = new InventoryCrafting(new Container() {
             @Override
             public boolean canInteractWith(EntityPlayer var1) {
                 return false;
             }
         }, 3, 3);
-        for (int i = 0; i < 9 && i < aRecipe.length; i++) aCrafting.setInventorySlotContents(i, aRecipe[i]);
+        for (int i = 0; i < 9 && i < aRecipe.length; i++) {aCrafting.setInventorySlotContents(i, aRecipe[i]);}
         int aList_sS=aList.size();
         try {
         temp = false;
         for (int i = 0; i < aList_sS; i++) {
-            if (aList.get(i).matches(aCrafting, DW)) {
-                ItemStack tOutput = aList.get(i).getCraftingResult(aCrafting);
+            IRecipe tempALg0 = aList.get(i);
+            if (tempALg0.matches(aCrafting, DW)) {
+                ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
                 rList.add(GT_Utility.copy(tOutput));
-                if (aDeleteFromList) aList.remove(i--);aList_sS=aList.size();
+                if (aDeleteFromList) {aList.remove(i--);aList_sS=aList.size();}
             }
         }} catch (Throwable e) {
                 e.printStackTrace(GT_Log.err);
