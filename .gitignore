@@ -8,3 +8,5 @@ thumbs.db
 *.DS_Store
 /findbugs/*
 /fb/*
+gradle.properties_off
+gradle.properties

@@ -1,5 +1,7 @@
 package gregtech.api.util;
 
+import cpw.mods.fml.common.*;
+
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.*;
 import gregtech.api.enums.TC_Aspects.TC_AspectStack;
@@ -120,6 +122,7 @@ public class GT_RecipeRegistrator {
             {"Scythe", s_H + s_P + s_I, s_P + s_F + s_R, " " + " " + s_R}
     };
     public static volatile int VERSION = 508;
+    private static int i_cycle = 0;
 
     public static void registerMaterialRecycling(ItemStack aStack, Materials aMaterial, long aMaterialAmount, MaterialStack aByproduct) {
         if (GT_Utility.isStackInvalid(aStack)) return;
@@ -261,14 +264,19 @@ public class GT_RecipeRegistrator {
      * @param aOutput          the Dust you usually get from macerating aMat
      * @param aRecipeReplacing allows to replace the Recipe with a Plate variant
      */
-    public static void registerUsagesForMaterials(ItemStack aMat, String aPlate, boolean aRecipeReplacing) {
+    public static synchronized void registerUsagesForMaterials(ItemStack aMat, String aPlate, boolean aRecipeReplacing) {
     // public static synchronized void 
+        //float startT, startT1, elapsed1, startT2, elapsed2 = 0;
+        //startT = System.nanoTime();
         if (aMat == null) return;
         aMat = GT_Utility.copy(aMat);
         ItemStack tStack;
         ItemData aItemData = GT_OreDictUnificator.getItemData(aMat);
-        if (aItemData == null || aItemData.mPrefix != OrePrefixes.ingot) {aPlate = null;}
+        boolean aItemData_b_0 = aItemData != null ? true : false;
+        if (!aItemData_b_0 || aItemData.mPrefix != OrePrefixes.ingot) {aPlate = null;}
         if (aPlate != null && GT_OreDictUnificator.getFirstOre(aPlate, 1) == null) {aPlate = null;}
+        boolean aItemData_b_1 = aItemData.hasValidPrefixMaterialData() ? true : false;
+        boolean aPlate_b_0 = aPlate != null ? true : false;
 
         sMt1.func_150996_a(aMat.getItem());
         sMt1.stackSize = 1;
@@ -277,26 +285,38 @@ public class GT_RecipeRegistrator {
         sMt2.func_150996_a(new ItemStack(Blocks.dirt).getItem());
         sMt2.stackSize = 1;
         Items.feather.setDamage(sMt2, 0);
+        //float elapsed = System.nanoTime() - startT;
+        //if (elapsed > 0) {FMLLog.warning("registerUsagesForMaterials: no cycle stage: "+elapsed/1000000+"ms");}startT = System.nanoTime();
 
         for (ItemStack[] tRecipe : sShapes1) {
             int tAmount1 = 0;
             for (ItemStack tMat : tRecipe) {
                 if (tMat == sMt1) tAmount1++;
             }
-            if (aItemData != null && aItemData.hasValidPrefixMaterialData())
+            if (aItemData_b_0 && aItemData_b_1)
                 for (ItemStack tCrafted : GT_ModHandler.getRecipeOutputs(tRecipe)) {
                     GT_OreDictUnificator.addItemData(tCrafted, new ItemData(aItemData.mMaterial.mMaterial, aItemData.mMaterial.mAmount * tAmount1));
                 }
         }
+        //elapsed = System.nanoTime() - startT;
+        //if (elapsed > 0) {FMLLog.warning("registerUsagesForMaterials: 1 cycle stage: "+elapsed/1000000+"ms");}startT = System.nanoTime();
 
+        //GT_Log.out.println("sRodMaterialList size list: "+sRodMaterialList.size());
         for (Materials tMaterial : sRodMaterialList) {
+            //startT1 = System.nanoTime();
             ItemStack tMt2 = GT_OreDictUnificator.get(OrePrefixes.stick, tMaterial, 1);
             if (tMt2 != null) {
                 sMt2.func_150996_a(tMt2.getItem());
                 sMt2.stackSize = 1;
                 Items.feather.setDamage(sMt2, Items.feather.getDamage(tMt2));
+                
 
-                for (int i = 0; i < sShapes1.length; i++) {
+                //GT_Log.out.println("sShapes1.length: "+sShapes1.length);
+                //elapsed1 = System.nanoTime() - startT;
+                //if (elapsed1 > 0) {FMLLog.warning("registerUsagesForMaterials: 2 cycle stage 1: "+elapsed1/1000000+"ms");}startT1 = System.nanoTime();
+                //for (int i = 0; i < sShapes1.length; i++) {
+                    int i = 0;
+                    if (i_cycle < 44) {i = i_cycle;}
                     ItemStack[] tRecipe = sShapes1[i];
 
                     int tAmount1 = 0, tAmount2 = 0;
@@ -304,12 +324,21 @@ public class GT_RecipeRegistrator {
                         if (tMat == sMt1) tAmount1++;
                         if (tMat == sMt2) tAmount2++;
                     }
-                    for (ItemStack tCrafted : GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe)) {
-                        if (aItemData != null && aItemData.hasValidPrefixMaterialData()) {
+                    //startT2 = System.nanoTime();
+                    List <ItemStack> tempTest = GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe);
+                    //elapsed2 = System.nanoTime() - startT2;
+                    //if (elapsed2 > 0) {FMLLog.warning("registerUsagesForMaterials: 2 cycle stage special: "+elapsed2/1000000+"ms");}
+                    int tempTest_size_sS = tempTest.size();
+                    //if (tempTest_size_sS > 0) {GT_Log.out.println("GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe): "+tempTest_size_sS);}
+                    //elapsed1 = System.nanoTime() - startT1;
+                    //if (elapsed1 > 0) {FMLLog.warning("registerUsagesForMaterials: 2 cycle stage 2: "+elapsed1/1000000+"ms");}startT1 = System.nanoTime();
+                    if (tempTest_size_sS > 0) {
+                    for (ItemStack tCrafted : tempTest/*GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe)*/) {
+                        if (aItemData_b_0 && aItemData_b_1) {
                             GT_OreDictUnificator.addItemData(tCrafted, new ItemData(aItemData.mMaterial.mMaterial, aItemData.mMaterial.mAmount * tAmount1, new MaterialStack(tMaterial, OrePrefixes.stick.mMaterialAmount * tAmount2)));}
 
-                        if (aRecipeReplacing && aPlate != null && sShapesA[i] != null && sShapesA[i].length > 1) {
-                            assert aItemData != null;
+                        if (aRecipeReplacing && aPlate_b_0 && sShapesA[i] != null && sShapesA[i].length > 1) {
+                            //assert aItemData != null;//dead dev code or decomp JAD?
                             if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.recipereplacements, new StringBuilder().append(aItemData.mMaterial.mMaterial).append('.').append(sShapesA[i][0]).toString(), true)) {
                                 if (null != (tStack = GT_ModHandler.removeRecipe(tRecipe))) {
                                     switch (sShapesA[i].length) {
@@ -326,9 +355,15 @@ public class GT_RecipeRegistrator {
                                 }
                             }
                         }
-                    }
-                }
+                    }}
+                    //if (elapsed1 > 0) {elapsed1 = System.nanoTime() - startT1;FMLLog.warning("registerUsagesForMaterials: 2 cycle stage 3: "+elapsed1/1000000+"ms");}
+                    //startT1 = System.nanoTime();
+                    i_cycle++;
+                //}
             }
         }
+        //elapsed = System.nanoTime() - startT;
+        //if (elapsed > 0) {FMLLog.warning("registerUsagesForMaterials: 2 cycle stage: "+elapsed/1000000+"ms; cycleaDeleteFromList: "+gregtech.api.util.GT_ModHandler.cycleaDeleteFromList);}
+        //startT = System.nanoTime();
     }
 }
