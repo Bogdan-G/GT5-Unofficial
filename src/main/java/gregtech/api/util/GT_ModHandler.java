@@ -53,7 +53,7 @@ import static gregtech.api.enums.GT_Values.*;
 public class GT_ModHandler {
     public static final List<IRecipe> sSingleNonBlockDamagableRecipeList = new ArrayList<IRecipe>(1000);
     private static final Map<String, ItemStack> sIC2ItemMap = new HashMap<String, ItemStack>();
-    private static final List<IRecipe> sAllRecipeList = /*Collections.synchronizedList(*/new ArrayList<IRecipe>(5000)/*)*/, sBufferRecipeList = new ArrayList<IRecipe>(1000);
+    private static final List<IRecipe> sAllRecipeList = Collections.synchronizedList(new ArrayList<IRecipe>(5000)), sBufferRecipeList = new ArrayList<IRecipe>(1000);
     public static volatile int VERSION = 508;
     public static Collection<String> sNativeRecipeClasses = new HashSet<String>(), sSpecialRecipeClasses = new HashSet<String>();
     public static GT_HashSet<GT_ItemStack> sNonReplaceableItems = new GT_HashSet<GT_ItemStack>();
@@ -65,8 +65,6 @@ public class GT_ModHandler {
     private static Map<IRecipeInput, RecipeOutput> sThermalCentrifugeRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
     private static Map<IRecipeInput, RecipeOutput> sMassfabRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
     private static boolean sBufferCraftingRecipes = true;
-    //public static int cycleaDeleteFromList = 0;
-    //private static float startT = 0, elapsed = 0,  startT1 = 0, elapsed1 = 0;
 
     static {
         sNativeRecipeClasses.add(ShapedRecipes.class.getName());
@@ -1326,7 +1324,6 @@ public class GT_ModHandler {
      * If you have multiple Mods, which add Bronze Armor for example
      */
     public static ArrayList<ItemStack> getRecipeOutputs(List<IRecipe> aList, boolean aDeleteFromList, ItemStack... aRecipe) {
-        //startT1 = System.nanoTime();
         ArrayList<ItemStack> rList = new ArrayList<ItemStack>();
         if (aRecipe == null) {return rList;}
         boolean temp = false;
@@ -1337,29 +1334,16 @@ public class GT_ModHandler {
             }
         }
         if (!temp) {return rList;}
-        //elapsed1 = System.nanoTime() - startT1;
-        //if (elapsed1 > 0) {FMLLog.warning("getRecipeOutputs cycle 1:  "+elapsed1/1000000+"ms");}
-        //startT1 = System.nanoTime();
         InventoryCrafting aCrafting = new InventoryCrafting(new Container() {
             @Override
             public boolean canInteractWith(EntityPlayer var1) {
                 return false;
             }
         }, 3, 3);
-        //elapsed1 = System.nanoTime() - startT1;
-        //if (elapsed1 > 0) {FMLLog.warning("getRecipeOutputs cycle 2:  "+elapsed1/1000000+"ms");}
-        //startT1 = System.nanoTime();
         for (int i = 0; i < 9 && i < aRecipe.length; i++) {aCrafting.setInventorySlotContents(i, aRecipe[i]);}
-        //elapsed1 = System.nanoTime() - startT1;
-        //if (elapsed1 > 0) {FMLLog.warning("getRecipeOutputs cycle 3:  "+elapsed1/1000000+"ms");}
-        //startT1 = System.nanoTime();
         int aList_sS=aList.size();
-        //Object[] tempaList = aList.toArray();
         ArrayList<Integer> tempaList_list = new ArrayList<Integer>();
-        //GT_Log.out.println("size list: "+aList_sS);
         for (int i = 0; i < aList_sS; i++) {
-            //temp = false;
-            //temp = aList.get(i).matches(aCrafting, DW);
             IRecipe tempALg0 = aList.get(i);
             if (tempALg0.matches(aCrafting, DW)) {
                 ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
@@ -1370,12 +1354,8 @@ public class GT_ModHandler {
                 if (aDeleteFromList) {tempaList_list.add(i);}
                 }
         }}
-        //elapsed1 = System.nanoTime() - startT1;
-        //if (elapsed1 > 0) {FMLLog.warning("getRecipeOutputs cycle 4:  "+elapsed1/1000000+"ms; "+aDeleteFromList);}
         boolean tempaList_list_b = tempaList_list.size() != 0 ? true : false;
         if (aDeleteFromList) {
-        //startT = System.nanoTime();
-        //aList.removeAll(rList);//~33ms
         List<IRecipe> tempaList_2 = new ArrayList<IRecipe>();
         for (int i = 0; i < aList_sS; i++) {
         int k = 0, l = 0;
@@ -1383,9 +1363,6 @@ public class GT_ModHandler {
         tempaList_2.add(aList.get(l));l++;
         }
         aList = tempaList_2;
-        //elapsed = System.nanoTime() - startT;
-        //if (elapsed > 0) {FMLLog.warning("aList.removeAll(rList): "+elapsed/1000000+"ms");}
-        //cycleaDeleteFromList++;
         }
         return rList;
     }
