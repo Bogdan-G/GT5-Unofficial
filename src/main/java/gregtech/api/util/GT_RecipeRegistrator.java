@@ -304,7 +304,7 @@ public class GT_RecipeRegistrator {
                 sMt2.stackSize = 1;
                 Items.feather.setDamage(sMt2, Items.feather.getDamage(tMt2));
 
-                if (GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size() == 0) {
+                if (GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_verified.size() == 0) {
                 sRodMaterialList_cycles++;continue;}
                 int sShapes1_len = GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size();
                 for (int i = 0; i < sShapes1_len; i++) {

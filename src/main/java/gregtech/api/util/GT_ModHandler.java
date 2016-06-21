@@ -120,6 +120,7 @@ public class GT_ModHandler {
     public static boolean sSingleNonBlockDamagableRecipeList_validsShapes1_update = false;
     public static List<Integer> sSingleNonBlockDamagableRecipeList_warntOutput = new ArrayList<Integer>(50);
     public static List<Integer> sVanillaRecipeList_warntOutput = new ArrayList<Integer>(50);
+    public static final List<IRecipe> sSingleNonBlockDamagableRecipeList_verified = new ArrayList<IRecipe>(1000);
 
     static {
         sNativeRecipeClasses.add(ShapedRecipes.class.getName());
@@ -1365,33 +1366,24 @@ public class GT_ModHandler {
             sSingleNonBlockDamagableRecipeList_list.add(aList_move);
             sSingleNonBlockDamagableRecipeList_create = false;
             sSingleNonBlockDamagableRecipeList_validsShapes1_update = true;
+            InventoryCrafting aCrafting = new InventoryCrafting(new Container() {
+            @Override
+            public boolean canInteractWith(EntityPlayer var1) {return false;}}, 3, 3);
             for (int i = 0; i < aList_move; i++) {
               for (int j = 0; j < sShapes1.length; j++) {
-                if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {
                     ItemStack[] sRecipe = sShapes1[j];
-                    if (sRecipe == null) continue;
-                    boolean temp1 = false;
-                    for (byte k = 0; k < sRecipe.length; k++) {
-                      if (sRecipe[k] != null) {
-                        temp1 = true;
-                        break;
-                      }
-                    }
-                    if (!temp1) {continue;}
-                    InventoryCrafting aCrafting = new InventoryCrafting(new Container() {
-                    @Override
-                    public boolean canInteractWith(EntityPlayer var1) {return false;}}, 3, 3);
                     for (int l = 0; l < 9 && l < sRecipe.length; l++) {aCrafting.setInventorySlotContents(l, sRecipe[l]);}
-                      if (sSingleNonBlockDamagableRecipeList.get(i).matches(aCrafting, DW)) {
-                        sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);
-                      }
-                }
+                    IRecipe vRecipe = sSingleNonBlockDamagableRecipeList.get(i);
+                    if (vRecipe.matches(aCrafting, DW)) {
+                      if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);}
+                      sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);
+                    }
               }
             }
                     
         }
         /*ArrayList<ItemStack> */
-        if (sSingleNonBlockDamagableRecipeList.size() != 0) {rList = getRecipeOutputs(sSingleNonBlockDamagableRecipeList, true, aRecipe);}
+        if (sSingleNonBlockDamagableRecipeList_verified.size() != 0) {rList = getRecipeOutputs(sSingleNonBlockDamagableRecipeList_verified, true, aRecipe);}
         if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished) {
             sSingleNonBlockDamagableRecipeList.clear();sSingleNonBlockDamagableRecipeList_create = true;sSingleNonBlockDamagableRecipeList_validsShapes1.clear();}
         return rList;
