@@ -805,7 +805,9 @@ public class GT_MetaGenerated_Item_01
         Collection<GT_Recipe> fusionRecipes = GT_Recipe.GT_Recipe_Map.sFusionRecipes.mRecipeList;
         if(aPrefix == OrePrefixes.cellPlasma && aMaterial.getPlasma(1L) != null) { //Materials has a plasma fluid
             for(GT_Recipe recipe : fusionRecipes) { //Loop through fusion recipes
-                if(recipe.getFluidOutput(0).isFluidEqual(aMaterial.getPlasma(1L))) return true; //Fusion recipe output matches current plasma cell fluid
+                if(recipe.getFluidOutput(0) != null) {
+                    if(recipe.getFluidOutput(0).isFluidEqual(aMaterial.getPlasma(1L))) return true; //Fusion recipe output matches current plasma cell fluid
+                }
             }
         }
         return false;
