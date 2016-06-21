@@ -65,6 +65,61 @@ public class GT_ModHandler {
     private static Map<IRecipeInput, RecipeOutput> sThermalCentrifugeRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
     private static Map<IRecipeInput, RecipeOutput> sMassfabRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
     private static boolean sBufferCraftingRecipes = true;
+    public static List<Integer> sSingleNonBlockDamagableRecipeList_list = new ArrayList<Integer>(100);
+    private static boolean sSingleNonBlockDamagableRecipeList_create = true;
+    private static final ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
+    private static final String s_H = "h", s_F = "f", s_I = "I", s_P = "P", s_R = "R";
+    private static final ItemStack[][]
+            sShapes1 = new ItemStack[][]{
+            {sMt1, null, sMt1, sMt1, sMt1, sMt1, null, sMt1, null},
+            {sMt1, null, sMt1, sMt1, null, sMt1, sMt1, sMt1, sMt1},
+            {null, sMt1, null, sMt1, sMt1, sMt1, sMt1, null, sMt1},
+            {sMt1, sMt1, sMt1, sMt1, null, sMt1, null, null, null},
+            {sMt1, null, sMt1, sMt1, sMt1, sMt1, sMt1, sMt1, sMt1},
+            {sMt1, sMt1, sMt1, sMt1, null, sMt1, sMt1, null, sMt1},
+            {null, null, null, sMt1, null, sMt1, sMt1, null, sMt1},
+            {null, sMt1, null, null, sMt1, null, null, sMt2, null},
+            {sMt1, sMt1, sMt1, null, sMt2, null, null, sMt2, null},
+            {null, sMt1, null, null, sMt2, null, null, sMt2, null},
+            {sMt1, sMt1, null, sMt1, sMt2, null, null, sMt2, null},
+            {null, sMt1, sMt1, null, sMt2, sMt1, null, sMt2, null},
+            {sMt1, sMt1, null, null, sMt2, null, null, sMt2, null},
+            {null, sMt1, sMt1, null, sMt2, null, null, sMt2, null},
+            {null, sMt1, null, sMt1, null, null, null, sMt1, sMt2},
+            {null, sMt1, null, null, null, sMt1, sMt2, sMt1, null},
+            {null, sMt1, null, sMt1, null, sMt1, null, null, sMt2},
+            {null, sMt1, null, sMt1, null, sMt1, sMt2, null, null},
+            {null, sMt2, null, null, sMt1, null, null, sMt1, null},
+            {null, sMt2, null, null, sMt2, null, sMt1, sMt1, sMt1},
+            {null, sMt2, null, null, sMt2, null, null, sMt1, null},
+            {null, sMt2, null, sMt1, sMt2, null, sMt1, sMt1, null},
+            {null, sMt2, null, null, sMt2, sMt1, null, sMt1, sMt1},
+            {null, sMt2, null, null, sMt2, null, sMt1, sMt1, null},
+            {sMt1, null, null, null, sMt2, null, null, null, sMt2},
+            {null, null, sMt1, null, sMt2, null, sMt2, null, null},
+            {sMt1, null, null, null, sMt2, null, null, null, null},
+            {null, null, sMt1, null, sMt2, null, null, null, null},
+            {sMt1, sMt2, null, null, null, null, null, null, null},
+            {sMt2, sMt1, null, null, null, null, null, null, null},
+            {sMt1, null, null, sMt2, null, null, null, null, null},
+            {sMt2, null, null, sMt1, null, null, null, null, null},
+            {sMt1, sMt1, sMt1, sMt1, sMt1, sMt1, null, sMt2, null},
+            {sMt1, sMt1, null, sMt1, sMt1, sMt2, sMt1, sMt1, null},
+            {null, sMt1, sMt1, sMt2, sMt1, sMt1, null, sMt1, sMt1},
+            {null, sMt2, null, sMt1, sMt1, sMt1, sMt1, sMt1, sMt1},
+            {sMt1, sMt1, sMt1, sMt1, sMt2, sMt1, null, sMt2, null},
+            {sMt1, sMt1, null, sMt1, sMt2, sMt2, sMt1, sMt1, null},
+            {null, sMt1, sMt1, sMt2, sMt2, sMt1, null, sMt1, sMt1},
+            {null, sMt2, null, sMt1, sMt2, sMt1, sMt1, sMt1, sMt1},
+            {sMt1, null, null, null, sMt1, null, null, null, null},
+            {null, sMt1, null, sMt1, null, null, null, null, null},
+            {sMt1, sMt1, null, sMt2, null, sMt1, sMt2, null, null},
+            {null, sMt1, sMt1, sMt1, null, sMt2, null, null, sMt2}
+    };
+    public static List<Integer> sSingleNonBlockDamagableRecipeList_validsShapes1 = new ArrayList<Integer>(44);
+    public static boolean sSingleNonBlockDamagableRecipeList_validsShapes1_update = false;
+    public static List<Integer> sSingleNonBlockDamagableRecipeList_warntOutput = new ArrayList<Integer>(50);
+    public static List<Integer> sVanillaRecipeList_warntOutput = new ArrayList<Integer>(50);
 
     static {
         sNativeRecipeClasses.add(ShapedRecipes.class.getName());
@@ -1267,9 +1322,11 @@ public class GT_ModHandler {
      * This also removes old Recipes from the List.
      */
     public static ArrayList<ItemStack> getVanillyToolRecipeOutputs(ItemStack... aRecipe) {
+        ArrayList<ItemStack> rList = new ArrayList<ItemStack>();
+        if (aRecipe == null) {return rList;}
         if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished) {
-            sSingleNonBlockDamagableRecipeList.clear();}
-        if (sSingleNonBlockDamagableRecipeList.isEmpty()) {
+            sSingleNonBlockDamagableRecipeList.clear();sSingleNonBlockDamagableRecipeList_create = true;sSingleNonBlockDamagableRecipeList_validsShapes1.clear();}
+        if (sSingleNonBlockDamagableRecipeList_create/*sSingleNonBlockDamagableRecipeList.isEmpty()*/) {
             for (IRecipe tRecipe : (ArrayList<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
                 ItemStack tStack = tRecipe.getRecipeOutput();
                 if (GT_Utility.isStackValid(tStack) && tStack.getMaxStackSize() == 1 && tStack.getMaxDamage() > 0 && !(tStack.getItem() instanceof ItemBlock) && !(tStack.getItem() instanceof IReactorComponent) && !isElectricItem(tStack) && !GT_Utility.isStackInList(tStack, sNonReplaceableItems)) {
@@ -1304,10 +1361,39 @@ public class GT_ModHandler {
                 }
             }
             GT_Log.out.println("GT_Mod: Created a List of Tool Recipes containing " + sSingleNonBlockDamagableRecipeList.size() + " Recipes for recycling." + (sSingleNonBlockDamagableRecipeList.size() > 1024 ? " Scanning all these Recipes is the reason for the startup Lag you receive right now." : E));
+            int aList_move = sSingleNonBlockDamagableRecipeList.size();
+            sSingleNonBlockDamagableRecipeList_list.add(aList_move);
+            sSingleNonBlockDamagableRecipeList_create = false;
+            sSingleNonBlockDamagableRecipeList_validsShapes1_update = true;
+            for (int i = 0; i < aList_move; i++) {
+              for (int j = 0; j < sShapes1.length; j++) {
+                if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {
+                    ItemStack[] sRecipe = sShapes1[j];
+                    if (sRecipe == null) continue;
+                    boolean temp1 = false;
+                    for (byte k = 0; k < sRecipe.length; k++) {
+                      if (sRecipe[k] != null) {
+                        temp1 = true;
+                        break;
+                      }
+                    }
+                    if (!temp1) {continue;}
+                    InventoryCrafting aCrafting = new InventoryCrafting(new Container() {
+                    @Override
+                    public boolean canInteractWith(EntityPlayer var1) {return false;}}, 3, 3);
+                    for (int l = 0; l < 9 && l < sRecipe.length; l++) {aCrafting.setInventorySlotContents(l, sRecipe[l]);}
+                      if (sSingleNonBlockDamagableRecipeList.get(i).matches(aCrafting, DW)) {
+                        sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);
+                      }
+                }
+              }
+            }
+                    
         }
-        ArrayList<ItemStack> rList = getRecipeOutputs(sSingleNonBlockDamagableRecipeList, true, aRecipe);
+        /*ArrayList<ItemStack> */
+        if (sSingleNonBlockDamagableRecipeList.size() != 0) {rList = getRecipeOutputs(sSingleNonBlockDamagableRecipeList, true, aRecipe);}
         if (!GregTech_API.sPostloadStarted || GregTech_API.sPostloadFinished) {
-            sSingleNonBlockDamagableRecipeList.clear();}
+            sSingleNonBlockDamagableRecipeList.clear();sSingleNonBlockDamagableRecipeList_create = true;sSingleNonBlockDamagableRecipeList_validsShapes1.clear();}
         return rList;
     }
 
@@ -1325,7 +1411,7 @@ public class GT_ModHandler {
      */
     public static ArrayList<ItemStack> getRecipeOutputs(List<IRecipe> aList, boolean aDeleteFromList, ItemStack... aRecipe) {
         ArrayList<ItemStack> rList = new ArrayList<ItemStack>();
-        if (aRecipe == null) {return rList;}
+        if (aRecipe == null || aList.size() == 0) {return rList;}
         boolean temp = false;
         for (byte i = 0; i < aRecipe.length; i++) {
             if (aRecipe[i] != null) {
@@ -1343,23 +1429,36 @@ public class GT_ModHandler {
         for (int i = 0; i < 9 && i < aRecipe.length; i++) {aCrafting.setInventorySlotContents(i, aRecipe[i]);}
         int aList_sS=aList.size();
         ArrayList<Integer> tempaList_list = new ArrayList<Integer>();
+        if (!aDeleteFromList) {
         for (int i = 0; i < aList_sS; i++) {
             IRecipe tempALg0 = aList.get(i);
             if (tempALg0.matches(aCrafting, DW)) {
                 ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
                 if (tOutput == null || tOutput.stackSize <= 0) {
-                GT_Log.out.println(i+" - detect tOutput == null or tOutput.stackSize <= 0");
+                if (!(sVanillaRecipeList_warntOutput.contains(i))) {sVanillaRecipeList_warntOutput.add(i);}
                 } else {
                 rList.add(GT_Utility.copy(tOutput));
                 if (aDeleteFromList) {tempaList_list.add(i);}
                 }
         }}
-        boolean tempaList_list_b = tempaList_list.size() != 0 ? true : false;
-        if (aDeleteFromList) {
+        } else {
+        for (int i = 0; i < aList_sS; i++) {
+            IRecipe tempALg0 = aList.get(i);
+                ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
+                if (tOutput == null || tOutput.stackSize <= 0) {
+                if (!(sSingleNonBlockDamagableRecipeList_warntOutput.contains(i))) {sSingleNonBlockDamagableRecipeList_warntOutput.add(i);}
+                } else {
+                rList.add(GT_Utility.copy(tOutput));
+                if (aDeleteFromList) {tempaList_list.add(i);}
+                }
+        }
+        }
+        //boolean tempaList_list_b = tempaList_list.size() != 0 ? true : false;
+        if (aDeleteFromList && tempaList_list.size() != 0) {
         List<IRecipe> tempaList_2 = new ArrayList<IRecipe>();
         for (int i = 0; i < aList_sS; i++) {
         int k = 0, l = 0;
-        if (tempaList_list_b && tempaList_list.get(k) == i) {k++;continue;}
+        if (tempaList_list.get(k) == i) {k++;continue;}
         tempaList_2.add(aList.get(l));l++;
         }
         aList = tempaList_2;
