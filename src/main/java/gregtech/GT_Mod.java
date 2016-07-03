@@ -28,6 +28,7 @@ import gregtech.loaders.load.GT_ItemIterator;
 import gregtech.loaders.load.GT_SonictronLoader;
 import gregtech.loaders.misc.GT_Achievements;
 import gregtech.loaders.misc.GT_CoverLoader;
+import gregtech.loaders.misc.OreProcessingConfiguration;
 import gregtech.loaders.postload.*;
 import gregtech.loaders.preload.*;
 import ic2.api.recipe.IRecipeInput;
@@ -294,6 +295,8 @@ public class GT_Mod
         new Enchantment_EnderDamage();
         new Enchantment_Radioactivity();
 
+        new OreProcessingConfiguration(aEvent.getModConfigurationDirectory()).run();
+        
         new GT_Loader_OreProcessing().run();
         new GT_Loader_OreDictionary().run();
         new GT_Loader_ItemData().run();
