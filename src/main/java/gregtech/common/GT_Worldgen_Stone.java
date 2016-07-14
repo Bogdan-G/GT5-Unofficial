@@ -29,37 +29,40 @@ public class GT_Worldgen_Stone
                     float math_pi = 3.141593F;//FB: CNT - CNT_ROUGH_CONSTANT_VALUE
                     float var6 = aRandom.nextFloat() * math_pi;
                     float var1d = this.mSize / 8.0F;float var2d = tX + 8;float var3d = tZ + 8;float var4d = tY - 2;
-                    float var7 = var2d + MathHelper.sin(var6) * var1d;
-                    float var9 = var2d - MathHelper.sin(var6) * var1d;
-                    float var11 = var3d + MathHelper.cos(var6) * var1d;
-                    float var13 = var3d - MathHelper.cos(var6) * var1d;
-                    float var15 = var4d + aRandom.nextInt(3);
-                    float var17 = var4d + aRandom.nextInt(3);
+                    float mh_s_0 = MathHelper.sin(var6) * var1d;float mh_c_0 = MathHelper.cos(var6) * var1d;
+                    float var7 = var2d + mh_s_0;
+                    float var9 = var2d - mh_s_0;
+                    float var11 = var3d + mh_c_0;
+                    float var13 = var3d - mh_c_0;
+                    int var15r = aRandom.nextInt(3);int var17r = aRandom.nextInt(3);
+                    float var15 = var4d + var15r;float var17 = var4d + var17r;
+                    int mh_n_4=var17r - var15r;
+                    float mh_n_0 = -2*mh_s_0;float mh_n_1 = -2*mh_c_0;
                     for (int var19 = 0; var19 <= this.mSize; var19++) {
                         float var5d = var19 / this.mSize;
-                        float var20 = var7 + (var9 - var7) * var5d;
-                        float var22 = var15 + (var17 - var15) * var5d;
-                        float var24 = var11 + (var13 - var11) * var5d;
+                        float var20 = var7 + mh_n_0 * var5d;
+                        float var22 = var15 + mh_n_4 * var5d;
+                        float var24 = var11 + mh_n_1 * var5d;
                         float var6d = var19 * math_pi / this.mSize;
                         float var26 = aRandom.nextFloat() * this.mSize / 16.0F;
-                        float var7d = var26 + 1.0F;
-                        float var28 = (MathHelper.sin(var6d) + 1.0F) * var7d;
-                        float var30 = (MathHelper.sin(var6d) + 1.0F) * var7d;
-                        float var8d = var28 / 2.0F;float var9d = var30 / 2.0F;
+                        //float var7d = var26 + 1.0F;
+                        float var28 = (MathHelper.sin(var6d) + 1.0F) * var26 + 1.0F;
+                        //float var30 = (MathHelper.sin(var6d) + 1.0F) * var7d;
+                        float var8d = var28 / 2.0F;//float var9d = var30 / 2.0F;
                         int tMinX = MathHelper.floor_float(var20 - var8d);
-                        int tMinY = MathHelper.floor_float(var22 - var9d);
+                        int tMinY = MathHelper.floor_float(var22 - var8d);
                         int tMinZ = MathHelper.floor_float(var24 - var8d);
                         int tMaxX = MathHelper.floor_float(var20 + var8d);
-                        int tMaxY = MathHelper.floor_float(var22 + var9d);
+                        int tMaxY = MathHelper.floor_float(var22 + var8d);
                         int tMaxZ = MathHelper.floor_float(var24 + var8d);
                         for (int eX = tMinX; eX <= tMaxX; eX++) {
                             float var39 = (eX + 0.5F - var20) / (var8d);
                             float var10d = var39 * var39;
                             if (var10d < 1.0F) {
                                 for (int eY = tMinY; eY <= tMaxY; eY++) {
-                                    float var42 = (eY + 0.5F - var22) / (var9d);
-                                    float var11d = var42 * var42;
-                                    float var12d = var10d + var11d;
+                                    float var42 = (eY + 0.5F - var22) / (var8d);
+                                    //float var11d = var42 * var42;
+                                    float var12d = var10d + var42 * var42;
                                     if (var12d < 1.0F) {
                                         for (int eZ = tMinZ; eZ <= tMaxZ; eZ++) {
                                             float var45 = (eZ + 0.5F - var24) / (var8d);
