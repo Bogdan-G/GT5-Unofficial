@@ -256,7 +256,7 @@ public abstract class GT_MetaTileEntity_Boiler
         if (aIndex == 1) {
             GT_Utility.doSoundAtClient((String) GregTech_API.sSoundList.get(Integer.valueOf(4)), 2, 1.0F, aX, aY, aZ);
             for (int l = 0; l < 8; l++) {
-                getBaseMetaTileEntity().getWorld().spawnParticle("largesmoke", aX - 0.5D + (new XSTR()).nextDouble(), aY, aZ - 0.5D + (new XSTR()).nextDouble(), 0.0D, 0.0D, 0.0D);
+                getBaseMetaTileEntity().getWorld().spawnParticle("largesmoke", aX - 0.5D + (new XSTR()).nextFloat(), aY, aZ - 0.5D + (new XSTR()).nextFloat(), 0.0D, 0.0D, 0.0D);
             }
         }
     }

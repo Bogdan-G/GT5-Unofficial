@@ -182,7 +182,7 @@ public class GT_MetaTileEntity_BronzeBlastFurnace
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTimer) {
         if ((aBaseMetaTileEntity.isClientSide()) &&
                 (aBaseMetaTileEntity.isActive())) {
-            aBaseMetaTileEntity.getWorld().spawnParticle("largesmoke", aBaseMetaTileEntity.getOffsetX(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextDouble(), aBaseMetaTileEntity.getOffsetY(aBaseMetaTileEntity.getBackFacing(), 1), aBaseMetaTileEntity.getOffsetZ(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextDouble(), 0.0D, 0.3D, 0.0D);
+            aBaseMetaTileEntity.getWorld().spawnParticle("largesmoke", aBaseMetaTileEntity.getOffsetX(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextFloat(), aBaseMetaTileEntity.getOffsetY(aBaseMetaTileEntity.getBackFacing(), 1), aBaseMetaTileEntity.getOffsetZ(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextFloat(), 0.0D, 0.3D, 0.0D);
         }
         if (aBaseMetaTileEntity.isServerSide()) {
             if (this.mUpdate-- == 0) {
