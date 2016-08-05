@@ -119,6 +119,7 @@ public class ItemData {
     @Override
     public String toString() {
         if (mPrefix == null || mMaterial == null || mMaterial.mMaterial == null) return "";
-        return mPrefix.name() + mMaterial.mMaterial.name();
+        String concatenate = String.valueOf(new StringBuilder().append(mPrefix.name()).append(mMaterial.mMaterial.name()));
+        return concatenate;
     }
 }
