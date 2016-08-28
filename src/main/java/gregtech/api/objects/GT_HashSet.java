@@ -11,23 +11,23 @@ public class GT_HashSet<E extends GT_ItemStack> extends AbstractSet<E> {
     private transient Map<GT_ItemStack, Object> map;
 
     public GT_HashSet() {
-        map = new WeakHashMap<GT_ItemStack, Object>();
+        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>();
         GregTech_API.sItemStackMappings.add(map);
     }
 
     public GT_HashSet(Collection<? extends E> c) {
-        map = new WeakHashMap<GT_ItemStack, Object>(Math.max((int) (c.size() / .75f) + 1, 16));
+        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>(Math.max((int) (c.size() / .75f) + 1, 16));
         addAll(c);
         GregTech_API.sItemStackMappings.add(map);
     }
 
     public GT_HashSet(int initialCapacity, float loadFactor) {
-        map = new WeakHashMap<GT_ItemStack, Object>(initialCapacity, loadFactor);
+        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>(initialCapacity, loadFactor);
         GregTech_API.sItemStackMappings.add(map);
     }
 
     public GT_HashSet(int initialCapacity) {
-        map = new WeakHashMap<GT_ItemStack, Object>(initialCapacity);
+        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>(initialCapacity);
         GregTech_API.sItemStackMappings.add(map);
     }
 

@@ -14,7 +14,8 @@ import java.util.Map.Entry;
 import static gregtech.api.enums.GT_Values.E;
 
 public class GT_LanguageManager {
-    public static final HashMap<String, String> TEMPMAP = new HashMap<String, String>(), BUFFERMAP = new HashMap<String, String>();
+    public static final HashMap<String, String> TEMPMAP = new HashMap<String, String>();
+    public static final java.util.Map<String, String> BUFFERMAP = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, String>();
     public static Configuration sEnglishFile;
 
     public static String addStringLocalization(String aKey, String aEnglish) {

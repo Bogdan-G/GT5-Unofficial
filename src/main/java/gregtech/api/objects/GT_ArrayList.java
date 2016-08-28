@@ -1,10 +1,14 @@
 package gregtech.api.objects;
 
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import org.eclipse.collections.impl.*;
+import org.eclipse.collections.impl.collection.mutable.*;
+import org.eclipse.collections.impl.list.mutable.*;
 
-public class GT_ArrayList<E> extends ArrayList<E> {
+public class GT_ArrayList<E> extends FastList<E> {//attempt, old: ArrayList
     private static final long serialVersionUID = 1L;private int size_sS;
 
     private final boolean mAllowNulls;

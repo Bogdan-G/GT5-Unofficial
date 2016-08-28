@@ -12,10 +12,10 @@ public class OreProcessingConfiguration
     implements Runnable
 {
     private final Configuration mConfiguration;
-    private final HashMap<String, Boolean> mEnabledMaterials;
+    private final java.util.Map<String, Boolean> mEnabledMaterials;
     public OreProcessingConfiguration(File aModConfigurationDirectory)
     {
-        this.mEnabledMaterials = new HashMap<String, Boolean>();
+        this.mEnabledMaterials = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Boolean>();
         this.mConfiguration =
             new Configuration(new File(new File(aModConfigurationDirectory, "GregTech"), "OreProcessing.cfg"));
         this.mConfiguration.load();

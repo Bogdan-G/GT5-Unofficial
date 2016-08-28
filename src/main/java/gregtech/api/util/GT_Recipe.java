@@ -124,7 +124,7 @@ public class GT_Recipe {
                 }
 
         if (aOptimize && aDuration >= 32) {
-            ArrayList<ItemStack> tList = new ArrayList<ItemStack>();
+            org.eclipse.collections.impl.list.mutable.FastList<ItemStack> tList = new org.eclipse.collections.impl.list.mutable.FastList<ItemStack>();
             tList.addAll(Arrays.asList(aInputs));
             tList.addAll(Arrays.asList(aOutputs));
             for (int i = 0; i < tList.size(); i++) if (tList.get(i) == null) tList.remove(i--);

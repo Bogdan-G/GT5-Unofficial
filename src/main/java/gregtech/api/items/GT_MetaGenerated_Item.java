@@ -54,7 +54,7 @@ public abstract class GT_MetaGenerated_Item extends GT_MetaBase_Item implements 
      * <p/>
      * You can also use the unlocalized Name gotten from getUnlocalizedName() as Key if you want to get a specific Item.
      */
-    public static final ConcurrentHashMap<String, GT_MetaGenerated_Item> sInstances = new ConcurrentHashMap<String, GT_MetaGenerated_Item>();
+    public static final org.eclipse.collections.impl.map.mutable.UnifiedMap<String, GT_MetaGenerated_Item> sInstances = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, GT_MetaGenerated_Item>();
 
 	/* ---------- CONSTRUCTOR AND MEMBER VARIABLES ---------- */
 
@@ -63,10 +63,10 @@ public abstract class GT_MetaGenerated_Item extends GT_MetaBase_Item implements 
     public final BitSet mVisibleItems;
     public final IIcon[][] mIconList;
 
-    public final ConcurrentHashMap<Short, IFoodStat> mFoodStats = new ConcurrentHashMap<Short, IFoodStat>();
-    public final ConcurrentHashMap<Short, Long[]> mElectricStats = new ConcurrentHashMap<Short, Long[]>();
-    public final ConcurrentHashMap<Short, Long[]> mFluidContainerStats = new ConcurrentHashMap<Short, Long[]>();
-    public final ConcurrentHashMap<Short, Short> mBurnValues = new ConcurrentHashMap<Short, Short>();
+    public final org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, IFoodStat> mFoodStats = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, IFoodStat>();
+    public final org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]> mElectricStats = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]>();
+    public final org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]> mFluidContainerStats = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]>();
+    public final org.eclipse.collections.impl.map.mutable.primitive.ShortShortHashMap/*<Short, Short>*/ mBurnValues = new org.eclipse.collections.impl.map.mutable.primitive.ShortShortHashMap/*<Short, Short>*/();
 
     /**
      * Creates the Item using these Parameters.

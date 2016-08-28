@@ -33,7 +33,7 @@ import static gregtech.api.enums.GT_Values.V;
 
 public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpecialElectricItem, IElectricItemManager, IFluidContainerItem {
     /* ---------- CONSTRUCTOR AND MEMBER VARIABLES ---------- */
-    private final HashMap<Short, ArrayList<IItemBehaviour<GT_MetaBase_Item>>> mItemBehaviors = new HashMap<Short, ArrayList<IItemBehaviour<GT_MetaBase_Item>>>();
+    private final /*Hash*/java.util.Map<Short, ArrayList<IItemBehaviour<GT_MetaBase_Item>>> mItemBehaviors = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, ArrayList<IItemBehaviour<GT_MetaBase_Item>>>();
 
     /**
      * Creates the Item using these Parameters.

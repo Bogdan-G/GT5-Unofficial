@@ -34,17 +34,17 @@ import java.util.List;
 
 public class GT_Achievements {
 
-    public static List<Materials> oreList = new ArrayList<Materials>();
-    public static List<Integer[]> oreStats = new ArrayList<Integer[]>();
+    public static List<Materials> oreList = new org.eclipse.collections.impl.list.mutable.FastList<Materials>();
+    public static List<Integer[]> oreStats = new org.eclipse.collections.impl.list.mutable.FastList<Integer[]>();
     public static int oreReg = -1;
-    public ConcurrentHashMap<String, Achievement> achievementList;
-    public ConcurrentHashMap<String, Boolean> issuedAchievements;
+    public org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Achievement> achievementList;
+    public org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Boolean> issuedAchievements;
     public int adjX = 5;
     public int adjY = 9;
 
     public GT_Achievements() {
-        this.achievementList = new ConcurrentHashMap();
-        this.issuedAchievements = new ConcurrentHashMap();
+        this.achievementList = new org.eclipse.collections.impl.map.mutable.UnifiedMap();
+        this.issuedAchievements = new org.eclipse.collections.impl.map.mutable.UnifiedMap();
         int oreList_sS=oreList.size();
         for (int i = 0; i < oreList_sS; i++) {
             if (GT_Values.D1 && this.achievementList.get(oreList.get(i).name()) == null) {

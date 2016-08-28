@@ -103,6 +103,7 @@ dependencies {
     provided name: 'CoFHLib', version: config.cofhlib.version, ext: 'jar'
     provided name: 'CoFHCore', version: config.cofhcore.version, ext: 'jar'
     provided name: 'Railcraft', version: config.railcraft.version, ext: 'jar'
+    compile fileTree(dir: "libs", include: "*.jar")
 }
 
 processResources

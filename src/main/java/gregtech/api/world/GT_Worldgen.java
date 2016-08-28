@@ -13,7 +13,7 @@ public abstract class GT_Worldgen {
 
     public final String mWorldGenName;
     public final boolean mEnabled;
-    private final Map<String, Boolean> mDimensionMap = new ConcurrentHashMap<String, Boolean>();
+    private final Map<String, Boolean> mDimensionMap = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Boolean>();
 
     public GT_Worldgen(String aName, List aList, boolean aDefault) {
         mWorldGenName = aName;

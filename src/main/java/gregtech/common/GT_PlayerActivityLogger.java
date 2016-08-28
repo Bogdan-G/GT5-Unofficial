@@ -4,6 +4,7 @@ import gregtech.GT_Mod;
 import gregtech.api.util.GT_Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GT_PlayerActivityLogger
         implements Runnable {
@@ -13,8 +14,8 @@ public class GT_PlayerActivityLogger
                 if (GT_Log.pal == null) {
                     return;
                 }
-                ArrayList<String> tList = GT_Mod.gregtechproxy.mBufferedPlayerActivity;
-                GT_Mod.gregtechproxy.mBufferedPlayerActivity = new ArrayList();
+                List<String> tList = GT_Mod.gregtechproxy.mBufferedPlayerActivity;
+                GT_Mod.gregtechproxy.mBufferedPlayerActivity = new org.eclipse.collections.impl.list.mutable.FastList();
                 String tLastOutput = "";
                 int i = 0;
                 int j=tList.size();

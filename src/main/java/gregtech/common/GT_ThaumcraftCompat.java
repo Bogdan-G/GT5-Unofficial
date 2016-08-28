@@ -118,7 +118,7 @@ public class GT_ThaumcraftCompat
             }
         }
         ResearchItem rResearch = new ResearchItem(aResearch, aCategory, getAspectList(aAspects), aX, aY, aComplexity, aIcon);
-        ArrayList<ResearchPage> tPages = new ArrayList(aPages.length);
+        /*Array*/List<ResearchPage> tPages = new org.eclipse.collections.impl.list.mutable.FastList(aPages.length);
         GT_LanguageManager.addStringLocalization("tc.research_name." + aResearch, aName);
         GT_LanguageManager.addStringLocalization("tc.research_text." + aResearch, "[GT] " + aText);
         for (Object tPage : aPages) {
