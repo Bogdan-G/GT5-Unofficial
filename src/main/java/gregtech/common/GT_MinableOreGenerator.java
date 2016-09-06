@@ -31,9 +31,9 @@ public class GT_MinableOreGenerator
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5) {
         float math_pi = 3.141593F;//FB: CNT - CNT_ROUGH_CONSTANT_VALUE
         float var6 = par2Random.nextFloat() * math_pi;
-        float var1s = this.numberOfBlocks / 8.0F;
+        int var1s = this.numberOfBlocks >> 3;
         int var4s = par4 - 2;int var5s = par3 + 8;int var6s = par5 + 8;
-        float var7s = this.numberOfBlocks / 16.0F;
+        int var7s = this.numberOfBlocks >> 4;
         float var8s = math_pi / this.numberOfBlocks;
         float mh_s_0 = MathHelper.sin(var6) * var1s;float mh_c_0 = MathHelper.cos(var6) * var1s;
         float var7 = var5s + mh_s_0;

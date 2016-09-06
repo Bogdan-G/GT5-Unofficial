@@ -420,7 +420,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
         NBTTagCompound tNBT = aStack.getTagCompound();
         if (tNBT == null) tNBT = new NBTTagCompound();
         tNBT.removeTag("GT.ItemCharge");
-        aCharge = Math.min(tStats[0] < 0 ? Math.abs(tStats[0] / 2) : aCharge, Math.abs(tStats[0]));
+        aCharge = Math.min(tStats[0] < 0 ? Math.abs(tStats[0] >> 1) : aCharge, Math.abs(tStats[0]));
         if (aCharge > 0) {
             aStack.setItemDamage(getChargedMetaData(aStack));
             tNBT.setLong("GT.ItemCharge", aCharge);

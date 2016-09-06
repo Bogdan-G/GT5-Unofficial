@@ -45,7 +45,7 @@ public class GT_RadioactiveCellIC_Item extends GT_RadioactiveCell_Item implement
             return;
         }
         for (int iteration = 0; iteration < this.numberOfCells; iteration++) {
-            int pulses = 1 + this.numberOfCells / 2;
+            int pulses = 1 + (this.numberOfCells >> 1);
             if (!heatrun) {
                 for (int i = 0; i < pulses; i++) {
                     acceptUraniumPulse(reactor, yourStack, yourStack, x, y, x, y, heatrun);
@@ -55,7 +55,7 @@ public class GT_RadioactiveCellIC_Item extends GT_RadioactiveCell_Item implement
             } else {
                 pulses += checkPulseable(reactor, x - 1, y, yourStack, x, y, heatrun) + checkPulseable(reactor, x + 1, y, yourStack, x, y, heatrun) + checkPulseable(reactor, x, y - 1, yourStack, x, y, heatrun) + checkPulseable(reactor, x, y + 1, yourStack, x, y, heatrun);
 
-                int heat = sumUp(pulses) * 4;
+                int heat = sumUp(pulses) << 2;
 
                 ArrayList<ItemStackCoord> heatAcceptors = new ArrayList();
                 checkHeatAcceptor(reactor, x - 1, y, heatAcceptors);

@@ -30,8 +30,8 @@ public class GT_GUIContainer_QuantumChest extends GT_GUIContainerMetaTile_Machin
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-        int x = (width - xSize) / 2;
-        int y = (height - ySize) / 2;
+        int x = (width - xSize) >> 1;
+        int y = (height - ySize) >> 1;
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
     }
 }

@@ -225,7 +225,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
                 }
 
                 if (mFluid != null && mFluid.amount > 0) {
-                    int tAmount = Math.max(1, Math.min(mCapacity * 10, mFluid.amount / 2)), tSuccessfulTankAmount = 0;
+                    int tAmount = Math.max(1, Math.min(mCapacity * 10, mFluid.amount >> 1)), tSuccessfulTankAmount = 0;
 
                     for (Entry<IFluidHandler, ForgeDirection> tEntry : tTanks.entrySet())
                         if (tEntry.getKey().fill(tEntry.getValue(), drain(tAmount, false), false) > 0)
@@ -359,7 +359,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
 
     @Override
     public int getTankPressure() {
-        return (mFluid == null ? 0 : mFluid.amount) - (getCapacity() / 2);
+        return (mFluid == null ? 0 : mFluid.amount) - (getCapacity() >> 1);
     }
 
     @Override

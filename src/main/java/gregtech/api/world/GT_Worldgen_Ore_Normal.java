@@ -20,7 +20,7 @@ public class GT_Worldgen_Ore_Normal extends GT_Worldgen_Ore {
             for (int i = 0; i < mAmount; i++) {
                 int tX = aChunkX + aRandom.nextInt(16), tY = mMinY + aRandom.nextInt(mMaxY - mMinY), tZ = aChunkZ + aRandom.nextInt(16);
                 if (mAllowToGenerateinVoid || aWorld.getBlock(tX, tY, tZ).isAir(aWorld, tX, tY, tZ)) {
-                    float math_pi = 3.141593F;float var1b = mSize / 8.0F;
+                    float math_pi = 3.141593F;int var1b = mSize >> 3;
                     float var6 = aRandom.nextFloat() * math_pi;
                     float var3b = MathHelper.sin(var6) * var1b; float var4b = MathHelper.cos(var6) * var1b;
                     float var8b = -2*var3b;float var9b = -2*var4b;
@@ -39,7 +39,7 @@ public class GT_Worldgen_Ore_Normal extends GT_Worldgen_Ore {
                         float var20 = var7 + var8b * var2b;
                         float var22 = var15 + var7b * var2b;
                         float var24 = var11 + var9b * var2b;
-                        float var26 = aRandom.nextFloat() * mSize / 16.0F;
+                        float var26 = aRandom.nextFloat() * (mSize >> 4);
                         float var28 = ((MathHelper.sin(var19 * var12b) + 1.0F) * var26 + 1.0F) / 2.0F;
                         //float var30 = (MathHelper.sin(var19 * math_pi / mSize) + 1.0F) * var26 + 1.0F;
                         int var32 = MathHelper.floor_float(var20 - var28);

@@ -23,7 +23,7 @@ public class GT_Worldgen_Boulder extends GT_Worldgen_Ore {
                 if (tBlock != null && tBlock.isOpaqueCube() && aWorld.getBlock(tX, tY - 6, tZ).isAir(aWorld, tX, tY - 6, tZ)) {
                     float math_pi = 3.141593F;
                     float var6 = aRandom.nextFloat() * math_pi;
-                    float var1b = mSize / 8.0F;
+                    int var1b = mSize >> 3;
                     float var3b = MathHelper.sin(var6) * var1b; float var4b = MathHelper.cos(var6) * var1b;
                     float var8b = -2*var3b;float var9b = -2*var4b;
                     int var10b = (tX + 8);int var11b = (tZ + 8);
@@ -41,7 +41,7 @@ public class GT_Worldgen_Boulder extends GT_Worldgen_Ore {
                         float var20 = var7 + var8b * var2b;
                         float var22 = var15 + var7b * var2b;
                         float var24 = var11 + var9b * var2b;
-                        float var26 = aRandom.nextFloat() * mSize / 16.0F;
+                        float var26 = aRandom.nextFloat() * (mSize >> 4);
                         float var28 = ((MathHelper.sin(var19 * var12b) + 1.0F) * var26 + 1.0F) / 2.0F;
                         //float var30 = (MathHelper.sin(var19 * math_pi / mSize) + 1.0F) * var26 + 1.0F;
                         int var32 = MathHelper.floor_float(var20 - var28);

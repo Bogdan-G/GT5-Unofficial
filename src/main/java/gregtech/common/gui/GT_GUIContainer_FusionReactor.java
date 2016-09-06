@@ -43,8 +43,8 @@ public class GT_GUIContainer_FusionReactor extends GT_GUIContainerMetaTile_Machi
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-        int x = (width - xSize) / 2;
-        int y = (height - ySize) / 2;
+        int x = (width - xSize) >> 1;
+        int y = (height - ySize) >> 1;
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         if (this.mContainer != null) {
             double tScale = (double) this.mContainer.mEnergy / (double) this.mContainer.mStorage;
