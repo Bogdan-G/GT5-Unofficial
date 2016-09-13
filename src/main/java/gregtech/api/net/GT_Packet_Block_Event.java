@@ -11,14 +11,14 @@ import net.minecraft.world.IBlockAccess;
  */
 public class GT_Packet_Block_Event extends GT_Packet {
     private int mX, mZ;
-    private short mY;
+    private byte mY;
     private byte mID, mValue;
 
     public GT_Packet_Block_Event() {
         super(true);
     }
 
-    public GT_Packet_Block_Event(int aX, short aY, int aZ, byte aID, byte aValue) {
+    public GT_Packet_Block_Event(int aX, byte aY, int aZ, byte aID, byte aValue) {
         super(false);
         mX = aX;
         mY = aY;
@@ -31,7 +31,7 @@ public class GT_Packet_Block_Event extends GT_Packet {
     public byte[] encode() {
         ByteArrayDataOutput tOut = ByteStreams.newDataOutput(10);
         tOut.writeInt(mX);
-        tOut.writeShort(mY);
+        tOut.writeByte(mY);
         tOut.writeInt(mZ);
         tOut.writeByte(mID);
         tOut.writeByte(mValue);
@@ -40,13 +40,13 @@ public class GT_Packet_Block_Event extends GT_Packet {
 
     @Override
     public GT_Packet decode(ByteArrayDataInput aData) {
-        return new GT_Packet_Block_Event(aData.readInt(), aData.readShort(), aData.readInt(), aData.readByte(), aData.readByte());
+        return new GT_Packet_Block_Event(aData.readInt(), aData.readByte(), aData.readInt(), aData.readByte(), aData.readByte());
     }
 
     @Override
     public void process(IBlockAccess aWorld) {
         if (aWorld != null) {
-            TileEntity tTileEntity = aWorld.getTileEntity(mX, mY, mZ);
+            TileEntity tTileEntity = aWorld.getTileEntity(mX, ((int)mY)+128, mZ);
             if (tTileEntity != null) tTileEntity.receiveClientEvent(mID, mValue);
         }
     }

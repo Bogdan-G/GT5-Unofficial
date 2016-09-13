@@ -17,12 +17,14 @@ public class GT_Worldgen_Ore_Normal extends GT_Worldgen_Ore {
     @Override
     public boolean executeWorldgen(World aWorld, Random aRandom, String aBiome, int aDimensionType, int aChunkX, int aChunkZ, IChunkProvider aChunkGenerator, IChunkProvider aChunkProvider) {
         if (isGenerationAllowed(aWorld, aDimensionType, mDimensionType) && (mBiomeList.isEmpty() || mBiomeList.contains(aBiome)) && (mProbability <= 1 || aRandom.nextInt(mProbability) == 0)) {
+            float var12b = (float)Math.PI / mSize;
             for (int i = 0; i < mAmount; i++) {
                 int tX = aChunkX + aRandom.nextInt(16), tY = mMinY + aRandom.nextInt(mMaxY - mMinY), tZ = aChunkZ + aRandom.nextInt(16);
                 if (mAllowToGenerateinVoid || aWorld.getBlock(tX, tY, tZ).isAir(aWorld, tX, tY, tZ)) {
-                    float math_pi = 3.141593F;int var1b = mSize >> 3;
-                    float var6 = aRandom.nextFloat() * math_pi;
-                    float var3b = MathHelper.sin(var6) * var1b; float var4b = MathHelper.cos(var6) * var1b;
+                    float var6 = aRandom.nextFloat() * (float)Math.PI;
+                    float var3b_ = MathHelper.sin(var6);
+                    float var3b = var3b_ * (mSize >> 3);
+                    float var4b = (float)Math.sqrt(1 - var3b_) * (mSize >> 3);
                     float var8b = -2*var3b;float var9b = -2*var4b;
                     int var10b = (tX + 8);int var11b = (tZ + 8);
                     float var7 = (var10b + var3b);
@@ -32,7 +34,6 @@ public class GT_Worldgen_Ore_Normal extends GT_Worldgen_Ore {
                     int var5b = aRandom.nextInt(3);int var6b = aRandom.nextInt(3);int var7b = var6b - var5b;
                     float var15 = (tY + var5b - 2);
                     //float var17 = (tY + aRandom.nextInt(3) - 2);
-                    float var12b = math_pi / mSize;
 
                     for (int var19 = 0; var19 <= mSize; ++var19) {
                         float var2b = var19 / mSize;

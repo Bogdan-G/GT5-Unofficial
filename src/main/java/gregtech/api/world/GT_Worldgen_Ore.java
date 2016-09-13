@@ -5,11 +5,12 @@ import net.minecraft.block.Block;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 public abstract class GT_Worldgen_Ore extends GT_Worldgen {
     public final int mBlockMeta, mAmount, mSize, mMinY, mMaxY, mProbability, mDimensionType;
     public final Block mBlock;
-    public final Collection<String> mBiomeList;
+    public final Collection<String> mBiomeList;//all id biomes from 0-256? then it may be static?
     public final boolean mAllowToGenerateinVoid;
     private static final String worldgen_text = "worldgen.";
 
@@ -23,7 +24,7 @@ public abstract class GT_Worldgen_Ore extends GT_Worldgen {
         mSize = GregTech_API.sWorldgenFile.get(worldgen_text + mWorldGenName, "Size", aSize);
         mMinY = GregTech_API.sWorldgenFile.get(worldgen_text + mWorldGenName, "MinHeight", aMinY);
         mMaxY = GregTech_API.sWorldgenFile.get(worldgen_text + mWorldGenName, "MaxHeight", aMaxY);
-        if (aBiomeList == null) mBiomeList = new ArrayList<String>();
+        if (aBiomeList == null) mBiomeList = new FastList<String>();
         else mBiomeList = aBiomeList;
         mAllowToGenerateinVoid = aAllowToGenerateinVoid;
     }

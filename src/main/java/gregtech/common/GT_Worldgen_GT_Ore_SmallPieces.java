@@ -9,8 +9,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.Random;
 
-public class GT_Worldgen_GT_Ore_SmallPieces
-        extends GT_Worldgen {
+public class GT_Worldgen_GT_Ore_SmallPieces extends GT_Worldgen {
     public final short mMinY;
     public final short mMaxY;
     public final short mAmount;

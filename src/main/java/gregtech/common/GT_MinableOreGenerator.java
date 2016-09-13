@@ -8,8 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class GT_MinableOreGenerator
-        extends WorldGenerator {
+public class GT_MinableOreGenerator extends WorldGenerator {
     private Block minableBlockId;
     private Block mBlock;
     private int minableBlockMeta = 0;
@@ -29,20 +28,17 @@ public class GT_MinableOreGenerator
     }
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5) {
-        float math_pi = 3.141593F;//FB: CNT - CNT_ROUGH_CONSTANT_VALUE
-        float var6 = par2Random.nextFloat() * math_pi;
-        int var1s = this.numberOfBlocks >> 3;
-        int var4s = par4 - 2;int var5s = par3 + 8;int var6s = par5 + 8;
+        float var6 = par2Random.nextFloat() * (float)Math.PI;
         int var7s = this.numberOfBlocks >> 4;
-        float var8s = math_pi / this.numberOfBlocks;
-        float mh_s_0 = MathHelper.sin(var6) * var1s;float mh_c_0 = MathHelper.cos(var6) * var1s;
-        float var7 = var5s + mh_s_0;
-        //float var9 = var5s - mh_s_0;
-        float var11 = var6s + mh_c_0;
-        //float var13 = var6s - mh_c_0;
+        float var8s = (float)Math.PI / this.numberOfBlocks;
+        float mh_s_ = MathHelper.sin(var6);
+        float mh_s_0 = mh_s_ * (this.numberOfBlocks >> 3);
+        float mh_c_0 = (float)Math.sqrt(1 - mh_s_) * (this.numberOfBlocks >> 3);
+        float var7 = par3 + 8 + mh_s_0;//float var9 = var5s - mh_s_0;
+        float var11 = par5 + 8 + mh_c_0;//float var13 = var6s - mh_c_0;
         int var15r = par2Random.nextInt(3);int var17r = par2Random.nextInt(3);
         int mh_n_4=var17r - var15r;
-        int var15 = var4s + var15r;//int var17 = var4s + var17r;
+        int var15 = par4 - 2 + var15r;//int var17 = var4s + var17r;
         float mh_n_0 = -2*mh_s_0;float mh_n_1 = -2*mh_c_0;
         for (int var19 = 0; var19 <= this.numberOfBlocks; var19++) {
             float mh_n_2 = var19 / this.numberOfBlocks;

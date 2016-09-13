@@ -38,8 +38,15 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import java.lang.ref.SoftReference;
 import java.util.*;
 import java.util.Map.Entry;import java.util.concurrent.ConcurrentHashMap;
+
+import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 
 import static gregtech.api.enums.GT_Values.*;
 
@@ -51,25 +58,25 @@ import static gregtech.api.enums.GT_Values.*;
  * Due to the many imports, this File can cause compile Problems if not all the APIs are installed
  */
 public class GT_ModHandler {
-    public static final List<IRecipe> sSingleNonBlockDamagableRecipeList = new org.eclipse.collections.impl.list.mutable.FastList<IRecipe>(1000);
-    private static final Map<String, ItemStack> sIC2ItemMap = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, ItemStack>();
-    private static final List<IRecipe> sAllRecipeList = Collections.synchronizedList(new org.eclipse.collections.impl.list.mutable.FastList<IRecipe>(5000)), sBufferRecipeList = new org.eclipse.collections.impl.list.mutable.FastList<IRecipe>(1000);
-    public static volatile int VERSION = 508;
-    public static Collection<String> sNativeRecipeClasses = new org.eclipse.collections.impl.set.mutable.UnifiedSet<String>(), sSpecialRecipeClasses = new org.eclipse.collections.impl.set.mutable.UnifiedSet<String>();
+    public static List<IRecipe> sSingleNonBlockDamagableRecipeList = new FastList<IRecipe>(1000);
+    private static final Map<String, ItemStack> sIC2ItemMap = new UnifiedMap<String, ItemStack>();
+    private static final List<IRecipe> sAllRecipeList = /*Collections.synchronizedList(*/new FastList<IRecipe>(5000)/*)*/, sBufferRecipeList = new FastList<IRecipe>(1000);
+    //public static volatile int VERSION = 508;
+    public static Collection<String> sNativeRecipeClasses = new UnifiedSet<String>(), sSpecialRecipeClasses = new UnifiedSet<String>();
     public static GT_HashSet<GT_ItemStack> sNonReplaceableItems = new GT_HashSet<GT_ItemStack>();
     public static Object sBoxableWrapper = GT_Utility.callConstructor("gregtechmod.api.util.GT_IBoxableWrapper", 0, null, false);
-    private static Map<IRecipeInput, RecipeOutput> sExtractorRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
-    private static Map<IRecipeInput, RecipeOutput> sMaceratorRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
-    private static Map<IRecipeInput, RecipeOutput> sCompressorRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
-    private static Map<IRecipeInput, RecipeOutput> sOreWashingRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
-    private static Map<IRecipeInput, RecipeOutput> sThermalCentrifugeRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
-    private static Map<IRecipeInput, RecipeOutput> sMassfabRecipes = new /*Concurrent*/HashMap<IRecipeInput, RecipeOutput>();
+    private static Map<IRecipeInput, RecipeOutput> sExtractorRecipes = new UnifiedMap<IRecipeInput, RecipeOutput>();
+    private static Map<IRecipeInput, RecipeOutput> sMaceratorRecipes = new UnifiedMap<IRecipeInput, RecipeOutput>();
+    private static Map<IRecipeInput, RecipeOutput> sCompressorRecipes = new UnifiedMap<IRecipeInput, RecipeOutput>();
+    private static Map<IRecipeInput, RecipeOutput> sOreWashingRecipes = new UnifiedMap<IRecipeInput, RecipeOutput>();
+    private static Map<IRecipeInput, RecipeOutput> sThermalCentrifugeRecipes = new UnifiedMap<IRecipeInput, RecipeOutput>();
+    private static Map<IRecipeInput, RecipeOutput> sMassfabRecipes = new UnifiedMap<IRecipeInput, RecipeOutput>();
     private static boolean sBufferCraftingRecipes = true;
-    public static List<Integer> sSingleNonBlockDamagableRecipeList_list = new org.eclipse.collections.impl.list.mutable.FastList<Integer>(100);
+    public static SoftReference<cern.colt.list.IntArrayList> sSingleNonBlockDamagableRecipeList_list = new SoftReference(new cern.colt.list.IntArrayList());
     private static boolean sSingleNonBlockDamagableRecipeList_create = true;
-    private static final ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
+    private static ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
     private static final String s_H = "h", s_F = "f", s_I = "I", s_P = "P", s_R = "R";
-    private static final ItemStack[][]
+    private static ItemStack[][]
             sShapes1 = new ItemStack[][]{
             {sMt1, null, sMt1, sMt1, sMt1, sMt1, null, sMt1, null},
             {sMt1, null, sMt1, sMt1, null, sMt1, sMt1, sMt1, sMt1},
@@ -116,11 +123,11 @@ public class GT_ModHandler {
             {sMt1, sMt1, null, sMt2, null, sMt1, sMt2, null, null},
             {null, sMt1, sMt1, sMt1, null, sMt2, null, null, sMt2}
     };
-    public static List<Integer> sSingleNonBlockDamagableRecipeList_validsShapes1 = new org.eclipse.collections.impl.list.mutable.FastList<Integer>(44);
+    public static List<Integer> sSingleNonBlockDamagableRecipeList_validsShapes1 = new FastList<Integer>(44);
     public static boolean sSingleNonBlockDamagableRecipeList_validsShapes1_update = false;
-    public static List<Integer> sSingleNonBlockDamagableRecipeList_warntOutput = new org.eclipse.collections.impl.list.mutable.FastList<Integer>(50);
-    public static List<Integer> sVanillaRecipeList_warntOutput = new org.eclipse.collections.impl.list.mutable.FastList<Integer>(50);
-    public static final List<IRecipe> sSingleNonBlockDamagableRecipeList_verified = new org.eclipse.collections.impl.list.mutable.FastList<IRecipe>(1000);
+    public static IntHashSet sSingleNonBlockDamagableRecipeList_warntOutput = new IntHashSet();
+    public static IntHashSet sVanillaRecipeList_warntOutput = new IntHashSet();
+    public static List<IRecipe> sSingleNonBlockDamagableRecipeList_verified = new FastList<IRecipe>(1000);
 
     static {
         sNativeRecipeClasses.add(ShapedRecipes.class.getName());
@@ -403,7 +410,7 @@ public class GT_ModHandler {
         aOutput = GT_OreDictUnificator.get(true, aOutput);
         if (aOutput == null || aChance <= 0) return false;
         aOutput.stackSize = 1;
-        if (GT_Config.troll && !GT_Utility.areStacksEqual(aOutput, new ItemStack(Items.wooden_hoe, 1, 0))) return false;
+        //if (GT_Config.troll && !GT_Utility.areStacksEqual(aOutput, new ItemStack(Items.wooden_hoe, 1, 0))) return false;
         aChance = (float) GregTech_API.sRecipeFile.get(ConfigCategories.Machines.scrapboxdrops, aOutput, aChance);
         if (aChance <= 0) return false;
         try {
@@ -1363,7 +1370,7 @@ public class GT_ModHandler {
             }
             GT_Log.out.println("GT_Mod: Created a List of Tool Recipes containing " + sSingleNonBlockDamagableRecipeList.size() + " Recipes for recycling." + (sSingleNonBlockDamagableRecipeList.size() > 1024 ? " Scanning all these Recipes is the reason for the startup Lag you receive right now." : E));
             int aList_move = sSingleNonBlockDamagableRecipeList.size();
-            sSingleNonBlockDamagableRecipeList_list.add(aList_move);
+            sSingleNonBlockDamagableRecipeList_list.get().add(aList_move);
             sSingleNonBlockDamagableRecipeList_create = false;
             sSingleNonBlockDamagableRecipeList_validsShapes1_update = true;
             InventoryCrafting aCrafting = new InventoryCrafting(new Container() {
@@ -1420,17 +1427,17 @@ public class GT_ModHandler {
         }, 3, 3);
         for (int i = 0; i < 9 && i < aRecipe.length; i++) {aCrafting.setInventorySlotContents(i, aRecipe[i]);}
         int aList_sS=aList.size();
-        ArrayList<Integer> tempaList_list = new ArrayList<Integer>();
+        IntArrayList tempaList_list = new IntArrayList();
         if (!aDeleteFromList) {
         for (int i = 0; i < aList_sS; i++) {
             IRecipe tempALg0 = aList.get(i);
             if (tempALg0.matches(aCrafting, DW)) {
                 ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
                 if (tOutput == null || tOutput.stackSize <= 0) {
-                if (!(sVanillaRecipeList_warntOutput.contains(i))) {sVanillaRecipeList_warntOutput.add(i);}
+                sVanillaRecipeList_warntOutput.add(i);
                 } else {
                 rList.add(GT_Utility.copy(tOutput));
-                if (aDeleteFromList) {tempaList_list.add(i);}
+                //if (aDeleteFromList) {tempaList_list.add(i);}
                 }
         }}
         } else {
@@ -1438,7 +1445,7 @@ public class GT_ModHandler {
             IRecipe tempALg0 = aList.get(i);
                 ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
                 if (tOutput == null || tOutput.stackSize <= 0) {
-                if (!(sSingleNonBlockDamagableRecipeList_warntOutput.contains(i))) {sSingleNonBlockDamagableRecipeList_warntOutput.add(i);}
+                sSingleNonBlockDamagableRecipeList_warntOutput.add(i);
                 } else {
                 rList.add(GT_Utility.copy(tOutput));
                 if (aDeleteFromList) {tempaList_list.add(i);}
@@ -1966,5 +1973,15 @@ public class GT_ModHandler {
             toSend.setInteger("energy", energy);
             FMLInterModComms.sendMessage("ThermalExpansion", "Coolant", toSend);
         }
+    }
+    public static void cleanupObjects() {
+        //crutches for allegedly cleaning
+        sSingleNonBlockDamagableRecipeList=null;
+        sSingleNonBlockDamagableRecipeList_list=null;
+        sMt1=null;sMt2=null;sShapes1=null;
+        sSingleNonBlockDamagableRecipeList_validsShapes1=null;
+        sSingleNonBlockDamagableRecipeList_warntOutput=null;
+        sVanillaRecipeList_warntOutput=null;
+        sSingleNonBlockDamagableRecipeList_verified=null;
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.*;
 
-public class ItemData {
+public final class ItemData {
     private static final MaterialStack[] EMPTY_MATERIALSTACK_ARRAY = new MaterialStack[0];
 
     public final List<Object> mExtraData = new GT_ArrayList<Object>(false, 1);

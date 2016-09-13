@@ -7,7 +7,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.SubTag;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IHasWorldObjectAndCoords;
-import gregtech.api.objects.GT_FluidStack;
+//import gregtech.api.objects.GT_FluidStack;
 import gregtech.api.objects.GT_ItemStack;
 import gregtech.api.objects.ItemData;
 import gregtech.api.objects.MaterialStack;
@@ -34,7 +34,7 @@ import static gregtech.api.enums.GT_Values.*;
  * I know this File causes some Errors, because of missing Main Functions, but if you just need to compile Stuff, then remove said erroreous Functions.
  */
 public class GT_Recipe {
-    public static volatile int VERSION = 508;
+    //public static volatile int VERSION = 508;
     /**
      * If you want to change the Output, feel free to modify or even replace the whole ItemStack Array, for Inputs, please add a new Recipe, because of the HashMaps.
      */
@@ -107,8 +107,8 @@ public class GT_Recipe {
         for (ItemStack tStack : aOutputs) GT_Utility.updateItemStack(tStack);
 
         for (int i = 0; i < aChances.length; i++) if (aChances[i] <= 0) aChances[i] = 10000;
-        for (int i = 0; i < aFluidInputs.length; i++) aFluidInputs[i] = new GT_FluidStack(aFluidInputs[i]);
-        for (int i = 0; i < aFluidOutputs.length; i++) aFluidOutputs[i] = new GT_FluidStack(aFluidOutputs[i]);
+        for (int i = 0; i < aFluidInputs.length; i++) aFluidInputs[i] = new FluidStack(aFluidInputs[i].getFluid(), aFluidInputs[i].amount);
+        for (int i = 0; i < aFluidOutputs.length; i++) aFluidOutputs[i] = new FluidStack(aFluidOutputs[i].getFluid(), aFluidOutputs[i].amount);
 
         for (int i = 0; i < aInputs.length; i++)
             if (aInputs[i] != null && Items.feather.getDamage(aInputs[i]) != W)

@@ -65,7 +65,7 @@ import org.bogdang.modifications.random.XSTR;
 @Mod(modid = "gregtech", name = "GregTech", version = "MC1710", useMetadata = false, dependencies = "required-after:IC2; after:Forestry; after:PFAAGeologica; after:Thaumcraft; after:Railcraft; after:appliedenergistics2; after:ThermalExpansion; after:TwilightForest; after:harvestcraft; after:magicalcrops; after:BuildCraft|Transport; after:BuildCraft|Silicon; after:BuildCraft|Factory; after:BuildCraft|Energy; after:BuildCraft|Core; after:BuildCraft|Builders; after:GalacticraftCore; after:GalacticraftMars; after:GalacticraftPlanets; after:ThermalExpansion|Transport; after:ThermalExpansion|Energy; after:ThermalExpansion|Factory; after:RedPowerCore; after:RedPowerBase; after:RedPowerMachine; after:RedPowerCompat; after:RedPowerWiring; after:RedPowerLogic; after:RedPowerLighting; after:RedPowerWorld; after:RedPowerControl;")
 public class GT_Mod
         implements IGT_Mod {
-    public static final int VERSION = 508;
+    //public static final int VERSION = 508;
     public static final int REQUIRED_IC2 = 624;
     @Mod.Instance("gregtech")
     public static GT_Mod instance;
@@ -76,6 +76,7 @@ public class GT_Mod
     private static final String general_text = "general";
     private static final String ic2_text = "ic2_";
 
+    //hmm, again this check is disabled then you can disable the variables
     /*static {
         if ((508 != GregTech_API.VERSION) || (508 != GT_ModHandler.VERSION) || (508 != GT_OreDictUnificator.VERSION) || (508 != GT_Recipe.VERSION) || (508 != GT_Utility.VERSION) || (508 != GT_RecipeRegistrator.VERSION) || (508 != Element.VERSION) || (508 != Materials.VERSION) || (508 != OrePrefixes.VERSION)) {
             throw new GT_ItsNotMyFaultException("One of your Mods included GregTech-API Files inside it's download, mention this to the Mod Author, who does this bad thing, and tell him/her to use reflection. I have added a Version check, to prevent Authors from breaking my Mod that way.");
@@ -462,11 +463,12 @@ public class GT_Mod
         FMLLog.info("If your Log stops here, you were too impatient. Wait a bit more next time, before killing Minecraft with the Task Manager.", new Object[0]);
         gregtechproxy.activateOreDictHandler();
         FMLLog.info("Congratulations, you have been waiting long enough. Have a Cake.", new Object[0]);
-        GT_Log.out.println("GT_Mod: List of Lists of Tool Recipes: "+GT_ModHandler.sSingleNonBlockDamagableRecipeList_list.toString());
+        GT_Log.out.println("GT_Mod: List of Lists of Tool Recipes: "+GT_ModHandler.sSingleNonBlockDamagableRecipeList_list.get().toString());
         //GT_Log.out.println("GT_Mod: " + GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() + " Recipes were left unused.");
-        GT_Log.out.println("GT_Mod: Vanilla Recipe List -> Outputs null or stackSize <=0: " + GT_ModHandler.sVanillaRecipeList_warntOutput.toString());
-        GT_Log.out.println("GT_Mod: Single Non Block Damagable Recipe List -> Outputs null or stackSize <=0: " + GT_ModHandler.sSingleNonBlockDamagableRecipeList_warntOutput.toString());
-        GT_Log.out.println("GT_Mod: sRodMaterialList cycles: " + GT_RecipeRegistrator.sRodMaterialList_cycles);
+        GT_Log.out.println("GT_Mod: Vanilla Recipe List -> Outputs null or stackSize <=0: " + GT_ModHandler.sVanillaRecipeList_warntOutput.makeString());
+        GT_Log.out.println("GT_Mod: Single Non Block Damagable Recipe List -> Outputs null or stackSize <=0: " + GT_ModHandler.sSingleNonBlockDamagableRecipeList_warntOutput.makeString());
+        GT_Log.out.println("GT_Mod: sRodMaterialList cycles (work): " + GT_RecipeRegistrator.sRodMaterialList_cycles);
+        GT_Log.out.println("GT_Mod: sRodMaterialList cycles (no work): " + GT_RecipeRegistrator.sRodMaterialList_cycles1);
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPostLoad, part 4, gregtechproxy.activateOreDictHandler "+elapsed/1000000+"ms");
         startT = System.nanoTime();
@@ -701,12 +703,10 @@ public class GT_Mod
         achievements = new GT_Achievements();
         Map.Entry<IRecipeInput, RecipeOutput> tRecipe;
         GT_Log.out.println("GT_Mod: Loading finished, deallocating temporary Init Variables.");
-        GregTech_API.sBeforeGTPreload = null;
-        GregTech_API.sAfterGTPreload = null;
-        GregTech_API.sBeforeGTLoad = null;
-        GregTech_API.sAfterGTLoad = null;
-        GregTech_API.sBeforeGTPostload = null;
-        GregTech_API.sAfterGTPostload = null;
+        GregTech_API.sBeforeGTPreload=null;GregTech_API.sAfterGTPreload=null;
+        GregTech_API.sBeforeGTLoad=null;GregTech_API.sAfterGTLoad=null;
+        GregTech_API.sBeforeGTPostload=null;GregTech_API.sAfterGTPostload=null;
+        GT_ModHandler.cleanupObjects();GT_RecipeRegistrator.cleanupObjects();GT_LanguageManager.cleanupObjects();
         elapsed = System.nanoTime() - startT;
         FMLLog.warning("GT Timer: onPostLoad, part 8 "+elapsed/1000000+"ms");
     }

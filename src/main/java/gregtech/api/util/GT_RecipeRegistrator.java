@@ -26,9 +26,9 @@ public class GT_RecipeRegistrator {
      * List of Materials, which are used in the Creation of Sticks. All Rod Materials are automatically added to this List.
      */
     public static final List<Materials> sRodMaterialList = new ArrayList<Materials>();
-    private static final ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
+    private static ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
     private static final String s_H = "h", s_F = "f", s_I = "I", s_P = "P", s_R = "R";
-    private static final ItemStack[][]
+    private static ItemStack[][]
             sShapes1 = new ItemStack[][]{
             {sMt1, null, sMt1, sMt1, sMt1, sMt1, null, sMt1, null},
             {sMt1, null, sMt1, sMt1, null, sMt1, sMt1, sMt1, sMt1},
@@ -75,7 +75,7 @@ public class GT_RecipeRegistrator {
             {sMt1, sMt1, null, sMt2, null, sMt1, sMt2, null, null},
             {null, sMt1, sMt1, sMt1, null, sMt2, null, null, sMt2}
     };
-    private static final String[][] sShapesA = new String[][]{
+    private static String[][] sShapesA = new String[][]{
             null,
             null,
             null,
@@ -121,9 +121,10 @@ public class GT_RecipeRegistrator {
             {"Scythe", s_I + s_P + s_H, s_R + s_F + s_P, s_R + " " + " "},
             {"Scythe", s_H + s_P + s_I, s_P + s_F + s_R, " " + " " + s_R}
     };
-    public static volatile int VERSION = 508;
-    public static int sRodMaterialList_cycles = 0;
+    //public static volatile int VERSION = 508;
+    public static int sRodMaterialList_cycles = 0;public static int sRodMaterialList_cycles1 = 0;
     private static int i_count = 0;
+    private static boolean first_call_gVTRO = true;private static boolean emptyList_find = false;
 
     public static void registerMaterialRecycling(ItemStack aStack, Materials aMaterial, long aMaterialAmount, MaterialStack aByproduct) {
         if (GT_Utility.isStackInvalid(aStack)) return;
@@ -296,7 +297,7 @@ public class GT_RecipeRegistrator {
                 }
         }
 
-        GT_ModHandler.getVanillyToolRecipeOutputs(sShapes1[0]);
+        if (first_call_gVTRO) {GT_ModHandler.getVanillyToolRecipeOutputs(sShapes1[0]);first_call_gVTRO = false;}
         for (Materials tMaterial : sRodMaterialList) {
             ItemStack tMt2 = GT_OreDictUnificator.get(OrePrefixes.stick, tMaterial, 1);
             if (tMt2 != null) {
@@ -304,8 +305,9 @@ public class GT_RecipeRegistrator {
                 sMt2.stackSize = 1;
                 Items.feather.setDamage(sMt2, Items.feather.getDamage(tMt2));
 
-                if (GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_verified.size() == 0) {
-                sRodMaterialList_cycles++;continue;}
+                if (emptyList_find || GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size() == 0 || GT_ModHandler.sSingleNonBlockDamagableRecipeList_verified.size() == 0) {
+                if (!emptyList_find) {emptyList_find = true;}
+                sRodMaterialList_cycles1++;continue;}
                 int sShapes1_len = GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size();
                 for (int i = 0; i < sShapes1_len; i++) {
                     //int i = 0;
@@ -351,5 +353,9 @@ public class GT_RecipeRegistrator {
                 }
             }
         }
+    }
+    public static void cleanupObjects() {
+        //crutches for allegedly cleaning
+        sMt1=null;sMt2=null;sShapes1=null;sShapesA=null;
     }
 }

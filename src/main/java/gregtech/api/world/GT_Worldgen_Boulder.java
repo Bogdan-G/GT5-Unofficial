@@ -17,24 +17,20 @@ public class GT_Worldgen_Boulder extends GT_Worldgen_Ore {
     @Override
     public boolean executeWorldgen(World aWorld, Random aRandom, String aBiome, int aDimensionType, int aChunkX, int aChunkZ, IChunkProvider aChunkGenerator, IChunkProvider aChunkProvider) {
         if (isGenerationAllowed(aWorld, aDimensionType, mDimensionType) && (mBiomeList.isEmpty() || mBiomeList.contains(aBiome)) && (mProbability <= 1 || aRandom.nextInt(mProbability) == 0)) {
+            float var12b = (float)Math.PI / mSize;
             for (int i = 0; i < mAmount; i++) {
                 int tX = aChunkX + aRandom.nextInt(16), tY = mMinY + aRandom.nextInt(mMaxY - mMinY), tZ = aChunkZ + aRandom.nextInt(16);
                 Block tBlock = aWorld.getBlock(tX, tY - 7, tZ);
                 if (tBlock != null && tBlock.isOpaqueCube() && aWorld.getBlock(tX, tY - 6, tZ).isAir(aWorld, tX, tY - 6, tZ)) {
-                    float math_pi = 3.141593F;
-                    float var6 = aRandom.nextFloat() * math_pi;
-                    int var1b = mSize >> 3;
-                    float var3b = MathHelper.sin(var6) * var1b; float var4b = MathHelper.cos(var6) * var1b;
+                    float var6 = aRandom.nextFloat() * (float)Math.PI;
+                    float var3b_ = MathHelper.sin(var6);
+                    float var3b = var3b_ * (mSize >> 3);
+                    float var4b = (float)Math.sqrt(1 - var3b_) * (mSize >> 3);
                     float var8b = -2*var3b;float var9b = -2*var4b;
-                    int var10b = (tX + 8);int var11b = (tZ + 8);
-                    float var7 = (var10b + var3b);
-                    //float var9 = (var10b - var3b);
-                    float var11 = (var11b + var4b);
-                    //float var13 = (var11b - var4b);
+                    float var7 = ((tX + 8) + var3b);//float var9 = (var10b - var3b);
+                    float var11 = ((tZ + 8) + var4b);//float var13 = (var11b - var4b);
                     int var5b = aRandom.nextInt(3);int var6b = aRandom.nextInt(3);int var7b = var6b - var5b;
-                    float var15 = (tY + var5b - 2);
-                    //float var17 = (tY + var6b - 2);
-                    float var12b = math_pi / mSize;
+                    float var15 = (tY + var5b - 2);//float var17 = (tY + var6b - 2);
 
                     for (int var19 = 0; var19 <= mSize; ++var19) {
                         float var2b = var19 / mSize;

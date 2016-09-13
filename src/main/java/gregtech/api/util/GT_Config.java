@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.Property;
 import static gregtech.api.enums.GT_Values.E;
 
 public class GT_Config implements Runnable {
-    public static boolean troll = false;
+    //public static boolean troll = false;
 
     public static Configuration sConfigFileIDs;
     public final Configuration mConfig;

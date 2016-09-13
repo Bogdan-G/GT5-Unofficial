@@ -80,7 +80,7 @@ public class GT_Utility {
     private static final List<FluidContainerData> sFluidContainerList = new ArrayList<FluidContainerData>();
     private static final Map<GT_ItemStack, FluidContainerData> sFilledContainerToData = new /*Concurrent*/HashMap<GT_ItemStack, FluidContainerData>();
     private static final Map<GT_ItemStack, Map<Fluid, FluidContainerData>> sEmptyContainerToFluidToData = new /*Concurrent*/HashMap<GT_ItemStack, Map<Fluid, FluidContainerData>>();
-    public static volatile int VERSION = 508;
+    //public static volatile int VERSION = 508;
     public static boolean TE_CHECK = false, BC_CHECK = false, CHECK_ALL = true;
     public static Map<GT_PlayedSound, Integer> sPlayedSoundMap = new /*Concurrent*/HashMap<GT_PlayedSound, Integer>();
     private static int sBookCount = 0;

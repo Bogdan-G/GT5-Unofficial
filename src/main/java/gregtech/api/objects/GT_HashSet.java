@@ -4,30 +4,32 @@ import gregtech.api.GregTech_API;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.item.ItemStack;
 
-import java.util.*;import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
-public class GT_HashSet<E extends GT_ItemStack> extends AbstractSet<E> {
+public final class GT_HashSet<E extends GT_ItemStack> extends AbstractSet<E> {
     private static final Object OBJECT = new Object();
     private transient Map<GT_ItemStack, Object> map;
 
     public GT_HashSet() {
-        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>();
+        map = new UnifiedMap<GT_ItemStack, Object>();
         GregTech_API.sItemStackMappings.add(map);
     }
 
     public GT_HashSet(Collection<? extends E> c) {
-        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>(Math.max((int) (c.size() / .75f) + 1, 16));
+        map = new UnifiedMap<GT_ItemStack, Object>(Math.max((int) (c.size() / .75f) + 1, 16));
         addAll(c);
         GregTech_API.sItemStackMappings.add(map);
     }
 
     public GT_HashSet(int initialCapacity, float loadFactor) {
-        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>(initialCapacity, loadFactor);
+        map = new UnifiedMap<GT_ItemStack, Object>(initialCapacity, loadFactor);
         GregTech_API.sItemStackMappings.add(map);
     }
 
     public GT_HashSet(int initialCapacity) {
-        map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<GT_ItemStack, Object>(initialCapacity);
+        map = new UnifiedMap<GT_ItemStack, Object>(initialCapacity);
         GregTech_API.sItemStackMappings.add(map);
     }
 

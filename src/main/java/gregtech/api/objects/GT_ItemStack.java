@@ -5,7 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class GT_ItemStack {
+public final class GT_ItemStack {
     public final Item mItem;
     public final byte mStackSize;
     public final short mMetaData;

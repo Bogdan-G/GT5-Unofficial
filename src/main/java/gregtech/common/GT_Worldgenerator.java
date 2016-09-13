@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.bogdang.modifications.random.XSTR;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
-public class GT_Worldgenerator
-        implements IWorldGenerator {
+public class GT_Worldgenerator implements IWorldGenerator {
     public static boolean sAsteroids = true;
-    public List<Runnable> mList = new ArrayList();
+    public List<Runnable> mList = new FastList();
     public boolean mIsGenerating = false;
 
     public GT_Worldgenerator() {
@@ -40,8 +40,7 @@ public class GT_Worldgenerator
         }
     }
 
-    public static class WorldGenContainer
-            implements Runnable {
+    public static class WorldGenContainer implements Runnable {
         public final Random mRandom;
         public final int mX;
         public final int mZ;
@@ -63,7 +62,7 @@ public class GT_Worldgenerator
         }
 
         public void run() {
-            if ((Math.abs(this.mX / 16) % 3 == 1) && (Math.abs(this.mZ / 16) % 3 == 1)) {
+            if (((this.mX / 16) % 3 == 1 || (this.mX / 16) % 3 == -1) && ((this.mZ / 16) % 3 == 1 || (this.mZ / 16) % 3 == -1)) {
                 if ((GT_Worldgen_GT_Ore_Layer.sWeight > 0) && (GT_Worldgen_GT_Ore_Layer.sList.size() > 0)) {
                     boolean temp = true;
                     int tRandomWeight;

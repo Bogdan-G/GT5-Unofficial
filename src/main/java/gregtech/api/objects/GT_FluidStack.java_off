@@ -1,4 +1,5 @@
-package gregtech.api.objects;
+//class off
+/*package gregtech.api.objects;
 
 import gregtech.api.GregTech_API;
 import gregtech.api.util.GT_Log;
@@ -10,24 +11,25 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-
+*/
 /**
  * Because Forge fucked this one up royally.
  */
-public class GT_FluidStack extends FluidStack {
-    private static final Collection<GT_FluidStack> sAllFluidStacks = new ArrayList<GT_FluidStack>(5000);
+//need drop class and rename GT_FluidStack -> FluidStack in code? dead class rly
+/*public class GT_FluidStack extends FluidStack {
+    //private static final Collection<GT_FluidStack> sAllFluidStacks = new ArrayList<GT_FluidStack>(5000);//oops, dead code
     //private static boolean lock = false;
     //private Fluid mFluid;
 
     public GT_FluidStack(Fluid aFluid, int aAmount) {
         super(aFluid, aAmount);
         //mFluid = aFluid;
-        if(!GregTech_API.mServerStarted){sAllFluidStacks.add(this);}
+        //if(!GregTech_API.mServerStarted){sAllFluidStacks.add(this);}
     }
 
     public GT_FluidStack(FluidStack aFluid) {
         this(aFluid.getFluid(), aFluid.amount);
-    }
+    }*/
 
     //dead code
     /*public static final void fixAllThoseFuckingFluidIDs() {
@@ -64,6 +66,7 @@ public class GT_FluidStack extends FluidStack {
         }
     }*/
 
+    /*//only one life func?
     @Override
     public FluidStack copy() {
         /*if (ForgeVersion.getBuildVersion() < 1355 && ForgeVersion.getRevisionVersion() < 4) {
@@ -71,4 +74,4 @@ public class GT_FluidStack extends FluidStack {
         }*/
         return new GT_FluidStack(this);
     }
-}
+}*/

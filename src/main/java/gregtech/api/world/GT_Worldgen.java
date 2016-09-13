@@ -7,7 +7,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;import java.util.concurrent.ConcurrentHashMap;
+import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class GT_Worldgen {
 

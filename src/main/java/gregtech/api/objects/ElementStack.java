@@ -2,7 +2,7 @@ package gregtech.api.objects;
 
 import gregtech.api.enums.Element;
 
-public class ElementStack implements Cloneable {
+public final class ElementStack implements Cloneable {
     public int mAmount;
     public Element mElement;
 

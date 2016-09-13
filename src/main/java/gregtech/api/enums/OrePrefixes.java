@@ -308,7 +308,7 @@ public enum OrePrefixes {
     bars("Bars", "", "", false, false, false, false, false, false, false, false, false, false, 0, -1, 64, -1),
     bar("Bars", "", "", false, false, false, false, false, false, false, false, false, false, 0, -1, 64, -1);
 
-    public static volatile int VERSION = 508;
+    //public static volatile int VERSION = 508;
 
     static {
         pulp.mPrefixInto = dust;
