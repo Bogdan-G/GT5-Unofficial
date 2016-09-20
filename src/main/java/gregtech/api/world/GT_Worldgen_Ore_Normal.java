@@ -24,7 +24,7 @@ public class GT_Worldgen_Ore_Normal extends GT_Worldgen_Ore {
                     float var6 = aRandom.nextFloat() * (float)Math.PI;
                     float var3b_ = MathHelper.sin(var6);
                     float var3b = var3b_ * (mSize >> 3);
-                    float var4b = (float)Math.sqrt(1 - var3b_) * (mSize >> 3);
+                    float var4b = (float)Math.sqrt(1 - var3b_*var3b_) * (mSize >> 3);
                     float var8b = -2*var3b;float var9b = -2*var4b;
                     int var10b = (tX + 8);int var11b = (tZ + 8);
                     float var7 = (var10b + var3b);

@@ -33,7 +33,7 @@ public class GT_MinableOreGenerator extends WorldGenerator {
         float var8s = (float)Math.PI / this.numberOfBlocks;
         float mh_s_ = MathHelper.sin(var6);
         float mh_s_0 = mh_s_ * (this.numberOfBlocks >> 3);
-        float mh_c_0 = (float)Math.sqrt(1 - mh_s_) * (this.numberOfBlocks >> 3);
+        float mh_c_0 = (float)Math.sqrt(1 - mh_s_*mh_s_) * (this.numberOfBlocks >> 3);
         float var7 = par3 + 8 + mh_s_0;//float var9 = var5s - mh_s_0;
         float var11 = par5 + 8 + mh_c_0;//float var13 = var6s - mh_c_0;
         int var15r = par2Random.nextInt(3);int var17r = par2Random.nextInt(3);

@@ -31,7 +31,7 @@ public class GT_Worldgen_Stone extends GT_Worldgen_Ore {
                     float var6 = aRandom.nextFloat() * (float)Math.PI;
                     float mh_s_ = MathHelper.sin(var6);
                     float mh_s_0 = mh_s_ * (this.mSize >> 3);
-                    float mh_c_0 = (float)Math.sqrt(1 - mh_s_) * (this.mSize >> 3);
+                    float mh_c_0 = (float)Math.sqrt(1 - mh_s_*mh_s_) * (this.mSize >> 3);
                     float var7 = tX + 8 + mh_s_0;//float var9 = var2d - mh_s_0;
                     float var11 = tZ + 8 + mh_c_0;//float var13 = var3d - mh_c_0;
                     int var15r = aRandom.nextInt(3);int var17r = aRandom.nextInt(3);

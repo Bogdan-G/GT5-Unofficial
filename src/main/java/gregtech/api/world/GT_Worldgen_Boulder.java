@@ -25,7 +25,7 @@ public class GT_Worldgen_Boulder extends GT_Worldgen_Ore {
                     float var6 = aRandom.nextFloat() * (float)Math.PI;
                     float var3b_ = MathHelper.sin(var6);
                     float var3b = var3b_ * (mSize >> 3);
-                    float var4b = (float)Math.sqrt(1 - var3b_) * (mSize >> 3);
+                    float var4b = (float)Math.sqrt(1 - var3b_*var3b_) * (mSize >> 3);
                     float var8b = -2*var3b;float var9b = -2*var4b;
                     float var7 = ((tX + 8) + var3b);//float var9 = (var10b - var3b);
                     float var11 = ((tZ + 8) + var4b);//float var13 = (var11b - var4b);
