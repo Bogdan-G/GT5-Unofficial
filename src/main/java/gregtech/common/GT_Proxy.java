@@ -741,19 +741,20 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
 
         GT_Log.out.println("GT_Mod: Cleaning up all OreDict Crafting Recipes, which have an empty List in them, since they are never meeting any Condition.");
         List tList = CraftingManager.getInstance().getRecipeList();
-        int tList_sS=tList.size();
-        for (int i = 0; i < tList_sS; i++) {
-            if ((tList.get(i) instanceof ShapedOreRecipe)) {
-                for (Object tObject : ((ShapedOreRecipe) tList.get(i)).getInput()) {
+        //int tList_sS=tList.size();
+        for (int i = 0; i < tList.size(); i++) {
+            Object tRecipe = tList.get(i);
+            if ((tRecipe instanceof ShapedOreRecipe)) {
+                for (Object tObject : ((ShapedOreRecipe) tRecipe).getInput()) {
                     if (((tObject instanceof List)) && (((List) tObject).isEmpty())) {
-                        tList.remove(i--);tList_sS=tList.size();
+                        tList.remove(i--);//tList_sS=tList.size();
                         break;
                     }
                 }
-            } else if ((tList.get(i) instanceof ShapelessOreRecipe)) {
-                for (Object tObject : ((ShapelessOreRecipe) tList.get(i)).getInput()) {
+            } else if ((tRecipe instanceof ShapelessOreRecipe)) {
+                for (Object tObject : ((ShapelessOreRecipe) tRecipe).getInput()) {
                     if (((tObject instanceof List)) && (((List) tObject).isEmpty())) {
-                        tList.remove(i--);tList_sS=tList.size();
+                        tList.remove(i--);//tList_sS=tList.size();
                         break;
                     }
                 }

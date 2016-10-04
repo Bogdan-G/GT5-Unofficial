@@ -25,10 +25,10 @@ public class GT_RecipeRegistrator {
     /**
      * List of Materials, which are used in the Creation of Sticks. All Rod Materials are automatically added to this List.
      */
-    public static final List<Materials> sRodMaterialList = new ArrayList<Materials>();
-    private static ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
-    private static final String s_H = "h", s_F = "f", s_I = "I", s_P = "P", s_R = "R";
-    private static ItemStack[][]
+    public static List<Materials> sRodMaterialList = new ArrayList<Materials>();
+    public static ItemStack sMt1 = new ItemStack(Blocks.dirt, 1, 0), sMt2 = new ItemStack(Blocks.dirt, 1, 0);
+    private static String s_H = "h", s_F = "f", s_I = "I", s_P = "P", s_R = "R";
+    public static ItemStack[][]
             sShapes1 = new ItemStack[][]{
             {sMt1, null, sMt1, sMt1, sMt1, sMt1, null, sMt1, null},
             {sMt1, null, sMt1, sMt1, null, sMt1, sMt1, sMt1, sMt1},
@@ -75,7 +75,7 @@ public class GT_RecipeRegistrator {
             {sMt1, sMt1, null, sMt2, null, sMt1, sMt2, null, null},
             {null, sMt1, sMt1, sMt1, null, sMt2, null, null, sMt2}
     };
-    private static String[][] sShapesA = new String[][]{
+    public static String[][] sShapesA = new String[][]{
             null,
             null,
             null,
@@ -125,6 +125,7 @@ public class GT_RecipeRegistrator {
     public static int sRodMaterialList_cycles = 0;public static int sRodMaterialList_cycles1 = 0;
     private static int i_count = 0;
     private static boolean first_call_gVTRO = true;private static boolean emptyList_find = false;
+    //public static int sRodMaterialList_cycles2 = 0;
 
     public static void registerMaterialRecycling(ItemStack aStack, Materials aMaterial, long aMaterialAmount, MaterialStack aByproduct) {
         if (GT_Utility.isStackInvalid(aStack)) return;
@@ -272,11 +273,11 @@ public class GT_RecipeRegistrator {
         aMat = GT_Utility.copy(aMat);
         ItemStack tStack;
         ItemData aItemData = GT_OreDictUnificator.getItemData(aMat);
-        boolean aItemData_b_0 = aItemData != null ? true : false;
+        boolean aItemData_b_0 = aItemData != null;
         if (!aItemData_b_0 || aItemData.mPrefix != OrePrefixes.ingot) {aPlate = null;}
         if (aPlate != null && GT_OreDictUnificator.getFirstOre(aPlate, 1) == null) {aPlate = null;}
-        boolean aItemData_b_1 = aItemData.hasValidPrefixMaterialData() ? true : false;
-        boolean aPlate_b_0 = aPlate != null ? true : false;
+        boolean aItemData_b_1 = aItemData.hasValidPrefixMaterialData();
+        boolean aPlate_b_0 = aPlate != null;
 
         sMt1.func_150996_a(aMat.getItem());
         sMt1.stackSize = 1;
@@ -301,6 +302,7 @@ public class GT_RecipeRegistrator {
         for (Materials tMaterial : sRodMaterialList) {
             ItemStack tMt2 = GT_OreDictUnificator.get(OrePrefixes.stick, tMaterial, 1);
             if (tMt2 != null) {
+                //GT_Log.out.println("GT_Mod: Debug: sRodMaterialList_cycles " + sRodMaterialList_cycles + " sRodMaterialList_cycles1 " + sRodMaterialList_cycles1);
                 sMt2.func_150996_a(tMt2.getItem());
                 sMt2.stackSize = 1;
                 Items.feather.setDamage(sMt2, Items.feather.getDamage(tMt2));
@@ -309,6 +311,7 @@ public class GT_RecipeRegistrator {
                 if (!emptyList_find) {emptyList_find = true;}
                 sRodMaterialList_cycles1++;continue;}
                 int sShapes1_len = GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size();
+                //if (sRodMaterialList_cycles % 100 == 0) GT_Log.out.println("GT_Mod: Debug: sRodMaterialList_cycles " + sRodMaterialList_cycles + " sRodMaterialList_cycles1 " + sRodMaterialList_cycles1);
                 for (int i = 0; i < sShapes1_len; i++) {
                     //int i = 0;
                     //if (i_count > 43) {i_count = 0;}
@@ -323,18 +326,18 @@ public class GT_RecipeRegistrator {
                         if (tMat == sMt2) tAmount2++;
                     }
                     List <ItemStack> tempTest = GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe);
-                    if (GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1_update && GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size() != 0) {sShapes1_len = GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size();GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1_update = false;}
-                    int tempTest_size_sS = tempTest.size();
-                    if (tempTest_size_sS > 0) {
+                    if (GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1_update) {sShapes1_len = GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1.size();GT_ModHandler.sSingleNonBlockDamagableRecipeList_validsShapes1_update = false;}
+                    //int tempTest_size_sS = tempTest.size();
+                    //if (tempTest_size_sS > 0) {
                     for (ItemStack tCrafted : tempTest/*GT_ModHandler.getVanillyToolRecipeOutputs(tRecipe)*/) {
                         if (aItemData_b_0 && aItemData_b_1) {
                             GT_OreDictUnificator.addItemData(tCrafted, new ItemData(aItemData.mMaterial.mMaterial, aItemData.mMaterial.mAmount * tAmount1, new MaterialStack(tMaterial, OrePrefixes.stick.mMaterialAmount * tAmount2)));}
 
                         if (aRecipeReplacing && aPlate_b_0 && sShapesA[i2] != null && sShapesA[i2].length > 1) {
-                            //assert aItemData != null;//dead dev code or decomp JAD?
+                            assert aItemData != null;//dead dev code or decomp JAD?
                             if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.recipereplacements, new StringBuilder().append(aItemData.mMaterial.mMaterial).append('.').append(sShapesA[i2][0]).toString(), true)) {
                                 if (null != (tStack = GT_ModHandler.removeRecipe(tRecipe))) {
-                                    switch (sShapesA[i].length) {
+                                    switch (sShapesA[i2].length) {
                                         case 2:
                                             GT_ModHandler.addCraftingRecipe(tStack, GT_ModHandler.RecipeBits.BUFFERED, new Object[]{sShapesA[i2][1], s_P.charAt(0), aPlate, s_R.charAt(0), OrePrefixes.stick.get(tMaterial), s_I.charAt(0), aItemData});
                                             break;
@@ -348,14 +351,19 @@ public class GT_RecipeRegistrator {
                                 }
                             }
                         }
-                    }}
+                    }
+                    //sRodMaterialList_cycles2++;
+                    //}
                     sRodMaterialList_cycles++;//i_count++;
+                    //if (sRodMaterialList_cycles % 1000 == 0) GT_Log.out.println("GT_Mod: Debug: sRodMaterialList_cycles " + sRodMaterialList_cycles + " sRodMaterialList_cycles1 " + sRodMaterialList_cycles1);
                 }
+                //GT_Log.out.println("GT_Mod: Debug: sRodMaterialList_cycles2 " + sRodMaterialList_cycles2);
             }
         }
     }
     public static void cleanupObjects() {
         //crutches for allegedly cleaning
         sMt1=null;sMt2=null;sShapes1=null;sShapesA=null;
+        s_H=null;s_F=null;s_I=null;s_P=null;s_R=null;
     }
 }

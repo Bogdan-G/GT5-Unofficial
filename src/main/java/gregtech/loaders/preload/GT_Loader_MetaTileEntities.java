@@ -1204,10 +1204,10 @@ public class GT_Loader_MetaTileEntities
         float startT = 0;float elapsed = 0;
         GT_Log.out.println("GT_Mod: Registering MetaTileEntities.");
         startT = System.nanoTime();
-        run1();elapsed = System.nanoTime() - startT;FMLLog.warning("GT_Mod: Registering MetaTileEntities: step 1: "+elapsed/1000000+"ms");startT = System.nanoTime();
-        run2();elapsed = System.nanoTime() - startT;FMLLog.warning("GT_Mod: Registering MetaTileEntities: step 2: "+elapsed/1000000+"ms");startT = System.nanoTime();
-        run3();elapsed = System.nanoTime() - startT;FMLLog.warning("GT_Mod: Registering MetaTileEntities: step 3: "+elapsed/1000000+"ms");startT = System.nanoTime();
-        run4();elapsed = System.nanoTime() - startT;FMLLog.warning("GT_Mod: Registering MetaTileEntities: step 4: "+elapsed/1000000+"ms");startT = System.nanoTime();
-        elapsed = System.nanoTime() - startT;FMLLog.warning("GT_Mod: Registering MetaTileEntities: finish!: "+elapsed/1000000+"ms");
+        run1();elapsed = System.nanoTime() - startT;FMLLog.info("GT_Mod: Registering MetaTileEntities: step 1: "+elapsed/1000000+"ms");startT = System.nanoTime();
+        run2();elapsed = System.nanoTime() - startT;FMLLog.info("GT_Mod: Registering MetaTileEntities: step 2: "+elapsed/1000000+"ms");startT = System.nanoTime();
+        run3();elapsed = System.nanoTime() - startT;FMLLog.info("GT_Mod: Registering MetaTileEntities: step 3: "+elapsed/1000000+"ms");startT = System.nanoTime();
+        run4();elapsed = System.nanoTime() - startT;FMLLog.info("GT_Mod: Registering MetaTileEntities: step 4: "+elapsed/1000000+"ms");startT = System.nanoTime();
+        elapsed = System.nanoTime() - startT;FMLLog.info("GT_Mod: Registering MetaTileEntities: finish!: "+elapsed/1000000+"ms");
     }
 }

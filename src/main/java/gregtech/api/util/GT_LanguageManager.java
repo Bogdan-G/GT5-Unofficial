@@ -8,16 +8,16 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import java.lang.ref.SoftReference;
+//import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Map;
+//import java.util.Map;
 
 import static gregtech.api.enums.GT_Values.E;
 
 public class GT_LanguageManager {
-    public static SoftReference<HashMap<String, String>> TEMPMAP = new SoftReference(new HashMap<String, String>(1));
-    public static SoftReference<Map<String, String>> BUFFERMAP = new SoftReference(new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, String>());
+    public static final HashMap<String, String> TEMPMAP = new HashMap<String, String>(1);
+    public static final HashMap<String, String> BUFFERMAP = new HashMap<String, String>();
     public static Configuration sEnglishFile;
 
     public static String addStringLocalization(String aKey, String aEnglish) {
@@ -27,24 +27,24 @@ public class GT_LanguageManager {
     public static String addStringLocalization(String aKey, String aEnglish, boolean aWriteIntoLangFile) {
         if (aKey == null) return E;
         if (aWriteIntoLangFile) aEnglish = writeToLangFile(aKey, aEnglish);
-        TEMPMAP.get().put(aKey.trim(), aEnglish);
-        LanguageRegistry.instance().injectLanguage("en_US", TEMPMAP.get());
-        TEMPMAP.get().clear();
+        TEMPMAP.put(aKey.trim(), aEnglish);
+        LanguageRegistry.instance().injectLanguage("en_US", TEMPMAP);
+        TEMPMAP.clear();
         return aEnglish;
     }
 
-    private static String writeToLangFile(String aKey, String aEnglish) {
+    private static synchronized String writeToLangFile(String aKey, String aEnglish) {
     //private static synchronized
         if (aKey == null) return E;
         if (sEnglishFile == null) {
-            BUFFERMAP.get().put(aKey.trim(), aEnglish);
+            BUFFERMAP.put(aKey.trim(), aEnglish);
         } else {
-            if (!BUFFERMAP.get().isEmpty()) {
-                for (Entry<String, String> tEntry : BUFFERMAP.get().entrySet()) {
+            if (!BUFFERMAP.isEmpty()) {
+                for (Entry<String, String> tEntry : BUFFERMAP.entrySet()) {
                     Property tProperty = sEnglishFile.get("LanguageFile", tEntry.getKey(), tEntry.getValue());
                     if (!tProperty.wasRead() && GregTech_API.sPostloadFinished) sEnglishFile.save();
                 }
-                BUFFERMAP.get().clear();
+                BUFFERMAP.clear();
             }
             Property tProperty = sEnglishFile.get("LanguageFile", aKey.trim(), aEnglish);
             if (!tProperty.wasRead() && GregTech_API.sPostloadFinished) sEnglishFile.save();
