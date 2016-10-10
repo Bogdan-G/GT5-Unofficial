@@ -150,7 +150,7 @@ public class GregTech_API {
     /**
      * For the API Version check
      */
-    //public static volatile int VERSION = 508;
+    public static volatile int VERSION = 508;
     @Deprecated
     public static IGT_RecipeAdder sRecipeAdder;
     /**

@@ -38,6 +38,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.oredict.*;
 
 import java.lang.ref.SoftReference;
 import java.util.*;
@@ -75,7 +76,7 @@ public class GT_ModHandler {
     private static boolean sBufferCraftingRecipes = true;
     public static SoftReference<cern.colt.list.IntArrayList> sSingleNonBlockDamagableRecipeList_list = new SoftReference(new cern.colt.list.IntArrayList());
     private static boolean sSingleNonBlockDamagableRecipeList_create = true;
-    public static List<Integer> sSingleNonBlockDamagableRecipeList_validsShapes1 = new FastList<Integer>(44);
+    public static FastList<Integer> sSingleNonBlockDamagableRecipeList_validsShapes1 = new FastList<Integer>(44);
     public static boolean sSingleNonBlockDamagableRecipeList_validsShapes1_update = false;
     public static IntHashSet sSingleNonBlockDamagableRecipeList_warntOutput = new IntHashSet();
     public static IntHashSet sVanillaRecipeList_warntOutput = new IntHashSet();
@@ -1118,13 +1119,13 @@ public class GT_ModHandler {
         //try {
         for (int i = 0; i < tList.size(); i++) {
                 try {
-                //for (; i < tList.size(); i++) {
+                for (; i < tList.size(); i++) {
                     IRecipe tRecipe = tList.get(i);
                     if ((!(tRecipe instanceof IGT_CraftingRecipe) || ((IGT_CraftingRecipe) tRecipe).isRemovable()) && tRecipe.matches(aCrafting, DW)) {
                         rReturn = tRecipe.getCraftingResult(aCrafting);
                         if (rReturn != null) tList.remove(i--);//tList_sS=tList.size();
                     }
-                //}
+                }
                 } catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         }//} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
         return rReturn;
@@ -1326,10 +1327,16 @@ public class GT_ModHandler {
                 }
             }
             GT_Log.out.println("GT_Mod: Created a List of Tool Recipes containing " + sSingleNonBlockDamagableRecipeList.size() + " Recipes for recycling." + (sSingleNonBlockDamagableRecipeList.size() > 1024 ? " Scanning all these Recipes is the reason for the startup Lag you receive right now." : E));
+            GT_Log.out.println("GT_Mod: List of Tool Recipes containing: " + sSingleNonBlockDamagableRecipeList.toString());
             aList_move = sSingleNonBlockDamagableRecipeList.size();
             sSingleNonBlockDamagableRecipeList_list.get().add(aList_move);
             sSingleNonBlockDamagableRecipeList_create = false;
             sSingleNonBlockDamagableRecipeList_validsShapes1_update = true;
+            //fix, crutch for ic2/vanilla
+            /*sSingleNonBlockDamagableRecipeList_validsShapes1.add(0);
+            sSingleNonBlockDamagableRecipeList_validsShapes1.add(2);
+            sSingleNonBlockDamagableRecipeList_validsShapes1.add(6);
+            sSingleNonBlockDamagableRecipeList_validsShapes1.add(24);*/
             for (int i = 0; i < aList_move; i++) {
               IRecipe vRecipe = sSingleNonBlockDamagableRecipeList.get(i);
               boolean tmp1 = false;boolean tmp2 = false;
@@ -1341,17 +1348,29 @@ public class GT_ModHandler {
                       Object[] tObject = ((ShapedOreRecipe) vRecipe).getInput();
                       boolean temp = true;
                       for (int l = 0; l < 9 && l < sRecipe.length && l < tObject.length; l++) { if (sRecipe[l] != null && tObject[l] != null || sRecipe[l] == null && tObject[l] == null){}else{temp = false;break;}}
+                      if (!temp) {
+                       int n0 = 0, n1 = 0;
+                       for (int l = 0; l < 9 && l < sRecipe.length; l++) { if (sRecipe[l] != null) n0++; }
+                       for (int l = 0; l < 9 && l < tObject.length; l++) { if (tObject[l] != null) n1++; }
+                       if (n0 == n1) temp = true;
+                      }
                       if (temp) {
-                      if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);}
-                      if (!(sSingleNonBlockDamagableRecipeList_verified.contains(vRecipe))) {sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);}
+                       if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);}
+                       if (!(sSingleNonBlockDamagableRecipeList_verified.contains(vRecipe))) {sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);}
                       }
                     } else if (tmp2) {
                       ItemStack[] tObject = ((ShapedRecipes) vRecipe).recipeItems;
                       boolean temp = true;
                       for (int l = 0; l < 9 && l < sRecipe.length && l < tObject.length; l++) { if (sRecipe[l] != null && tObject[l] != null || sRecipe[l] == null && tObject[l] == null){}else{temp = false;break;}}
+                      if (!temp) {
+                       int n0 = 0, n1 = 0;
+                       for (int l = 0; l < 9 && l < sRecipe.length; l++) { if (sRecipe[l] != null) n0++; }
+                       for (int l = 0; l < 9 && l < tObject.length; l++) { if (tObject[l] != null) n1++; }
+                       if (n0 == n1) temp = true;
+                      }
                       if (temp) {
-                      if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);}
-                      if (!(sSingleNonBlockDamagableRecipeList_verified.contains(vRecipe))) {sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);}
+                       if (!(sSingleNonBlockDamagableRecipeList_validsShapes1.contains(j))) {sSingleNonBlockDamagableRecipeList_validsShapes1.add(j);}
+                       if (!(sSingleNonBlockDamagableRecipeList_verified.contains(vRecipe))) {sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);}
                       }
                     } else {
                       if (!(sSingleNonBlockDamagableRecipeList_verified.contains(vRecipe))) {sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);}
@@ -1361,7 +1380,11 @@ public class GT_ModHandler {
               //sSingleNonBlockDamagableRecipeList_verified.add(vRecipe);
             }
             GT_Log.out.println("GT_Mod: Created a List of Tool Recipes containing verified " + sSingleNonBlockDamagableRecipeList_verified.size() + " Recipes for recycling." + (sSingleNonBlockDamagableRecipeList_verified.size() > 1024 ? " Scanning all these Recipes is the reason for the startup Lag you receive right now." : E));
+            GT_Log.out.println("GT_Mod: List of Tool Recipes containing verified: " + sSingleNonBlockDamagableRecipeList_verified.toString());
             GT_Log.out.println("GT_Mod: Created a List of verified shapes " + sSingleNonBlockDamagableRecipeList_validsShapes1.size());
+            GT_Log.out.println("GT_Mod: List of verified shapes: " + sSingleNonBlockDamagableRecipeList_validsShapes1.toString());
+            sSingleNonBlockDamagableRecipeList_validsShapes1=sSingleNonBlockDamagableRecipeList_validsShapes1.sortThis();
+            GT_Log.out.println("GT_Mod: List of verified shapes (sorted): " + sSingleNonBlockDamagableRecipeList_validsShapes1.toString());
                     
         }
         /*ArrayList<ItemStack> */
@@ -1401,7 +1424,6 @@ public class GT_ModHandler {
             }
         }, 3, 3);
         for (int i = 0; i < 9 && i < aRecipe.length; i++) {aCrafting.setInventorySlotContents(i, aRecipe[i]);}
-        //int aList_sS=aList.size();
         IntArrayList tempaList_list = new IntArrayList();
         if (!aDeleteFromList) {
         for (int i = 0; i < aList.size(); i++) {
@@ -1412,32 +1434,71 @@ public class GT_ModHandler {
                 sVanillaRecipeList_warntOutput.add(i);
                 } else {
                 rList.add(GT_Utility.copy(tOutput));
-                //if (aDeleteFromList) {tempaList_list.add(i);}
                 }
         }}
         } else {
         for (int i = 0; i < aList.size(); i++) {
             IRecipe tempALg0 = aList.get(i);
-            if (tempALg0.matches(aCrafting, DW)) {
+            if (tempALg0.equals(ShapedOreRecipe.class)) {
+             boolean tmpSOR=false;
+             for (int startX = 0; startX < 9; startX++) {
+             for (int startY = 0; startY < 9; ++startY) {
+             Object target = null;
+             int subX = 0;int subY = 0;
+             labelcm: for (int x = 0; x < 3; x++) {
+             subX = x - startX;
+             for (int y = 0; y < 3; y++) {
+                subY = y - startY;
+                if (target != null) target = null;
+                if (subX >= 0 && subY >= 0 && subX < 3 && subY < 3) {
+                        Object[] input = ((ShapedOreRecipe) tempALg0).getInput();
+                        try {try {try {target = input[subX + subY * 3];} catch (Throwable e) {target = input[subX + subY * 2];}} catch (Throwable e) {target = input[subX + subY * 1];}} catch (Throwable e) {target = input[subX + subY * 0];}
+                }
+                ItemStack slot = aCrafting.getStackInRowAndColumn(x, y);
+                if (target instanceof ItemStack) {
+                    ItemStack tmpt = (ItemStack)target;
+                    boolean im=false;
+                    if (slot != null && tmpt != null) {
+                    im = (tmpt.getItem() == slot.getItem() && ((tmpt.getItemDamage() == Short.MAX_VALUE) || tmpt.getItemDamage() == slot.getItemDamage()));
+                    }
+                    if (!im) break labelcm;
+                } else if (target instanceof ArrayList) {
+                    boolean matched = false;
+                    Iterator<ItemStack> itr = ((ArrayList<ItemStack>)target).iterator();
+                    while (itr.hasNext() && !matched) {
+                    ItemStack tmpt = itr.next();
+                    if (slot != null && tmpt != null) {
+                    matched = (tmpt.getItem() == slot.getItem() && ((tmpt.getItemDamage() == Short.MAX_VALUE) || tmpt.getItemDamage() == slot.getItemDamage()));
+                    }
+                    }
+                    if (!matched) {
+                        break labelcm;
+                    }
+                } else if (target == null && slot != null) {
+                    break labelcm;
+                }
+            }}
+            tmpSOR=true;
+            }}
+            
+            if (tmpSOR) {
                 ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
                 if (tOutput == null || tOutput.stackSize <= 0) {
                 sSingleNonBlockDamagableRecipeList_warntOutput.add(i);
                 } else {
                 rList.add(GT_Utility.copy(tOutput));
-                /*if (aDeleteFromList) {*/aList.remove(i--);/*tempaList_list.add(i);*//*}*/
+                aList.remove(i--);
                 }
+                }
+             } else if (tempALg0.matches(aCrafting, DW)) {
+                ItemStack tOutput = tempALg0.getCraftingResult(aCrafting);
+                if (tOutput == null || tOutput.stackSize <= 0) {
+                sSingleNonBlockDamagableRecipeList_warntOutput.add(i);
+                } else {
+                rList.add(GT_Utility.copy(tOutput));
+                aList.remove(i--);
+                }}
         }}
-        }
-        //boolean tempaList_list_b = tempaList_list.size() != 0 ? true : false;
-        /*if (aDeleteFromList && tempaList_list.size() != 0) {
-        List<IRecipe> tempaList_2 = new ArrayList<IRecipe>();
-        for (int i = 0; i < aList.size(); i++) {
-        int k = 0, l = 0;
-        if (tempaList_list.get(k) == i) {k++;continue;}
-        tempaList_2.add(aList.get(l));l++;
-        }
-        if (aList.size() != tempaList_2.size()) {aList = tempaList_2;}else{aList.clear();}
-        }*/
         return rList;
     }
 
