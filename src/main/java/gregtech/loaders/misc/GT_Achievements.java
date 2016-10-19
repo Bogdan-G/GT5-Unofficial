@@ -423,14 +423,13 @@ public class GT_Achievements {
         }
 //		System.out.println("Pickup: "+stack.getUnlocalizedName());
         ItemData data = GT_OreDictUnificator.getItemData(stack);
-        if (data != null) {
+        if (data != null && data.mPrefix != null) {
             if (data.mPrefix == OrePrefixes.dust) {
                 if (data.mMaterial.mMaterial == Materials.Lutetium) {
                     issueAchievement(player, "newmetal");
                 }
                 issueAchievement(player, "cleandust");
-            } else if (data.mPrefix == OrePrefixes.ore || data.mPrefix == OrePrefixes.oreBlackgranite || data.mPrefix == OrePrefixes.oreEndstone
-                    || data.mPrefix == OrePrefixes.oreNetherrack || data.mPrefix == OrePrefixes.oreRedgranite) {
+            } else if (data.mPrefix.name() != null && data.mPrefix.name().startsWith("ore")) {//fix NPE when item/block pickup
                 int data_getAllMaterialStacks_sS=data.getAllMaterialStacks().size();
                 for (int i = 0; i < data_getAllMaterialStacks_sS; i++) {
                     issueAchievement(player, data.getAllMaterialStacks().get(i).mMaterial.name());

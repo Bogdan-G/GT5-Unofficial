@@ -851,14 +851,17 @@ public class GT_Utility {
         ItemData tOreName = GT_OreDictUnificator.getAssociation(aInput);
         for (int i = 0; i < aOutput.length; i++) {
             if (aOutput[i] == null) {
-                System.out.println("EmptyIC2Output!" + aInput.getUnlocalizedName());
+                GT_Log.out.println("EmptyIC2Output!" + aInput.getUnlocalizedName());
                 return false;
             }
         }
+        ItemStack[] tStack = GT_OreDictUnificator.getStackArray(true, aOutput);
+        if(tStack == null || (tStack.length > 0 && GT_Utility.areStacksEqual(aInput, tStack[0]))) return false;
         if (tOreName != null) {
-            aRecipeList.put(new RecipeInputOreDict(tOreName.toString(), aInput.stackSize), new RecipeOutput(aNBT, GT_OreDictUnificator.getStackArray(true, aOutput)));
+            if(tOreName.toString().equals("dustAsh") && tStack[0].getUnlocalizedName().equals("tile.volcanicAsh")) return false;
+            aRecipeList.put(new RecipeInputOreDict(tOreName.toString(), aInput.stackSize), new RecipeOutput(aNBT, tStack));
         } else {
-            aRecipeList.put(new RecipeInputItemStack(copy(aInput), aInput.stackSize), new RecipeOutput(aNBT, GT_OreDictUnificator.getStackArray(true, aOutput)));
+            aRecipeList.put(new RecipeInputItemStack(copy(aInput), aInput.stackSize), new RecipeOutput(aNBT, tStack));
         }
         return true;
     }
