@@ -422,7 +422,7 @@ public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item implements 
         if (tStats == null) return null;
         doDamage(aStack, tStats.getToolDamagePerContainerCraft());
         aStack = aStack.stackSize > 0 ? aStack : null;
-        if (playSound) {
+        if (playSound && gregtech.GT_Mod.gregtechproxy.mTicksUntilNextCraftSound <= 0) {
             String sound = (aStack == null) ? tStats.getBreakingSound() : tStats.getCraftingSound();
             GT_Utility.doSoundAtClient(sound, 1, 1.0F);
         }

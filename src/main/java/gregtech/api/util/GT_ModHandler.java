@@ -1424,7 +1424,6 @@ public class GT_ModHandler {
             }
         }, 3, 3);
         for (int i = 0; i < 9 && i < aRecipe.length; i++) {aCrafting.setInventorySlotContents(i, aRecipe[i]);}
-        IntArrayList tempaList_list = new IntArrayList();
         if (!aDeleteFromList) {
         for (int i = 0; i < aList.size(); i++) {
             IRecipe tempALg0 = aList.get(i);

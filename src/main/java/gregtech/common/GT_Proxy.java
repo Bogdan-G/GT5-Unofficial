@@ -158,6 +158,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
     private static final String TwilightForest_text = "TwilightForest";
     private static final String Forestry_text = "Forestry";
     private static final String arsmagica2_text = "arsmagica2";
+    public int mTicksUntilNextCraftSound = 0;
 
     public GT_Proxy() {
         GameRegistry.registerFuelHandler(this);
@@ -1342,6 +1343,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
 
     @SubscribeEvent
     public void onWorldTickEvent(TickEvent.WorldTickEvent aEvent) {
+        if (aEvent.world.provider.dimensionId == 0) mTicksUntilNextCraftSound--;
         if (aEvent.side.isServer()) {
             if (this.mUniverse == null) {
                 this.mUniverse = aEvent.world;

@@ -18,6 +18,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GT_MetaTileEntity_ProcessingArray extends GT_MetaTileEntity_MultiBlockBase {
@@ -122,6 +123,7 @@ public class GT_MetaTileEntity_ProcessingArray extends GT_MetaTileEntity_MultiBl
         return aFacing > 1;
     }
 
+    public String mMachine = "";
     public boolean checkRecipe(ItemStack aStack) {
         if (!isCorrectMachinePart(mInventory[1])) {
             return false;
@@ -134,43 +136,41 @@ public class GT_MetaTileEntity_ProcessingArray extends GT_MetaTileEntity_MultiBl
         int tTier = 0;
         if (mInventory[1].getUnlocalizedName().endsWith("1")) {
             tTier = 1;
-        }
-        if (mInventory[1].getUnlocalizedName().endsWith("2")) {
+        } else if (mInventory[1].getUnlocalizedName().endsWith("2")) {
             tTier = 2;
-        }
-        if (mInventory[1].getUnlocalizedName().endsWith("3")) {
+        } else if (mInventory[1].getUnlocalizedName().endsWith("3")) {
             tTier = 3;
-        }
-        if (mInventory[1].getUnlocalizedName().endsWith("4")) {
+        } else if (mInventory[1].getUnlocalizedName().endsWith("4")) {
             tTier = 4;
-        }
-        if (mInventory[1].getUnlocalizedName().endsWith("5")) {
+        } else if (mInventory[1].getUnlocalizedName().endsWith("5")) {
             tTier = 5;
         }
-        int tInputList_sS=tInputList.size();
-        for (int i = 0; i < tInputList_sS - 1; i++) {
-            for (int j = i + 1; j < tInputList_sS; j++) {
+        //int tInputList_sS=tInputList.size();
+        for (int i = 0; i < tInputList.size() - 1; i++) {
+            for (int j = i + 1; j < tInputList.size(); j++) {
                 if (GT_Utility.areStacksEqual((ItemStack) tInputList.get(i), (ItemStack) tInputList.get(j))) {
                     if (((ItemStack) tInputList.get(i)).stackSize >= ((ItemStack) tInputList.get(j)).stackSize) {
-                        tInputList.remove(j--);tInputList_sS=tInputList.size();
+                        tInputList.remove(j--);//tInputList_sS=tInputList.size();
                     } else {
-                        tInputList.remove(i--);tInputList_sS=tInputList.size();
+                        tInputList.remove(i--);//tInputList_sS=tInputList.size();
                         break;
                     }
                 }
             }
         }
+        if (!mMachine.equals(mInventory[1].getUnlocalizedName())) mLastRecipe=null;
+        mMachine = mInventory[1].getUnlocalizedName();
         ItemStack[] tInputs = (ItemStack[]) Arrays.copyOfRange(tInputList.toArray(new ItemStack[tInputList.size()]), 0, 2);
 
         ArrayList<FluidStack> tFluidList = getStoredFluids();
-        int tFluidList_sS=tFluidList.size();
-        for (int i = 0; i < tFluidList_sS - 1; i++) {
-            for (int j = i + 1; j < tFluidList_sS; j++) {
+        //int tFluidList_sS=tFluidList.size();
+        for (int i = 0; i < tFluidList.size() - 1; i++) {
+            for (int j = i + 1; j < tFluidList.size(); j++) {
                 if (GT_Utility.areFluidsEqual((FluidStack) tFluidList.get(i), (FluidStack) tFluidList.get(j))) {
                     if (((FluidStack) tFluidList.get(i)).amount >= ((FluidStack) tFluidList.get(j)).amount) {
-                        tFluidList.remove(j--);tFluidList_sS=tFluidList.size();
+                        tFluidList.remove(j--);//tFluidList_sS=tFluidList.size();
                     } else {
-                        tFluidList.remove(i--);tFluidList_sS=tFluidList.size();
+                        tFluidList.remove(i--);//tFluidList_sS=tFluidList.size();
                         break;
                     }
                 }
@@ -217,8 +217,9 @@ public class GT_MetaTileEntity_ProcessingArray extends GT_MetaTileEntity_MultiBl
                 }
                 ItemStack[] tOut = new ItemStack[tRecipe.mOutputs.length];
                 for (int h = 0; h < tRecipe.mOutputs.length; h++) {
+                    if (tRecipe.getOutput(h) != null) {
                     tOut[h] = tRecipe.getOutput(h).copy();
-                    tOut[h].stackSize = 0;
+                    tOut[h].stackSize = 0; }
                 }
                 FluidStack tFOut = null;
                 if (tRecipe.getFluidOutput(0) != null) tFOut = tRecipe.getFluidOutput(0).copy();
@@ -234,16 +235,20 @@ public class GT_MetaTileEntity_ProcessingArray extends GT_MetaTileEntity_MultiBl
                     int tSize = tFOut.amount;
                     tFOut.amount = tSize * i;
                 }
+                List<ItemStack> list = new ArrayList<ItemStack>(Arrays.asList(tOut));
+                list.removeAll(Collections.singleton(null));
+                tOut = list.toArray(new ItemStack[list.size()]);
                 this.mMaxProgresstime = Math.max(1, this.mMaxProgresstime);
                 List<ItemStack> overStacks = new ArrayList<ItemStack>();
                 for (int f = 0; f < tOut.length; f++) {
                 /* FindBugs: Bug kind and pattern: RpC - RpC_REPEATED_CONDITIONAL_TEST */
                     //if (tOut[f].getMaxStackSize() < tOut[f].stackSize) {
                         while (tOut[f].getMaxStackSize() < tOut[f].stackSize) {
+                            if (tOut[f] != null) {
                             ItemStack tmp = tOut[f].copy();
                             tmp.stackSize = tmp.getMaxStackSize();
                             tOut[f].stackSize = tOut[f].stackSize - tOut[f].getMaxStackSize();
-                            overStacks.add(tmp);
+                            overStacks.add(tmp); }
                         }
                     //}
                 }
