@@ -210,7 +210,7 @@ public class GregTech_API {
         sDimensionalList.add(0);
         sDimensionalList.add(1);
 
-        if (!Ser0 || !Boolean.parseBoolean(System.getProperty("gt.SerializableObjects", "F"))) {
+        if (!Ser0 || !Boolean.parseBoolean(System.getProperty("gt.SerializableObjects", "false"))) {
         sSoundList.put(0, "random.break");
         sSoundList.put(1, "random.anvil_use");
         sSoundList.put(2, "random.anvil_break");
