@@ -9,14 +9,17 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 
-public class GT_FoodStat implements IFoodStat {
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
+public class GT_FoodStat implements IFoodStat, java.io.Serializable {
     private final int mFoodLevel;
     private final int[] mPotionEffects;
     private final float mSaturation;
     private final EnumAction mAction;
     private final ItemStack mEmptyContainer;
     private final boolean mAlwaysEdible, mInvisibleParticles, mIsRotten;
-    private boolean mExplosive = false, mMilk = false;
+    private boolean mExplosive = F, mMilk = F;
 
     /**
      * @param aFoodLevel          Amount of Food in Half Bacon [0 - 20]
@@ -43,12 +46,12 @@ public class GT_FoodStat implements IFoodStat {
     }
 
     public GT_FoodStat setExplosive() {
-        mExplosive = true;
+        mExplosive = T;
         return this;
     }
 
     public GT_FoodStat setMilk() {
-        mMilk = true;
+        mMilk = T;
         return this;
     }
 
@@ -67,7 +70,7 @@ public class GT_FoodStat implements IFoodStat {
         aStack.stackSize--;
         ItemStack tStack = GT_OreDictUnificator.get(GT_Utility.copy(mEmptyContainer));
         if (tStack != null && !aPlayer.inventory.addItemStackToInventory(tStack))
-            aPlayer.dropPlayerItemWithRandomChoice(tStack, true);
+            aPlayer.dropPlayerItemWithRandomChoice(tStack, T);
         aPlayer.worldObj.playSoundAtEntity(aPlayer, "random.burp", 0.5F, aPlayer.worldObj.rand.nextFloat() * 0.1F + 0.9F);
         if (!aPlayer.worldObj.isRemote) {
             if (mMilk) {
@@ -79,7 +82,7 @@ public class GT_FoodStat implements IFoodStat {
                 }
             }
             if (mExplosive) {
-                aPlayer.worldObj.newExplosion(aPlayer, aPlayer.posX, aPlayer.posY, aPlayer.posZ, 4, true, true);
+                aPlayer.worldObj.newExplosion(aPlayer, aPlayer.posX, aPlayer.posY, aPlayer.posZ, 4, T, T);
                 aPlayer.attackEntityFrom(GT_DamageSources.getExplodingDamage(), Float.MAX_VALUE);
             }
         }

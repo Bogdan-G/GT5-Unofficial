@@ -6,9 +6,11 @@ import net.minecraftforge.fluids.Fluid;
 import static gregtech.api.enums.GT_Values.RES_PATH_BLOCK;
 
 public class GT_Fluid extends Fluid implements Runnable {
-    public final String mTextureName;
-    private final short[] mRGBa;
-
+    public String mTextureName = null;
+    private short[] mRGBa = null;
+    
+    public GT_Fluid() {super((String)null);}
+    
     public GT_Fluid(String aName, String aTextureName, short[] aRGBa) {
         super(aName);
         mRGBa = aRGBa;

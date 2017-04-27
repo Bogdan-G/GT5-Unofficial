@@ -31,6 +31,8 @@ import squeek.applecore.api.food.FoodValues;
 import squeek.applecore.api.food.IEdible;
 
 import java.util.*;import java.util.concurrent.ConcurrentHashMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ShortShortHashMap;
 
 import static gregtech.api.enums.GT_Values.*;
 
@@ -54,7 +56,7 @@ public abstract class GT_MetaGenerated_Item extends GT_MetaBase_Item implements 
      * <p/>
      * You can also use the unlocalized Name gotten from getUnlocalizedName() as Key if you want to get a specific Item.
      */
-    public static final org.eclipse.collections.impl.map.mutable.UnifiedMap<String, GT_MetaGenerated_Item> sInstances = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, GT_MetaGenerated_Item>();
+    public static final UnifiedMap<String, GT_MetaGenerated_Item> sInstances = new UnifiedMap<String, GT_MetaGenerated_Item>();
 
 	/* ---------- CONSTRUCTOR AND MEMBER VARIABLES ---------- */
 
@@ -63,10 +65,10 @@ public abstract class GT_MetaGenerated_Item extends GT_MetaBase_Item implements 
     public final BitSet mVisibleItems;
     public final IIcon[][] mIconList;
 
-    public final org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, IFoodStat> mFoodStats = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, IFoodStat>();
-    public final org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]> mElectricStats = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]>();
-    public final org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]> mFluidContainerStats = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Short, Long[]>();
-    public final org.eclipse.collections.impl.map.mutable.primitive.ShortShortHashMap/*<Short, Short>*/ mBurnValues = new org.eclipse.collections.impl.map.mutable.primitive.ShortShortHashMap/*<Short, Short>*/();
+    public final UnifiedMap<Short, IFoodStat> mFoodStats = new UnifiedMap<Short, IFoodStat>();
+    public final UnifiedMap<Short, Long[]> mElectricStats = new UnifiedMap<Short, Long[]>();
+    public final UnifiedMap<Short, Long[]> mFluidContainerStats = new UnifiedMap<Short, Long[]>();
+    public final ShortShortHashMap/*<Short, Short>*/ mBurnValues = new ShortShortHashMap/*<Short, Short>*/();
 
     /**
      * Creates the Item using these Parameters.

@@ -38,6 +38,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.net.URL;
 import java.util.*;
+import java.io.*;
 
 // Referenced classes of package gregtech.common:
 //            GT_Proxy
@@ -214,7 +215,7 @@ public class GT_Client extends GT_Proxy
                         GregTech_API.METATILEENTITIES[i].getStackForm(1L).getTooltip(null, true);
                     i++;
                 } while (true);
-            } catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+            } catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
 
 
 //        super.onPostLoad();
@@ -223,32 +224,33 @@ public class GT_Client extends GT_Proxy
 //              try {
 //                for (; i < GregTech_API.METATILEENTITIES.length; i++) if (GregTech_API.METATILEENTITIES[i] != null) GregTech_API.METATILEENTITIES[i].getStackForm(1L).getTooltip(null, true);
 //              } catch (Throwable e) {
-//                e.printStackTrace(GT_Log.err);
+//                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
 //              }
 //            }
     }
 
     public void run() {
         //skip - dead code, rly, txt files on server is now empty
+        //no need for my modpack, Cape always off
         try {
             GT_Log.out.println("Skip: GT_Mod: Downloading Cape List.");
-            /*@*//*SuppressWarnings("resource")*/
-            //Scanner tScanner = new Scanner(new URL("http://files.minecraftforge.net/maven/com/gregoriust/gregtech/capelist.txt").openStream());
-            //while (tScanner.hasNextLine()) {
-                //String tName = tScanner.nextLine();
-                //if (!this.mCapeList.contains(tName.toLowerCase())) {
-                    //this.mCapeList.add(tName.toLowerCase());
-                //}
-            //}
+            /*//@//SuppressWarnings("resource")
+            Scanner tScanner = new Scanner(new URL("http://files.minecraftforge.net/maven/com/gregoriust/gregtech/capelist.txt").openStream());
+            while (tScanner.hasNextLine()) {
+                String tName = tScanner.nextLine();
+                if (!this.mCapeList.contains(tName.toLowerCase())) {
+                    this.mCapeList.add(tName.toLowerCase());
+                }
+            }*/
         } catch (Throwable e) {
         }
         try {
             GT_Log.out.println("Skip: GT_Mod: Downloading News.");
-            /*@*//*SuppressWarnings("resource")*/
-            //Scanner tScanner = new Scanner(new URL("http://files.minecraftforge.net/maven/com/gregoriust/gregtech/message.txt").openStream());
-            //while (tScanner.hasNextLine()) {
-                //this.mMessage = (this.mMessage + tScanner.nextLine() + " ");
-            //}
+            /*//@//SuppressWarnings("resource")
+            Scanner tScanner = new Scanner(new URL("http://files.minecraftforge.net/maven/com/gregoriust/gregtech/message.txt").openStream());
+            while (tScanner.hasNextLine()) {
+                this.mMessage = (this.mMessage + tScanner.nextLine() + " ");
+            }*/
         } catch (Throwable e) {
         }
     }
@@ -264,11 +266,10 @@ public class GT_Client extends GT_Proxy
                     tEntry.setValue(Integer.valueOf(tEntry.getValue().intValue() - 1));
                 }
             }
-            GT_PlayedSound tKey;
-            for (Iterator i$ = tList.iterator(); i$.hasNext(); GT_Utility.sPlayedSoundMap.remove(tKey)) {
-                tKey = (GT_PlayedSound) i$.next();
+            for (GT_PlayedSound tKey : tList) {
+                GT_Utility.sPlayedSoundMap.remove(tKey);
             }
-            if(GregTech_API.mServerStarted == false)GregTech_API.mServerStarted = true;
+            if (GregTech_API.mServerStarted == false) GregTech_API.mServerStarted = true;
             //wut, every tick? baaad, not need (and other) -> dead code
             /*if ((this.isFirstClientPlayerTick) && (aEvent.player == GT_Values.GT.getThePlayer())) {
                 this.isFirstClientPlayerTick = false;
@@ -313,7 +314,7 @@ public class GT_Client extends GT_Proxy
                 }
             } catch (Throwable e) {
                 if (GT_Values.D1) {
-                    e.printStackTrace(GT_Log.err);
+                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
                 }
             }
         }

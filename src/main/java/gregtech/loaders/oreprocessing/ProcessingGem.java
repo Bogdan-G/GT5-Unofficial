@@ -30,22 +30,39 @@ public class ProcessingGem implements gregtech.api.interfaces.IOreRecipeRegistra
             GT_Values.RA.addForgeHammerRecipe(aStack, GT_OreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, 2L), 64, 16);
         } else {
             long matgM0 = aMaterial.getMass();
-            GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) Math.max(matgM0, 1L), 16);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) Math.max(matgM0 * 2L, 1L), 24);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(2L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateDouble, aMaterial, 1L), (int) Math.max(matgM0 * 2L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(3L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateTriple, aMaterial, 1L), (int) Math.max(matgM0 * 3L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(4L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, aMaterial, 1L), (int) Math.max(matgM0 * 4L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(5L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, aMaterial, 1L), (int) Math.max(matgM0 * 5L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(9L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateDense, aMaterial, 1L), (int) Math.max(matgM0 * 9L, 1L), 96);
+            //if Math.max(matgM0, 1L) = 1L then Math.max(matgM0 * X (positive), 1L) = 1L
+            if (matgM0 < 1L) {
+            GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), 1, 16);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), 1, 24);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(2L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateDouble, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(3L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateTriple, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(4L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(5L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(9L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateDense, aMaterial, 1L), 1, 96);
+            } else {
+            GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) (matgM0), 16);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) (matgM0 * 2L), 24);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(2L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateDouble, aMaterial, 1L), (int) (matgM0 * 2L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(3L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateTriple, aMaterial, 1L), (int) (matgM0 * 3L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(4L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, aMaterial, 1L), (int) (matgM0 * 4L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(5L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, aMaterial, 1L), (int) (matgM0 * 5L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(9L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.plateDense, aMaterial, 1L), (int) (matgM0 * 9L), 96);
+            }
         }
 
         if (!aMaterial.contains(SubTag.NO_WORKING)) {
-            long matgM0 = aMaterial.getMass();
-            GT_Values.RA.addLatheRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial, 1L), GT_OreDictUnificator.get(OrePrefixes.dustSmall, aMaterial, 2L), (int) Math.max(matgM0, 1L), 16);
+            GT_Values.RA.addLatheRecipe(GT_Utility.copyAmount(1L, Ogem0), GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial, 1L), GT_OreDictUnificator.get(OrePrefixes.dustSmall, aMaterial, 2L), (int) Math.max(aMaterial.getMass(), 1L), 16);
         }
         gregtech.api.util.GT_RecipeRegistrator.registerUsagesForMaterials(GT_Utility.copyAmount(1L, Ogem0), OrePrefixes.plate.get(aMaterial).toString(), !BmatNSs0);
 
-        switch (aMaterial) {
+        if (aMaterial == Materials._NULL) {
+        } else if (aMaterial == Materials.Coal || aMaterial == Materials.Charcoal) {
+            if (gregtech.api.GregTech_API.sRecipeFile.get(gregtech.api.enums.ConfigCategories.Recipes.disabledrecipes, "torchesFromCoal", false)) {
+                GT_ModHandler.removeRecipe(new ItemStack[]{GT_Utility.copyAmount(1L, Ogem0), null, null, new ItemStack(net.minecraft.init.Items.stick, 1, 0)});}
+        } else if (aMaterial == Materials.CertusQuartz) {
+            GT_Values.RA.addElectrolyzerRecipe(aStack, 0, GT_ModHandler.getModItem("appliedenergistics2", "item.ItemMultiMaterial", 1L, 1), null, null, null, null, null, 2000, 30);
+            }
+        /*switch (aMaterial) {
             case _NULL:
                 break;
             case Coal:
@@ -55,6 +72,6 @@ public class ProcessingGem implements gregtech.api.interfaces.IOreRecipeRegistra
                 break;
             case CertusQuartz:
                 GT_Values.RA.addElectrolyzerRecipe(aStack, 0, GT_ModHandler.getModItem("appliedenergistics2", "item.ItemMultiMaterial", 1L, 1), null, null, null, null, null, 2000, 30);
-        }
+        }*/
     }
 }

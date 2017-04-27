@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static gregtech.api.enums.GT_Values.VN;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public class GT_MetaPipeEntity_Cable extends MetaPipeEntity implements IMetaTileEntityCable {
     public final float mThickNess;
@@ -107,22 +109,22 @@ public class GT_MetaPipeEntity_Cable extends MetaPipeEntity implements IMetaTile
 
     @Override
     public boolean isSimpleMachine() {
-        return true;
+        return T;
     }
 
     @Override
     public boolean isFacingValid(byte aFacing) {
-        return false;
+        return F;
     }
 
     @Override
     public boolean isValidSlot(int aIndex) {
-        return true;
+        return T;
     }
 
     @Override
     public final boolean renderInside(byte aSide) {
-        return false;
+        return F;
     }
 
     @Override
@@ -176,16 +178,16 @@ public class GT_MetaPipeEntity_Cable extends MetaPipeEntity implements IMetaTile
                     } else if (GregTech_API.mOutputRF && tTileEntity instanceof IEnergyReceiver) {
                         ForgeDirection tDirection = ForgeDirection.getOrientation(i).getOpposite();
                         int rfOut = (int) (aVoltage * GregTech_API.mEUtoRF / 100);
-                        if (((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, rfOut, true) == rfOut) {
-                            ((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, rfOut, false);
+                        if (((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, rfOut, T) == rfOut) {
+                            ((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, rfOut, F);
                             rUsedAmperes++;
-                        } else if (((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, rfOut, true) > 0) {
+                        } else if (((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, rfOut, T) > 0) {
                             if (mRestRF == 0) {
-                                int RFtrans = ((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, (int) rfOut, false);
+                                int RFtrans = ((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, (int) rfOut, F);
                                 rUsedAmperes++;
                                 mRestRF = rfOut - RFtrans;
                             } else {
-                                int RFtrans = ((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, (int) mRestRF, false);
+                                int RFtrans = ((IEnergyReceiver) tTileEntity).receiveEnergy(tDirection, (int) mRestRF, F);
                                 mRestRF = mRestRF - RFtrans;
                             }
                         }
@@ -257,12 +259,12 @@ public class GT_MetaPipeEntity_Cable extends MetaPipeEntity implements IMetaTile
 
     @Override
     public boolean allowPullStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-        return false;
+        return F;
     }
 
     @Override
     public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-        return false;
+        return F;
     }
 
     @Override

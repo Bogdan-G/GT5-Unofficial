@@ -15,6 +15,7 @@ import net.minecraft.world.gen.ChunkProviderHell;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.*;
 import org.bogdang.modifications.random.XSTR;
 import org.eclipse.collections.impl.list.mutable.FastList;
 
@@ -28,12 +29,13 @@ public class GT_Worldgenerator implements IWorldGenerator {
     }
 
     public void generate(Random aRandom, int aX, int aZ, World aWorld, IChunkProvider aChunkGenerator, IChunkProvider aChunkProvider) {
-        this.mList.add(new WorldGenContainer(new XSTR(aRandom.nextInt()), aX * 16, aZ * 16, ((aChunkGenerator instanceof ChunkProviderEnd)) || (aWorld.getBiomeGenForCoords(aX * 16 + 8, aZ * 16 + 8) == BiomeGenBase.sky) ? 1 : ((aChunkGenerator instanceof ChunkProviderHell)) || (aWorld.getBiomeGenForCoords(aX * 16 + 8, aZ * 16 + 8) == BiomeGenBase.hell) ? -1 : 0, aWorld, aChunkGenerator, aChunkProvider, aWorld.getBiomeGenForCoords(aX * 16 + 8, aZ * 16 + 8).biomeName));
+        BiomeGenBase tBiome = aWorld.getBiomeGenForCoords(aX * 16 + 8, aZ * 16 + 8);
+        this.mList.add(new WorldGenContainer(new XSTR(aRandom.nextInt()), aX * 16, aZ * 16, ((aChunkGenerator instanceof ChunkProviderEnd)) || (tBiome == BiomeGenBase.sky) ? 1 : ((aChunkGenerator instanceof ChunkProviderHell)) || (tBiome == BiomeGenBase.hell) ? -1 : 0, aWorld, aChunkGenerator, aChunkProvider, tBiome.biomeName));
         if (!this.mIsGenerating) {
             this.mIsGenerating = true;
             int mList_sS=this.mList.size();
             for (int i = 0; i < mList_sS; i++) {
-                ((Runnable) this.mList.get(i)).run();
+                this.mList.get(i).run();
             }
             this.mList.clear();
             this.mIsGenerating = false;
@@ -76,7 +78,7 @@ public class GT_Worldgenerator implements IWorldGenerator {
                                         temp = false;
                                     }
                                 } catch (Throwable e) {
-                                    e.printStackTrace(GT_Log.err);
+                                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
                                 }
                                 break;
                             }
@@ -84,17 +86,19 @@ public class GT_Worldgenerator implements IWorldGenerator {
                     }
                 }
                 int i = 0;
-                for (int tX = this.mX - 16; i < 3; tX += 16) {
+                int tX = this.mX - 16;
+                for (; i < 3; tX += 16) {
                     int j = 0;
-                    for (int tZ = this.mZ - 16; j < 3; tZ += 16) {
-                        //String tBiome = this.mWorld.getBiomeGenForCoords(tX + 8, tZ + 8).biomeName;
-                        /*if (tBiome == null) {
-                            tBiome = BiomeGenBase.plains.biomeName;//FindBugs: DLS - DLS_DEAD_LOCAL_STORE
-                        }*/
+                    int tZ = this.mZ - 16;
+                    for (; j < 3; tZ += 16) {
+                        String tBiome = this.mWorld.getBiomeGenForCoords(tX + 8, tZ + 8).biomeName;
+                        if (tBiome == null) {
+                            tBiome = BiomeGenBase.plains.biomeName;//FindBugs: DLS - DLS_DEAD_LOCAL_STORE//hmm test for other method
+                        }
                         try {
                         for (GT_Worldgen tWorldGen : GregTech_API.sWorldgenList) {
-                                tWorldGen.executeWorldgen(this.mWorld, this.mRandom, this.mBiome, this.mDimensionType, tX, tZ, this.mChunkGenerator, this.mChunkProvider);
-                        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+                                tWorldGen.executeWorldgen(this.mWorld, this.mRandom, tBiome, this.mDimensionType, tX, tZ, this.mChunkGenerator, this.mChunkProvider);
+                        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
                         j++;
                     }
                     i++;

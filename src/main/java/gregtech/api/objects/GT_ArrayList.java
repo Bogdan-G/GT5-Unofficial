@@ -9,11 +9,13 @@ import org.eclipse.collections.impl.collection.mutable.*;
 import org.eclipse.collections.impl.list.mutable.*;
 
 public final class GT_ArrayList<E> extends FastList<E> {//attempt, old: ArrayList
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2202628394524462901L;
     private int size_sS;
 
-    private final boolean mAllowNulls;
-
+    private boolean mAllowNulls = true;
+    
+    public GT_ArrayList() {}
+    
     public GT_ArrayList(boolean aAllowNulls, int aCapacity) {
         super(aCapacity);
         mAllowNulls = aAllowNulls;

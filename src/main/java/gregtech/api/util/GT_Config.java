@@ -6,9 +6,11 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 import static gregtech.api.enums.GT_Values.E;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public class GT_Config implements Runnable {
-    //public static boolean troll = false;
+    //public static boolean troll = F;
 
     public static Configuration sConfigFileIDs;
     public final Configuration mConfig;

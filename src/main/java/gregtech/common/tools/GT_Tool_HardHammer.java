@@ -147,9 +147,6 @@ public class GT_Tool_HardHammer
 
     public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
         super.onToolCrafted(aStack, aPlayer);
-        try {
-            GT_Mod.instance.achievements.issueAchievement(aPlayer, "tools");
-        } catch (Exception e) {
-        }
+        GT_Mod.instance.achievements.issueAchievement(aPlayer, "tools");
     }
 }

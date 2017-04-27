@@ -29,9 +29,12 @@ import net.minecraftforge.fluids.IFluidHandler;
 import java.util.ArrayList;
 import java.util.HashMap;import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map.Entry;
+import java.io.*;
 import org.bogdang.modifications.random.XSTR;
 
 import static gregtech.api.enums.GT_Values.D1;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
     public final float mThickNess;
@@ -88,22 +91,22 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
 
     @Override
     public boolean isSimpleMachine() {
-        return true;
+        return T;
     }
 
     @Override
     public boolean isFacingValid(byte aFacing) {
-        return false;
+        return F;
     }
 
     @Override
     public boolean isValidSlot(int aIndex) {
-        return false;
+        return F;
     }
 
     @Override
     public final boolean renderInside(byte aSide) {
-        return false;
+        return F;
     }
 
     @Override
@@ -171,7 +174,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
                                 GT_Utility.applyHeatDamage(tLiving, (tTemperature - 300) / 25.0F);
                             }
                         } catch (Throwable e) {
-                            if (D1) e.printStackTrace(GT_Log.err);
+                            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
                         }
                     } else if (tTemperature < 260) {
                         try {
@@ -179,7 +182,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
                                 GT_Utility.applyFrostDamage(tLiving, (270 - tTemperature) / 12.5F);
                             }
                         } catch (Throwable e) {
-                            if (D1) e.printStackTrace(GT_Log.err);
+                            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
                         }
                     }
                     if (mFluid.amount <= 0) mFluid = null;
@@ -228,7 +231,7 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
                     int tAmount = Math.max(1, Math.min(mCapacity * 10, mFluid.amount >> 1)), tSuccessfulTankAmount = 0;
 
                     for (Entry<IFluidHandler, ForgeDirection> tEntry : tTanks.entrySet())
-                        if (tEntry.getKey().fill(tEntry.getValue(), drain(tAmount, false), false) > 0)
+                        if (tEntry.getKey().fill(tEntry.getValue(), drain(tAmount, F), F) > 0)
                             tSuccessfulTankAmount++;
 
                     if (tSuccessfulTankAmount > 0) {
@@ -236,16 +239,16 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
                             tAmount /= tSuccessfulTankAmount;
                             for (Entry<IFluidHandler, ForgeDirection> tTileEntity : tTanks.entrySet()) {
                                 if (mFluid == null || mFluid.amount <= 0) break;
-                                int tFilledAmount = tTileEntity.getKey().fill(tTileEntity.getValue(), drain(tAmount, false), false);
+                                int tFilledAmount = tTileEntity.getKey().fill(tTileEntity.getValue(), drain(tAmount, F), F);
                                 if (tFilledAmount > 0)
-                                    tTileEntity.getKey().fill(tTileEntity.getValue(), drain(tFilledAmount, true), true);
+                                    tTileEntity.getKey().fill(tTileEntity.getValue(), drain(tFilledAmount, T), T);
                             }
                         } else {
                             for (Entry<IFluidHandler, ForgeDirection> tTileEntity : tTanks.entrySet()) {
                                 if (mFluid == null || mFluid.amount <= 0) break;
-                                int tFilledAmount = tTileEntity.getKey().fill(tTileEntity.getValue(), drain(mFluid.amount, false), false);
+                                int tFilledAmount = tTileEntity.getKey().fill(tTileEntity.getValue(), drain(mFluid.amount, F), F);
                                 if (tFilledAmount > 0)
-                                    tTileEntity.getKey().fill(tTileEntity.getValue(), drain(tFilledAmount, true), true);
+                                    tTileEntity.getKey().fill(tTileEntity.getValue(), drain(tFilledAmount, T), T);
                             }
                         }
                     }
@@ -276,12 +279,12 @@ public class GT_MetaPipeEntity_Fluid extends MetaPipeEntity {
 
     @Override
     public boolean allowPullStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-        return false;
+        return F;
     }
 
     @Override
     public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-        return false;
+        return F;
     }
 
     @Override

@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class Behaviour_None
-        implements IItemBehaviour<GT_MetaBase_Item> {
+        implements IItemBehaviour<GT_MetaBase_Item>, java.io.Serializable {
     public boolean onLeftClickEntity(GT_MetaBase_Item aItem, ItemStack aStack, EntityPlayer aPlayer, Entity aEntity) {
         return false;
     }

@@ -8,6 +8,7 @@ import gregtech.api.interfaces.IOreRecipeRegistrator;
 import gregtech.api.items.GT_Generic_Block;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Utility;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,6 +24,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
+
+import static gregtech.api.enums.GT_Values.IronPickaxeReqGTOres;
 
 public class GT_Block_Stones_Abstract
         extends GT_Generic_Block
@@ -78,7 +81,7 @@ public class GT_Block_Stones_Abstract
     }
 
     public int getHarvestLevel(int aMeta) {
-        return 1;
+        return IronPickaxeReqGTOres ? 2 : 1;
     }
 
     public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {
@@ -94,7 +97,7 @@ public class GT_Block_Stones_Abstract
     }
 
     public boolean canBeReplacedByLeaves(IBlockAccess aWorld, int aX, int aY, int aZ) {
-        return false;
+        return true;
     }
 
     public boolean isNormalCube(IBlockAccess aWorld, int aX, int aY, int aZ) {
@@ -145,5 +148,11 @@ public class GT_Block_Stones_Abstract
         for (int i = 0; i < 16; i++) {
             aList.add(new ItemStack(aItem, 1, i));
         }
+    }
+
+    //allow replace, test for collision, in theory we will be allowed to be generated over ore mod, it can be faster than another generation cycle
+    public boolean isReplaceableOreGen(World world, int x, int y, int z, Block target)
+    {
+        return true;
     }
 }

@@ -65,42 +65,43 @@ public class GT_ContainerMetaTile_Machine extends GT_Container {
         Iterator var2 = this.crafters.iterator();
         while (var2.hasNext()) {
             ICrafting var1 = (ICrafting) var2.next();
-            if (mTimer % 500 == 10 || oEnergy != mEnergy) {
+            boolean mTimer_chk = mTimer % 500 == 10;
+            if (mTimer_chk || oEnergy != mEnergy) {
                 var1.sendProgressBarUpdate(this, 0, mEnergy & 65535);
                 var1.sendProgressBarUpdate(this, 1, mEnergy >>> 16);
             }
-            if (mTimer % 500 == 10 || oStorage != mStorage) {
+            if (mTimer_chk || oStorage != mStorage) {
                 var1.sendProgressBarUpdate(this, 2, mStorage & 65535);
                 var1.sendProgressBarUpdate(this, 3, mStorage >>> 16);
             }
-            if (mTimer % 500 == 10 || oOutput != mOutput) {
+            if (mTimer_chk || oOutput != mOutput) {
                 var1.sendProgressBarUpdate(this, 4, mOutput);
             }
-            if (mTimer % 500 == 10 || oInput != mInput) {
+            if (mTimer_chk || oInput != mInput) {
                 var1.sendProgressBarUpdate(this, 5, mInput);
             }
-            if (mTimer % 500 == 10 || oDisplayErrorCode != mDisplayErrorCode) {
+            if (mTimer_chk || oDisplayErrorCode != mDisplayErrorCode) {
                 var1.sendProgressBarUpdate(this, 6, mDisplayErrorCode);
             }
-            if (mTimer % 500 == 10 || oProgressTime != mProgressTime) {
+            if (mTimer_chk || oProgressTime != mProgressTime) {
                 var1.sendProgressBarUpdate(this, 11, mProgressTime & 65535);
                 var1.sendProgressBarUpdate(this, 12, mProgressTime >>> 16);
             }
-            if (mTimer % 500 == 10 || oMaxProgressTime != mMaxProgressTime) {
+            if (mTimer_chk || oMaxProgressTime != mMaxProgressTime) {
                 var1.sendProgressBarUpdate(this, 13, mMaxProgressTime & 65535);
                 var1.sendProgressBarUpdate(this, 14, mMaxProgressTime >>> 16);
             }
-            if (mTimer % 500 == 10 || oID != mID) {
+            if (mTimer_chk || oID != mID) {
                 var1.sendProgressBarUpdate(this, 15, mID);
             }
-            if (mTimer % 500 == 10 || oActive != mActive) {
+            if (mTimer_chk || oActive != mActive) {
                 var1.sendProgressBarUpdate(this, 16, mActive);
             }
-            if (mTimer % 500 == 10 || oSteam != mSteam) {
+            if (mTimer_chk || oSteam != mSteam) {
                 var1.sendProgressBarUpdate(this, 17, mSteam & 65535);
                 var1.sendProgressBarUpdate(this, 18, mSteam >>> 16);
             }
-            if (mTimer % 500 == 10 || oSteamStorage != mSteamStorage) {
+            if (mTimer_chk || oSteamStorage != mSteamStorage) {
                 var1.sendProgressBarUpdate(this, 19, mSteamStorage & 65535);
                 var1.sendProgressBarUpdate(this, 20, mSteamStorage >>> 16);
             }

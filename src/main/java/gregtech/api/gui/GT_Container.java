@@ -12,6 +12,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.io.*;
 
 /**
  * NEVER INCLUDE THIS FILE IN YOUR MOD!!!
@@ -112,7 +113,7 @@ public class GT_Container extends Container {
         try {
             return super.slotClick(aSlotIndex, aMouseclick, aShifthold, aPlayer);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
 
         ItemStack rStack = null;
@@ -374,7 +375,7 @@ public class GT_Container extends Container {
         try {
             return super.addSlotToContainer(par1Slot);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return par1Slot;
     }
@@ -384,7 +385,7 @@ public class GT_Container extends Container {
         try {
             super.addCraftingToCrafters(par1ICrafting);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -393,7 +394,7 @@ public class GT_Container extends Container {
         try {
             return super.getInventory();
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return null;
     }
@@ -403,7 +404,7 @@ public class GT_Container extends Container {
         try {
             super.removeCraftingFromCrafters(par1ICrafting);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -412,7 +413,7 @@ public class GT_Container extends Container {
         try {
             super.detectAndSendChanges();
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -421,7 +422,7 @@ public class GT_Container extends Container {
         try {
             return super.enchantItem(par1EntityPlayer, par2);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return false;
     }
@@ -431,7 +432,7 @@ public class GT_Container extends Container {
         try {
             return super.getSlotFromInventory(par1IInventory, par2);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return null;
     }
@@ -441,7 +442,7 @@ public class GT_Container extends Container {
         try {
             if (this.inventorySlots.size() > par1) return super.getSlot(par1);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return null;
     }
@@ -451,7 +452,7 @@ public class GT_Container extends Container {
         try {
             return super.func_94530_a(par1ItemStack, par2Slot);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return true;
     }
@@ -461,7 +462,7 @@ public class GT_Container extends Container {
         try {
             super.retrySlotClick(par1, par2, par3, par4EntityPlayer);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -470,7 +471,7 @@ public class GT_Container extends Container {
         try {
             super.onContainerClosed(par1EntityPlayer);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -479,7 +480,7 @@ public class GT_Container extends Container {
         try {
             super.onCraftMatrixChanged(par1IInventory);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -488,7 +489,7 @@ public class GT_Container extends Container {
         try {
             super.putStackInSlot(par1, par2ItemStack);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -497,7 +498,7 @@ public class GT_Container extends Container {
         try {
             super.putStacksInSlots(par1ArrayOfItemStack);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -506,7 +507,7 @@ public class GT_Container extends Container {
         try {
             super.updateProgressBar(par1, par2);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -515,7 +516,7 @@ public class GT_Container extends Container {
         try {
             return super.getNextTransactionID(par1InventoryPlayer);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return 0;
     }
@@ -525,7 +526,7 @@ public class GT_Container extends Container {
         try {
             return super.isPlayerNotUsingContainer(par1EntityPlayer);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return true;
     }
@@ -535,7 +536,7 @@ public class GT_Container extends Container {
         try {
             super.setPlayerIsPresent(par1EntityPlayer, par2);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -544,7 +545,7 @@ public class GT_Container extends Container {
         try {
             super.func_94533_d();
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 
@@ -553,7 +554,7 @@ public class GT_Container extends Container {
         try {
             return super.canDragIntoSlot(par1Slot);
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
         return true;
     }

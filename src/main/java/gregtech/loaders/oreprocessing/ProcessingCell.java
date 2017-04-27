@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static gregtech.api.enums.GT_Values.T;
+
 public class ProcessingCell
         implements IOreRecipeRegistrator {
     public ProcessingCell() {
@@ -28,13 +30,12 @@ public class ProcessingCell
             }
         } else {
             if (aMaterial.mFuelPower > 0) {
-                GT_Values.RA.addFuel(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_Utility.getFluidForFilledItem(aStack, true) == null ? GT_Utility.getContainerItem(aStack, true) : null, aMaterial.mFuelPower, aMaterial.mFuelType);
+                GT_Values.RA.addFuel(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_Utility.getFluidForFilledItem(aStack, T) == null ? GT_Utility.getContainerItem(aStack, T) : null, aMaterial.mFuelPower, aMaterial.mFuelType);
             }
             if ((aMaterial.mMaterialList.size() > 0) && ((aMaterial.mExtraData & 0x3) != 0)) {
                 int tAllAmount = 0;
-                MaterialStack tMat2;
-                for (Iterator i$ = aMaterial.mMaterialList.iterator(); i$.hasNext(); tAllAmount = (int) (tAllAmount + tMat2.mAmount)) {
-                    tMat2 = (MaterialStack) i$.next();
+                for (MaterialStack tMat2 : aMaterial.mMaterialList) {
+                    tAllAmount = (int) (tAllAmount + tMat2.mAmount);
                 }
                 long tItemAmount = 0L;
                 long tCapsuleCount = GT_ModHandler.getCapsuleCellContainerCountMultipliedWithStackSize(new ItemStack[]{aStack}) * -tAllAmount;

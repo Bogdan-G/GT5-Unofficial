@@ -47,8 +47,7 @@ public class GT_MetaTileEntity_Replicator
                                 if (ItemList.Cell_Empty.isStackEqual(getInputAt(0))) {
                                     if (canOutput(new ItemStack[]{this.mOutputItems[0]})) {
                                         getInputAt(0).stackSize -= 1;
-                                        FluidStack
-                                                tmp231_230 = tFluid;
+                                        FluidStack tmp231_230 = tFluid;
                                         tmp231_230.amount = ((int) (tmp231_230.amount - tMass));
                                         return 2;
                                     }
@@ -83,11 +82,8 @@ public class GT_MetaTileEntity_Replicator
 
     public int getCapacity() {
         if ((sHeaviestElementMass == 0) && (GregTech_API.sPostloadFinished)) {
-            Materials tMaterial;
-            for (Iterator i$ = Materials.VALUES.iterator(); i$.hasNext(); sHeaviestElementMass = Math.max(sHeaviestElementMass, (int) tMaterial.getMass())) {
-                tMaterial = (Materials) i$.next();
-                //if ((tMaterial.mElement == null) || (tMaterial.mElement.mIsIsotope)) {
-                //}
+            for (Materials tMaterial : Materials.VALUES) {
+                if ((tMaterial.mElement != null) && !(tMaterial.mElement.mIsIsotope)) sHeaviestElementMass = Math.max(sHeaviestElementMass, (int) tMaterial.getMass());
             }
         }
         return sHeaviestElementMass;

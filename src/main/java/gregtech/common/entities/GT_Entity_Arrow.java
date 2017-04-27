@@ -29,6 +29,9 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import java.util.List;
 import java.util.UUID;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_Entity_Arrow
         extends EntityArrow {
     private int mHitBlockX = -1;
@@ -36,7 +39,7 @@ public class GT_Entity_Arrow
     private int mHitBlockZ = -1;
     private Block mHitBlock = Blocks.air;
     private int mHitBlockMeta = 0;
-    private boolean inGround = false;
+    private boolean inGround = F;
     private int mTicksAlive = 0;
     private int ticksInAir = 0;
     private int mKnockback = 0;
@@ -82,7 +85,7 @@ public class GT_Entity_Arrow
             tBlock.setBlockBoundsBasedOnState(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
             AxisAlignedBB axisalignedbb = tBlock.getCollisionBoundingBoxFromPool(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
             if ((axisalignedbb != null) && (axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))) {
-                this.inGround = true;
+                this.inGround = T;
             }
         }
         if (this.arrowShake > 0) {
@@ -91,7 +94,7 @@ public class GT_Entity_Arrow
         if (this.inGround) {
             int j = this.worldObj.getBlockMetadata(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
             if ((tBlock != this.mHitBlock) || (j != this.mHitBlockMeta)) {
-                this.inGround = false;
+                this.inGround = F;
                 this.motionX *= this.rand.nextFloat() * 0.2F;
                 this.motionY *= this.rand.nextFloat() * 0.2F;
                 this.motionZ *= this.rand.nextFloat() * 0.2F;
@@ -102,7 +105,7 @@ public class GT_Entity_Arrow
             this.ticksInAir += 1;
             Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition tVector = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
+            MovingObjectPosition tVector = this.worldObj.func_147447_a(vec31, vec3, F, T, F);
             vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             if (tVector != null) {
@@ -229,14 +232,14 @@ public class GT_Entity_Arrow
                     this.posY -= this.motionY / f2 * 0.0500000007450581D;
                     this.posZ -= this.motionZ / f2 * 0.0500000007450581D;
                     playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-                    this.inGround = true;
+                    this.inGround = T;
                     this.arrowShake = 7;
-                    setIsCritical(false);
+                    setIsCritical(F);
                     if (this.mHitBlock.getMaterial() != Material.air) {
                         this.mHitBlock.onEntityCollidedWithBlock(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, this);
                     }
                     if ((!this.worldObj.isRemote) && (EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, this.mArrow) > 2)) {
-                        GT_Utility.setCoordsOnFire(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, true);
+                        GT_Utility.setCoordsOnFire(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, T);
                     }
                     if (breaksOnImpact()) {
                         setDead();
@@ -336,7 +339,7 @@ public class GT_Entity_Arrow
     }
 
     public boolean breaksOnImpact() {
-        return false;
+        return F;
     }
 
     public void setKnockbackStrength(int aKnockback) {

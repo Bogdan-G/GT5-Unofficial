@@ -19,7 +19,7 @@ import java.util.List;
 
 public class GT_Tool_Plow
         extends GT_Tool {
-    private ThreadLocal<Object> sIsHarvestingRightNow = new ThreadLocal();
+    private transient ThreadLocal<Object> sIsHarvestingRightNow = new ThreadLocal();
 
     public float getNormalDamageAgainstEntity(float aOriginalDamage, Entity aEntity, ItemStack aStack, EntityPlayer aPlayer) {
         return (aEntity instanceof EntitySnowman) ? aOriginalDamage * 4.0F : aOriginalDamage;

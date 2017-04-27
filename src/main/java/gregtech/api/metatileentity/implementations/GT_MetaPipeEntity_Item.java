@@ -21,13 +21,16 @@ import net.minecraft.tileentity.TileEntityHopper;
 import java.util.ArrayList;
 import java.util.HashMap;import java.util.concurrent.ConcurrentHashMap;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileEntityItemPipe {
     public final float mThickNess;
     public final Materials mMaterial;
     public final int mStepSize;
     public int mTransferredItems = 0;
     public byte mLastReceivedFrom = 0, oLastReceivedFrom = 0;
-    public boolean mIsRestrictive = false;
+    public boolean mIsRestrictive = F;
 
     public GT_MetaPipeEntity_Item(int aID, String aName, String aNameRegional, float aThickNess, Materials aMaterial, int aInvSlotCount, int aStepSize, boolean aIsRestrictive) {
         super(aID, aName, aNameRegional, aInvSlotCount);
@@ -89,22 +92,22 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
 
     @Override
     public boolean isSimpleMachine() {
-        return true;
+        return T;
     }
 
     @Override
     public boolean isFacingValid(byte aFacing) {
-        return false;
+        return F;
     }
 
     @Override
     public boolean isValidSlot(int aIndex) {
-        return true;
+        return T;
     }
 
     @Override
     public final boolean renderInside(byte aSide) {
-        return false;
+        return F;
     }
 
     @Override
@@ -138,7 +141,7 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
                 if (tTileEntity != null) {
                     boolean temp = GT_Utility.isConnectableNonInventoryPipe(tTileEntity, GT_Utility.getOppositeSide(i));
                     if (tTileEntity instanceof IGregTechTileEntity) {
-                        temp = true;
+                        temp = T;
                         if (((IGregTechTileEntity) tTileEntity).getMetaTileEntity() == null) continue;
                         if (aBaseMetaTileEntity.getColorization() >= 0) {
                             byte tColor = ((IGregTechTileEntity) tTileEntity).getColorization();
@@ -152,13 +155,13 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
                         }
                     }
                     if (tTileEntity instanceof IInventory) {
-                        temp = true;
+                        temp = T;
                         if (((IInventory) tTileEntity).getSizeInventory() <= 0) {
                             continue;
                         }
                     }
                     if (tTileEntity instanceof ISidedInventory) {
-                        temp = true;
+                        temp = T;
                         int[] tSlots = ((ISidedInventory) tTileEntity).getAccessibleSlotsFromSide(GT_Utility.getOppositeSide(i));
                         if (tSlots == null || tSlots.length <= 0) {
                             continue;
@@ -186,19 +189,19 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
             }
 
             if (oLastReceivedFrom == mLastReceivedFrom) {
-                doTickProfilingInThisTick = false;
+                doTickProfilingInThisTick = F;
 
                 ArrayList<IMetaTileEntityItemPipe> tPipeList = new ArrayList<IMetaTileEntityItemPipe>();
 
-                for (boolean temp = true; temp && !isInventoryEmpty() && pipeCapacityCheck(); ) {
-                    temp = false;
+                for (boolean temp = T; temp && !isInventoryEmpty() && pipeCapacityCheck(); ) {
+                    temp = F;
                     tPipeList.clear();
-                    for (IMetaTileEntityItemPipe tTileEntity : GT_Utility.sortMapByValuesAcending(IMetaTileEntityItemPipe.Util.scanPipes(this, new ConcurrentHashMap<IMetaTileEntityItemPipe, Long>(), 0, false, false)).keySet()) {
+                    for (IMetaTileEntityItemPipe tTileEntity : GT_Utility.sortMapByValuesAcending(IMetaTileEntityItemPipe.Util.scanPipes(this, new ConcurrentHashMap<IMetaTileEntityItemPipe, Long>(), 0, F, F)).keySet()) {
                         if (temp) break;
                         tPipeList.add(tTileEntity);
                         while (!temp && !isInventoryEmpty() && tTileEntity.sendItemStack(aBaseMetaTileEntity))
                             for (IMetaTileEntityItemPipe tPipe : tPipeList)
-                                if (!tPipe.incrementTransferCounter(1)) temp = true;
+                                if (!tPipe.incrementTransferCounter(1)) temp = T;
                     }
                 }
             }
@@ -221,11 +224,11 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
             for (byte i = 0; i < 6; i++) {
                 tSide = (byte) ((i + tOffset) % 6);
                 if (isInventoryEmpty() || (tSide != mLastReceivedFrom || aSender != getBaseMetaTileEntity())) {
-                    if (insertItemStackIntoTileEntity(aSender, tSide)) return true;
+                    if (insertItemStackIntoTileEntity(aSender, tSide)) return T;
                 }
             }
         }
-        return false;
+        return F;
     }
 
     @Override
@@ -234,11 +237,11 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
             TileEntity tInventory = getBaseMetaTileEntity().getTileEntityAtSide(aSide);
             if (tInventory != null && !(tInventory instanceof BaseMetaPipeEntity)) {
                 if ((!(tInventory instanceof TileEntityHopper) && !(tInventory instanceof TileEntityDispenser)) || getBaseMetaTileEntity().getMetaIDAtSide(aSide) != GT_Utility.getOppositeSide(aSide)) {
-                    return GT_Utility.moveOneItemStack(aSender, tInventory, (byte) 6, GT_Utility.getOppositeSide(aSide), null, false, (byte) 64, (byte) 1, (byte) 64, (byte) 1) > 0;
+                    return GT_Utility.moveOneItemStack(aSender, tInventory, (byte) 6, GT_Utility.getOppositeSide(aSide), null, F, (byte) 64, (byte) 1, (byte) 64, (byte) 1) > 0;
                 }
             }
         }
-        return false;
+        return F;
     }
 
     @Override
@@ -268,12 +271,12 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
 
     @Override
     public boolean canExtractItem(int aIndex, ItemStack aStack, int aSide) {
-        return true;
+        return T;
     }
 
     @Override
     public boolean allowPullStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-        return true;
+        return T;
     }
 
     @Override
@@ -288,8 +291,8 @@ public class GT_MetaPipeEntity_Item extends MetaPipeEntity implements IMetaTileE
     }
 
     private boolean isInventoryEmpty() {
-        for (ItemStack tStack : mInventory) if (tStack != null) return false;
-        return true;
+        for (ItemStack tStack : mInventory) if (tStack != null) return F;
+        return T;
     }
 
     @Override

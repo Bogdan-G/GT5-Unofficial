@@ -23,13 +23,16 @@ import java.util.ArrayList;
 import java.util.Random;
 import org.bogdang.modifications.random.XSTR;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_TileEntity_Ores
         extends TileEntity
         implements ITexturedTileEntity {
     private static final ITexture[] mStoneTextures = {new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.netherrack, 0, 0), new GT_CopiedBlockTexture(Blocks.end_stone, 0, 0), new GT_RenderedTexture(Textures.BlockIcons.GRANITE_BLACK_STONE), new GT_RenderedTexture(Textures.BlockIcons.GRANITE_RED_STONE), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0), new GT_CopiedBlockTexture(Blocks.stone, 0, 0)};
     public short mMetaData = 0;
-    public boolean mNatural = false;
-    public boolean mBlocked = true;
+    public boolean mNatural = F;
+    public boolean mBlocked = T;
 
     public static byte getHarvestData(short aMetaData) {
         Materials aMaterial = GregTech_API.sGeneratedMaterials[(aMetaData % 1000)];
@@ -39,10 +42,12 @@ public class GT_TileEntity_Ores
     public static boolean setOreBlock(World aWorld, int aX, int aY, int aZ, int aMetaData) {
         aY = Math.min(aWorld.getActualHeight(), Math.max(aY, 1));
         Block tBlock = aWorld.getBlock(aX, aY, aZ);
+        //add aWorld.provider.dimensionId, test for speed
+        int dim = aWorld.provider.dimensionId;
         if ((aMetaData > 0) && (tBlock != Blocks.air)) {
-            if (tBlock.isReplaceableOreGen(aWorld, aX, aY, aZ, Blocks.netherrack)) {
+            if (dim == -1 && tBlock.isReplaceableOreGen(aWorld, aX, aY, aZ, Blocks.netherrack)) {
                 aMetaData += 1000;
-            } else if (tBlock.isReplaceableOreGen(aWorld, aX, aY, aZ, Blocks.end_stone)) {
+            } else if (dim == 1 && tBlock.isReplaceableOreGen(aWorld, aX, aY, aZ, Blocks.end_stone)) {
                 aMetaData += 2000;
             } else if (tBlock.isReplaceableOreGen(aWorld, aX, aY, aZ, GregTech_API.sBlockGranites)) {
                 if (tBlock == GregTech_API.sBlockGranites) {
@@ -55,17 +60,17 @@ public class GT_TileEntity_Ores
                     aMetaData += 3000;
                 }
             } else if (!tBlock.isReplaceableOreGen(aWorld, aX, aY, aZ, Blocks.stone)) {
-                return false;
+                return F;
             }
             aWorld.setBlock(aX, aY, aZ, GregTech_API.sBlockOres1, getHarvestData((short) aMetaData), 0);
             TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
             if ((tTileEntity instanceof GT_TileEntity_Ores)) {
                 ((GT_TileEntity_Ores) tTileEntity).mMetaData = ((short) aMetaData);
-                ((GT_TileEntity_Ores) tTileEntity).mNatural = true;
+                ((GT_TileEntity_Ores) tTileEntity).mNatural = T;
             }
-            return true;
+            return T;
         }
-        return false;
+        return F;
     }
 
     public void readFromNBT(NBTTagCompound aNBT) {
@@ -82,7 +87,7 @@ public class GT_TileEntity_Ores
 
     public void onUpdated() {
         if ((!this.worldObj.isRemote) && (this.mBlocked)) {
-            this.mBlocked = false;
+            this.mBlocked = F;
             GT_Values.NW.sendPacketToAllPlayersInRange(this.worldObj, new GT_Packet_Ores(this.xCoord, (byte) (this.yCoord-128), this.zCoord, this.mMetaData), this.xCoord, this.zCoord);
         }
     }
@@ -121,7 +126,7 @@ public class GT_TileEntity_Ores
     }
 
     public boolean canUpdate() {
-        return false;
+        return F;
     }
 
     public ArrayList<ItemStack> getDrops(int aFortune) {
@@ -143,47 +148,85 @@ public class GT_TileEntity_Ores
             ArrayList<ItemStack> tSelector = new ArrayList();
 
 
-            ItemStack tStack = GT_OreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L), 1L);
+            final ItemStack tStack = GT_OreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L), 1L);
             if (tStack != null) {
-                for (int i = 0; i < 1; i++) {
+                //for (int i = 0; i < 1; i++) {
                     tSelector.add(tStack);
-                }
+                //}
             }
-            tStack = GT_OreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L), 1L);
-            if (tStack != null) {
-                for (int i = 0; i < 2; i++) {
-                    tSelector.add(tStack);
-                }
+            final ItemStack tStack1 = GT_OreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L), 1L);
+            if (tStack1 != null) {
+                //for (int i = 0; i < 2; i++) {
+                    tSelector.add(tStack1);
+                    tSelector.add(tStack1);
+                //}
             }
-            tStack = GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L);
-            if (tStack != null) {
-                for (int i = 0; i < 12; i++) {
-                    tSelector.add(tStack);
-                }
+            final ItemStack tStack2 = GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L);
+            if (tStack2 != null) {
+                //for (int i = 0; i < 12; i++) {
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                    tSelector.add(tStack2);
+                //}
             }
-            tStack = GT_OreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, GT_OreDictUnificator.get(OrePrefixes.crushed, aMaterial, 1L), 1L);
-            if (tStack != null) {
-                for (int i = 0; i < 5; i++) {
-                    tSelector.add(tStack);
-                }
+            final ItemStack tStack3 = GT_OreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, GT_OreDictUnificator.get(OrePrefixes.crushed, aMaterial, 1L), 1L);
+            if (tStack3 != null) {
+                //for (int i = 0; i < 5; i++) {
+                    tSelector.add(tStack3);
+                    tSelector.add(tStack3);
+                    tSelector.add(tStack3);
+                    tSelector.add(tStack3);
+                    tSelector.add(tStack3);
+                //}
             }
-            tStack = GT_OreDictUnificator.get(OrePrefixes.crushed, aMaterial, 1L);
-            if (tStack != null) {
-                for (int i = 0; i < 10; i++) {
-                    tSelector.add(tStack);
-                }
+            final ItemStack tStack4 = GT_OreDictUnificator.get(OrePrefixes.crushed, aMaterial, 1L);
+            if (tStack4 != null) {
+                //for (int i = 0; i < 10; i++) {
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                    tSelector.add(tStack4);
+                //}
             }
-            tStack = GT_OreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, GT_OreDictUnificator.get(OrePrefixes.dustImpure, aMaterial, 1L), 1L);
-            if (tStack != null) {
-                for (int i = 0; i < 5; i++) {
-                    tSelector.add(tStack);
-                }
+            final ItemStack tStack5 = GT_OreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, GT_OreDictUnificator.get(OrePrefixes.dustImpure, aMaterial, 1L), 1L);
+            if (tStack5 != null) {
+                //for (int i = 0; i < 5; i++) {
+                    tSelector.add(tStack5);
+                    tSelector.add(tStack5);
+                    tSelector.add(tStack5);
+                    tSelector.add(tStack5);
+                    tSelector.add(tStack5);
+                //}
             }
-            tStack = GT_OreDictUnificator.get(OrePrefixes.dustImpure, aMaterial, 1L);
-            if (tStack != null) {
-                for (int i = 0; i < 10; i++) {
-                    tSelector.add(tStack);
-                }
+            final ItemStack tStack6 = GT_OreDictUnificator.get(OrePrefixes.dustImpure, aMaterial, 1L);
+            if (tStack6 != null) {
+                //for (int i = 0; i < 10; i++) {
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                    tSelector.add(tStack6);
+                //}
             }
             if (tSelector.size() > 0) {
                 int i = 0;

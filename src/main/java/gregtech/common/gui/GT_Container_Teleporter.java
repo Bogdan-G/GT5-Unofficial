@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Iterator;
 
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_Container_Teleporter
         extends GT_ContainerMetaTile_Machine {
     public int mEgg = 0;
@@ -27,25 +29,25 @@ public class GT_Container_Teleporter
 
     @Override
     public void addSlots(InventoryPlayer aInventoryPlayer) {
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 5, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 23, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 41, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 59, false, false, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 5, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 23, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 41, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 8, 59, F, F, 1));
 
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 5, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 23, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 41, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 59, false, false, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 5, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 23, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 41, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 26, 59, F, F, 1));
 
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 5, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 23, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 41, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 59, false, false, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 5, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 23, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 41, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 152, 59, F, F, 1));
 
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 5, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 23, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 41, false, false, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 59, false, false, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 5, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 23, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 41, F, F, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 2, 134, 59, F, F, 1));
     }
 
     @Override

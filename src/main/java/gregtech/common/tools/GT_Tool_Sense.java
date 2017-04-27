@@ -18,7 +18,7 @@ import java.util.List;
 
 public class GT_Tool_Sense
         extends GT_Tool {
-    private ThreadLocal<Object> sIsHarvestingRightNow = new ThreadLocal();
+    private transient ThreadLocal<Object> sIsHarvestingRightNow = new ThreadLocal();
 
     public float getBaseDamage() {
         return 3.0F;

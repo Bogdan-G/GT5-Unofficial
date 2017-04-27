@@ -13,25 +13,45 @@ public class ProcessingCircuit implements gregtech.api.interfaces.IOreRecipeRegi
     }
 
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName, ItemStack aStack) {
-        switch (aMaterial) {
-            case Good:
-            case Advanced:
-            case Data:
-            case Elite:
-            case Master:
-            case Ultimate:
-                if (!gregtech.api.util.GT_OreDictUnificator.isBlacklisted(aStack))
-                    GT_ModHandler.removeRecipeByOutput(aStack);
-                break;
-            case Primitive:
+        if (aModName.equals("gregtech") && gregtech.api.util.GT_OreDictUnificator.isBlacklisted(aStack)) return;
+
+        if (aMaterial == Materials.Good || aMaterial == Materials.Data || aMaterial == Materials.Elite || aMaterial == Materials.Master || aMaterial == Materials.Ultimate) {
+            if (!aModName.equals("gregtech") && !gregtech.api.util.GT_OreDictUnificator.isBlacklisted(aStack))
                 GT_ModHandler.removeRecipeByOutput(aStack);
-                GT_ModHandler.addShapelessCraftingRecipe(ItemList.Circuit_Primitive.get(1L, new Object[0]), new Object[]{GT_ModHandler.getIC2Item("casingadviron", 1L), OrePrefixes.wireGt01.get(Materials.RedAlloy), OrePrefixes.wireGt01.get(Materials.RedAlloy), OrePrefixes.wireGt01.get(Materials.Tin)});
-                break;
-            case Basic:
+        } else if (aMaterial == Materials.Advanced) {
+            if (!aModName.equals("gregtech"))
                 GT_ModHandler.removeRecipeByOutput(aStack);
-                GT_ModHandler.addCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{"WWW", "CPC", "WWW", 'C', OrePrefixes.circuit.get(Materials.Primitive), 'W', OreDictNames.craftingWireCopper, 'P', OrePrefixes.plate.get(Materials.Steel)});
-                GT_ModHandler.addCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{"WCW", "WPW", "WCW", 'C', OrePrefixes.circuit.get(Materials.Primitive), 'W', OreDictNames.craftingWireCopper, 'P', OrePrefixes.plate.get(Materials.Steel)});
-                GT_ModHandler.addShapelessCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{ItemList.Circuit_Integrated.getWildcard(1L, new Object[0])});
+        } else if (aMaterial == Materials.Primitive) {
+            GT_ModHandler.removeRecipeByOutput(aStack);
+            GT_ModHandler.addShapelessCraftingRecipe(ItemList.Circuit_Primitive.get(1L, new Object[0]), new Object[]{GT_ModHandler.getIC2Item("casingadviron", 1L), OrePrefixes.wireGt01.get(Materials.RedAlloy), OrePrefixes.wireGt01.get(Materials.RedAlloy), OrePrefixes.wireGt01.get(Materials.Tin)});
+        } else if (aMaterial == Materials.Basic) {
+            GT_ModHandler.removeRecipeByOutput(aStack);
+            //In Gregtech 3(or configured for modpack) Circuit no craft in workbench
+            //GT_ModHandler.addCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{"WWW", "CPC", "WWW", 'C', OrePrefixes.circuit.get(Materials.Primitive), 'W', OreDictNames.craftingWireCopper, 'P', OrePrefixes.plate.get(Materials.Steel)});
+            //GT_ModHandler.addCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{"WCW", "WPW", "WCW", 'C', OrePrefixes.circuit.get(Materials.Primitive), 'W', OreDictNames.craftingWireCopper, 'P', OrePrefixes.plate.get(Materials.Steel)});
+            GT_ModHandler.addShapelessCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{ItemList.Circuit_Integrated.getWildcard(1L, new Object[0])});
         }
+        
+        /*switch (aMaterial) {
+        case Good: 
+        case Data: 
+        case Elite: 
+        case Master: 
+        case Ultimate:
+            if (!aModName.equals("gregtech") && !gregtech.api.util.GT_OreDictUnificator.isBlacklisted(aStack))
+                GT_ModHandler.removeRecipeByOutput(aStack);
+        case Advanced:
+            if (!aModName.equals("gregtech"))
+                GT_ModHandler.removeRecipeByOutput(aStack);
+        case Primitive:
+            GT_ModHandler.removeRecipeByOutput(aStack);
+            GT_ModHandler.addShapelessCraftingRecipe(ItemList.Circuit_Primitive.get(1L, new Object[0]), new Object[]{GT_ModHandler.getIC2Item("casingadviron", 1L), OrePrefixes.wireGt01.get(Materials.RedAlloy), OrePrefixes.wireGt01.get(Materials.RedAlloy), OrePrefixes.wireGt01.get(Materials.Tin)});
+        case Basic:
+            GT_ModHandler.removeRecipeByOutput(aStack);
+            //In Gregtech 3(or configured for modpack) Circuit no craft in workbench
+            //GT_ModHandler.addCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{"WWW", "CPC", "WWW", 'C', OrePrefixes.circuit.get(Materials.Primitive), 'W', OreDictNames.craftingWireCopper, 'P', OrePrefixes.plate.get(Materials.Steel)});
+            //GT_ModHandler.addCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{"WCW", "WPW", "WCW", 'C', OrePrefixes.circuit.get(Materials.Primitive), 'W', OreDictNames.craftingWireCopper, 'P', OrePrefixes.plate.get(Materials.Steel)});
+            GT_ModHandler.addShapelessCraftingRecipe(ItemList.Circuit_Basic.get(1L, new Object[0]), new Object[]{ItemList.Circuit_Integrated.getWildcard(1L, new Object[0])});
+        }*/
     }
 }

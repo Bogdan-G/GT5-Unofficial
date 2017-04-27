@@ -19,6 +19,7 @@ import gregtech.common.items.behaviors.Behaviour_DataOrb;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import java.io.*;
 
 public class GT_MetaTileEntity_Scanner
         extends GT_MetaTileEntity_BasicMachine {
@@ -62,7 +63,7 @@ public class GT_MetaTileEntity_Scanner
                     }
                 } catch (Throwable e) {
                     if (GT_Values.D1) {
-                        e.printStackTrace(GT_Log.err);
+                        final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
                     }
                 }
             }
@@ -140,13 +141,8 @@ public class GT_MetaTileEntity_Scanner
 
     @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
-        if (mProgresstime >= (mMaxProgresstime - 1)) {
-            //try {
-                if ((this.mOutputItems[0] != null) && (this.mOutputItems[0].getUnlocalizedName().equals("gt.metaitem.01.32707"))) {
-                    GT_Mod.instance.achievements.issueAchievement(aBaseMetaTileEntity.getWorld().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), "scanning");
-                }
-            //} catch (Exception e) {
-            //}
+        if ((mProgresstime >= (mMaxProgresstime - 1)) && (this.mOutputItems[0] != null) && (this.mOutputItems[0].getUnlocalizedName().equals("gt.metaitem.01.32707"))) {
+            GT_Mod.instance.achievements.issueAchievement(aBaseMetaTileEntity.getWorld().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), "scanning");
         }
         super.onPostTick(aBaseMetaTileEntity, aTick);
     }

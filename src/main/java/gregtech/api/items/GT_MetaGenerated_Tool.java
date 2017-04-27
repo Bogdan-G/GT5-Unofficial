@@ -44,8 +44,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import static gregtech.api.enums.GT_Values.MOD_ID_FR;
-import static gregtech.api.enums.GT_Values.MOD_ID_RC;
+import static gregtech.api.enums.GT_Values.*;
 
 /**
  * This is an example on how you can create a Tool ItemStack, in this case a Bismuth Wrench:

@@ -82,10 +82,8 @@ public class GT_Tool_JackHammer
 
     public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
         super.onToolCrafted(aStack, aPlayer);
-        try {
-            GT_Mod.instance.achievements.issueAchievement(aPlayer, "hammertime");
-        } catch (Exception e) {
-        }
+        GT_Mod.instance.achievements.issueAchievement(aPlayer, "hammertime");
+
     }
 
 

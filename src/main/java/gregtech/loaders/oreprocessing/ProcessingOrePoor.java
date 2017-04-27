@@ -18,7 +18,17 @@ public class ProcessingOrePoor implements gregtech.api.interfaces.IOreRecipeRegi
 
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName, ItemStack aStack) {
         int aMultiplier = 1;
-        switch (aPrefix) {
+
+        if (aPrefix == OrePrefixes.oreSmall) {
+            //aMultiplier = 1;//emm ^, default initialized 1
+        } else if (aPrefix == OrePrefixes.orePoor) {
+            aMultiplier = 2;
+        } else if (aPrefix == OrePrefixes.oreNormal) {
+            aMultiplier = 3;
+        } else if (aPrefix == OrePrefixes.oreRich) {
+            aMultiplier = 4;
+            }
+        /*switch (aPrefix) {
             case oreSmall:
                 aMultiplier = 1;
                 break;
@@ -30,7 +40,7 @@ public class ProcessingOrePoor implements gregtech.api.interfaces.IOreRecipeRegi
                 break;
             case oreRich:
                 aMultiplier = 4;
-        }
+        }*/
         if (aMaterial != null) {
             GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.dustTiny, aMaterial, aMultiplier), 16, 10);
             GT_ModHandler.addPulverisationRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.dustTiny, aMaterial, 2 * aMultiplier), GT_OreDictUnificator.get(OrePrefixes.dustTiny, GT_Utility.selectItemInList(0, aMaterial, aMaterial.mOreByProducts), 1L), 5 * aMultiplier, GT_OreDictUnificator.getDust(aPrefix.mSecondaryMaterial), 100, true);

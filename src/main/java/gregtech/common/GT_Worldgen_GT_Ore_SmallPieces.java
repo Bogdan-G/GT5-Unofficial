@@ -31,7 +31,8 @@ public class GT_Worldgen_GT_Ore_SmallPieces extends GT_Worldgen {
     }
 
     public boolean executeWorldgen(World aWorld, Random aRandom, String aBiome, int aDimensionType, int aChunkX, int aChunkZ, IChunkProvider aChunkGenerator, IChunkProvider aChunkProvider) {
-        if (!isGenerationAllowed(aWorld, aDimensionType, ((aDimensionType == -1) && (this.mNether)) || ((aDimensionType == 0) && (this.mOverworld)) || ((aDimensionType == 1) && (this.mEnd)) ? aDimensionType : aDimensionType ^ 0xFFFFFFFF)) {
+        //aRandom.nextInt(3) != 2 - decrease gen by 30%, for balance my modpack
+        if (aRandom.nextInt(3) != 2) {if (!isGenerationAllowed(aWorld, aDimensionType, ((aDimensionType == -1) && (this.mNether)) || ((aDimensionType == 0) && (this.mOverworld)) || ((aDimensionType == 1) && (this.mEnd)) ? aDimensionType : aDimensionType ^ 0xFFFFFFFF)) {
             return false;
         }
         if (this.mMeta > 0) {
@@ -39,7 +40,7 @@ public class GT_Worldgen_GT_Ore_SmallPieces extends GT_Worldgen {
             for (int j = Math.max(1, ((int)this.mAmount >> 1) + (aRandom.nextInt(this.mAmount) >> 1)); i < j; i++) {
                 GT_TileEntity_Ores.setOreBlock(aWorld, aChunkX + aRandom.nextInt(16), this.mMinY + aRandom.nextInt(Math.max(1, this.mMaxY - this.mMinY)), aChunkZ + aRandom.nextInt(16), this.mMeta + 16000);
             }
-        }
+        }}
         return true;
     }
 }

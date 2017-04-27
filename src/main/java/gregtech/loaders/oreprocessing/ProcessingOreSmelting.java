@@ -24,7 +24,18 @@ public class ProcessingOreSmelting implements gregtech.api.interfaces.IOreRecipe
                 if (aMaterial.mBlastFurnaceTemp <= 1000)
                     GT_ModHandler.addRCBlastFurnaceRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial, 1L), aMaterial.mBlastFurnaceTemp * 2);
             } else {
-                switch (aPrefix) {
+
+                if (aPrefix == OrePrefixes.crushed || aPrefix == OrePrefixes.crushedPurified || aPrefix == OrePrefixes.crushedCentrifuged) {
+                    ItemStack tStack = GT_OreDictUnificator.get(OrePrefixes.nugget, aMaterial.mDirectSmelting, aMaterial.mDirectSmelting == aMaterial ? 10L : 3L);
+                    if (tStack == null)
+                        tStack = GT_OreDictUnificator.get(aMaterial.contains(SubTag.SMELTING_TO_GEM) ? OrePrefixes.gem : OrePrefixes.ingot, aMaterial.mDirectSmelting, 1L);
+                    if ((tStack == null) && (!aMaterial.contains(SubTag.SMELTING_TO_GEM)))
+                        tStack = GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial.mDirectSmelting, 1L);
+                    GT_ModHandler.addSmeltingRecipe(aStack, tStack);
+                } else {
+                    GT_ModHandler.addSmeltingRecipe(aStack, GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial.mDirectSmelting, 1L));
+                    }
+                /*switch (aPrefix) {
                     case crushed:
                     case crushedPurified:
                     case crushedCentrifuged:
@@ -37,7 +48,7 @@ public class ProcessingOreSmelting implements gregtech.api.interfaces.IOreRecipe
                         break;
                     default:
                         GT_ModHandler.addSmeltingRecipe(aStack, GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial.mDirectSmelting, 1L));
-                }
+                }*/
             }
         }
     }

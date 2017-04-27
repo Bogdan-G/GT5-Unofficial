@@ -28,7 +28,39 @@ public class ProcessingPlate1 implements gregtech.api.interfaces.IOreRecipeRegis
         if (aMaterial.mStandardMoltenFluid != null) {
             GT_Values.RA.addFluidSolidifierRecipe(ItemList.Shape_Mold_Plate.get(0L, new Object[0]), aMaterial.getMolten(144L), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), 32, 8);
         }
-        switch (aMaterial) {
+
+        if (aMaterial == Materials.Iron) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.iron_block, 1, 0), null);
+        } else if (aMaterial == Materials.Gold) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.gold_block, 1, 0), null);
+        } else if (aMaterial == Materials.Diamond) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.diamond_block, 1, 0), null);
+        } else if (aMaterial == Materials.Emerald) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.emerald_block, 1, 0), null);
+        } else if (aMaterial == Materials.Lapis) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.lapis_block, 1, 0), null);
+        } else if (aMaterial == Materials.Coal) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.coal_block, 1, 0), null);
+        } else if (aMaterial == Materials.Redstone) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.redstone_block, 1, 0), null);
+        } else if (aMaterial == Materials.Glowstone) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.glowstone, 1, 0), null);
+        } else if (aMaterial == Materials.NetherQuartz) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.quartz_block, 1, 0), null);
+        } else if (aMaterial == Materials.Obsidian) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.obsidian, 1, 0), null);
+        } else if (aMaterial == Materials.Stone) {
+            GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.stone, 1, 0), null);
+        } else if (aMaterial == Materials.GraniteBlack) {
+            GregTech_API.registerCover(aStack, new GT_RenderedTexture(gregtech.api.enums.Textures.BlockIcons.GRANITE_BLACK_SMOOTH), null);
+        } else if (aMaterial == Materials.GraniteRed) {
+            GregTech_API.registerCover(aStack, new GT_RenderedTexture(gregtech.api.enums.Textures.BlockIcons.GRANITE_RED_SMOOTH), null);
+        } else if (aMaterial == Materials.Concrete) {
+            GregTech_API.registerCover(aStack, new GT_RenderedTexture(gregtech.api.enums.Textures.BlockIcons.CONCRETE_LIGHT_SMOOTH), null);
+        } else {
+            GregTech_API.registerCover(aStack, new GT_RenderedTexture(aMaterial.mIconSet.mTextures[71], aMaterial.mRGBa, false), null);
+            }
+        /*switch (aMaterial) {
             case Iron:
                 GregTech_API.registerCover(aStack, new GT_CopiedBlockTexture(Blocks.iron_block, 1, 0), null);
                 break;
@@ -73,7 +105,7 @@ public class ProcessingPlate1 implements gregtech.api.interfaces.IOreRecipeRegis
                 break;
             default:
                 GregTech_API.registerCover(aStack, new GT_RenderedTexture(aMaterial.mIconSet.mTextures[71], aMaterial.mRGBa, false), null);
-        }
+        }*/
 
         if (aMaterial.mFuelPower > 0)
             GT_Values.RA.addFuel(GT_Utility.copyAmount(1L, new Object[]{aStack}), null, aMaterial.mFuelPower, aMaterial.mFuelType);

@@ -115,6 +115,7 @@ processResources
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
+        include 'META-INF/gregtech_at.cfg'
                 
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
@@ -123,6 +124,12 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'gregtech_at.cfg'
     }
 }
 
@@ -135,6 +142,7 @@ task devJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
     manifest {
+        attributes 'FMLAT': 'gregtech_at.cfg'
         //attributes 'FMLCorePlugin': 'WhateverLoaderClass'
         //attributes 'FMLCorePluginContainsFMLMod': 'true'
     }

@@ -27,6 +27,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import java.util.ArrayList;
 import java.util.HashMap;//import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
+import java.io.*;
 
 import static gregtech.api.enums.GT_Values.D1;
 import static gregtech.api.enums.GT_Values.V;
@@ -130,7 +131,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
                     return false;
                 }
         } catch (Throwable e) {
-                if (D1) e.printStackTrace(GT_Log.err);
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             }
         return false;
     }
@@ -150,7 +151,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
                     return false;
                 }
         } catch (Throwable e) {
-                if (D1) e.printStackTrace(GT_Log.err);
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             }
         return false;
     }
@@ -170,7 +171,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
                     return false;
                 }
         } catch (Throwable e) {
-                if (D1) e.printStackTrace(GT_Log.err);
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             }
         return false;
     }
@@ -183,7 +184,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
         try { if (tList != null) for (IItemBehaviour<GT_MetaBase_Item> tBehavior : tList)
                 aStack = tBehavior.onItemRightClick(this, aStack, aWorld, aPlayer);
         } catch (Throwable e) {
-                if (D1) e.printStackTrace(GT_Log.err);
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             }
         return aStack;
     }
@@ -290,7 +291,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
         chargeFromArmor(aStack, aPlayer);
         if (aPlayer instanceof EntityPlayer && ((EntityPlayer) aPlayer).capabilities.isCreativeMode) return true;
         double tTransfer = discharge(aStack, aAmount, Integer.MAX_VALUE, true, false, true);
-        if (/*tTransfer == aAmount*/Math.abs(tTransfer - aAmount) < .0000001) {
+        if (tTransfer == aAmount) {
             discharge(aStack, aAmount, Integer.MAX_VALUE, true, false, false);
             chargeFromArmor(aStack, aPlayer);
             return true;

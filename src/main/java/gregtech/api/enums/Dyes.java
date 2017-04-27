@@ -7,6 +7,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public enum Dyes implements IColorModulationContainer {
     /**
@@ -44,7 +48,7 @@ public enum Dyes implements IColorModulationContainer {
     public final byte mIndex;
     public final String mName;
     public final short[] mRGBa;
-    private final /*Array*/java.util.List<Fluid> mFluidDyes = new GT_ArrayList<Fluid>(false, 1);
+    private final /*Array*/List<Fluid> mFluidDyes = new GT_ArrayList<Fluid>(F, 1);
 
     private Dyes(int aIndex, int aR, int aG, int aB, String aName) {
         mIndex = (byte) aIndex;
@@ -63,7 +67,7 @@ public enum Dyes implements IColorModulationContainer {
     }
 
     public static Dyes get(String aColor) {
-        Object tObject = GT_Utility.getFieldContent(Dyes.class, aColor, false, false);
+        Object tObject = GT_Utility.getFieldContent(Dyes.class, aColor, F, F);
         if (tObject instanceof Dyes) return (Dyes) tObject;
         return _NULL;
     }
@@ -73,8 +77,8 @@ public enum Dyes implements IColorModulationContainer {
     }
 
     public static boolean isAnyFluidDye(Fluid aFluid) {
-        if (aFluid != null) for (Dyes tDye : VALUES) if (tDye.isFluidDye(aFluid)) return true;
-        return false;
+        if (aFluid != null) for (Dyes tDye : VALUES) if (tDye.isFluidDye(aFluid)) return T;
+        return F;
     }
 
     public boolean isFluidDye(FluidStack aFluid) {
@@ -86,9 +90,9 @@ public enum Dyes implements IColorModulationContainer {
     }
 
     public boolean addFluidDye(Fluid aDye) {
-        if (aDye == null || mFluidDyes.contains(aDye)) return false;
+        if (aDye == null || mFluidDyes.contains(aDye)) return F;
         mFluidDyes.add(aDye);
-        return true;
+        return T;
     }
 
     public int getSizeOfFluidList() {

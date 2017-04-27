@@ -15,57 +15,52 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_MetaGenerated_Tool_Renderer
         implements IItemRenderer {
     public GT_MetaGenerated_Tool_Renderer() {
         for (GT_MetaGenerated_Tool tItem : GT_MetaGenerated_Tool.sInstances.values()) {
-            if (tItem != null) {
-                MinecraftForgeClient.registerItemRenderer(tItem, this);
-            }
+            if (tItem != null) MinecraftForgeClient.registerItemRenderer(tItem, this);
         }
     }
 
     public boolean handleRenderType(ItemStack aStack, IItemRenderer.ItemRenderType aType) {
-        if ((GT_Utility.isStackInvalid(aStack)) || (aStack.getItemDamage() < 0)) {
-            return false;
-        }
+        if ((GT_Utility.isStackInvalid(aStack)) || (aStack.getItemDamage() < 0)) return F;
         return (aType == IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON) || (aType == IItemRenderer.ItemRenderType.INVENTORY) || (aType == IItemRenderer.ItemRenderType.EQUIPPED) || (aType == IItemRenderer.ItemRenderType.ENTITY);
     }
 
     public boolean shouldUseRenderHelper(IItemRenderer.ItemRenderType aType, ItemStack aStack, IItemRenderer.ItemRendererHelper aHelper) {
-        if (GT_Utility.isStackInvalid(aStack)) {
-            return false;
-        }
+        if (GT_Utility.isStackInvalid(aStack)) return F;
         return aType == IItemRenderer.ItemRenderType.ENTITY;
     }
 
     public void renderItem(IItemRenderer.ItemRenderType aType, ItemStack aStack, Object... data) {
-        if (GT_Utility.isStackInvalid(aStack)) {
-            return;
-        }
+        //if (GT_Utility.isStackInvalid(aStack)) return;
         GT_MetaGenerated_Tool aItem = (GT_MetaGenerated_Tool) aStack.getItem();
         GL11.glEnable(3042);
         if (aType == IItemRenderer.ItemRenderType.ENTITY) {
             if (RenderItem.renderInFrame) {
                 GL11.glScalef(0.85F, 0.85F, 0.85F);
                 GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glTranslated(-0.5D, -0.42D, 0.0D);
+                GL11.glTranslatef(-0.5F, -0.42F, 0.0F);
             } else {
-                GL11.glTranslated(-0.5D, -0.42D, 0.0D);
+                GL11.glTranslatef(-0.5F, -0.42F, 0.0F);
             }
         }
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
         IToolStats tToolStats = aItem.getToolStats(aStack);
         if (tToolStats != null) {
-            IIconContainer aIcon = tToolStats.getIcon(false, aStack);
+            IIconContainer aIcon = tToolStats.getIcon(F, aStack);
             if (aIcon != null) {
                 IIcon tIcon = aIcon.getIcon();
                 IIcon tOverlay = aIcon.getOverlayIcon();
                 if (tIcon != null) {
                     Minecraft.getMinecraft().renderEngine.bindTexture(aIcon.getTextureFile());
                     GL11.glBlendFunc(770, 771);
-                    short[] tModulation = tToolStats.getRGBa(false, aStack);
+                    short[] tModulation = tToolStats.getRGBa(F, aStack);
                     GL11.glColor3f(tModulation[0] / 255.0F, tModulation[1] / 255.0F, tModulation[2] / 255.0F);
                     if (aType.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
                         GT_RenderUtil.renderItemIcon(tIcon, 16.0D, 0.001D, 0.0F, 0.0F, -1.0F);
@@ -84,14 +79,14 @@ public class GT_MetaGenerated_Tool_Renderer
                     }
                 }
             }
-            aIcon = tToolStats.getIcon(true, aStack);
+            aIcon = tToolStats.getIcon(T, aStack);
             if (aIcon != null) {
                 IIcon tIcon = aIcon.getIcon();
                 IIcon tOverlay = aIcon.getOverlayIcon();
                 if (tIcon != null) {
                     Minecraft.getMinecraft().renderEngine.bindTexture(aIcon.getTextureFile());
                     GL11.glBlendFunc(770, 771);
-                    short[] tModulation = tToolStats.getRGBa(true, aStack);
+                    short[] tModulation = tToolStats.getRGBa(T, aStack);
                     GL11.glColor3f(tModulation[0] / 255.0F, tModulation[1] / 255.0F, tModulation[2] / 255.0F);
                     if (aType.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
                         GT_RenderUtil.renderItemIcon(tIcon, 16.0D, 0.001D, 0.0F, 0.0F, -1.0F);

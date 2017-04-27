@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.io.*;
 
 public class GT_IntegratedCircuit_Item
         extends GT_Generic_Item {
@@ -96,14 +97,14 @@ public class GT_IntegratedCircuit_Item
         super.registerIcons(aIconRegister);
         if (GregTech_API.sPostloadFinished) {
             GT_Log.out.println("GT_Mod: Starting Item Icon Load Phase");
-            System.out.println("GT_Mod: Starting Item Icon Load Phase");
+            //GT_Log.out.println("GT_Mod: Starting Item Icon Load Phase");
             GregTech_API.sItemIcons = aIconRegister;
             try {
             for (Runnable tRunnable : GregTech_API.sGTItemIconload) {
                     tRunnable.run();
-            }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+            }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             GT_Log.out.println("GT_Mod: Finished Item Icon Load Phase");
-            System.out.println("GT_Mod: Finished Item Icon Load Phase");
+            //GT_Log.out.println("GT_Mod: Finished Item Icon Load Phase");
         }
     }
 }

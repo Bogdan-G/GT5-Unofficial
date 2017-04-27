@@ -28,10 +28,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static gregtech.api.enums.GT_Values.*;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 /**
  * Please do not include this File in your Mod-download as it ruins compatiblity, like with the IC2-API
@@ -120,7 +123,7 @@ public class GregTech_API {
     /**
      * The List of all Sounds used in GT, indices are in the static Block at the bottom
      */
-    public static final Map<Integer, String> sSoundList = new org.eclipse.collections.impl.map.mutable.UnifiedMap<Integer, String>();
+    public static Map<Integer, String> sSoundList = gregtech.api.enums.GT_Values.Ser0 ? null : new org.eclipse.collections.impl.map.mutable.UnifiedMap<Integer, String>();
     /**
      * The List of Tools, which can be used. Accepts regular damageable Items and Electric Items
      */
@@ -181,19 +184,19 @@ public class GregTech_API {
     /**
      * Getting assigned by the Config
      */
-    public static boolean sTimber = false, sDrinksAlwaysDrinkable = false, sMultiThreadedSounds = false, sDoShowAllItemsInCreative = false, sColoredGUI = true, sConstantEnergy = true, sMachineExplosions = true, sMachineFlammable = true, sMachineNonWrenchExplosions = true, sMachineRainExplosions = true, sMachineThunderExplosions = true, sMachineFireExplosions = true, sMachineWireFire = true;
-    public static boolean mOutputRF = false;
-    public static boolean mInputRF = false;
-    public static boolean meIOLoaded = false;
+    public static boolean sTimber = F, sDrinksAlwaysDrinkable = F, sMultiThreadedSounds = F, sDoShowAllItemsInCreative = F, sColoredGUI = T, sConstantEnergy = T, sMachineExplosions = T, sMachineFlammable = T, sMachineNonWrenchExplosions = T, sMachineRainExplosions = T, sMachineThunderExplosions = T, sMachineFireExplosions = T, sMachineWireFire = T;
+    public static boolean mOutputRF = F;
+    public static boolean mInputRF = F;
+    public static boolean meIOLoaded = F;
     public static int mEUtoRF = 360;
     public static int mRFtoEU = 20;
-    public static boolean mRFExplosions = true;
-    public static boolean mServerStarted = false;
+    public static boolean mRFExplosions = T;
+    public static boolean mServerStarted = F;
     private static final String mii = MOD_ID_IC2.toLowerCase(Locale.ENGLISH);
     /**
      * Getting assigned by the Mod loading
      */
-    public static boolean sUnificationEntriesRegistered = false, sPreloadStarted = false, sPreloadFinished = false, sLoadStarted = false, sLoadFinished = false, sPostloadStarted = false, sPostloadFinished = false;
+    public static boolean sUnificationEntriesRegistered = F, sPreloadStarted = F, sPreloadFinished = F, sLoadStarted = F, sLoadFinished = F, sPostloadStarted = F, sPostloadFinished = F;
     private static Class sBaseMetaTileEntityClass = null;
 
     /**
@@ -207,6 +210,7 @@ public class GregTech_API {
         sDimensionalList.add(0);
         sDimensionalList.add(1);
 
+        if (!Ser0 || !Boolean.parseBoolean(System.getProperty("gt.SerializableObjects", "F"))) {
         sSoundList.put(0, "random.break");
         sSoundList.put(1, "random.anvil_use");
         sSoundList.put(2, "random.anvil_break");
@@ -238,6 +242,22 @@ public class GregTech_API {
         sSoundList.put(210, mii + ":" + "machines.InterruptOne");
         sSoundList.put(211, mii + ":" + "machines.KaChing");
         sSoundList.put(212, mii + ":" + "machines.MagnetizerLoop");
+        try {
+        FileOutputStream outputStream = new FileOutputStream("."+File.separator+"cache2"+File.separator+"sSoundList.ser");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(sSoundList);
+        objectOutputStream.flush();
+        outputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        } else {
+        try {
+        FileInputStream inputStream = new FileInputStream("."+File.separator+"cache2"+File.separator+"sSoundList.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        sSoundList = (Map<Integer, String>) objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        }
     }
 
     /**
@@ -259,7 +279,7 @@ public class GregTech_API {
     public static ItemStack getUnificatedOreDictStack(ItemStack aOreStack) {
         if (!GregTech_API.sPreloadFinished)
             GT_Log.err.println("GregTech_API ERROR: " + aOreStack.getItem() + "." + aOreStack.getItemDamage() + " - OreDict Unification Entries are not registered now, please call it in the postload phase.");
-        return GT_OreDictUnificator.get(true, aOreStack);
+        return GT_OreDictUnificator.get(T, aOreStack);
     }
 
     /**
@@ -275,7 +295,7 @@ public class GregTech_API {
     public static boolean causeMachineUpdate(World aWorld, int aX, int aY, int aZ) {
         if (!aWorld.isRemote)
             new Thread(new GT_Runnable_MachineBlockUpdate(aWorld, aX, aY, aZ), "Machine Block Updating").start();
-        return true;
+        return T;
     }
 
     /**
@@ -287,31 +307,31 @@ public class GregTech_API {
      * @param aMeta the Metadata of the Blocks as Bitmask! -1 or ~0 for all Metavalues
      */
     public static boolean registerMachineBlock(Block aBlock, int aMeta) {
-        if (GT_Utility.isBlockInvalid(aBlock)) return false;
+        if (GT_Utility.isBlockInvalid(aBlock)) return F;
         if (GregTech_API.sThaumcraftCompat != null)
             GregTech_API.sThaumcraftCompat.registerPortholeBlacklistedBlock(aBlock);
         sMachineIDs.put(aBlock, aMeta);
-        return true;
+        return T;
     }
 
     /**
      * Like above but with boolean Parameters instead of a BitMask
      */
     public static boolean registerMachineBlock(Block aBlock, boolean... aMeta) {
-        if (GT_Utility.isBlockInvalid(aBlock) || aMeta == null || aMeta.length == 0) return false;
+        if (GT_Utility.isBlockInvalid(aBlock) || aMeta == null || aMeta.length == 0) return F;
         if (GregTech_API.sThaumcraftCompat != null)
             GregTech_API.sThaumcraftCompat.registerPortholeBlacklistedBlock(aBlock);
         int rMeta = 0;
         for (byte i = 0; i < 16 && i < aMeta.length; i++) if (aMeta[i]) rMeta |= B[i];
         sMachineIDs.put(aBlock, rMeta);
-        return true;
+        return T;
     }
 
     /**
      * if this Block is a Machine Update Conducting Block
      */
     public static boolean isMachineBlock(Block aBlock, int aMeta) {
-        if (GT_Utility.isBlockInvalid(aBlock)) return false;
+        if (GT_Utility.isBlockInvalid(aBlock)) return F;
         return (sMachineIDs.containsKey(aBlock) && (sMachineIDs.get(aBlock) & B[aMeta]) != 0);
     }
 
@@ -333,7 +353,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
         }
-        return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", false);
+        return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", F);
     }
 
     /**
@@ -352,7 +372,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return new GT_CoolantCell_Item(aUnlocalized, aEnglish, aMaxStore);");
         }
-        return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", false);
+        return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", F);
     }
 
     /**
@@ -371,7 +391,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (Item) Class.forName(_gregtechmod.api.items.GT_EnergyStore_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aCharge, aTransfer, aTier, aEmptyID, aFullID);");
         }
-        return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", false);
+        return new gregtech.api.items.GT_Generic_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", F);
     }
 
     /**
@@ -384,7 +404,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_HardHammer_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -403,7 +423,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_Crowbar_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -416,7 +436,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_Wrench_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -429,7 +449,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_ScrewdriverIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -442,7 +462,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_WrenchIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -455,7 +475,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_SawIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -468,7 +488,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_DrillIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aToolQuality, aToolStrength, aEnergyConsumptionPerBlockBreak, aDisChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -481,7 +501,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_SolderingToolIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aEntityDamage, aDisChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, aEntityDamage, F);
     }
 
     /**
@@ -494,7 +514,7 @@ public class GregTech_API {
         /*Do nothing*/
         GT_Log.out.println("return (GT_Tool_Item) Class.forName(_gregtechmod.api.items.GT_EmptyToolIC_Item_).getConstructors()[0].newInstance(aUnlocalized, aEnglish, aMaxDamage, aChargedGTID);");
         }
-        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, 0, false);
+        return new gregtech.api.items.GT_Tool_Item(aUnlocalized, aEnglish, "Doesn't work as intended, this is a Bug", aMaxDamage, 0, F);
     }
 
     /**
@@ -514,7 +534,7 @@ public class GregTech_API {
             return (BaseMetaTileEntity) (sBaseMetaTileEntityClass.newInstance());
         } catch (Throwable e) {
             GT_Log.err.println("GT_Mod: Fatal Error ocurred while initializing TileEntities, crashing Minecraft.");
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
             throw new RuntimeException(e);
         }
     }
@@ -564,7 +584,7 @@ public class GregTech_API {
      * <p/>
      * -----
      * <p/>
-     * Returning true at isDamagable was a great Idea, KingLemming. Well played.
+     * Returning T at isDamagable was a great Idea, KingLemming. Well played.
      * Since the OmniWrench is just a Single-Item-Mod, people can choose if they want your infinite durability or not. So that's not really a Problem.
      * I even have a new Config to autodisable most infinite BC Wrenches (but that one is turned off).
      * <p/>
@@ -639,9 +659,9 @@ public class GregTech_API {
      */
     public static boolean registerTool(ItemStack aTool, Collection<GT_ItemStack> aToolList) {
         if (aTool == null || GT_Utility.isStackInList(aTool, sToolList) || (!aTool.getItem().isDamageable() && !GT_ModHandler.isElectricItem(aTool) && !(aTool.getItem() instanceof IDamagableItem)))
-            return false;
+            return F;
         aToolList.add(new GT_ItemStack(GT_Utility.copyAmount(1, aTool)));
         sToolList.add(new GT_ItemStack(GT_Utility.copyAmount(1, aTool)));
-        return true;
+        return T;
     }
 }

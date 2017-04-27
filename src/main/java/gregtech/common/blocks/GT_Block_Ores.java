@@ -29,34 +29,50 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
+import static gregtech.api.enums.GT_Values.IronPickaxeReqGTOres;
+
 public class GT_Block_Ores
         extends GT_Generic_Block
         implements ITileEntityProvider {
-    public static ThreadLocal<GT_TileEntity_Ores> mTemporaryTileEntity = new ThreadLocal();
+    public transient static ThreadLocal<GT_TileEntity_Ores> mTemporaryTileEntity = new ThreadLocal();
     public static boolean FUCKING_LOCK = false;
-    private static final String name_text = ".name";
-    private static final String Small_text = "Small ";
+    private static final String name_text = ".name", Small_text = "Small ";
 
     public GT_Block_Ores() {
         super(GT_Item_Ores.class, "gt.blockores", Material.rock);
         this.isBlockContainer = true;
         setStepSound(soundTypeStone);
         setCreativeTab(GregTech_API.TAB_GREGTECH_ORES);
-        for (int i = 0; i < 16; i++) {
-            GT_ModHandler.addValuableOre(this, i, 1);
-        }
+        //for (int i = 0; i < 16; i++) {
+            GT_ModHandler.addValuableOre(this, 0, 1);
+            GT_ModHandler.addValuableOre(this, 1, 1);
+            GT_ModHandler.addValuableOre(this, 2, 1);
+            GT_ModHandler.addValuableOre(this, 3, 1);
+            GT_ModHandler.addValuableOre(this, 4, 1);
+            GT_ModHandler.addValuableOre(this, 5, 1);
+            GT_ModHandler.addValuableOre(this, 6, 1);
+            GT_ModHandler.addValuableOre(this, 7, 1);
+            GT_ModHandler.addValuableOre(this, 8, 1);
+            GT_ModHandler.addValuableOre(this, 9, 1);
+            GT_ModHandler.addValuableOre(this, 10, 1);
+            GT_ModHandler.addValuableOre(this, 11, 1);
+            GT_ModHandler.addValuableOre(this, 12, 1);
+            GT_ModHandler.addValuableOre(this, 13, 1);
+            GT_ModHandler.addValuableOre(this, 14, 1);
+            GT_ModHandler.addValuableOre(this, 15, 1);
+        //}
         for (int i = 1; i < GregTech_API.sGeneratedMaterials.length; i++) {
             if (GregTech_API.sGeneratedMaterials[i] != null) {//new StringBuilder().append("A ").append(String.valueOf(B)).toString() //heh, im look in docs, fix append(String.valueOf(B)) to append(i)
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append(i).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 1000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 2000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 3000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 4000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 16000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 17000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 18000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 19000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
-                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append(".").append((i + 20000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append(i).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 1000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 2000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 3000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 4000)).append(name_text).toString(), getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 16000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 17000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 18000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 19000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
+                GT_LanguageManager.addStringLocalization(new StringBuilder().append(getUnlocalizedName()).append('.').append((i + 20000)).append(name_text).toString(), Small_text + getLocalizedName(GregTech_API.sGeneratedMaterials[i]));
                 if ((GregTech_API.sGeneratedMaterials[i].mTypes & 0x8) != 0) {
                     GT_OreDictUnificator.registerOre(OrePrefixes.ore.get(GregTech_API.sGeneratedMaterials[i]), new ItemStack(this, 1, i));
                     GT_OreDictUnificator.registerOre(OrePrefixes.oreNetherrack.get(GregTech_API.sGeneratedMaterials[i]), new ItemStack(this, 1, i + 1000));
@@ -135,7 +151,8 @@ public class GT_Block_Ores
     }
 
     public int getHarvestLevel(int aMeta) {
-        return aMeta % 8;
+        int mMeta = aMeta % 8;
+        return IronPickaxeReqGTOres ? (mMeta < 2 ? 2 : mMeta) : mMeta;
     }
 
     public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {
@@ -159,14 +176,12 @@ public class GT_Block_Ores
     }
 
     public int getRenderType() {
-        if (GT_Renderer_Block.INSTANCE == null) {
-            return super.getRenderType();
-        }
+        if (GT_Renderer_Block.INSTANCE == null) return super.getRenderType();
         return GT_Renderer_Block.INSTANCE.mRenderID;
     }
 
     public boolean canBeReplacedByLeaves(IBlockAccess aWorld, int aX, int aY, int aZ) {
-        return false;
+        return true;
     }
 
     public boolean isNormalCube(IBlockAccess aWorld, int aX, int aY, int aZ) {
@@ -247,5 +262,11 @@ public class GT_Block_Ores
                 aList.add(new ItemStack(aItem, 1, i + 20000));
             }
         }
+    }
+
+    //allow replace, test for collision, in theory we will be allowed to be generated over ore mod, it can be faster than another generation cycle
+    public boolean isReplaceableOreGen(World world, int x, int y, int z, Block target)
+    {
+        return true;
     }
 }

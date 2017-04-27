@@ -8,14 +8,16 @@ import gregtech.api.enums.Materials;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
+
 public class OreProcessingConfiguration
     implements Runnable
 {
     private final Configuration mConfiguration;
-    private final java.util.Map<String, Boolean> mEnabledMaterials;
+    private final ObjectBooleanHashMap mEnabledMaterials;
     public OreProcessingConfiguration(File aModConfigurationDirectory)
     {
-        this.mEnabledMaterials = new org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Boolean>();
+        this.mEnabledMaterials = new ObjectBooleanHashMap();
         this.mConfiguration =
             new Configuration(new File(new File(aModConfigurationDirectory, "GregTech"), "OreProcessing.cfg"));
         this.mConfiguration.load();
@@ -42,8 +44,9 @@ public class OreProcessingConfiguration
     @Override
     public void run()
     {
-        for (String tMaterialName : this.mEnabledMaterials.keySet())
+        for (Object tMaterialName0 : this.mEnabledMaterials.keySet())
         {
+            String tMaterialName = (String)tMaterialName0;
             if (this.mEnabledMaterials.get(tMaterialName))
             {
                 Materials.valueOf(tMaterialName).mTypes |= 8;

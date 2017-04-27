@@ -19,34 +19,36 @@ public class GT_Worldgen_Stone extends GT_Worldgen_Ore {
     }
 
     public boolean executeWorldgen(World aWorld, Random aRandom, String aBiome, int aDimensionType, int aChunkX, int aChunkZ, IChunkProvider aChunkGenerator, IChunkProvider aChunkProvider) {
-        if ((isGenerationAllowed(aWorld, aDimensionType, this.mDimensionType)) && ((this.mBiomeList.isEmpty()) || (this.mBiomeList.contains(aBiome))) && ((this.mProbability <= 1) || (aRandom.nextInt(this.mProbability) == 0))) {
-            float math_pi_0 = (float)Math.PI / this.mSize;
+        //aRandom.nextInt(3) != 2 - decrease gen by 30%, for balance my modpack
+        if (aRandom.nextInt(3) != 2) {if ((isGenerationAllowed(aWorld, aDimensionType, this.mDimensionType)) && ((this.mBiomeList.isEmpty()) || (this.mBiomeList.contains(aBiome))) && ((this.mProbability <= 1) || (aRandom.nextInt(this.mProbability) == 0))) {
             //float[] arr_m_0 = new float[this.mSize+1];
             //for (int var19 = 0; var19 <= this.mSize; var19++) arr_m_0[var19] = MathHelper.sin(var19 * math_pi_0);//off, JMH test find slow by 30%
             for (int i = 0; i < this.mAmount; i++) {
+                float math_pi_0 = (float)Math.PI / this.mSize;
                 int tX = aChunkX + aRandom.nextInt(16);
                 int tY = this.mMinY + aRandom.nextInt(this.mMaxY - this.mMinY);
                 int tZ = aChunkZ + aRandom.nextInt(16);
                 if ((this.mAllowToGenerateinVoid) || (!aWorld.getBlock(tX, tY, tZ).isAir(aWorld, tX, tY, tZ))) {
-                    float var6 = aRandom.nextFloat() * (float)Math.PI;
-                    float mh_s_ = MathHelper.sin(var6);
-                    float mh_s_0 = mh_s_ * (this.mSize >> 3);
+                    //float var6 = aRandom.nextFloat() * (float)Math.PI;
+                    float mh_s_ = MathHelper.sin(aRandom.nextFloat() * (float)Math.PI);
+                    //float mh_s_0 = mh_s_ * (this.mSize >> 3);
                     float mh_c_0 = (float)Math.sqrt(1 - mh_s_*mh_s_) * (this.mSize >> 3);
-                    float var7 = tX + 8 + mh_s_0;//float var9 = var2d - mh_s_0;
+                    float var7 = tX + 8 + (mh_s_ * (this.mSize >> 3));//float var9 = var2d - mh_s_0;
                     float var11 = tZ + 8 + mh_c_0;//float var13 = var3d - mh_c_0;
-                    int var15r = aRandom.nextInt(3);int var17r = aRandom.nextInt(3);
+                    int var15r = aRandom.nextInt(3);//int var17r = aRandom.nextInt(3);
                     int var15 = tY - 2 + var15r;//float var17 = var4d + var17r;
-                    int mh_n_4=var17r - var15r;
-                    float mh_n_0 = -2*mh_s_0;float mh_n_1 = -2*mh_c_0;
+                    int mh_n_4=aRandom.nextInt(3) - var15r;
+                    float mh_n_0 = -2*(mh_s_ * (this.mSize >> 3));float mh_n_1 = -2*mh_c_0;
+                    int dim = aWorld.provider.dimensionId;
                     for (int var19 = 0; var19 <= this.mSize; var19++) {
                         float var5d = var19 / this.mSize;
                         float var20 = var7 + mh_n_0 * var5d;
                         float var22 = var15 + mh_n_4 * var5d;
                         float var24 = var11 + mh_n_1 * var5d;
-                        float var6d = var19 * math_pi_0;
-                        float var26 = aRandom.nextFloat() * (this.mSize >> 4);
+                        //float var6d = var19 * math_pi_0;
+                        //float var26 = aRandom.nextFloat() * (this.mSize >> 4);
                         //float var7d = var26 + 1.0F;
-                        float var28 = ((MathHelper.sin(var6d) + 1.0F) * var26 + 1.0F) / 2.0F;
+                        float var28 = ((MathHelper.sin(var19 * math_pi_0) + 1.0F) * (aRandom.nextFloat() * (this.mSize >> 4)) + 1.0F) / 2.0F;
                         //float var30 = (MathHelper.sin(var6d) + 1.0F) * var7d;
                         //float var8d = var28 / 2.0F;//float var9d = var30 / 2.0F;
                         int tMinX = MathHelper.floor_float(var20 - var28);
@@ -73,7 +75,7 @@ public class GT_Worldgen_Stone extends GT_Worldgen_Ore {
                                                     if ((tTileEntity instanceof GT_TileEntity_Ores)) {
                                                         ((GT_TileEntity_Ores) tTileEntity).overrideOreBlockMaterial(this.mBlock, (byte) this.mBlockMeta);
                                                     }
-                                                } else if (((this.mAllowToGenerateinVoid) && (aWorld.getBlock(eX, eY, eZ).isAir(aWorld, eX, eY, eZ))) || ((tTargetedBlock != null) && ((tTargetedBlock.isReplaceableOreGen(aWorld, eX, eY, eZ, Blocks.stone)) || (tTargetedBlock.isReplaceableOreGen(aWorld, eX, eY, eZ, Blocks.end_stone)) || (tTargetedBlock.isReplaceableOreGen(aWorld, eX, eY, eZ, Blocks.netherrack))))) {
+                                                } else if (((this.mAllowToGenerateinVoid) && (tTargetedBlock.isAir(aWorld, eX, eY, eZ))) || ((tTargetedBlock != null) && ((tTargetedBlock.isReplaceableOreGen(aWorld, eX, eY, eZ, Blocks.stone)) || (dim == 1 && tTargetedBlock.isReplaceableOreGen(aWorld, eX, eY, eZ, Blocks.end_stone)) || (dim == -1 && tTargetedBlock.isReplaceableOreGen(aWorld, eX, eY, eZ, Blocks.netherrack))))) {
                                                     aWorld.setBlock(eX, eY, eZ, this.mBlock, this.mBlockMeta, 0);
                                                 }
                                             }
@@ -88,5 +90,7 @@ public class GT_Worldgen_Stone extends GT_Worldgen_Ore {
             return true;
         }
         return false;
+        }
+        return true;
     }
 }

@@ -15,6 +15,9 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Iterator;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_Container_Regulator
         extends GT_ContainerMetaTile_Machine {
     public int[] mTargetSlots = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -36,27 +39,27 @@ public class GT_Container_Regulator
         addSlotToContainer(new Slot(this.mTileEntity, 7, 26, 42));
         addSlotToContainer(new Slot(this.mTileEntity, 8, 44, 42));
 
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 9, 64, 7, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 10, 81, 7, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 11, 98, 7, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 12, 64, 24, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 13, 81, 24, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 14, 98, 24, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 15, 64, 41, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 16, 81, 41, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 17, 98, 41, false, true, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 9, 64, 7, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 10, 81, 7, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 11, 98, 7, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 12, 64, 24, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 13, 81, 24, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 14, 98, 24, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 15, 64, 41, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 16, 81, 41, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 17, 98, 41, F, T, 1));
 
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 119, 7, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 136, 7, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 153, 7, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 119, 24, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 136, 24, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 153, 24, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 119, 41, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 136, 41, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 153, 41, false, true, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 119, 7, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 136, 7, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 153, 7, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 119, 24, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 136, 24, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 153, 24, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 119, 41, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 136, 41, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 153, 41, F, T, 1));
 
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 8, 63, false, true, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 18, 8, 63, F, T, 1));
     }
 
     public ItemStack slotClick(int aSlotIndex, int aMouseclick, int aShifthold, EntityPlayer aPlayer) {

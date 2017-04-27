@@ -9,9 +9,11 @@ import net.minecraft.client.renderer.RenderBlocks;
  * <p/>
  * I should have done this much earlier...
  */
-public class GT_MultiTexture implements ITexture {
-    private final ITexture[] mTextures;
+public class GT_MultiTexture implements ITexture, java.io.Serializable {
+    private ITexture[] mTextures = null;
 
+    public GT_MultiTexture() {}
+    
     public GT_MultiTexture(ITexture... aTextures) {
         mTextures = aTextures;
     }

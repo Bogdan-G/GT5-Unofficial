@@ -40,14 +40,12 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                 GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(6L, new Object[]{aStack}), ItemList.Shape_Extruder_Pipe_Large.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.pipeLarge, aMaterial.mSmeltInto, tAmount), 48 * tAmount, 8 * tVoltageMultiplier);
                 GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(12L, new Object[]{aStack}), ItemList.Shape_Extruder_Pipe_Huge.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.pipeHuge, aMaterial.mSmeltInto, tAmount), 96 * tAmount, 8 * tVoltageMultiplier);
                 GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Plate.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, tAmount), (int) Math.max(aMaterial.getMass() * 1L * tAmount, tAmount), 8 * tVoltageMultiplier);
-                if (tAmount * 2 <= 64)
+                if (tAmount * 2 <= 64) {
                     GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Rod.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mSmeltInto, tAmount * 2), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 6 * tVoltageMultiplier);
-                if (tAmount * 2 <= 64)
-                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Wire.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.wireGt01, aMaterial.mSmeltInto, tAmount * 2), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 6 * tVoltageMultiplier);
-                if (tAmount * 8 <= 64)
+                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Wire.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.wireGt01, aMaterial.mSmeltInto, tAmount * 2), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 6 * tVoltageMultiplier);}
+                if (tAmount * 8 <= 64) {
                     GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Bolt.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.bolt, aMaterial.mSmeltInto, tAmount * 8), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 8 * tVoltageMultiplier);
-                if (tAmount * 4 <= 64)
-                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Ring.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.ring, aMaterial.mSmeltInto, tAmount * 4), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 6 * tVoltageMultiplier);
+                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Ring.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.ring, aMaterial.mSmeltInto, tAmount * 4), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 6 * tVoltageMultiplier);}
                 GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Extruder_Sword.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.toolHeadSword, aMaterial.mSmeltInto, tAmount), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 8 * tVoltageMultiplier);
                 GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(3L, new Object[]{aStack}), ItemList.Shape_Extruder_Pickaxe.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.toolHeadPickaxe, aMaterial.mSmeltInto, tAmount), (int) Math.max(aMaterial.getMass() * 3L * tAmount, tAmount), 8 * tVoltageMultiplier);
                 GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Shovel.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.toolHeadShovel, aMaterial.mSmeltInto, tAmount), (int) Math.max(aMaterial.getMass() * 1L * tAmount, tAmount), 8 * tVoltageMultiplier);
@@ -60,7 +58,43 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
 
                 GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Plate.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, tAmount), (int) Math.max(aMaterial.getMass() * 2L * tAmount, tAmount), 2 * tVoltageMultiplier);
                 GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(8L, new Object[]{aStack}), ItemList.Shape_Mold_Gear.get(0L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.gearGt, aMaterial.mSmeltInto, tAmount), (int) Math.max(aMaterial.getMass() * 10L * tAmount, tAmount), 2 * tVoltageMultiplier);
-                switch (aMaterial.mSmeltInto) {
+
+                if (aMaterial.mSmeltInto == Materials.Glass) {
+                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Bottle.get(0L, new Object[0]), new ItemStack(Items.glass_bottle, 1), tAmount * 32, 16);
+                    GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Mold_Bottle.get(0L, new Object[0]), new ItemStack(Items.glass_bottle, 1), tAmount * 64, 4);
+                } else if (aMaterial.mSmeltInto == Materials.Steel) {
+                        if (tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingadviron", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingadviron", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);}
+                } else if (aMaterial.mSmeltInto == Materials.Iron || aMaterial.mSmeltInto == Materials.WroughtIron) {
+                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Cell.get(0L, new Object[0]), GT_ModHandler.getIC2Item("fuelRod", tAmount), tAmount * 128, 32);
+                    if (tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingiron", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingiron", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);}
+                    if (tAmount * 31 <= 64)
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(31L, new Object[]{aStack}), ItemList.Shape_Mold_Anvil.get(0L, new Object[0]), new ItemStack(Blocks.anvil, 1, 0), tAmount * 512, 4 * tVoltageMultiplier);
+                } else if (aMaterial.mSmeltInto == Materials.Tin) {
+                    GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Extruder_Cell.get(0L, new Object[0]), ItemList.Cell_Empty.get(tAmount, new Object[0]), tAmount * 128, 32);
+                    if (tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingtin", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingtin", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);}
+                } else if (aMaterial.mSmeltInto == Materials.Lead) {
+                        if (tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casinglead", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casinglead", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);}
+                } else if (aMaterial.mSmeltInto == Materials.Copper || aMaterial.mSmeltInto == Materials.AnnealedCopper) {
+                        if (tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingcopper", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingcopper", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);}
+                } else if (aMaterial.mSmeltInto == Materials.Bronze.mSmeltInto && tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingbronze", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casingbronze", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);
+                } else if (aMaterial.mSmeltInto == Materials.Gold) {
+                        if (tAmount * 2 <= 64) {
+                        GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casinggold", tAmount * 2), tAmount * 32, 3 * tVoltageMultiplier);
+                        GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casinggold", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);}
+                        }
+                /*switch (aMaterial.mSmeltInto) {
                     case Glass:
                         GT_Values.RA.addExtruderRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Extruder_Bottle.get(0L, new Object[0]), new ItemStack(Items.glass_bottle, 1), tAmount * 32, 16);
                         GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), ItemList.Shape_Mold_Bottle.get(0L, new Object[0]), new ItemStack(Items.glass_bottle, 1), tAmount * 64, 4);
@@ -113,7 +147,7 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                         if (tAmount * 2 <= 64)
                             GT_Values.RA.addAlloySmelterRecipe(GT_Utility.copyAmount(2L, new Object[]{aStack}), ItemList.Shape_Mold_Casing.get(0L, new Object[0]), GT_ModHandler.getIC2Item("casinggold", tAmount * 3), tAmount * 128, 1 * tVoltageMultiplier);
                         break;
-                }
+                }*/
             }
         }
     }

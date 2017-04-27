@@ -8,9 +8,10 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
-public final class GT_HashSet<E extends GT_ItemStack> extends AbstractSet<E> {
+public final class GT_HashSet<E extends GT_ItemStack> extends AbstractSet<E> implements java.io.Serializable {
     private static final Object OBJECT = new Object();
     private transient Map<GT_ItemStack, Object> map;
+    //private Object cacheobj = null;
 
     public GT_HashSet() {
         map = new UnifiedMap<GT_ItemStack, Object>();
@@ -59,6 +60,8 @@ public final class GT_HashSet<E extends GT_ItemStack> extends AbstractSet<E> {
 
     @Override
     public boolean contains(Object o) {
+        //if (cacheobj == o) return true;
+        //cacheobj = o;
         return map.containsKey(o);
     }
 

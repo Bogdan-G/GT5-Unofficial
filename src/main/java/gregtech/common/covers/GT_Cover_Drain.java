@@ -71,9 +71,7 @@ public class GT_Cover_Drain
     }
 
     public boolean letsFluidIn(byte aSide, int aCoverID, int aCoverVariable, Fluid aFluid, ICoverable aTileEntity) {
-        //if ((aCoverVariable > 1) && ((aTileEntity instanceof IMachineProgress))) {
-        //}
-        return ((IMachineProgress) aTileEntity).isAllowedToWork() == aCoverVariable < 2;
+        return aCoverVariable <= 1 || !(aTileEntity instanceof IMachineProgress) || ((IMachineProgress) aTileEntity).isAllowedToWork() == aCoverVariable < 2;
     }
 
     public boolean alwaysLookConnected(byte aSide, int aCoverID, int aCoverVariable, ICoverable aTileEntity) {

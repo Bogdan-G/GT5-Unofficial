@@ -15,41 +15,31 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Iterator;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public class GT_MetaGenerated_Item_Renderer
         implements IItemRenderer {
     public GT_MetaGenerated_Item_Renderer() {
-        GT_MetaGenerated_Item tItem;
-        for (Iterator i$ = GT_MetaGenerated_Item.sInstances.values().iterator(); i$.hasNext(); MinecraftForgeClient.registerItemRenderer(tItem, this)) {
-            tItem = (GT_MetaGenerated_Item) i$.next();
-            //if ((tItem == null) || (!tItem.useStandardMetaItemRenderer())) {
-            //}
+        for (GT_MetaGenerated_Item tItem : GT_MetaGenerated_Item.sInstances.values()) {
+            if (tItem != null && tItem.useStandardMetaItemRenderer()) MinecraftForgeClient.registerItemRenderer(tItem, this);
         }
     }
 
     public boolean handleRenderType(ItemStack aStack, IItemRenderer.ItemRenderType aType) {
-        if ((GT_Utility.isStackInvalid(aStack)) || (aStack.getItemDamage() < 0)) {
-            return false;
-        }
-        return (aType == IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON) || (aType == IItemRenderer.ItemRenderType.INVENTORY) || (aType == IItemRenderer.ItemRenderType.EQUIPPED) || (aType == IItemRenderer.ItemRenderType.ENTITY);
+        if (!(GT_Utility.isStackInvalid(aStack)) && (aStack.getItemDamage() >= 0) && ((aType == IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON) || (aType == IItemRenderer.ItemRenderType.INVENTORY) || (aType == IItemRenderer.ItemRenderType.EQUIPPED) || (aType == IItemRenderer.ItemRenderType.ENTITY))) return T;
+        return F;
     }
 
     public boolean shouldUseRenderHelper(IItemRenderer.ItemRenderType aType, ItemStack aStack, IItemRenderer.ItemRendererHelper aHelper) {
-        if (GT_Utility.isStackInvalid(aStack)) {
-            return false;
-        }
-        return aType == IItemRenderer.ItemRenderType.ENTITY;
+        if (!GT_Utility.isStackInvalid(aStack) && aType == IItemRenderer.ItemRenderType.ENTITY) return T;
+        return F;
     }
 
     public void renderItem(IItemRenderer.ItemRenderType type, ItemStack aStack, Object... data) {
-        if (GT_Utility.isStackInvalid(aStack)) {
-            return;
-        }
+        //if (GT_Utility.isStackInvalid(aStack)) return;//null itemstack drop?
         short aMetaData = (short) aStack.getItemDamage();
-        if (aMetaData < 0) {
-            return;
-        }
+        //if (aMetaData < 0) return;//at an earlier stage it was not checked?
         GT_MetaGenerated_Item aItem = (GT_MetaGenerated_Item) aStack.getItem();
 
 
@@ -58,9 +48,9 @@ public class GT_MetaGenerated_Item_Renderer
             if (RenderItem.renderInFrame) {
                 GL11.glScalef(0.85F, 0.85F, 0.85F);
                 GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glTranslated(-0.5D, -0.42D, 0.0D);
+                GL11.glTranslatef(-0.5F, -0.42F, 0.0F);
             } else {
-                GL11.glTranslated(-0.5D, -0.42D, 0.0D);
+                GL11.glTranslatef(-0.5F, -0.42F, 0.0F);
             }
         }
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
@@ -75,10 +65,8 @@ public class GT_MetaGenerated_Item_Renderer
                 tIcon = aIcon.getIcon();
                 tOverlay = aIcon.getOverlayIcon();
             }
-            if (tIcon == null) {
-                return;
-            }
-            FluidStack tFluid = GT_Utility.getFluidForFilledItem(aStack, true);
+            if (tIcon == null) return;
+            FluidStack tFluid = GT_Utility.getFluidForFilledItem(aStack, T);
             if ((tOverlay != null) && (tFluid != null) && (tFluid.getFluid() != null)) {
                 tFluidIcon = tFluid.getFluid().getIcon(tFluid);
             }
@@ -94,7 +82,7 @@ public class GT_MetaGenerated_Item_Renderer
                 ItemRenderer.renderItemIn2D(Tessellator.instance, tIcon.getMaxU(), tIcon.getMinV(), tIcon.getMinU(), tIcon.getMaxV(), tIcon.getIconWidth(), tIcon.getIconHeight(), 0.0625F);
             }
             if (tFluidIcon != null) {
-                assert (tFluid != null);
+                //assert (tFluid != null);
                 int tColor = tFluid.getFluid().getColor(tFluid);
                 GL11.glColor3f((tColor >> 16 & 0xFF) / 255.0F, (tColor >> 8 & 0xFF) / 255.0F, (tColor & 0xFF) / 255.0F);
                 Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);

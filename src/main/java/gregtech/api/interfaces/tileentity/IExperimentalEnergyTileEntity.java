@@ -7,6 +7,9 @@ import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 /**
  * THIS IS GOING TO BE USED IN 1.8
  * <p/>
@@ -42,21 +45,21 @@ public interface IExperimentalEnergyTileEntity extends IColoredTileEntity, IHasW
      */
     public static class Util {
         public static int RF_PER_EU = 4;
-        private static boolean RF_ENERGY = false, IC_ENERGY = false, CHECK_ALL = true;
+        private static boolean RF_ENERGY = F, IC_ENERGY = F, CHECK_ALL = T;
 
         private static void checkAvailabilities() {
             if (CHECK_ALL) {
                 try {
                     Class tClass = cofh.api.energy.IEnergyReceiver.class;
                     tClass.getCanonicalName();
-                    RF_ENERGY = true;
+                    RF_ENERGY = T;
                 } catch (Throwable e) {/**/}
                 try {
                     Class tClass = ic2.api.energy.tile.IEnergySink.class;
                     tClass.getCanonicalName();
-                    IC_ENERGY = true;
+                    IC_ENERGY = T;
                 } catch (Throwable e) {/**/}
-                CHECK_ALL = false;
+                CHECK_ALL = F;
             }
         }
 
@@ -84,7 +87,7 @@ public interface IExperimentalEnergyTileEntity extends IColoredTileEntity, IHasW
                                 rUsedSecondary++;
                         }
                     } else if (RF_ENERGY && aEnergyType == SubTag.ENERGY_REDSTONE_FLUX && tTileEntity instanceof IEnergyReceiver && ((IEnergyReceiver) tTileEntity).canConnectEnergy(ForgeDirection.getOrientation(j))) {
-                        rUsedSecondary += ((IEnergyReceiver) tTileEntity).receiveEnergy(ForgeDirection.getOrientation(j), (int) aSecondary, false);
+                        rUsedSecondary += ((IEnergyReceiver) tTileEntity).receiveEnergy(ForgeDirection.getOrientation(j), (int) aSecondary, F);
                     }
                 }
             return rUsedSecondary;

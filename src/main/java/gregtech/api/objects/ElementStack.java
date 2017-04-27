@@ -2,10 +2,13 @@ package gregtech.api.objects;
 
 import gregtech.api.enums.Element;
 
-public final class ElementStack implements Cloneable {
+public final class ElementStack implements Cloneable, java.io.Serializable {
     public int mAmount;
     public Element mElement;
+    private static final long serialVersionUID = 2302628094500062901L;
 
+    public ElementStack() {}
+    
     public ElementStack(Element aElement, int aAmount) {
         mElement = aElement == null ? Element._NULL : aElement;
         mAmount = aAmount;

@@ -9,6 +9,8 @@ import net.minecraft.item.ItemPickaxe;
 
 import java.util.Set;
 
+import static gregtech.api.enums.GT_Values.*;
+
 public class GT_BlockResistanceLoader
         implements Runnable {
     public void run() {
@@ -19,6 +21,8 @@ public class GT_BlockResistanceLoader
             Blocks.stained_hardened_clay.setHardness(32.0F);
             Blocks.cobblestone.setHardness(12.0F);
             Blocks.stonebrick.setHardness(24.0F);
+            Blocks.sandstone.setHardness(8.0F);
+            Blocks.sandstone_stairs.setHardness(8.0F);
         }
         Blocks.stone.setResistance(10.0F);
         Blocks.cobblestone.setResistance(10.0F);
@@ -26,6 +30,34 @@ public class GT_BlockResistanceLoader
         Blocks.brick_block.setResistance(20.0F);
         Blocks.hardened_clay.setResistance(15.0F);
         Blocks.stained_hardened_clay.setResistance(15.0F);
+        Blocks.sandstone.setResistance(4.0F);
+        Blocks.sandstone_stairs.setResistance(4.0F);
+        //Add setHarvestLevel("pickaxe", 2) for balance my modpack
+        if (IronPickaxeReq) {
+            Blocks.stone.setHarvestLevel("pickaxe", 2);
+            Blocks.cobblestone.setHarvestLevel("pickaxe", 2);
+            Blocks.stonebrick.setHarvestLevel("pickaxe", 2);
+            Blocks.brick_block.setHarvestLevel("pickaxe", 2);
+            Blocks.gold_ore.setHarvestLevel("pickaxe", 2);
+            Blocks.iron_ore.setHarvestLevel("pickaxe", 2);
+            Blocks.lapis_ore.setHarvestLevel("pickaxe", 2);
+            Blocks.sandstone.setHarvestLevel("pickaxe", 1);//additional req
+            Blocks.double_stone_slab.setHarvestLevel("pickaxe", 2);
+            Blocks.stone_slab.setHarvestLevel("pickaxe", 2);
+            Blocks.stone_stairs.setHarvestLevel("pickaxe", 2);
+            Blocks.stone_pressure_plate.setHarvestLevel("pickaxe", 2);
+            Blocks.redstone_ore.setHarvestLevel("pickaxe", 2);
+            Blocks.stone_button.setHarvestLevel("pickaxe", 2);
+            Blocks.brick_stairs.setHarvestLevel("pickaxe", 2);
+            Blocks.stone_brick_stairs.setHarvestLevel("pickaxe", 2);
+            Blocks.nether_brick.setHarvestLevel("pickaxe", 2);
+            Blocks.nether_brick_fence.setHarvestLevel("pickaxe", 2);
+            Blocks.nether_brick_stairs.setHarvestLevel("pickaxe", 2);
+            Blocks.sandstone_stairs.setHarvestLevel("pickaxe", 1);//additional req
+            Blocks.emerald_ore.setHarvestLevel("pickaxe", 2);
+            Blocks.cobblestone_wall.setHarvestLevel("pickaxe", 2);
+            Blocks.quartz_ore.setHarvestLevel("pickaxe", 2);
+        }
 
 
         Blocks.bed.setHarvestLevel("axe", 0);

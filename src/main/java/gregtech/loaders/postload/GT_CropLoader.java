@@ -9,6 +9,7 @@ import gregtech.api.util.GT_OreDictUnificator;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import java.io.*;
 
 public class GT_CropLoader
         implements Runnable {
@@ -42,7 +43,7 @@ public class GT_CropLoader
             new GT_BaseCrop(148, "Liveroots", "Benimatic", GT_OreDictUnificator.get(OrePrefixes.dust, Materials.LiveRoot, 1L), new ItemStack[]{ItemList.TF_LiveRoot.get(1L, new Object[0])}, null, 8, 4, 0, 1, 4, 2, 0, 5, 2, 6, new String[]{"Wood", "Vine"});
         } catch (Throwable e) {
             GT_Log.err.println("GT_Mod: Failed to register Crops to IC2.");
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 }

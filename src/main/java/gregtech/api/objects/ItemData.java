@@ -6,16 +6,19 @@ import net.minecraft.item.ItemStack;
 
 import java.util.*;
 
-public final class ItemData {
+public final class ItemData implements java.io.Serializable {
     private static final MaterialStack[] EMPTY_MATERIALSTACK_ARRAY = new MaterialStack[0];
+    private static final long serialVersionUID = 2212611394124462901L;
 
     public final List<Object> mExtraData = new GT_ArrayList<Object>(false, 1);
-    public final OrePrefixes mPrefix;
-    public final MaterialStack mMaterial;
-    public final MaterialStack[] mByProducts;
+    public OrePrefixes mPrefix = null;
+    public MaterialStack mMaterial = null;
+    public MaterialStack[] mByProducts = null;
     public boolean mBlackListed = false;
     public ItemStack mUnificationTarget = null;
 
+    public ItemData() {}
+    
     public ItemData(OrePrefixes aPrefix, Materials aMaterial, boolean aBlackListed) {
         mPrefix = aPrefix;
         mMaterial = aMaterial == null ? null : new MaterialStack(aMaterial, aPrefix.mMaterialAmount);

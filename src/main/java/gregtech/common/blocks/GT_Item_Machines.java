@@ -17,6 +17,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.io.*;
 
 public class GT_Item_Machines
         extends ItemBlock {
@@ -83,7 +84,7 @@ public class GT_Item_Machines
                 }
             }
         } catch (Throwable e) {
-            e.printStackTrace(GT_Log.err);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
         }
     }
 

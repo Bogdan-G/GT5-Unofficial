@@ -42,10 +42,7 @@ public class GT_Tool_Drill_HV
 
     public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
         super.onToolCrafted(aStack, aPlayer);
-        try {
-            GT_Mod.instance.achievements.issueAchievement(aPlayer, "highpowerdrill");
-        } catch (Exception e) {
-        }
+        GT_Mod.instance.achievements.issueAchievement(aPlayer, "highpowerdrill");
     }
 
     public IIconContainer getIcon(boolean aIsToolHead, ItemStack aStack) {

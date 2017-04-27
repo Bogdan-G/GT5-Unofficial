@@ -110,7 +110,9 @@ public class GT_Values {
     /**
      * Not really Constants, but they set using the Config and therefore should be constant (those are for the Debug Mode)
      */
-    public static boolean D1 = false, D2 = false;
+    //Hack(or bug) if Ser0=false, but config true fast PostLoad else both true PostLoad up time by ~23 times (example before 40sec after 938sec), enum deserialized more copies object's if full list elements(it full?) //in sRodMaterialList
+    //OneElemRML - option first element in sRodMaterialList, his work is similar with effect commentary above, if true - decrese PostLoad time
+    public static boolean D1 = false, D2 = false, Ser0 = Boolean.parseBoolean(System.getProperty("gt.SerializableObjects", "false")), DisableRemoveIC2MR = false, OneElemRML = false, IronPickaxeReq = false, IronPickaxeReqGTOres = false;
     /**
      * If you have to give something a World Parameter but there is no World... (Dummy World)
      */

@@ -3,6 +3,7 @@ package gregtech;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.*;
 import forestry.api.core.ForestryAPI;
 import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.ISqueezerRecipe;
@@ -33,10 +34,12 @@ import gregtech.loaders.postload.*;
 import gregtech.loaders.preload.*;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeOutput;
+import ic2.api.recipe.Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
@@ -53,6 +56,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.*;
 import java.util.*;
 import java.util.Locale;
 import java.util.Map.Entry;
@@ -85,6 +89,8 @@ public class GT_Mod
 
     public GT_Mod() {
         float startT = System.nanoTime();
+        File dir_cache2 = new File("."+File.separator+"cache2");
+        dir_cache2.mkdir();
         try {
             Class.forName("ic2.core.IC2").getField("enableOreDictCircuit").set(null, Boolean.valueOf(true));
         } catch (Throwable e) {
@@ -118,7 +124,7 @@ public class GT_Mod
         try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTPreload) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         File tFile = new File(new File(aEvent.getModConfigurationDirectory(), "GregTech"), "GregTech.cfg");
         Configuration tMainConfig = new Configuration(tFile);
         tMainConfig.load();
@@ -144,7 +150,28 @@ public class GT_Mod
             }
         }
         try {
-            GT_Log.out = GT_Log.err = new PrintStream(GT_Log.mLogFile);
+            GT_Log.out = GT_Log.err = new PrintStream(GT_Log.mLogFile) {
+            //decrease in frequency of log entries, down IO
+            public StringBuilder mBufferedLog = new StringBuilder();
+            public int count = 0;
+            @Override
+            public void println(String x) {
+            mBufferedLog.append(x).append("\n");
+            count++;
+            if (count==10) {
+            count = 0;
+            try {
+            try (FileWriter writer = new FileWriter(GT_Log.mLogFile, true)) {
+            try (BufferedWriter bufferWriter = new BufferedWriter(writer)) {
+            bufferWriter.write(String.valueOf(mBufferedLog));
+            bufferWriter.flush();
+            }
+            }
+            } catch (Exception e) {}
+            mBufferedLog = new StringBuilder();
+            }
+            }
+            };
         } catch (FileNotFoundException e) {
         }
         GT_Log.mOreDictLogFile = new File(aEvent.getModConfigurationDirectory().getParentFile(), "logs/OreDict.log");
@@ -168,24 +195,29 @@ public class GT_Mod
             }
         }
         try {
+            if (GT_Values.D1) {
             List<String> tList = ((GT_Log.LogBuffer) GT_Log.ore).mBufferedOreDictLog;
             GT_Log.ore.println("******************************************************************************");
             GT_Log.ore.println("* This is the complete log of the GT5-Unofficial OreDictionary Handler. It   *");
             GT_Log.ore.println("* processes all OreDictionary entries and can sometimes cause errors. All    *");
             GT_Log.ore.println("* entries and errors are being logged. If you see an error please raise an   *");
-            GT_Log.ore.println("* issue at https://github.com/Blood-Asp/GT5-Unofficial.                      *");
+            GT_Log.ore.println("* issue at https://github.com/Bogdan-G/GT5-Unofficial                      *");
             GT_Log.ore.println("******************************************************************************");
-            String tString;
-            for (Iterator i$ = tList.iterator(); i$.hasNext(); GT_Log.ore.println(tString)) {
-                tString = (String) i$.next();
-            }
+            for (String tString : tList) {
+                GT_Log.ore.println(tString);
+            }}
         } catch (Throwable e) {
         }
         gregtechproxy.onPreLoad();
 
         GT_Log.out.println("GT_Mod: Setting Configs");
+        GT_Values.Ser0 = tMainConfig.get(general_text, "SerializableObjects", false).getBoolean(false);
         GT_Values.D1 = tMainConfig.get(general_text, "Debug", false).getBoolean(false);
         GT_Values.D2 = tMainConfig.get(general_text, "Debug2", false).getBoolean(false);
+        GT_Values.DisableRemoveIC2MR = tMainConfig.get(general_text, "DisableRemoveIC2MachineRecipeIsOutputNull", false).getBoolean(false);// Disable job in class GT_Utility method removeIC2MachineRecipe when tOutput==null, decrease loadtimes by ~10%(~30sec for ~5min)
+        GT_Values.OneElemRML = tMainConfig.get(general_text, "One_element_in_sRodMaterialList_in_cycle_registerUsagesForMaterials", false).getBoolean(false);
+        GT_Values.IronPickaxeReq = tMainConfig.get(general_text, "RequiredMinimumIronLevelPickaxeInVanillaBlocks", false).getBoolean(false);//additional for harderstone option, req minimum harvest level 2 (Iron Pickaxe)
+        GT_Values.IronPickaxeReqGTOres = tMainConfig.get(general_text, "RequiredMinimumIronLevelPickaxeInGTOres", false).getBoolean(false);
 
         GregTech_API.TICKS_FOR_LAG_AVERAGING = tMainConfig.get(general_text, "TicksForLagAveragingWithScanner", 25).getInt(25);
         GregTech_API.MILLISECOND_THRESHOLD_UNTIL_LAG_WARNING = tMainConfig.get(general_text, "MillisecondsPassedInGTTileEntityUntilLagWarning", 100).getInt(100);
@@ -237,7 +269,8 @@ public class GT_Mod
         gregtechproxy.mSortToTheEnd = tMainConfig.get(general_text, "EnsureToBeLoadedLast", true).getBoolean(true);
         gregtechproxy.mDisableIC2Cables = tMainConfig.get(general_text, "DisableIC2Cables", false).getBoolean(false);
         gregtechproxy.mAchievements = tMainConfig.get(general_text, "EnableAchievements", true).getBoolean(true);
-        gregtechproxy.mAE2Integration = tMainConfig.get(general_text, "EnableAE2Integration", Loader.isModLoaded("appliedenergistics2")).getBoolean(Loader.isModLoaded("appliedenergistics2"));
+        if (!(Loader.isModLoaded("appliedenergistics2"))) gregtechproxy.mAE2Integration = false;
+        else gregtechproxy.mAE2Integration = tMainConfig.get(general_text, "EnableAE2Integration", true).getBoolean(true);
 
 
         GregTech_API.mOutputRF = GregTech_API.sOPStuff.get(ConfigCategories.general, "OutputRF", false);
@@ -281,7 +314,7 @@ public class GT_Mod
             ((List) GT_Utility.getFieldContent(GT_Utility.getFieldContent("ic2.api.recipe.Recipes", "scrapboxDrops", true, true), "drops", true, true)).clear();
         } catch (Throwable e) {
             if (GT_Values.D1) {
-                e.printStackTrace(GT_Log.err);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
             }
         }
         GT_Log.out.println("GT_Mod: Adding Scrap with a Weight of 200.0F to the Scrapbox Drops.");
@@ -360,20 +393,20 @@ public class GT_Mod
                 GT_Utility.getField(tLoadController, "activeModList", true, true).set(tLoadController, tNewModsList);
             } catch (Throwable e) {
                 if (GT_Values.D1) {
-                    e.printStackTrace(GT_Log.err);
+                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
                 }
             }
         }
         GregTech_API.sPreloadFinished = true;
         GT_Log.out.println("GT_Mod: Preload-Phase finished!");
-        GT_Log.ore.println("GT_Mod: Preload-Phase finished!");
+        if (gregtech.api.enums.GT_Values.D1) GT_Log.ore.println("GT_Mod: Preload-Phase finished!");
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPreLoad, part 2 "+elapsed/1000000+"ms");
         startT = System.nanoTime();
         try {
         for (Runnable tRunnable : GregTech_API.sAfterGTPreload) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPreLoad, part 3 "+elapsed/1000000+"ms");
         //startT = System.nanoTime();
@@ -388,7 +421,7 @@ public class GT_Mod
         try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTLoad) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         gregtechproxy.onLoad();
         if (gregtechproxy.mSortToTheEnd) {
             new GT_ItemIterator().run();
@@ -397,14 +430,14 @@ public class GT_Mod
         }
         GregTech_API.sLoadFinished = true;
         GT_Log.out.println("GT_Mod: Load-Phase finished!");
-        GT_Log.ore.println("GT_Mod: Load-Phase finished!");
+        if (gregtech.api.enums.GT_Values.D1) GT_Log.ore.println("GT_Mod: Load-Phase finished!");
         float elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onLoad, part 1 "+elapsed/1000000+"ms");
         startT = System.nanoTime();
         try {
         for (Runnable tRunnable : GregTech_API.sAfterGTLoad) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onLoad, part 2 "+elapsed/1000000+"ms");
     }
@@ -415,10 +448,36 @@ public class GT_Mod
         if (GregTech_API.sPostloadStarted) {
             return;
         }
+        /*if (GT_Values.Ser0) {
+        try {
+        net.minecraft.entity.ai.attributes.AttributeModifier tAtrModif = new net.minecraft.entity.ai.attributes.AttributeModifier("ClassFound", 0, 0);//call check load class
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        try {
+        FileInputStream inputStream = new FileInputStream("."+File.separator+"cache2"+File.separator+"sInternalListsBeforeAdd.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        GT_RecipeRegistrator.sInternalListsBeforeAdd = (List<ItemStack[]>) objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        try {
+        FileInputStream inputStream = new FileInputStream("."+File.separator+"cache2"+File.separator+"sInternalListsBeforeAdd2.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        GT_RecipeRegistrator.sInternalListsBeforeAdd2 = (List<Object[]>) objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        try {
+        FileInputStream inputStream = new FileInputStream("."+File.separator+"cache2"+File.separator+"sInternalListsBeforeAdd3.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        GT_RecipeRegistrator.sInternalListsBeforeAdd3 = (List<ItemStack>) objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        }*/
         try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTPostload) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         float elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPostLoad, part 1 "+elapsed/1000000+"ms");
         startT = System.nanoTime();
@@ -455,7 +514,7 @@ public class GT_Mod
         }
         GT_ModHandler.removeRecipe(new ItemStack[]{new ItemStack(Blocks.wooden_slab, 1, 0), new ItemStack(Blocks.wooden_slab, 1, 1), new ItemStack(Blocks.wooden_slab, 1, 2)});
         GT_ModHandler.addCraftingRecipe(new ItemStack(Blocks.wooden_slab, 6, 0), GT_ModHandler.RecipeBits.NOT_REMOVABLE, new Object[]{"WWW", 'W', new ItemStack(Blocks.planks, 1, 0)});
-
+        
         GT_Log.out.println("GT_Mod: Activating OreDictionary Handler, this can take some time, as it scans the whole OreDictionary");
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPostLoad, part 3 "+elapsed/1000000+"ms");
@@ -463,19 +522,58 @@ public class GT_Mod
         FMLLog.info("If your Log stops here, you were too impatient. Wait a bit more next time, before killing Minecraft with the Task Manager.", new Object[0]);
         gregtechproxy.activateOreDictHandler();
         FMLLog.info("Congratulations, you have been waiting long enough. Have a Cake.", new Object[0]);
-        GT_Log.out.println("GT_Mod: List of Lists of Tool Recipes: "+GT_ModHandler.sSingleNonBlockDamagableRecipeList_list.get().toString());
+        GT_Log.out.println("GT_Mod: List of Lists of Tool Recipes: "+String.valueOf(GT_ModHandler.sSingleNonBlockDamagableRecipeList_list.get().toString()));
         //GT_Log.out.println("GT_Mod: " + GT_ModHandler.sSingleNonBlockDamagableRecipeList.size() + " Recipes were left unused.");
         GT_Log.out.println("GT_Mod: Vanilla Recipe List -> Outputs null or stackSize <=0: " + GT_ModHandler.sVanillaRecipeList_warntOutput.makeString());
         GT_Log.out.println("GT_Mod: Single Non Block Damagable Recipe List -> Outputs null or stackSize <=0: " + GT_ModHandler.sSingleNonBlockDamagableRecipeList_warntOutput.makeString());
+        GT_Log.out.println("GT_Mod: sRodMaterialList size: " + GT_RecipeRegistrator.sRodMaterialList.size());
+        GT_Log.out.println("GT_Mod: tMt2 null cycles: " + GT_RecipeRegistrator.tMt2_null_cycles);
         GT_Log.out.println("GT_Mod: sRodMaterialList cycles (work): " + GT_RecipeRegistrator.sRodMaterialList_cycles);
         GT_Log.out.println("GT_Mod: sRodMaterialList cycles (no work): " + GT_RecipeRegistrator.sRodMaterialList_cycles1);
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPostLoad, part 4, gregtechproxy.activateOreDictHandler "+elapsed/1000000+"ms");
+        /*if (GT_Values.Ser0) {
         startT = System.nanoTime();
+        GT_Log.out.println("GT_Mod: Internal Recipe's from step Activating OreDictionary Handler");
+        int sInternalListsBeforeAdd_count=0, sInternalListsBeforeAdd2_count=0, sInternalListsBeforeAdd3_count=0;
+        for (ItemStack[] tRecipe : GT_RecipeRegistrator.sInternalListsBeforeAdd) {
+        GT_ModHandler.removeRecipe(tRecipe);
+        sInternalListsBeforeAdd_count++;
+        }
+        for (int i=0;i<GT_RecipeRegistrator.sInternalListsBeforeAdd2.size();i++) {
+        Object[] tObject = GT_RecipeRegistrator.sInternalListsBeforeAdd2.get(i);
+        ItemStack tStack = GT_RecipeRegistrator.sInternalListsBeforeAdd3.get(i);
+        GT_ModHandler.addCraftingRecipe(tStack, GT_ModHandler.RecipeBits.BUFFERED, tObject);
+        sInternalListsBeforeAdd2_count++;
+        sInternalListsBeforeAdd3_count++;
+        }
+        GT_Log.out.println("GT_Mod: sInternalListsBeforeAdd cycles: " + sInternalListsBeforeAdd_count);
+        GT_Log.out.println("GT_Mod: sInternalListsBeforeAdd2 cycles: " + sInternalListsBeforeAdd2_count);
+        GT_Log.out.println("GT_Mod: sInternalListsBeforeAdd3 cycles: " + sInternalListsBeforeAdd3_count);
+        elapsed = System.nanoTime() - startT;
+        FMLLog.info("GT Timer: onPostLoad, part 4.5,  "+elapsed/1000000+"ms");
+        }*/
+        startT = System.nanoTime();
+        if (!GT_Values.Ser0) {
+        /*try {
+        FileOutputStream outputStream = new FileOutputStream("."+File.separator+"cache2"+File.separator+"sRodMaterialList.ser");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(GT_RecipeRegistrator.sRodMaterialList_NonNull);
+        objectOutputStream.flush();
+        outputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}*/
         if (GT_Values.D1) {
-            IRecipe tRecipe;
-            for (Iterator i$ = GT_ModHandler.sSingleNonBlockDamagableRecipeList.iterator(); i$.hasNext(); GT_Log.out.println("=> " + tRecipe.getRecipeOutput().getDisplayName())) {
-                tRecipe = (IRecipe) i$.next();
+        try {
+        FileOutputStream outputStream = new FileOutputStream("."+File.separator+"cache2"+File.separator+"oreStats.ser");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(GT_Achievements.oreStats);
+        objectOutputStream.flush();
+        outputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        }}
+        if (GT_Values.D1) {
+            for (IRecipe tRecipe : GT_ModHandler.sSingleNonBlockDamagableRecipeList) {
+                GT_Log.out.println("=> " + tRecipe.getRecipeOutput().getDisplayName());
             }
         }
         new GT_CraftingRecipeLoader().run();
@@ -510,7 +608,7 @@ public class GT_Mod
             }
         } catch (Throwable e) {
             if (GT_Values.D1) {
-                e.printStackTrace(GT_Log.err);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
             }
         }
         try {
@@ -521,7 +619,7 @@ public class GT_Mod
             }
         } catch (Throwable e) {
             if (GT_Values.D1) {
-                e.printStackTrace(GT_Log.err);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
             }
         }
         elapsed = System.nanoTime() - startT;
@@ -621,14 +719,14 @@ public class GT_Mod
         GT_LanguageManager.sEnglishFile.save();
         GregTech_API.sPostloadFinished = true;
         GT_Log.out.println("GT_Mod: PostLoad-Phase finished!");
-        GT_Log.ore.println("GT_Mod: PostLoad-Phase finished!");
+        if (gregtech.api.enums.GT_Values.D1) GT_Log.ore.println("GT_Mod: PostLoad-Phase finished!");
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPostLoad, part 6 "+elapsed/1000000+"ms");
         startT = System.nanoTime();
         try {
         for (Runnable tRunnable : GregTech_API.sAfterGTPostload) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         GT_Log.out.println("GT_Mod: Adding Fake Recipes for NEI");
         if (ItemList.FR_Bee_Drone.get(1L, new Object[0]) != null) {
             GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(false, new ItemStack[]{ItemList.FR_Bee_Drone.getWildcard(1L, new Object[0])}, new ItemStack[]{ItemList.FR_Bee_Drone.getWithName(1L, "Scanned Drone", new Object[0])}, null, new FluidStack[]{Materials.Honey.getFluid(50L)}, null, 500, 2, 0);
@@ -687,8 +785,7 @@ public class GT_Mod
         GT_Recipe.GT_Recipe_Map.sRockBreakerFakeRecipes.addFakeRecipe(false, new ItemStack[]{ItemList.Display_ITS_FREE.getWithName(0L, "Place Lava on Side", new Object[0])}, new ItemStack[]{new ItemStack(Blocks.cobblestone, 1)}, null, null, null, 16, 32, 0);
         GT_Recipe.GT_Recipe_Map.sRockBreakerFakeRecipes.addFakeRecipe(false, new ItemStack[]{ItemList.Display_ITS_FREE.getWithName(0L, "Place Lava on Top", new Object[0])}, new ItemStack[]{new ItemStack(Blocks.stone, 1)}, null, null, null, 16, 32, 0);
         GT_Recipe.GT_Recipe_Map.sRockBreakerFakeRecipes.addFakeRecipe(false, new ItemStack[]{GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Redstone, 1L)}, new ItemStack[]{new ItemStack(Blocks.obsidian, 1)}, null, null, null, 128, 32, 0);
-        for (Iterator i$ = GT_ModHandler.getMaceratorRecipeList().entrySet().iterator(); i$.hasNext(); ) {
-            Entry tRecipe = (Map.Entry) i$.next();
+        for (Map.Entry tRecipe : GT_ModHandler.getMaceratorRecipeList().entrySet()) {
             if (((RecipeOutput) tRecipe.getValue()).items.size() > 0) {
                 for (ItemStack tStack : ((IRecipeInput) tRecipe.getKey()).getInputs()) {
                     if (GT_Utility.isStackValid(tStack)) {
@@ -697,16 +794,47 @@ public class GT_Mod
                 }
             }
         }
+        //Remove Workbench crafting in 2x2 or 3x3 grid craft (shaped) exclude gregtech
+        if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "vanillaworkbench", true)) {
+            GT_ModHandler.removeRecipeByOutput2(new ItemStack(Item.getItemFromBlock(GameData.getBlockRegistry().getObjectById(58)), 1, 0));
+        }
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onPostLoad, part 7 "+elapsed/1000000+"ms");
         startT = System.nanoTime();
         achievements = new GT_Achievements();
-        Map.Entry<IRecipeInput, RecipeOutput> tRecipe;
+        //Map.Entry<IRecipeInput, RecipeOutput> tRecipe;
+        //GT_Log.out.count=10;//wut, compiler strange
         GT_Log.out.println("GT_Mod: Loading finished, deallocating temporary Init Variables.");
         GregTech_API.sBeforeGTPreload=null;GregTech_API.sAfterGTPreload=null;
         GregTech_API.sBeforeGTLoad=null;GregTech_API.sAfterGTLoad=null;
         GregTech_API.sBeforeGTPostload=null;GregTech_API.sAfterGTPostload=null;
         elapsed = System.nanoTime() - startT;
+        /*if (!GT_Values.Ser0) {
+        try {
+        FileOutputStream outputStream = new FileOutputStream("."+File.separator+"cache2"+File.separator+"sInternalListsBeforeAdd.ser");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.INFO, "Gregtech sInternalListsBeforeAdd: %s", GT_RecipeRegistrator.sInternalListsBeforeAdd.toString());
+        objectOutputStream.writeObject(GT_RecipeRegistrator.sInternalListsBeforeAdd);
+        objectOutputStream.flush();
+        outputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        try {
+        FileOutputStream outputStream = new FileOutputStream("."+File.separator+"cache2"+File.separator+"sInternalListsBeforeAdd2.ser");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.INFO, "Gregtech sInternalListsBeforeAdd2: %s", GT_RecipeRegistrator.sInternalListsBeforeAdd2.toString());
+        objectOutputStream.writeObject(GT_RecipeRegistrator.sInternalListsBeforeAdd2);
+        objectOutputStream.flush();
+        outputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        try {
+        FileOutputStream outputStream = new FileOutputStream("."+File.separator+"cache2"+File.separator+"sInternalListsBeforeAdd3.ser");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.INFO, "Gregtech sInternalListsBeforeAdd3: %s", GT_RecipeRegistrator.sInternalListsBeforeAdd3.toString());
+        objectOutputStream.writeObject(GT_RecipeRegistrator.sInternalListsBeforeAdd3);
+        objectOutputStream.flush();
+        outputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        }*/
         FMLLog.info("GT Timer: onPostLoad, part 8 "+elapsed/1000000+"ms");
     }
 
@@ -716,69 +844,59 @@ public class GT_Mod
         try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTServerstart) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         gregtechproxy.onServerStarting();
         GT_Log.out.println("GT_Mod: Unificating outputs of all known Recipe Types.");
         ArrayList<ItemStack> tStacks = new ArrayList(10000);
         GT_Log.out.println("GT_Mod: IC2 Machines");
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.cannerBottle.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.cannerBottle.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.centrifuge.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.centrifuge.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.compressor.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.compressor.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.extractor.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.extractor.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.macerator.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.macerator.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.metalformerCutting.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.metalformerCutting.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.metalformerExtruding.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.metalformerExtruding.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.metalformerRolling.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.metalformerRolling.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.matterAmplifier.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.matterAmplifier.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
-        for (RecipeOutput tRecipe : ic2.api.recipe.Recipes.oreWashing.getRecipes().values()) {
-            ItemStack tStack;
-            for (Iterator i$ = tRecipe.items.iterator(); i$.hasNext(); tStacks.add(tStack)) {
-                tStack = (ItemStack) i$.next();
+        for (RecipeOutput tRecipe : Recipes.oreWashing.getRecipes().values()) {
+            for (ItemStack tStack : tRecipe.items) {
+                tStacks.add(tStack);
             }
         }
         float elapsed = System.nanoTime() - startT;
@@ -816,9 +934,8 @@ public class GT_Mod
             tStacks.add(tContent.theItemId);
         }
         GT_Log.out.println("GT_Mod: Smelting");
-        Object tStack;
-        for (Iterator i$ = FurnaceRecipes.smelting().getSmeltingList().values().iterator(); i$.hasNext(); tStacks.add((ItemStack) tStack)) {
-            tStack = i$.next();
+        for (Object tStack : FurnaceRecipes.smelting().getSmeltingList().values()) {
+            tStacks.add((ItemStack) tStack);
         }
         if (gregtechproxy.mCraftingUnification) {
             GT_Log.out.println("GT_Mod: Crafting Recipes");
@@ -855,11 +972,11 @@ public class GT_Mod
         }
         GregTech_API.mServerStarted = true;
         GT_Log.out.println("GT_Mod: ServerStarting-Phase finished!");
-        GT_Log.ore.println("GT_Mod: ServerStarting-Phase finished!");
+        if (gregtech.api.enums.GT_Values.D1) GT_Log.ore.println("GT_Mod: ServerStarting-Phase finished!");
         try {
         for (Runnable tRunnable : GregTech_API.sAfterGTServerstart) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onServerStarting, part 3 "+elapsed/1000000+"ms");
         //startT = System.nanoTime();
@@ -880,10 +997,9 @@ public class GT_Mod
         GT_Utility.reInit();
         GT_Recipe.reInit();
         try {
-        for (Iterator i$ = GregTech_API.sItemStackMappings.iterator(); i$.hasNext(); ) {
-            Map tMap = (Map) i$.next();
-                GT_Utility.reMap(tMap);
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        for (Map tMap : GregTech_API.sItemStackMappings) {
+            GT_Utility.reMap(tMap);
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         float elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onIDChangingEvent "+elapsed/1000000+"ms");
 
@@ -904,54 +1020,30 @@ public class GT_Mod
         try {
         for (Runnable tRunnable : GregTech_API.sBeforeGTServerstop) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         gregtechproxy.onServerStopping();
         try {
             if ((GT_Values.D1) || (GT_Log.out != System.out)) {
-                GT_Log.out.println("*");
-                GT_Log.out.println("Printing List of all registered Objects inside the OreDictionary, now with free extra Sorting:");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
+                GT_Log.out.println("*\nPrinting List of all registered Objects inside the OreDictionary, now with free extra Sorting:\n*\n*\n*");
 
                 String[] tList = OreDictionary.getOreNames();
                 Arrays.sort(tList);
                 for (String tOreName : tList) {
                     int tAmount = OreDictionary.getOres(tOreName).size();
-                    if (tAmount > 0) {
-                        GT_Log.out.println((tAmount < 10 ? " " : "") + tAmount + "x " + tOreName);
-                    }
+                    if (tAmount > 0) GT_Log.out.println((tAmount < 10 ? " " : "") + tAmount + "x " + tOreName);
                 }
-                GT_Log.out.println("*");
-                GT_Log.out.println("Printing List of all registered Objects inside the Fluid Registry, now with free extra Sorting:");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
+                GT_Log.out.println("*\nPrinting List of all registered Objects inside the Fluid Registry, now with free extra Sorting:\n*\n*\n*");
 
                 tList = (String[]) FluidRegistry.getRegisteredFluids().keySet().toArray(new String[FluidRegistry.getRegisteredFluids().keySet().size()]);
                 Arrays.sort(tList);
                 for (String tFluidName : tList) {
                     GT_Log.out.println(tFluidName);
                 }
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("Outputting all the Names inside the Biomeslist");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
+                GT_Log.out.println("*\n*\n*\nOutputting all the Names inside the Biomeslist\n*\n*\n*");
                 for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++) {
-                    if (BiomeGenBase.getBiomeGenArray()[i] != null) {
-                        GT_Log.out.println(BiomeGenBase.getBiomeGenArray()[i].biomeID + " = " + BiomeGenBase.getBiomeGenArray()[i].biomeName);
-                    }
+                    if (BiomeGenBase.getBiomeGenArray()[i] != null) GT_Log.out.println(BiomeGenBase.getBiomeGenArray()[i].biomeID + " = " + BiomeGenBase.getBiomeGenArray()[i].biomeName);
                 }
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("Printing List of generatable Materials");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
+                GT_Log.out.println("*\n*\n*\nPrinting List of generatable Materials\n*\n*\n*");
                 for (int i = 0; i < GregTech_API.sGeneratedMaterials.length; i++) {
                     if (GregTech_API.sGeneratedMaterials[i] == null) {
                         GT_Log.out.println("Index " + i + ":" + null);
@@ -959,23 +1051,30 @@ public class GT_Mod
                         GT_Log.out.println("Index " + i + ":" + GregTech_API.sGeneratedMaterials[i]);
                     }
                 }
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("END GregTech-Debug");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
-                GT_Log.out.println("*");
+                GT_Log.out.println("*\n*\n*\nEND GregTech-Debug\n*\n*\n*");
             }
         } catch (Throwable e) {
             if (GT_Values.D1) {
-                e.printStackTrace(GT_Log.err);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
             }
         }
+        if (GT_Values.D1) {
+        try {
+        List<String> tList = ((GT_Log.LogBuffer) GT_Log.ore).mBufferedOreDictLog;
+        StringBuilder split = new StringBuilder();
+        for (int i=0;i<tList.size();i++) split.append(tList.get(i)).append("\n");
+        try (OutputStream fos = new BufferedOutputStream(new FileOutputStream(GT_Log.mOreDictLogFile))) {
+        fos.write((String.valueOf(split)).getBytes("UTF-8"));
+        fos.flush();
+        }} catch (Throwable e) {
+            if (GT_Values.D1) {
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
+            }
+        }}
         try {
         for (Runnable tRunnable : GregTech_API.sAfterGTServerstop) {
                 tRunnable.run();
-        }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+        }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
         float elapsed = System.nanoTime() - startT;
         FMLLog.info("GT Timer: onServerStopping "+elapsed/1000000+"ms");
     }

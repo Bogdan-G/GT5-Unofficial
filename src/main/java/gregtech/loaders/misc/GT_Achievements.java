@@ -28,6 +28,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fluids.FluidStack;
 import thaumcraft.api.ThaumcraftApiHelper;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
@@ -35,12 +36,23 @@ import java.util.List;
 public class GT_Achievements {
 
     public static List<Materials> oreList = new org.eclipse.collections.impl.list.mutable.FastList<Materials>();
-    public static List<Integer[]> oreStats = new org.eclipse.collections.impl.list.mutable.FastList<Integer[]>();
+    public static List<Integer[]> oreStats = GT_Values.Ser0 ? null : new org.eclipse.collections.impl.list.mutable.FastList<Integer[]>();
     public static int oreReg = -1;
     public org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Achievement> achievementList;
     public org.eclipse.collections.impl.map.mutable.UnifiedMap<String, Boolean> issuedAchievements;
     public int adjX = 5;
     public int adjY = 9;
+    static {
+        if (GT_Values.Ser0 && GT_Values.D1) {
+        try {
+        FileInputStream inputStream = new FileInputStream("."+File.separator+"cache2"+File.separator+"oreStats.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        oreStats = (List<Integer[]>) objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
+        } catch (Exception e) {cpw.mods.fml.common.FMLLog.log(org.apache.logging.log4j.Level.WARN, (Throwable)e, "Gregtech stacktrace: %s", (Throwable)e);}
+        }
+    }
 
     public GT_Achievements() {
         this.achievementList = new org.eclipse.collections.impl.map.mutable.UnifiedMap();
@@ -172,7 +184,7 @@ public class GT_Achievements {
         if (aMaterial != Materials._NULL) {
             oreList.add(aMaterial);
         }
-        oreStats.add(new Integer[]{min, max, chance, overworld ? 1 : 0, nether ? 1 : 0, end ? 1 : 0});
+        if (!GT_Values.Ser0 && GT_Values.D1) oreStats.add(new Integer[]{min, max, chance, overworld ? 1 : 0, nether ? 1 : 0, end ? 1 : 0});
     }
 
     public Achievement registerAchievement(String textId, int x, int y, ItemStack icon, Achievement requirement, boolean special) {
@@ -421,7 +433,7 @@ public class GT_Achievements {
         if (player == null || stack == null) {
             return;
         }
-//		System.out.println("Pickup: "+stack.getUnlocalizedName());
+//		GT_Log.out.println("Pickup: "+stack.getUnlocalizedName());
         ItemData data = GT_OreDictUnificator.getItemData(stack);
         if (data != null && data.mPrefix != null) {
             if (data.mPrefix == OrePrefixes.dust) {

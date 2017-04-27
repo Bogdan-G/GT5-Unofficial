@@ -54,7 +54,8 @@ public class GT_Worldgen_GT_Ore_Layer extends GT_Worldgen {
     }
 
     public boolean executeWorldgen(World aWorld, Random aRandom, String aBiome, int aDimensionType, int aChunkX, int aChunkZ, IChunkProvider aChunkGenerator, IChunkProvider aChunkProvider) {
-        if (!isGenerationAllowed(aWorld, aDimensionType, ((aDimensionType == -1) && (this.mNether)) || ((aDimensionType == 0) && (this.mOverworld)) || ((aDimensionType == 1) && (this.mEnd)) ? aDimensionType : aDimensionType ^ 0xFFFFFFFF)) {
+        //aRandom.nextInt(3) != 2 - decrease gen by 30%, for balance my modpack
+        if (aRandom.nextInt(3) != 2 ) {if (!isGenerationAllowed(aWorld, aDimensionType, ((aDimensionType == -1) && (this.mNether)) || ((aDimensionType == 0) && (this.mOverworld)) || ((aDimensionType == 1) && (this.mEnd)) ? aDimensionType : aDimensionType ^ 0xFFFFFFFF)) {
             return false;
         }
         int tMinY = this.mMinY + aRandom.nextInt(this.mMaxY - this.mMinY - 5);
@@ -88,8 +89,8 @@ public class GT_Worldgen_GT_Ore_Layer extends GT_Worldgen {
             }
         }
         if (GT_Values.D1) {
-            System.out.println("Generated Orevein: " + this.mWorldGenName);
-        }
+            gregtech.api.util.GT_Log.out.println("Generated Orevein: " + this.mWorldGenName);
+        }}
         return true;
     }
 }

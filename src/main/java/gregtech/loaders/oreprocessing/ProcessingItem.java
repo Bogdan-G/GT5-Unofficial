@@ -17,11 +17,7 @@ public class ProcessingItem implements gregtech.api.interfaces.IOreRecipeRegistr
 
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName, ItemStack aStack) {
         if (GT_OreDictUnificator.getItemData(aStack) == null) {
-
-            if (!aOreDictName.equals("itemCertusQuartz")) {
-
-                if (!aOreDictName.equals("itemNetherQuartz")) {
-
+            if (!aOreDictName.equals("itemCertusQuartz") && !aOreDictName.equals("itemNetherQuartz")) {
                     if (aOreDictName.equals("itemSilicon")) {
                         GT_OreDictUnificator.addItemData(aStack, new ItemData(Materials.Silicon, 3628800L, new MaterialStack[0]));
                         GT_Values.RA.addFormingPressRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_ModHandler.getModItem("appliedenergistics2", "item.ItemMultiMaterial", 0L, 19), GT_ModHandler.getModItem("appliedenergistics2", "item.ItemMultiMaterial", 1L, 20), 200, 16);
@@ -44,9 +40,8 @@ public class ProcessingItem implements gregtech.api.interfaces.IOreRecipeRegistr
                     } else if (aOreDictName.equals("itemUranium")) {
                         GT_OreDictUnificator.addItemData(aStack, new ItemData(Materials.Uranium, 3628800L, new MaterialStack[0]));
                     } else {
-                        //System.out.println("Item Name: " + aOreDictName + " !!!Unknown Item detected!!! Please report to GregTech Intergalactical for additional compatiblity. This is not an Error, it's just an Information.");
+                        cpw.mods.fml.common.FMLLog.info("Item Name: " + aOreDictName + " - Unknown Item detected! This is not an Error, it's just an Information.");
                     }
-                }
             }
         }
     }

@@ -10,9 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import static gregtech.api.enums.GT_Values.V;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 
 public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredMachineBlock {
-    public boolean bOutput = false, bRedstoneIfFull = false, bInvert = false;
+    public boolean bOutput = F, bRedstoneIfFull = F, bInvert = F;
     public int mSuccess = 0, mTargetStackSize = 0;
 
     public GT_MetaTileEntity_Buffer(int aID, String aName, String aNameRegional, int aTier, int aInvSlotCount, String aDescription) {
@@ -97,7 +100,7 @@ public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredM
 
     @Override
     public boolean isSimpleMachine() {
-        return false;
+        return F;
     }
 
     @Override
@@ -107,17 +110,17 @@ public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredM
 
     @Override
     public boolean isFacingValid(byte aFacing) {
-        return true;
+        return T;
     }
 
     @Override
     public boolean isEnetInput() {
-        return true;
+        return T;
     }
 
     @Override
     public boolean isEnetOutput() {
-        return true;
+        return T;
     }
 
     @Override
@@ -132,7 +135,7 @@ public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredM
 
     @Override
     public boolean isTeleporterCompatible() {
-        return false;
+        return F;
     }
 
     @Override
@@ -167,16 +170,16 @@ public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredM
 
     @Override
     public boolean isAccessAllowed(EntityPlayer aPlayer) {
-        return true;
+        return T;
     }
 
     public abstract ITexture getOverlayIcon();
 
     @Override
     public boolean onRightclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer) {
-        if (aBaseMetaTileEntity.isClientSide()) return true;
+        if (aBaseMetaTileEntity.isClientSide()) return T;
         aBaseMetaTileEntity.openGUI(aPlayer);
-        return true;
+        return T;
     }
 
     @Override
@@ -225,7 +228,7 @@ public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredM
                     if (isValidSlot(i)) {
                         if (mInventory[i] == null) {
                             aBaseMetaTileEntity.setGenericRedstoneOutput(bInvert);
-                            aBaseMetaTileEntity.decreaseStoredEnergyUnits(1, true);
+                            aBaseMetaTileEntity.decreaseStoredEnergyUnits(1, T);
                             break;
                         }
                     }
@@ -234,16 +237,16 @@ public abstract class GT_MetaTileEntity_Buffer extends GT_MetaTileEntity_TieredM
     }
 
     protected void moveItems(IGregTechTileEntity aBaseMetaTileEntity, long aTimer) {
-        int tCost = GT_Utility.moveOneItemStack(aBaseMetaTileEntity, aBaseMetaTileEntity.getTileEntityAtSide(aBaseMetaTileEntity.getBackFacing()), aBaseMetaTileEntity.getBackFacing(), aBaseMetaTileEntity.getFrontFacing(), null, false, mTargetStackSize == 0 ? 64 : (byte) mTargetStackSize, mTargetStackSize == 0 ? 1 : (byte) mTargetStackSize, (byte) 64, (byte) 1);
+        int tCost = GT_Utility.moveOneItemStack(aBaseMetaTileEntity, aBaseMetaTileEntity.getTileEntityAtSide(aBaseMetaTileEntity.getBackFacing()), aBaseMetaTileEntity.getBackFacing(), aBaseMetaTileEntity.getFrontFacing(), null, F, mTargetStackSize == 0 ? 64 : (byte) mTargetStackSize, mTargetStackSize == 0 ? 1 : (byte) mTargetStackSize, (byte) 64, (byte) 1);
         if (tCost > 0 || aBaseMetaTileEntity.hasInventoryBeenModified()) {
             mSuccess = 50;
-            aBaseMetaTileEntity.decreaseStoredEnergyUnits(Math.abs(tCost), true);
+            aBaseMetaTileEntity.decreaseStoredEnergyUnits(Math.abs(tCost), T);
         }
     }
 
     @Override
     public boolean allowPullStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-        return true;
+        return T;
     }
 
     @Override

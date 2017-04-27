@@ -14,16 +14,18 @@ import java.util.Map.Entry;
 //import java.util.Map;
 
 import static gregtech.api.enums.GT_Values.E;
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public class GT_LanguageManager {
     public static final HashMap<String, String> TEMPMAP = new HashMap<String, String>(1);
     public static final HashMap<String, String> LANGMAP = new HashMap<String, String>();
     public static final HashMap<String, String> BUFFERMAP = new HashMap<String, String>();
     public static Configuration sEnglishFile;
-    public static boolean sUseEnglishFile = false;
+    public static boolean sUseEnglishFile = F;
 
     public static String addStringLocalization(String aKey, String aEnglish) {
-        return addStringLocalization(aKey, aEnglish, true);
+        return addStringLocalization(aKey, aEnglish, T);
     }
 
     public static String addStringLocalization(String aKey, String aEnglish, boolean aWriteIntoLangFile) {
@@ -54,9 +56,9 @@ public class GT_LanguageManager {
             }
             Property tProperty = sEnglishFile.get("LanguageFile", aKey.trim(), aEnglish);
             if (!tProperty.wasRead() && GregTech_API.sPostloadFinished) sEnglishFile.save();
-            if (sEnglishFile.get("EnableLangFile", "UseThisFileAsLanguageFile", false).getBoolean(false)) {
+            if (sEnglishFile.get("EnableLangFile", "UseThisFileAsLanguageFile", F).getBoolean(F)) {
                 aEnglish = tProperty.getString();
-                sUseEnglishFile = true;
+                sUseEnglishFile = T;
             }
         }
         return aEnglish;

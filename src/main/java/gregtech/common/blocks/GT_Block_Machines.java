@@ -37,17 +37,21 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import org.bogdang.modifications.random.TLR;
+//import org.bogdang.modifications.random.TLR;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.*;
 import org.bogdang.modifications.random.XSTR;
+
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
 
 public class GT_Block_Machines
         extends GT_Generic_Block
         implements IDebugableBlock, ITileEntityProvider {
-    public static ThreadLocal<IGregTechTileEntity> mTemporaryTileEntity = new ThreadLocal();
+    public transient static ThreadLocal<IGregTechTileEntity> mTemporaryTileEntity = new ThreadLocal();
 
     public GT_Block_Machines() {
         super(GT_Item_Machines.class, "gt.blockmachines", new GT_Material_Machines());
@@ -56,7 +60,7 @@ public class GT_Block_Machines
         setResistance(10.0F);
         setStepSound(soundTypeMetal);
         setCreativeTab(GregTech_API.TAB_GREGTECH);
-        this.isBlockContainer = true;
+        this.isBlockContainer = T;
     }
 
     public String getHarvestTool(int aMeta) {
@@ -78,7 +82,7 @@ public class GT_Block_Machines
     }
 
     protected boolean canSilkHarvest() {
-        return false;
+        return F;
     }
 
     public void onNeighborChange(IBlockAccess aWorld, int aX, int aY, int aZ, int aTileX, int aTileY, int aTileZ) {
@@ -127,39 +131,39 @@ public class GT_Block_Machines
     }
 
     public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess aWorld, int aX, int aY, int aZ) {
-        return false;
+        return F;
     }
 
     public boolean canConnectRedstone(IBlockAccess var1, int var2, int var3, int var4, int var5) {
-        return true;
+        return T;
     }
 
     public boolean canBeReplacedByLeaves(IBlockAccess aWorld, int aX, int aY, int aZ) {
-        return false;
+        return F;
     }
 
     public boolean isNormalCube(IBlockAccess aWorld, int aX, int aY, int aZ) {
-        return false;
+        return F;
     }
 
     public boolean hasTileEntity(int aMeta) {
-        return true;
+        return T;
     }
 
     public boolean hasComparatorInputOverride() {
-        return true;
+        return T;
     }
 
     public boolean renderAsNormalBlock() {
-        return false;
+        return F;
     }
 
     public boolean canProvidePower() {
-        return true;
+        return T;
     }
 
     public boolean isOpaqueCube() {
-        return false;
+        return F;
     }
 
     public TileEntity createNewTileEntity(World aWorld, int aMeta) {
@@ -177,7 +181,7 @@ public class GT_Block_Machines
     public boolean onBlockEventReceived(World aWorld, int aX, int aY, int aZ, int aData1, int aData2) {
         super.onBlockEventReceived(aWorld, aX, aY, aZ, aData1, aData2);
         TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        return tTileEntity != null ? tTileEntity.receiveClientEvent(aData1, aData2) : false;
+        return tTileEntity != null ? tTileEntity.receiveClientEvent(aData1, aData2) : F;
     }
 
     public void addCollisionBoxesToList(World aWorld, int aX, int aY, int aZ, AxisAlignedBB inputAABB, List outputAABB, Entity collider) {
@@ -218,23 +222,23 @@ public class GT_Block_Machines
                     if (tMetaTileEntity != null) {
                         tMetaTileEntity.registerIcons(aIconRegister);
                     }
-            }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+            }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             GT_Log.out.println("GT_Mod: Registering Crop specific Textures");
             try {
                 for (GT_BaseCrop tCrop : GT_BaseCrop.sCropList) {
                     tCrop.registerSprites(aIconRegister);
                 }
             } catch (Throwable e) {
-                e.printStackTrace(GT_Log.err);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());
             }
             GT_Log.out.println("GT_Mod: Starting Block Icon Load Phase");
-            System.out.println("GT_Mod: Starting Block Icon Load Phase");
+            GT_Log.out.println("GT_Mod: Starting Block Icon Load Phase");
             try {
             for (Runnable tRunnable : GregTech_API.sGTBlockIconload) {
                     tRunnable.run();
-            }} catch (Throwable e) {e.printStackTrace(GT_Log.err);}
+            }} catch (Throwable e) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
             GT_Log.out.println("GT_Mod: Finished Block Icon Load Phase");
-            System.out.println("GT_Mod: Finished Block Icon Load Phase");
+            GT_Log.out.println("GT_Mod: Finished Block Icon Load Phase");
         }
     }
 
@@ -243,32 +247,32 @@ public class GT_Block_Machines
     }
 
     public float getPlayerRelativeBlockHardness(EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ) {
-//	  System.out.println("player hardness");
+//	  GT_Log.out.println("player hardness");
         TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        if (((tTileEntity instanceof BaseMetaTileEntity)) && (((BaseMetaTileEntity) tTileEntity).privateAccess()) && (!((BaseMetaTileEntity) tTileEntity).playerOwnsThis(aPlayer, true))) {
-//      System.out.println("locked");
+        if (((tTileEntity instanceof BaseMetaTileEntity)) && (((BaseMetaTileEntity) tTileEntity).privateAccess()) && (!((BaseMetaTileEntity) tTileEntity).playerOwnsThis(aPlayer, T))) {
+//      GT_Log.out.println("locked");
             return -1.0F;
         }
-//    System.out.println("unlocked");
-//    System.out.println("hardness: "+super.getPlayerRelativeBlockHardness(aPlayer, aWorld, aX, aY, aZ));
+//    GT_Log.out.println("unlocked");
+//    GT_Log.out.println("hardness: "+super.getPlayerRelativeBlockHardness(aPlayer, aWorld, aX, aY, aZ));
         return super.getPlayerRelativeBlockHardness(aPlayer, aWorld, aX, aY, aZ);
     }
 
     public boolean onBlockActivated(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer, int aSide, float par1, float par2, float par3) {
         TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
         if ((tTileEntity == null) || (aPlayer.isSneaking())) {
-            return false;
+            return F;
         }
         if ((tTileEntity instanceof IGregTechTileEntity)) {
             if (((IGregTechTileEntity) tTileEntity).getTimer() < 50L) {
-                return false;
+                return F;
             }
             if ((!aWorld.isRemote) && (!((IGregTechTileEntity) tTileEntity).isUseableByPlayer(aPlayer))) {
-                return true;
+                return T;
             }
             return ((IGregTechTileEntity) tTileEntity).onRightclick(aPlayer, (byte) aSide, par1, par2, par3);
         }
-        return false;
+        return F;
     }
 
     public void onBlockClicked(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer) {
@@ -374,21 +378,21 @@ public class GT_Block_Machines
 
     public boolean isSideSolid(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {
         if (aWorld.getBlockMetadata(aX, aY, aZ) == 0) {
-            return true;
+            return T;
         }
         TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
         if (tTileEntity != null) {
             if ((tTileEntity instanceof BaseMetaTileEntity)) {
-                return true;
+                return T;
             }
             if (((tTileEntity instanceof BaseMetaPipeEntity)) && ((((BaseMetaPipeEntity) tTileEntity).mConnections & 0xFFFFFFC0) != 0)) {
-                return true;
+                return T;
             }
             if (((tTileEntity instanceof ICoverable)) && (((ICoverable) tTileEntity).getCoverIDAtSide((byte) aSide.ordinal()) != 0)) {
-                return true;
+                return T;
             }
         }
-        return false;
+        return F;
     }
 
     public int getLightOpacity(IBlockAccess aWorld, int aX, int aY, int aZ) {
@@ -484,11 +488,11 @@ public class GT_Block_Machines
         TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
         if ((tTileEntity instanceof IGregTechTileEntity)) {
             if (((IGregTechTileEntity) tTileEntity).getColorization() == (byte) ((aColor ^ 0xFFFFFFFF) & 0xF)) {
-                return false;
+                return F;
             }
             ((IGregTechTileEntity) tTileEntity).setColorization((byte) ((aColor ^ 0xFFFFFFFF) & 0xF));
-            return true;
+            return T;
         }
-        return false;
+        return F;
     }
 }

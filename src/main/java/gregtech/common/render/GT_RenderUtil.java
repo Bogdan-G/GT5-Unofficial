@@ -9,9 +9,7 @@ public class GT_RenderUtil {
     }
 
     public static void renderItemIcon(IIcon icon, double xStart, double yStart, double xEnd, double yEnd, double z, float nx, float ny, float nz) {
-        if (icon == null) {
-            return;
-        }
+        if (icon == null) return;
         Tessellator.instance.startDrawingQuads();
         Tessellator.instance.setNormal(nx, ny, nz);
         if (nz > 0.0F) {

@@ -5,11 +5,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public final class GT_ItemStack {
+public final class GT_ItemStack implements java.io.Serializable {
     public final Item mItem;
     public final byte mStackSize;
     public final short mMetaData;
-
+    
     public GT_ItemStack(Item aItem, long aStackSize, long aMetaData) {
         mItem = aItem;
         mStackSize = (byte) aStackSize;
@@ -17,7 +17,11 @@ public final class GT_ItemStack {
     }
 
     public GT_ItemStack(ItemStack aStack) {
-        this(aStack == null ? null : aStack.getItem(), aStack == null ? 0 : aStack.stackSize, aStack == null ? 0 : Items.feather.getDamage(aStack));
+        this(aStack, aStack == null);
+    }
+    
+    public GT_ItemStack(ItemStack aStack, boolean aStackIsNull) {
+        this(aStackIsNull ? null : aStack.getItem(), aStackIsNull ? 0 : aStack.stackSize, aStackIsNull ? 0 : Items.feather.getDamage(aStack));
     }
 
     public GT_ItemStack(int aHashCode) {
@@ -40,10 +44,7 @@ public final class GT_ItemStack {
     @Override
     public boolean equals(Object aStack) {
         if (aStack == this) return true;
-        if (aStack instanceof GT_ItemStack) {
-            return ((GT_ItemStack) aStack).mItem == mItem && ((GT_ItemStack) aStack).mMetaData == mMetaData;
-        }
-        return false;
+        return aStack instanceof GT_ItemStack && ((GT_ItemStack) aStack).mItem == mItem && ((GT_ItemStack) aStack).mMetaData == mMetaData;
     }
 
     @Override

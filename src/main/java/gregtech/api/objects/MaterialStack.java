@@ -2,10 +2,13 @@ package gregtech.api.objects;
 
 import gregtech.api.enums.Materials;
 
-public final class MaterialStack implements Cloneable {
+public final class MaterialStack implements Cloneable, java.io.Serializable {
     public long mAmount;
     public Materials mMaterial;
+    private static final long serialVersionUID = 2302628494524442001L;
 
+    public MaterialStack() {}
+    
     public MaterialStack(Materials aMaterial, long aAmount) {
         mMaterial = aMaterial == null ? Materials._NULL : aMaterial;
         mAmount = aAmount;

@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 
-public class GT_CopiedBlockTexture implements ITexture {
+public class GT_CopiedBlockTexture implements ITexture, java.io.Serializable {
     private final Block mBlock;
     private final byte mSide, mMeta;
     private final boolean mAllowAlpha;

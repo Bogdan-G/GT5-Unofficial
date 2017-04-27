@@ -10,6 +10,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import static gregtech.api.enums.GT_Values.T;
+import static gregtech.api.enums.GT_Values.F;
+
 public class GT_Container_ChestBuffer
         extends GT_ContainerMetaTile_Machine {
     public GT_Container_ChestBuffer(InventoryPlayer aInventoryPlayer, IGregTechTileEntity aTileEntity) {
@@ -22,9 +25,9 @@ public class GT_Container_ChestBuffer
                 addSlotToContainer(new Slot(this.mTileEntity, x + y * 9, 8 + x * 18, 5 + y * 18));
             }
         }
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 27, 8, 63, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 27, 26, 63, false, true, 1));
-        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 27, 44, 63, false, true, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 27, 8, 63, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 27, 26, 63, F, T, 1));
+        addSlotToContainer(new GT_Slot_Holo(this.mTileEntity, 27, 44, 63, F, T, 1));
     }
 
     public ItemStack slotClick(int aSlotIndex, int aMouseclick, int aShifthold, EntityPlayer aPlayer) {

@@ -11,6 +11,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 
+import static gregtech.api.enums.GT_Values.T;
+
 public class ProcessingDust implements gregtech.api.interfaces.IOreRecipeRegistrator {
     public ProcessingDust() {
         OrePrefixes.dust.add(this);
@@ -19,7 +21,7 @@ public class ProcessingDust implements gregtech.api.interfaces.IOreRecipeRegistr
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName, ItemStack aStack) {
         if (aMaterial.mFuelPower > 0)
             GT_Values.RA.addFuel(GT_Utility.copyAmount(1L, new Object[]{aStack}), null, aMaterial.mFuelPower, aMaterial.mFuelType);
-        if (GT_Utility.getFluidForFilledItem(GT_OreDictUnificator.get(OrePrefixes.cell, aMaterial, 1L), true) == null)
+        if (GT_Utility.getFluidForFilledItem(GT_OreDictUnificator.get(OrePrefixes.cell, aMaterial, 1L), T) == null)
             GT_Values.RA.addCannerRecipe(aStack, ItemList.Cell_Empty.get(1L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.cell, aMaterial, 1L), null, 100, 1);
         GT_Values.RA.addBoxingRecipe(GT_Utility.copyAmount(16L, new Object[]{aStack}), ItemList.Crate_Empty.get(1L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.crateGtDust, aMaterial, 1L), 100, 8);
         GT_Values.RA.addUnboxingRecipe(GT_OreDictUnificator.get(OrePrefixes.crateGtDust, aMaterial, 1L), GT_OreDictUnificator.get(OrePrefixes.dust, aMaterial, 16L), ItemList.Crate_Empty.get(1L, new Object[0]), 800, 1);
@@ -90,7 +92,7 @@ public class ProcessingDust implements gregtech.api.interfaces.IOreRecipeRegistr
                 FluidStack tFluid = null;
                 //int tList_sS=tList.size();
                 for (int i = 0; i < tList.size(); i++) {
-                    if ((!ItemList.Cell_Air.isStackEqual(tList.get(i))) && ((tFluid = GT_Utility.getFluidForFilledItem((ItemStack) tList.get(i), true)) != null)) {
+                    if ((!ItemList.Cell_Air.isStackEqual(tList.get(i))) && ((tFluid = GT_Utility.getFluidForFilledItem((ItemStack) tList.get(i), T)) != null)) {
                         tFluid.amount *= ((ItemStack) tList.get(i)).stackSize;
                         tCapsuleCount -= GT_ModHandler.getCapsuleCellContainerCountMultipliedWithStackSize(new ItemStack[]{(ItemStack) tList.get(i)});
                         tList.remove(i);//tList_sS=tList.size(); //kek
@@ -109,7 +111,9 @@ public class ProcessingDust implements gregtech.api.interfaces.IOreRecipeRegistr
             GT_Values.RA.addAutoclaveRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_ModHandler.getDistilledWater(200L), GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L), 9000, 1500, 24);
         }
 
-        switch (aMaterial) {
+        if (aMaterial == Materials._NULL) {        } else if (aMaterial == Materials.Glass) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), new ItemStack(net.minecraft.init.Blocks.glass));        } else if (aMaterial == Materials.NetherQuartz || aMaterial == Materials.Quartz || aMaterial == Materials.CertusQuartz) {            if (gregtech.api.GregTech_API.sRecipeFile.get(gregtech.api.enums.ConfigCategories.Recipes.disabledrecipes, "QuartzDustSmeltingIntoAESilicon", T))                GT_ModHandler.removeFurnaceSmelting(aStack);        } else if (aMaterial == Materials.MeatRaw) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.dust, Materials.MeatCooked, 1L));        } else if (aMaterial == Materials.Mercury) {            cpw.mods.fml.common.FMLLog.warning("Quicksilver Dust?, To melt that, you don't even need a Furnace...");        } else if (aMaterial == Materials.Tetrahedrite || aMaterial == Materials.Chalcopyrite || aMaterial == Materials.Malachite) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Copper, 6L));        } else if (aMaterial == Materials.Pentlandite) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Nickel, 6L));        } else if (aMaterial == Materials.Garnierite) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Nickel, 1L));        } else if (aMaterial == Materials.Cassiterite || aMaterial == Materials.CassiteriteSand) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Tin, 1L));        } else if (aMaterial == Materials.Magnetite || aMaterial == Materials.VanadiumMagnetite || aMaterial == Materials.BasalticMineralSand || aMaterial == Materials.GraniticMineralSand) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Iron, 3L));        } else if (aMaterial == Materials.YellowLimonite || aMaterial == Materials.BrownLimonite || aMaterial == Materials.BandedIron) {            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Iron, 1L));        } else if (aMaterial == Materials.Coal) {            GT_ModHandler.addLiquidTransposerFillRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), Materials.Water.getFluid(125L), GT_OreDictUnificator.get(OrePrefixes.dust, Materials.HydratedCoal, 1L), 125);        } else if (aMaterial == Materials.HydratedCoal) {            GT_ModHandler.addLiquidTransposerEmptyRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), Materials.Water.getFluid(125L), GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 1L), 125);            GT_ModHandler.addSmeltingRecipe(GT_Utility.copyAmount(1L, new Object[]{aStack}), GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 1L));        } else if (aMaterial == Materials.Diamond) {            GT_Values.RA.addImplosionRecipe(GT_Utility.copyAmount(4L, new Object[]{aStack}), 32, ItemList.IC2_Industrial_Diamond.get(3L, new Object[0]), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.DarkAsh, 16L));        } else if (aMaterial == Materials.Opal || aMaterial == Materials.Olivine || aMaterial == Materials.Emerald || aMaterial == Materials.Ruby || aMaterial == Materials.Sapphire || aMaterial == Materials.GreenSapphire || aMaterial == Materials.Topaz || aMaterial == Materials.BlueTopaz || aMaterial == Materials.Tanzanite) {            GT_Values.RA.addImplosionRecipe(GT_Utility.copyAmount(4L, new Object[]{aStack}), 24, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 3L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.DarkAsh, 12L));        } else if (aMaterial == Materials.FoolsRuby || aMaterial == Materials.GarnetRed || aMaterial == Materials.GarnetYellow || aMaterial == Materials.Jasper || aMaterial == Materials.Amber || aMaterial == Materials.Monazite || aMaterial == Materials.Forcicium || aMaterial == Materials.Forcillium || aMaterial == Materials.Force) {            GT_Values.RA.addImplosionRecipe(GT_Utility.copyAmount(4L, new Object[]{aStack}), 16, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 3L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.DarkAsh, 8L));
+            }
+        /*switch (aMaterial) {
             case _NULL:
                 break;
             case Glass:
@@ -183,7 +187,6 @@ public class ProcessingDust implements gregtech.api.interfaces.IOreRecipeRegistr
             case Forcicium:
             case Forcillium:
             case Force:
-                GT_Values.RA.addImplosionRecipe(GT_Utility.copyAmount(4L, new Object[]{aStack}), 16, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 3L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.DarkAsh, 8L));
-        }
+                GT_Values.RA.addImplosionRecipe(GT_Utility.copyAmount(4L, new Object[]{aStack}), 16, GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 3L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.DarkAsh, 8L));        }*/
     }
 }

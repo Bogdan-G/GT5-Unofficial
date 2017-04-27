@@ -97,10 +97,7 @@ public class GT_Tool_Drill_LV
         super.onToolCrafted(aStack, aPlayer);
         aPlayer.triggerAchievement(AchievementList.buildPickaxe);
         aPlayer.triggerAchievement(AchievementList.buildBetterPickaxe);
-        try {
-            GT_Mod.instance.achievements.issueAchievement(aPlayer, "driltime");
-        } catch (Exception e) {
-        }
+        GT_Mod.instance.achievements.issueAchievement(aPlayer, "driltime");
     }
 
     public IChatComponent getDeathMessage(EntityLivingBase aPlayer, EntityLivingBase aEntity) {

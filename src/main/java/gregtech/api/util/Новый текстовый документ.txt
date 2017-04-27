@@ -1,0 +1,1033 @@
+
+
+
+
+    /**
+     */
+
+    }
+
+        Field rField = null;
+        try {
+            rField = aObject.getClass().getDeclaredField(aField);
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rField = aObject.getClass().getDeclaredField(aField);");
+        }
+        return rField;
+    }
+
+        Field rField = null;
+        try {
+            rField = aObject.getClass().getDeclaredField(aField);
+            rField.setAccessible(T);
+        } catch (Throwable e) {
+        /*Do nothing*/
+        GT_Log.out.println("rField = aObject.getClass().getDeclaredField(aField);");
+        }
+        return rField;
+    }
+
+        Field rField = null;
+        try {
+            rField.setAccessible(T);
+        } catch (Throwable e) {
+        /*Do nothing*/
+        }
+        return rField;
+    }
+
+        Method rMethod = null;
+        try {
+            rMethod.setAccessible(T);
+        } catch (Throwable e) {
+        /*Do nothing*/
+        }
+        return rMethod;
+    }
+
+        Method rMethod = null;
+        try {
+            rMethod.setAccessible(T);
+        } catch (Throwable e) {
+        /*Do nothing*/
+        }
+        return rMethod;
+    }
+
+        try {
+            Field tField = (aObject instanceof Class) ? ((Class) aObject).getDeclaredField(aField) : (aObject instanceof String) ? Class.forName((String) aObject).getDeclaredField(aField) : aObject.getClass().getDeclaredField(aField);
+            if (aPrivate) tField.setAccessible(T);
+        } catch (Throwable e) {
+            if (aLogErrors) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+        return null;
+    }
+
+        try {
+            Field tField = (aObject instanceof Class) ? ((Class) aObject).getDeclaredField(aField) : (aObject instanceof String) ? Class.forName((String) aObject).getDeclaredField(aField) : aObject.getClass().getDeclaredField(aField);
+            if (aPrivate) tField.setAccessible(T);
+        } catch (Throwable e) {
+            if (aLogErrors) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+        return null;
+    }
+
+    }
+
+    }
+
+        try {
+                }
+                }
+            }
+
+        } catch (Throwable e) {
+            if (aLogErrors) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+        return null;
+    }
+
+            try {
+                    try {
+                    }
+                }
+            } catch (Throwable e) {
+                if (aLogErrors) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+        } else {
+            try {
+            } catch (Throwable e) {
+                if (aLogErrors) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+        }
+    }
+
+    }
+
+        try {
+            Field tPotionHashmap = null;
+
+            Field[] var3 = EntityLiving.class.getDeclaredFields();
+            int var4 = var3.length;
+
+            for (int var5 = 0; var5 < var4; ++var5) {
+                Field var6 = var3[var5];
+                if (var6.getType() == HashMap.class) {
+                    tPotionHashmap = var6;
+                    tPotionHashmap.setAccessible(T);
+                    break;
+                }
+            }
+
+        } catch (Throwable e) {
+            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+        return F;
+    }
+
+    }
+
+        try {
+            Field tPotionHashmap = null;
+
+            Field[] var3 = EntityLiving.class.getDeclaredFields();
+            int var4 = var3.length;
+
+            for (int var5 = 0; var5 < var4; ++var5) {
+                Field var6 = var3[var5];
+                if (var6.getType() == HashMap.class) {
+                    tPotionHashmap = var6;
+                    tPotionHashmap.setAccessible(T);
+                    break;
+                }
+            }
+
+        } catch (Throwable e) {
+            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+    }
+
+        try {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Throwable e) {
+            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+        return F;
+    }
+
+            }
+        }
+        return null;
+    }
+
+    }
+
+    }
+
+        }
+    }
+
+            try {
+                tClass.getCanonicalName();
+            } catch (Throwable e) {
+            /**/
+            }
+            try {
+                tClass.getCanonicalName();
+            } catch (Throwable e) {
+            /**/
+            }
+        }
+    }
+
+        return F;
+    }
+
+    /**
+     *
+     * @return the Amount of moved Items
+     */
+            return 0;
+                for (int i = 0; i < aGrabSlots.length; i++) {
+                    if (listContainsItem(aFilter, aTileEntity1.getStackInSlot(aGrabSlots[i]), T, aInvertFilter)) {
+                        if (isAllowedToTakeFromSlot(aTileEntity1, aGrabSlots[i], (byte) aGrabFrom, aTileEntity1.getStackInSlot(aGrabSlots[i]))) {
+                            if (Math.max(aMinMoveAtOnce, aMinTargetStackSize) <= aTileEntity1.getStackInSlot(aGrabSlots[i]).stackSize) {
+                                ItemStack tStack = copyAmount(Math.min(aTileEntity1.getStackInSlot(aGrabSlots[i]).stackSize, Math.min(aMaxMoveAtOnce, aMaxTargetStackSize)), aTileEntity1.getStackInSlot(aGrabSlots[i]));
+                                    aTileEntity1.decrStackSize(aGrabSlots[i], tMovedItemCount);
+                                    aTileEntity1.markDirty();
+                                    return tMovedItemCount;
+                                }
+                            }
+                        }
+                    }
+                }
+                return 0;
+            }
+                for (int i = 0; i < aGrabSlots.length; i++) {
+                    if (listContainsItem(aFilter, aTileEntity1.getStackInSlot(aGrabSlots[i]), T, aInvertFilter)) {
+                        if (isAllowedToTakeFromSlot(aTileEntity1, aGrabSlots[i], (byte) aGrabFrom, aTileEntity1.getStackInSlot(aGrabSlots[i]))) {
+                            if (Math.max(aMinMoveAtOnce, aMinTargetStackSize) <= aTileEntity1.getStackInSlot(aGrabSlots[i]).stackSize) {
+                                ItemStack tStack = copyAmount(Math.min(aTileEntity1.getStackInSlot(aGrabSlots[i]).stackSize, Math.min(aMaxMoveAtOnce, aMaxTargetStackSize)), aTileEntity1.getStackInSlot(aGrabSlots[i]));
+                                    aTileEntity1.decrStackSize(aGrabSlots[i], tMovedItemCount);
+                                    aTileEntity1.markDirty();
+                                    return tMovedItemCount;
+                                }
+                            }
+                        }
+                    }
+                }
+                return 0;
+            }
+        }
+
+                for (int i = 0; i < aGrabSlots.length; i++) {
+                    if (listContainsItem(aFilter, aTileEntity1.getStackInSlot(aGrabSlots[i]), T, aInvertFilter)) {
+                        if (isAllowedToTakeFromSlot(aTileEntity1, aGrabSlots[i], (byte) aGrabFrom, aTileEntity1.getStackInSlot(aGrabSlots[i]))) {
+                            if (Math.max(aMinMoveAtOnce, aMinTargetStackSize) <= aTileEntity1.getStackInSlot(aGrabSlots[i]).stackSize) {
+                                ItemStack tStack = copyAmount(Math.min(aTileEntity1.getStackInSlot(aGrabSlots[i]).stackSize, Math.min(aMaxMoveAtOnce, aMaxTargetStackSize)), aTileEntity1.getStackInSlot(aGrabSlots[i]));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     *
+     * @return the Amount of moved Items
+     */
+            return 0;
+
+                        aTileEntity2.markDirty();
+                        aTileEntity2.markDirty();
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+        if (ForgeDirection.getOrientation(aSide) == ForgeDirection.UNKNOWN) {
+        }
+        return T;
+    }
+
+            return F;
+        if (ForgeDirection.getOrientation(aSide) == ForgeDirection.UNKNOWN) {
+        }
+            return F;
+    }
+
+    /**
+     *
+     * @return the Amount of moved Items
+     */
+        return 0;
+    }
+
+    /**
+     */
+            return 0;
+
+        int[] tGrabSlots = null;
+        if (aTileEntity1 instanceof ISidedInventory)
+            tGrabSlots = ((ISidedInventory) aTileEntity1).getAccessibleSlotsFromSide(aGrabFrom);
+        if (tGrabSlots == null) {
+            for (int i = 0; i < tGrabSlots.length; i++) tGrabSlots[i] = i;
+        }
+
+
+            }
+
+            for (int i = 0; i < tGrabSlots.length; i++) {
+                            }
+                        }
+                    }
+                }
+            }
+
+                    byte tAmount = 0;
+                    }
+                    if (tAmount != 0) return tAmount;
+                }
+            }
+                    byte tAmount = 0;
+                    }
+                    if (tAmount != 0) return tAmount;
+                }
+            }
+        }
+
+    }
+
+    /**
+     *
+     * @return the Amount of moved Items
+     */
+            return 0;
+
+        int[] tGrabSlots = null;
+        if (aTileEntity1 instanceof ISidedInventory)
+            tGrabSlots = ((ISidedInventory) aTileEntity1).getAccessibleSlotsFromSide(aGrabFrom);
+        if (tGrabSlots == null) {
+            for (int i = 0; i < tGrabSlots.length; i++) tGrabSlots[i] = i;
+        }
+
+            for (int i = 0; i < tGrabSlots.length; i++) {
+                        }
+                    }
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     *
+     * @return the Amount of moved Items
+     */
+            return 0;
+                }
+            }
+        }
+        return 0;
+    }
+
+    }
+
+        }
+        return F;
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+        if (aFluid == null) return E;
+    }
+
+        if (aFluid == null) return E;
+    }
+
+            }
+        }
+    }
+
+        }
+    }
+
+            }
+            return null;
+        }
+            else
+            return aStack;
+        }
+    }
+
+    }
+
+        try {
+        }
+        NBTTagCompound tNBT = new NBTTagCompound();
+        rStack.setTagCompound(tNBT);
+        return rStack;
+    }
+
+        if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem) aStack.getItem()).getCapacity(aStack) > 0)
+        FluidContainerData tData = sFilledContainerToData.get(new GT_ItemStack(aStack));
+    }
+
+        if (isStackInvalid(aStack)) return null;
+        if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem) aStack.getItem()).getCapacity(aStack) > 0)
+        FluidContainerData tData = sFilledContainerToData.get(new GT_ItemStack(aStack));
+    }
+
+        if (isStackInvalid(aStack)) return null;
+        FluidContainerData tData = sFilledContainerToData.get(new GT_ItemStack(aStack));
+        if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem) aStack.getItem()).getCapacity(aStack) > 0) {
+            return aStack;
+        }
+        return null;
+    }
+
+        if (isStackInvalid(aStack)) return null;
+
+        if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem) aStack.getItem()).getCapacity(aStack) > 0) {
+            return null;
+        }
+
+
+        return null;
+    }
+
+            //elapsed = System.nanoTime() - startT1;
+            //startT1 = System.nanoTime();
+            //elapsed = System.nanoTime() - startT1;
+            //startT1 = System.nanoTime();
+            }
+            //elapsed = System.nanoTime() - startT1;
+            }
+            //startT1 = System.nanoTime();
+    }
+
+            }
+        }
+        } else {
+        }
+        return T;
+    }
+
+        if (isStringInvalid(aMapping)) return null;
+        ItemStack rStack = GregTech_API.sBookList.get(aMapping);
+        }
+    }
+
+        if (isStringInvalid(aMapping)) return null;
+        ItemStack rStack = GregTech_API.sBookList.get(aMapping);
+        NBTTagCompound tNBT = new NBTTagCompound();
+            } else {
+            }
+        }
+        rStack.setTagCompound(tNBT);
+    }
+
+    }
+
+    }
+
+    }
+
+            return F;
+        return T;
+    }
+
+        return T;
+    }
+
+        if (isStackInvalid(aStack)) return 0;
+    }
+
+        if (isStackInvalid(aStack)) return 0;
+    }
+
+        return null;
+    }
+
+        for (int i = 0; i < rArray.length; i++) {
+            rArray[i] = stackToInt(aStacks[i]);
+        }
+        return rArray;
+    }
+
+        for (int i = 0; i < rArray.length; i++) {
+            rArray[i] = stackToInt(aStacks[i]);
+        }
+        return rArray;
+    }
+
+    }
+
+    }
+
+        return F;
+    }
+
+        if (aArray == null) return new ArrayList<T>();
+        ArrayList<T> rList = new ArrayList<T>(Arrays.asList(aArray));
+        return rList;
+    }
+
+        if (aArray == null) return new ArrayList<T>();
+        ArrayList<T> rList = new ArrayList<T>(Arrays.asList(aArray));
+        return rList;
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+        if (aInventory != null) for (int i = 0, j = aInventory.getSizeInventory(); i < j; i++) {
+        }
+        return null;
+    }
+
+        if (aInventory != null) for (int i = 0, j = aInventory.getSizeInventory(); i < j; i++) {
+        }
+    }
+
+    /**
+     */
+
+        }
+
+            }
+        }
+
+
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        if (aNBT == null) aNBT = new NBTTagCompound();
+        return aNBT;
+    }
+
+        for (byte i = 1; i < 5; i++)
+        return T;
+    }
+
+        for (byte i = 1; i < 5; i++)
+        return T;
+    }
+
+        for (byte i = 1; i < 5; i++)
+        return T;
+    }
+
+        for (byte i = 1; i < 5; i++)
+        return T;
+    }
+
+        for (byte i = 1; i < 5; i++)
+        return T;
+    }
+
+        for (byte i = 1; i < 5; i++)
+        return T;
+    }
+
+        ItemData tData = GT_OreDictUnificator.getItemData(aStack);
+    }
+
+        ItemData tData = GT_OreDictUnificator.getItemData(aStack);
+        }
+    }
+
+    }
+
+            return T;
+        }
+        return F;
+    }
+
+            return T;
+        }
+        return F;
+    }
+
+            return T;
+        }
+        return F;
+    }
+
+            return T;
+        }
+        return F;
+    }
+
+    }
+
+        return rStacks;
+    }
+
+        return rStacks;
+    }
+
+        return null;
+    }
+
+        ItemStack rStack = copy(aStacks);
+        if (isStackInvalid(rStack)) return null;
+        return rStack;
+    }
+
+        ItemStack rStack = copy(aStacks);
+        if (isStackInvalid(rStack)) return null;
+        Items.feather.setDamage(rStack, (short) aMetaData);
+        return rStack;
+    }
+
+        if (isStackInvalid(rStack)) return null;
+        Items.feather.setDamage(rStack, (short) aMetaData);
+        return rStack;
+    }
+
+    /**
+     */
+        ItemStack rStack = copy(aStacks);
+        return rStack;
+    }
+
+    /**
+     * Loads an ItemStack properly.
+     */
+    }
+
+    /**
+     * Loads an ItemStack properly.
+     */
+    }
+
+    /**
+     * Loads an ItemStack properly.
+     */
+        if (aNBT == null) return null;
+        try {
+            }
+        } catch (Throwable e) {
+        }
+    }
+
+    /**
+     * Loads an ItemStack properly.
+     */
+        if (aNBT == null) return null;
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    }
+
+    /**
+     */
+    }
+
+    /**
+     * Why the fuck do neither Java nor Guava have a Function to do this?
+     */
+        List<Map.Entry<X, Y>> tEntrySet = new LinkedList<Map.Entry<X, Y>>(aMap.entrySet());
+        Collections.sort(tEntrySet, new Comparator<Map.Entry<X, Y>>() {
+            @Override
+            public int compare(Entry<X, Y> aValue1, Entry<X, Y> aValue2) {
+            }
+        });
+        LinkedHashMap<X, Y> rMap = new LinkedHashMap<X, Y>();
+        for (Map.Entry<X, Y> tEntry : tEntrySet) rMap.put(tEntry.getKey(), tEntry.getValue());
+        return rMap;
+    }
+
+    /**
+     * Why the fuck do neither Java nor Guava have a Function to do this?
+     */
+        List<Map.Entry<X, Y>> tEntrySet = new LinkedList<Map.Entry<X, Y>>(aMap.entrySet());
+        Collections.sort(tEntrySet, new Comparator<Map.Entry<X, Y>>() {
+            @Override
+            public int compare(Entry<X, Y> aValue1, Entry<X, Y> aValue2) {
+            }
+        });
+        LinkedHashMap<X, Y> rMap = new LinkedHashMap<X, Y>();
+        for (Map.Entry<X, Y> tEntry : tEntrySet) rMap.put(tEntry.getKey(), tEntry.getValue());
+        return rMap;
+    }
+
+    /**
+     */
+    }
+
+    /**
+     */
+    }
+
+    /**
+     */
+        try {
+        } catch (Throwable e) {
+        /*Do nothing*/
+        }
+        try {
+        } catch (Throwable e) {
+        /*Do nothing*/
+        }
+    }
+
+
+                aPlayer.playerNetServerHandler.setPlayerLocation(aX + 0.5, aY + 0.5, aZ + 0.5, aPlayer.rotationYaw, aPlayer.rotationPitch);
+                }
+                aPlayer.playerNetServerHandler.setPlayerLocation(aX + 0.5, aY + 0.5, aZ + 0.5, aPlayer.rotationYaw, aPlayer.rotationPitch);
+            } else {
+                    tNewEntity.isDead = F;
+                    tNewEntity.isDead = F;
+                }
+            }
+
+            } else {
+            }
+
+            return T;
+        }
+        return F;
+    }
+
+
+
+
+
+        try {
+            else
+
+        } catch (Throwable e) {
+            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+            try {
+                    rEUAmount += 500;
+                    }
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 500;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 500;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 200;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 400;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 400;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 200;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 200;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 500;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    rEUAmount += 400;
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+            try {
+                    }
+                        );
+                        );
+                        );
+                        }
+                    }
+                }
+            } catch (Throwable e) {
+                if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+            }
+        }
+        try {
+            }
+        } catch (Throwable e) {
+            if (D1) {final ByteArrayOutputStream baos = new ByteArrayOutputStream();e.printStackTrace(new PrintStream(baos));GT_Log.out.println("GT_Mod: Error: "+baos.toString());}
+        }
+
+    }
+
+    /**
+     */
+        switch (aSide) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+        }
+    }
+
+    /**
+     */
+        switch (aSide) {
+            case 0:
+            case 1:
+                if (aX < 0.25) {
+                    if (aZ < 0.25) return tBack;
+                    if (aZ > 0.75) return tBack;
+                    return 4;
+                }
+                if (aX > 0.75) {
+                    if (aZ < 0.25) return tBack;
+                    if (aZ > 0.75) return tBack;
+                    return 5;
+                }
+                return aSide;
+            case 2:
+            case 3:
+                if (aX < 0.25) {
+                    if (aY < 0.25) return tBack;
+                    if (aY > 0.75) return tBack;
+                    return 4;
+                }
+                if (aX > 0.75) {
+                    if (aY < 0.25) return tBack;
+                    if (aY > 0.75) return tBack;
+                    return 5;
+                }
+                if (aY < 0.25) return 0;
+                if (aY > 0.75) return 1;
+                return aSide;
+            case 4:
+            case 5:
+                    if (aY < 0.25) return tBack;
+                    if (aY > 0.75) return tBack;
+                }
+                    if (aY < 0.25) return tBack;
+                    if (aY > 0.75) return tBack;
+                }
+                if (aY < 0.25) return 0;
+                if (aY > 0.75) return 1;
+                return aSide;
+        }
+    }
+
+    }
+
+            }
+            }
+        }
+
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+            setNBT(aStack, tNBT);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+            setNBT(aStack, tNBT);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+            setNBT(aStack, tNBT);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+            setNBT(aStack, tNBT);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+            setNBT(aStack, tNBT);
+        }
+
+            NBTTagCompound tNBT = getNBT(aStack);
+        }
+
+
+
+                    break;
+                }
+            }
+
+            }
+        }
+    }
+
+    /**
+     */
+
+                    try {
+                }
+            }
+        }
+
+            }
+        }
+
+        }
+
+        }
+
+        }
+
+            public EntityLivingBase mPlayer;
+            public Entity mEntity;
+
+            }
+
+            @Override
+            public void calculateModifier(Enchantment aEnchantment, int aLevel) {
+            }
+        }
+
+            public EntityLivingBase mPlayer;
+            public Entity mEntity;
+
+            }
+
+            @Override
+            public void calculateModifier(Enchantment aEnchantment, int aLevel) {
+            }
+        }
+    }
+

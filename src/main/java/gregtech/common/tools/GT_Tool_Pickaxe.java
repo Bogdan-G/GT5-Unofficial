@@ -96,10 +96,7 @@ public class GT_Tool_Pickaxe
         super.onToolCrafted(aStack, aPlayer);
         aPlayer.triggerAchievement(AchievementList.buildPickaxe);
         aPlayer.triggerAchievement(AchievementList.buildBetterPickaxe);
-        try {
-            GT_Mod.instance.achievements.issueAchievement(aPlayer, "flintpick");
-        } catch (Exception e) {
-        }
+        GT_Mod.instance.achievements.issueAchievement(aPlayer, "flintpick");
     }
 
     public IChatComponent getDeathMessage(EntityLivingBase aPlayer, EntityLivingBase aEntity) {

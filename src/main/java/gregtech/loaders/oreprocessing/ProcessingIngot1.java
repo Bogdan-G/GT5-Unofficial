@@ -30,14 +30,26 @@ public class ProcessingIngot1 implements gregtech.api.interfaces.IOreRecipeRegis
         boolean BmatNSs1 = aMaterial.contains(SubTag.NO_SMASHING);
         if (!BmatNSs1) {
             long matgM1 = aMaterial.getMass();
+            //if Math.max(matgM1, 1L) = 1L then Math.max(matgM1 * X (positive), 1L) = 1L
+            if (matgM1 < 1L) {
             GT_Values.RA.addWiremillRecipe(GT_Utility.copyAmount(1L, Ogem1), GT_Utility.copy(new Object[]{GT_OreDictUnificator.get(OrePrefixes.wireGt01, aMaterial, 2L), GT_OreDictUnificator.get(OrePrefixes.wireFine, aMaterial, 8L)}), 100, 4);
-            GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(2L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) Math.max(matgM1, 1L), 16);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(1L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) Math.max(matgM1 * 1L, 1L), 24);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(2L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateDouble, aMaterial, 1L), (int) Math.max(matgM1 * 2L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(3L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateTriple, aMaterial, 1L), (int) Math.max(matgM1 * 3L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(4L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, aMaterial, 1L), (int) Math.max(matgM1 * 4L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(5L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, aMaterial, 1L), (int) Math.max(matgM1 * 5L, 1L), 96);
-            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(9L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateDense, aMaterial, 1L), (int) Math.max(matgM1 * 9L, 1L), 96);
+            GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(2L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), 1, 16);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(1L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), 1, 24);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(2L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateDouble, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(3L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateTriple, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(4L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(5L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, aMaterial, 1L), 1, 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(9L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateDense, aMaterial, 1L), 1, 96);
+            } else {
+            GT_Values.RA.addWiremillRecipe(GT_Utility.copyAmount(1L, Ogem1), GT_Utility.copy(new Object[]{GT_OreDictUnificator.get(OrePrefixes.wireGt01, aMaterial, 2L), GT_OreDictUnificator.get(OrePrefixes.wireFine, aMaterial, 8L)}), 100, 4);
+            GT_Values.RA.addForgeHammerRecipe(GT_Utility.copyAmount(2L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) (matgM1), 16);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(1L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L), (int) (matgM1 * 1L), 24);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(2L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateDouble, aMaterial, 1L), (int) (matgM1 * 2L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(3L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateTriple, aMaterial, 1L), (int) (matgM1 * 3L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(4L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, aMaterial, 1L), (int) (matgM1 * 4L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(5L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, aMaterial, 1L), (int) (matgM1 * 5L), 96);
+            GT_Values.RA.addBenderRecipe(GT_Utility.copyAmount(9L, Ogem1), GT_OreDictUnificator.get(OrePrefixes.plateDense, aMaterial, 1L), (int) (matgM1 * 9L), 96);
+            }
         }
 
 
@@ -60,7 +72,7 @@ public class ProcessingIngot1 implements gregtech.api.interfaces.IOreRecipeRegis
         GT_RecipeRegistrator.registerUsagesForMaterials(GT_Utility.copyAmount(1L, Ogem1), OrePrefixes.plate.get(aMaterial).toString(), !BmatNSs1);
 
         if (aMaterial == Materials.Mercury) {
-            System.err.println("Quicksilver Ingots?, Don't tell me there is an Armor made of that highly toxic and very likely to be melting Material!");
+            cpw.mods.fml.common.FMLLog.warning("%s - Quicksilver Ingots?, Don't tell me there is an Armor made of that highly toxic and very likely to be melting Material!", Materials.Mercury.getClass());
         }
     }
 }
